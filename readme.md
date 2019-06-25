@@ -1,7 +1,11 @@
-## Security Vulnerabilities
+A Laravel Vue boilerplate for developers that want to sleep again
 
-If you discover a security vulnerability within Curvue, please send an e-mail to _judicium via [_judicium@tuta.io](mailto:_judicium@tuta.io). All security vulnerabilities will be promptly addressed.
+## Main dependencies
 
-## License
+Front-end:
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* [Laravel Mix](https://github.com/JeffreyWay/laravel-mix)
+
+Back-end:
+
+* [Laravel](https://github.com/laravel/laravel)
