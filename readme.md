@@ -11,4 +11,4 @@ Front-end:
 Back-end:
 
 * [Laravel](https://github.com/laravel/laravel)
-* [Laravel-pug]https://github.com/BKWLD/laravel-pug
+* [Laravel-pug](https://github.com/BKWLD/laravel-pug)
