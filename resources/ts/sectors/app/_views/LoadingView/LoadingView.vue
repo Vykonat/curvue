@@ -1,5 +1,5 @@
 <template lang="pug">
-    h1 Loading...
+    h1 Loading View...
 </template>
 
 <script lang="ts">
