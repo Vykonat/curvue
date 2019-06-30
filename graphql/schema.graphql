@@ -7,5 +7,9 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 #import ./users/**/*.graphql
 
 type Query {
-    me: User! @auth
+    me: User! @middleware(checks: ["auth:api"]) @auth
+}
+
+type Mutation {
+    createUser(id: ID!): User! @create(model: "App\\Models\\User")
 }
