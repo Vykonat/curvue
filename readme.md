@@ -8,10 +8,13 @@ Front-end:
 * [Vue](https://github.com/vuejs/vue)
 * [Typescript](https://github.com/microsoft/TypeScript)
 * [Pug](https://github.com/pugjs/pug/tree/master/packages/pug)
+* [Vue Apollo](https://github.com/Akryum/vue-apollo)
 
 Back-end:
 
 * [Laravel](https://github.com/laravel/laravel)
-* [Laravel-pug](https://github.com/BKWLD/laravel-pug)
-* [Graphql-playground](https://github.com/mll-lab/laravel-graphql-playground)
-* [Lighthouse-php](https://github.com/nuwave/lighthouse)
+* [Laravel Pug](https://github.com/BKWLD/laravel-pug)
+* [GraphQL Playground](https://github.com/mll-lab/laravel-graphql-playground)
+* [Lighthouse](https://github.com/nuwave/lighthouse)
+* [Larevel Passport](https://github.com/laravel/passport)
+* [Lighthouse GraphQL Passport Auth](https://github.com/joselfonseca/lighthouse-graphql-passport-auth/blob/master/src/GraphQL/Mutations/Login.php)
