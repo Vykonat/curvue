@@ -13,3 +13,4 @@ Back-end:
 
 * [Laravel](https://github.com/laravel/laravel)
 * [Laravel-pug](https://github.com/BKWLD/laravel-pug)
+* [Graphql-playground](https://github.com/mll-lab/laravel-graphql-playground)
