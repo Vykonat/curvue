@@ -20,6 +20,11 @@ mix.ts('resources/ts/app.ts', 'public/js')
                test: /\.pug$/,
                loader: 'pug-plain-loader'
             },
+            {
+               test: /\.(graphql|gql)$/,
+               loader: 'graphql-tag/loader',
+               exclude: /node_modules/,
+            },
          ],
       }
    })
