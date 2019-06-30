@@ -1,5 +1,5 @@
-<template>
-    <h1>{{ message }}</h1>
+<template lang="pug">
+    h1 {{ message }}
 </template>
 
 <script lang="ts">

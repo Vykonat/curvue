@@ -7,6 +7,7 @@ Front-end:
 * [Laravel Mix](https://github.com/JeffreyWay/laravel-mix)
 * [Vue](https://github.com/vuejs/vue)
 * [Typescript](https://github.com/microsoft/TypeScript)
+* [Pug](https://github.com/pugjs/pug/tree/master/packages/pug)
 
 Back-end:
 

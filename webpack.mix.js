@@ -12,4 +12,14 @@ const mix = require('laravel-mix');
  */
 
 mix.ts('resources/ts/app.ts', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+   .sass('resources/sass/app.scss', 'public/css')
+   .webpackConfig({
+      module: {
+         rules: [
+            {
+               test: /\.pug$/,
+               loader: 'pug-plain-loader'
+            },
+         ],
+      }
+   })
