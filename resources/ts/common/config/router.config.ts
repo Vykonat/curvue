@@ -2,12 +2,14 @@ import Vue    from 'vue';
 import Router from 'vue-router';
 
 import { AppRoutes } from '../../sectors/app/_views/routes';
+import { AuthRoutes } from '../../sectors/auth/_views/routes';
 
 Vue.use(Router);
 
 export const router = new Router({
     mode: 'history',
     routes: [
+        ...AuthRoutes,
         ...AppRoutes //! Must be kept at bottom for 404 UX
     ],
   
