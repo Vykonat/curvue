@@ -4,6 +4,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Admin user setttings
+    |--------------------------------------------------------------------------
+    |
+    | Grabs the admin users data from the .env file for seeding. The password
+    | should already be hashed in the .env file (use tinker and Hash::make)
+    | and I feel this is a much more secure way of creating the admin file vs
+    | regular seeders. 
+    |
+    */
+    'adminUserName' => env('ADMIN_USER_NAME', 'admin'),
+    'adminUserEmail' => env('ADMIN_USER_EMAIL', 'admin@example.com'),
+    'adminUserPassword' => env('ADMIN_USER_PASSWORD', '$2y$10$hWWjOz/.L/y8RglUGMfKy.TTkWHSZg6CQRpI1TrgYMFLTB.5E.gIu'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
     |
