@@ -16,6 +16,8 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@babel/core": "^7.4.5",
+        "@babel/plugin-proposal-decorators": "^7.4.4",
         "apollo-cache-inmemory": "^1.6.2",
         "apollo-client": "^2.6.3",
         "apollo-link": "^1.2.12",
