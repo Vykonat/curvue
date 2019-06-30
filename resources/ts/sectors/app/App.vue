@@ -1,17 +1,11 @@
 <template>
 <article class="app">
-    <ExampleComponent />
+    <RouterView />
 </article>
 </template>
 
 <script>
-import ExampleComponent from './_components/ExampleComponent.vue';
-
-export default {
-    components: {
-        ExampleComponent: ExampleComponent
-    }
-}
+export default {}
 </script>
 
 <style>

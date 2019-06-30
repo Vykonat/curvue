@@ -40,6 +40,7 @@
     },
     "dependencies": {
         "vue-class-component": "^7.1.0",
-        "vue-property-decorator": "^8.2.1"
+        "vue-property-decorator": "^8.2.1",
+        "vue-router": "^3.0.6"
     }
 }
