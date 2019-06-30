@@ -8,7 +8,7 @@ Vue.use(Router);
 export const router = new Router({
     mode: 'history',
     routes: [
-        ...AppRoutes
+        ...AppRoutes //! Must be kept at bottom for 404 UX
     ],
   
     scrollBehavior(to, from, savedPosition) {
