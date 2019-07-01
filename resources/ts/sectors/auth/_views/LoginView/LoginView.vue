@@ -1,11 +1,16 @@
 <template lang="pug">
-    h1 Login Page
+    LoginForm
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import LoginForm from "../../_components/LoginForm/LoginForm.vue";
 
-@Component
+@Component({
+    components: {
+        LoginForm: LoginForm
+    }
+})
 export default class LoginView extends Vue {}
 </script>
 
