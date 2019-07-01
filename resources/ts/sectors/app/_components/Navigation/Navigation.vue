@@ -2,17 +2,24 @@
     ul
         li( v-for="(link, i) in navLinks")
             RouterLink( :to="{ name: link.target, params: link.params }", v-text="link.title" )
+        li
+            LogoutButton
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import LogoutButton from "../../../auth/_components/LogoutButton/LogoutButton.vue";
 
 interface INavItem {
     title: string,
     target: string,
     params?: any
 }
-@Component
+@Component({
+    components: {
+        LogoutButton: LogoutButton,
+    }
+})
 export default class Navigation extends Vue {
     navLinks: INavItem[] = [
         {
