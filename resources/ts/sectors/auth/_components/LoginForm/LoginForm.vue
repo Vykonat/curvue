@@ -21,11 +21,11 @@ export default class LoginForm extends Vue {
 
     async login() {
         try {
-            this.$auth.login(this.loginForm)
+            this.$auth.login(this.loginForm);
+            alert('You have logged in');
+            this.$router.push({ name: 'app.home' });
         } catch( e ) {
             console.log(e);
-        } finally {
-            this.$router.push({ name: 'app.home' })
         }
     }
 }
