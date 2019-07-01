@@ -3,7 +3,9 @@ import Login from "../../sectors/auth/_gql/mutations/loginMutation.gql";
 import Logout from "../../sectors/auth/_gql/mutations/logoutMutation.gql";
 import ForgotPassword from "../../sectors/auth/_gql/mutations/forgotPasswordMutation.gql";
 import ResetPassword from "../../sectors/auth/_gql/mutations/resetPasswordMutation.gql";
-import { apolloClient } from '../config/apollo.config';
+import Check from "../../sectors/auth/_gql/mutations/checkMutation.gql";
+
+import { apolloClient, onLogin, onLogout } from '../config/apollo.config';
 import _Vue from "vue";
 
 const Plugin = {
@@ -47,6 +49,10 @@ const Plugin = {
                         data: data
                     }
                 })
+                .then( data => {
+                    const access_token = data.data.login.access_token;
+                    onLogin(apolloClient, access_token);
+                })
             },
 
             //Logs the user out and clears local tokens
@@ -54,7 +60,27 @@ const Plugin = {
                 return apolloClient.mutate({
                     mutation: Logout,
                 })
+                .then( () => {
+                    onLogout(apolloClient)
+                })
             },
+
+            // Checks if a user is logged in
+            async check() {
+                let response
+
+                try {
+                    response = await apolloClient.mutate({
+                        mutation: Check,
+                    })
+
+                    const check: boolean = response.data.check;
+
+                    return check;
+                } catch( e ) {
+                    console.log( e )
+                }
+            }
         }
     }
 }
