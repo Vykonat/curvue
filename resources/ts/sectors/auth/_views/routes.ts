@@ -8,6 +8,9 @@ export const AuthRoutes: RouteConfig[] = [
         component: () => lazyLoadRoute(
             import(/* webpackChunkName: "Login_Page" */ "./LoginView/LoginView.vue")
         ),
+        meta: {
+            requiresGuest: true,
+        }
     },
 
     {
@@ -16,6 +19,9 @@ export const AuthRoutes: RouteConfig[] = [
         component: () => lazyLoadRoute(
             import(/* webpackChunkName: "Register_Page" */ "./RegisterView/RegisterView.vue")
         ),
+        meta: {
+            requiresGuest: true,
+        }
     },
 
     {
@@ -24,6 +30,9 @@ export const AuthRoutes: RouteConfig[] = [
         component: () => lazyLoadRoute(
             import(/* webpackChunkName: "Forgot_Password_Page" */ "./ForgotPasswordView/ForgotPasswordView.vue")
         ),
+        meta: {
+            requiresGuest: true,
+        }
     },
 
     {
@@ -32,5 +41,8 @@ export const AuthRoutes: RouteConfig[] = [
         component: () => lazyLoadRoute(
             import(/* webpackChunkName: "Forgot_Password_Page" */ "./ResetPasswordView/ResetPasswordView.vue")
         ),
+        meta: {
+            requiresGuest: true,
+        }
     },
 ]
