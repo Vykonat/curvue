@@ -11,5 +11,5 @@
 |
 */
 
-Auth::routes();
 Route::get('/{any}', 'AppController@index')->where('any', '.*');
+Auth::routes();
