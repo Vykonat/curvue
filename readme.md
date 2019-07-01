@@ -1,4 +1,5 @@
-A Laravel Vue boilerplate for developers that want to sleep again
+# Curvue
+###A Laravel Vue boilerplate for developers that want to sleep again
 
 ## Main dependencies
 
@@ -18,3 +19,28 @@ Back-end:
 * [Lighthouse](https://github.com/nuwave/lighthouse)
 * [Larevel Passport](https://github.com/laravel/passport)
 * [Lighthouse GraphQL Passport Auth](https://github.com/joselfonseca/lighthouse-graphql-passport-auth/blob/master/src/GraphQL/Mutations/Login.php)
+
+## Adding the root level account
+In your .env file locate the following lines:
+
+`
+ADMIN_USER_NAME=  
+`  
+`
+ADMIN_USER_EMAIL=  
+`  
+`
+ADMIN_USER_PASSWORD=  
+`
+
+and edit them with your details. Note that the password must be hashed when you enter it into the .env file. This can be done with the following commands:
+
+`
+php artisan tinker  
+`  
+`
+Hash::make('<password>')  
+`
+
+The auth.php file in the config folder reads these values and the users table seeder uses them to seed the
+first account.
