@@ -1,11 +1,16 @@
 <template lang="pug">
-    h1 Reset Password Page
+    ResetPasswordForm
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import ResetPasswordForm from "../../_components/ResetPasswordForm/ResetPasswordForm.vue";
 
-@Component
+@Component({
+    components: {
+        ResetPasswordForm: ResetPasswordForm
+    }
+})
 export default class ResetPasswordView extends Vue {}
 </script>
 

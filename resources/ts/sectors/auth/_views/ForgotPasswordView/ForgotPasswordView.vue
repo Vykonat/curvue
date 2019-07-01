@@ -1,11 +1,16 @@
 <template lang="pug">
-    h1 Forgot Password Page
+    ForgotPasswordForm
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import ForgotPasswordForm from "../../_components/ForgotPasswordForm/ForgotPasswordForm.vue"
 
-@Component
+@Component({
+    components: {
+        ForgotPasswordForm: ForgotPasswordForm
+    }
+})
 export default class ForgotPasswordView extends Vue {}
 </script>
 

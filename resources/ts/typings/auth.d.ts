@@ -9,3 +9,14 @@ declare interface IRegisterInput {
     password: string,
     password_confirmation: string,
 }
+
+declare interface IForgotPasswordInput {
+    email: string,
+}
+
+declare interface IResetPasswordInput {
+    email: string,
+    token: string,
+    password: string,
+    password_confirmation: string,
+}

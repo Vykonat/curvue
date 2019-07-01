@@ -1,8 +1,8 @@
-import RegisterMutation from "../../sectors/auth/_gql/mutations/registerMutation.gql";
-import LoginMutation from "../../sectors/auth/_gql/mutations/loginMutation.gql";
-import LogoutMutation from "../../sectors/auth/_gql/mutations/logoutMutation.gql";
-// import ForgotPasswordMutation from "../../sectors/auth/_gql/mutations/ForgotPasswordMutation.gql";
-// import ResetForgottenPassword from "../../sectors/auth/_gql/mutations/ResetForgottenPassword.gql";
+import Register from "../../sectors/auth/_gql/mutations/registerMutation.gql";
+import Login from "../../sectors/auth/_gql/mutations/loginMutation.gql";
+import Logout from "../../sectors/auth/_gql/mutations/logoutMutation.gql";
+import ForgotPassword from "../../sectors/auth/_gql/mutations/forgotPasswordMutation.gql";
+import ResetPassword from "../../sectors/auth/_gql/mutations/resetPasswordMutation.gql";
 import { apolloClient } from '../config/apollo.config';
 import _Vue from "vue";
 
@@ -14,35 +14,35 @@ const Plugin = {
 
             register(data: IRegisterInput) {
                 return apolloClient.mutate({
-                    mutation: RegisterMutation,
+                    mutation: Register,
                     variables: {
                         data: data
                     }
                 })
             },
 
-            // forgotPassword(data: any) {
-            //     return apolloClient.mutate({
-            //         mutation: ForgotPasswordMutation,
-            //         variables: {
-            //             data: data
-            //         }
-            //     })
-            // },
+            forgotPassword(data: any) {
+                return apolloClient.mutate({
+                    mutation: ForgotPassword,
+                    variables: {
+                        data: data
+                    }
+                })
+            },
 
-            // resetPassword(data: any) {
-            //     return apolloClient.mutate({
-            //         mutation: ResetForgottenPassword,
-            //         variables: {
-            //             data: data
-            //         }
-            //     })
-            // },
+            resetPassword(data: any) {
+                return apolloClient.mutate({
+                    mutation: ResetPassword,
+                    variables: {
+                        data: data
+                    }
+                })
+            },
 
             //Attempts to log the user in with supplied credentials
             login(data: ILoginInput) {
                 return apolloClient.mutate({
-                    mutation: LoginMutation,
+                    mutation: Login,
                     variables: {
                         data: data
                     }
@@ -52,7 +52,7 @@ const Plugin = {
             //Logs the user out and clears local tokens
             logout() {
                 return apolloClient.mutate({
-                    mutation: LogoutMutation,
+                    mutation: Logout,
                 })
             },
         }
