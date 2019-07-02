@@ -1,0 +1,110 @@
+html {
+    font-size: 62.5% // 1rem = 10px
+}
+
+body {
+    // font-family: $font-family;
+    font-size: fontSize();
+    font-weight: fontWeight("content");
+    letter-spacing: letterSpacing();
+    line-height: lineHeight("content");
+}
+
+h1, h2, h3, h4, h5, h6 {
+    // font-family: $font-family-headings;
+    font-weight: fontWeight("headings");
+    letter-spacing: letterSpacing("headings");
+    line-height: lineHeight("headings");
+}
+
+h5 {
+    font-size: fontSize(h5);
+
+    @include media(tabletLandscape) {
+        font-size: fontSize(h5) * $font-size-factor-tablet-landscape;
+    }
+
+    @include media(largeDesktop) {
+        font-size: fontSize(h5) * $font-size-factor-large-desktop;
+    }
+}
+
+h1, h2, h3 {
+    margin: space() 0 space(16) 0;
+}
+
+h4, h5, h6 {
+    margin: 0 0 space(4) 0
+}
+
+h1 {
+    font-size: fontSize(h1);
+
+    @include media(tabletLandscape) {
+        font-size: fontSize(h1) * $font-size-factor-tablet-landscape;
+    }
+
+    @include media(largeDesktop) {
+        font-size: fontSize(h1) * $font-size-factor-large-desktop;
+    }
+}
+
+h2 {
+    font-size: fontSize(h2);
+
+    @include media(tabletLandscape) {
+        font-size: fontSize(h2) * $font-size-factor-tablet-landscape;
+    }
+
+    @include media(largeDesktop) {
+        font-size: fontSize(h2) * $font-size-factor-large-desktop;
+    }
+}
+
+h3 {
+    font-size: fontSize(h3);
+
+    @include media(tabletLandscape) {
+        font-size: fontSize(h3) * $font-size-factor-tablet-landscape;
+    }
+
+    @include media(largeDesktop) {
+        font-size: fontSize(h3) * $font-size-factor-large-desktop;
+    }
+}
+
+h4 {
+    font-size: fontSize(h4);
+
+    @include media(tabletLandscape) {
+        font-size: fontSize(h4) * $font-size-factor-tablet-landscape;
+    }
+
+    @include media(largeDesktop) {
+        font-size: fontSize(h4) * $font-size-factor-large-desktop;
+    }
+}
+
+h6 {
+    font-size: fontSize(h6);
+
+    @include media(tabletLandscape) {
+        font-size: fontSize(h6) * $font-size-factor-tablet-landscape;
+    }
+
+    @include media(largeDesktop) {
+        font-size: fontSize(h6) * $font-size-factor-large-desktop;
+    }
+}
+
+small {
+    font-size: fontSize("small");
+}
+
+a {
+    color: color("primary");
+
+    &:hover {
+        color: color("primary", "dark");
+    }
+}

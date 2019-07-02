@@ -3,7 +3,9 @@ $space-units:(
     2: 0.2rem,
     4: 0.4rem,
     12: 1.2rem,
+    14: 1.4rem,
     16: 1.6rem,
+    18: 1.8rem,
     20: 2rem,
     24: 2.4rem,
     32: 3.2rem,
@@ -15,6 +17,8 @@ $space-units:(
 
 @function space($space-unit: "default") {
     @if map-has-key($space-units, $space-unit) {
-        @return map-get($space-units, $space-unit)
+        @return map-get($space-units, $space-unit);
     }
+
+    @error 'Space unit not supported!'
 }

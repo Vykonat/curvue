@@ -1,0 +1,9 @@
+@mixin media($breakpoint-name) {
+    @if map-has-key($grid-breakpoints, $breakpoint-name) {
+        @media (min-width: #{map_get($grid-breakpoints, $breakpoint-name)}) {
+            @content;
+        }
+    } @else {
+        @error "breakpoint not suported!"
+    }
+}

@@ -1,0 +1,83 @@
+// General font settings
+$google-font: 'https://fonts.googleapis.com/css?family=Oxygen:300,400,700|Lato:300,400,700';
+$font-family-headings: 'Oxygen', Helvetica, sans-serif;
+$font-family: 'Lato', Helvetica, sans-serif;
+
+// Factors for increasing text size at larger view-ports
+$font-size-factor-tablet-landscape: 1.125;
+$font-size-factor-large-desktop: 1.25;
+
+// font sizes
+$sizes: (
+    default: space(18),
+    h1: space(48),
+    h2: space(32),
+    h3: space(24),
+    h4: space(20),
+    h5: space(16),
+    h6: space(14),
+    small: space(14),
+);
+
+@function fontSize($font-size: "default") {
+    @if map-has-key($sizes, $font-size) {
+        @return map-get($sizes, $font-size);
+    };
+
+    @error 'Unsupported font size';
+} 
+
+// line heights
+$heights: (
+    content: (
+        default: 1.6,
+    ),
+    
+    headings: (
+        default: 1.2,
+        small: 1.4,
+    ),
+);
+
+@function lineHeight($type, $height: "default") {
+    @if map-has-key($heights, $type) {
+        @return map-get(map-get($heights, $type), $height);
+    };
+
+    @error 'Unsupported line height';
+}
+
+// font weights
+$weights: (
+    content: (
+        default: 400,
+        bold: 600,
+    ),
+
+    headings: (
+        default: 700,
+    ),
+);
+
+@function fontWeight($type, $weight: "default") {
+    @if map-has-key($weights, $type) {
+        @return map-get(map-get($weights, $type), $weight);
+    };
+
+    @error 'Unsupported font weight';
+}
+
+// Letter spacing
+$spaces: (
+    default: 0.01em,
+    headings: -0.1rem,
+);
+
+@function letterSpacing($letter-spacing: "default") {
+    @if map-has-key($spaces, $letter-spacing) {
+        @return map-get($spaces, $letter-spacing);
+    };
+
+    @error 'Unsupported letter spacing';
+} 
+
