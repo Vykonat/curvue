@@ -12,4 +12,6 @@ html( lang=str_replace('_', '-', app()->getLocale()) )
         #app 
             | Loading...
 
-        script( src=mix('js/app.js') )
+        script( src='js/manifest.js' )
+        script( src='js/js/vendor.app.js' )
+        script( src='js/js/app.app.js' )

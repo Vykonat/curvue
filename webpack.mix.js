@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.ts('resources/ts/app.ts', 'public/js')
+mix.ts('resources/ts/app.ts', 'public/js').extract()
    .sass('resources/sass/app.scss', 'public/css')
    .webpackConfig({
       module: {
@@ -26,6 +26,12 @@ mix.ts('resources/ts/app.ts', 'public/js')
                exclude: /node_modules/,
             },
          ],
+      },
+
+      output: {
+         filename: '[name].js', 
+         chunkFilename: 'js/[name].app.js', 
+         publicPath: '/',
       },
 
       resolve: {
