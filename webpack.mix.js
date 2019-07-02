@@ -26,5 +26,11 @@ mix.ts('resources/ts/app.ts', 'public/js')
                exclude: /node_modules/,
             },
          ],
-      }
+      },
+
+      resolve: {
+         alias: {
+            styles: path.resolve(__dirname, 'resources/sass'),
+         },
+      },
    })
