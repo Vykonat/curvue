@@ -1,0 +1,10 @@
+body, html {
+    width: 100%;
+    color: color("text");
+    background-color: color("background");
+    overflow-x: hidden;
+
+    i {
+        margin-top: 2px;
+    }
+}
