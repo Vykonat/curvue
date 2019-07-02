@@ -1,8 +1,8 @@
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { ApolloClient } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { AUTH_TOKEN } from "./app.config";
 
-const AUTH_TOKEN = "apollo-token"
 let token: HTMLMetaElement | null = document.head.querySelector("meta[name='csrf-token']");
 
 // HTTP connection to the API
@@ -10,7 +10,7 @@ const httpLink = createHttpLink({
     // You should use an absolute URL here
     uri: 'http://localhost:8000/graphql',
     headers: {
-        'Authorization': `Bearer ${localStorage.getItem('apollo-token')}`,
+        'Authorization': `Bearer ${localStorage.getItem( AUTH_TOKEN )}`,
         'X-CSRF-TOKEN': (<HTMLMetaElement>token).content,
         'X-Requested-With': 'XMLHttpRequest',
         'Accept': 'application/json'

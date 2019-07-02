@@ -1,9 +1,9 @@
 import Vue    from 'vue';
 import Router from 'vue-router';
+import { AUTH_TOKEN } from "./app.config";
 
 import { AppRoutes } from '../../sectors/app/_views/routes';
 import { AuthRoutes } from '../../sectors/auth/_views/routes';
-import { nextTick } from 'q';
 
 Vue.use(Router);
 
@@ -25,7 +25,7 @@ export const router = new Router({
 router.beforeEach((_to, _from, _next) => {
     if( _to.matched.some(record => record.meta.requiresAuth) ) {
         // User must be logged in to view
-        if( localStorage.getItem('apollo-token') === null ) {
+        if( localStorage.getItem( AUTH_TOKEN ) === null ) {
             _next({ name: 'auth.login' });
             alert('You must be logged in to view this page');
         }
@@ -33,7 +33,7 @@ router.beforeEach((_to, _from, _next) => {
         _next();
     } else if( _to.matched.some(record => record.meta.requiresGuest) ) {
         // User must not be logged in to view
-        if( localStorage.getItem('apollo-token') !== null ) {
+        if( localStorage.getItem( AUTH_TOKEN ) !== null ) {
             _next({ name: 'app.home' });
             alert('You must not be logged in to view this page');
         }
