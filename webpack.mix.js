@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const cleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 
 /*
  |--------------------------------------------------------------------------
@@ -39,4 +40,8 @@ mix.ts('resources/ts/app.ts', 'public/js').extract()
             styles: path.resolve(__dirname, 'resources/sass'),
          },
       },
+
+      plugins: [
+         new cleanObsoleteChunks(),
+      ]
    })
