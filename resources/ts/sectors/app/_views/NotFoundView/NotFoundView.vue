@@ -1,4 +1,5 @@
 <template lang="pug">
+cur-layout( name="Default" )
     h1 Page Not Found
 </template>
 

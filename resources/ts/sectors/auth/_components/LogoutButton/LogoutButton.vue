@@ -1,5 +1,5 @@
 <template lang="pug">
-    button( @click.prevent="logout" ) Logout
+    cur-button( v-if="$auth.check()", variant="primary", isGhost, @click="logout" ) Logout
 </template>
 
 <script lang="ts">

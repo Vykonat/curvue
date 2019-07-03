@@ -1,5 +1,6 @@
 <template lang="pug">
-    ForgotPasswordForm
+cur-layout( name="Default" )
+    forgot-password-form
 </template>
 
 <script lang="ts">

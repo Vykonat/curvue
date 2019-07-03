@@ -1,5 +1,6 @@
 <template lang="pug">
-    RegisterForm
+cur-layout( name="Default" )  
+    register-form
 </template>
 
 <script lang="ts">

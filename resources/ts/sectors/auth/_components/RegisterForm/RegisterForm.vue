@@ -1,20 +1,52 @@
 <template lang="pug">
-    form( @submit.prevent="register" )
-        legend Register
-        label( for="name" ) Enter your name
-        input( type="text", v-model="registerForm.name", name="name" )
-        br
-        label( for="email" ) Enter your email
-        input( type="email", v-model="registerForm.email", name="email" )
-        br
-        label( for="password" ) Enter your password
-        input( type="password", v-model="registerForm.password", name="password" )
-        br
-        label( for="password_confirmation" ) Confirm your password
-        input( type="password", v-model="registerForm.password_confirmation", name="password_confirmation" )
-        br
-        button( type="submit" ) register
-        pre {{ registerForm }}
+    cur-form( title="Register", button-text="register", @submit="register" )
+        template( v-slot:fields )
+            grid-row
+                grid-item
+                    cur-input(
+                        name="name",
+                        id="name",
+                        placeholder="Enter your name",
+                        validation="required|min:3|max:191",
+                        v-model="registerForm.name",
+                        required
+                    )
+
+            grid-row
+                grid-item
+                    cur-input(
+                        name="email",
+                        id="email",
+                        placeholder="Enter your email",
+                        type="email",
+                        validation="required|max:191|email",
+                        v-model="registerForm.email",
+                        required
+                    )
+
+            grid-row
+                grid-item
+                    cur-input(
+                        name="password",
+                        id="password",
+                        placeholder="Enter your password",
+                        type="password",
+                        validation="required|min:8|confirmed",
+                        v-model="registerForm.password",
+                        required
+                    )
+
+            grid-row
+                grid-item
+                    cur-input(
+                        name="password_confirmation",
+                        id="password_confirmation",
+                        placeholder="Confirm your password",
+                        type="password",
+                        validation="required",
+                        v-model="registerForm.password_confirmation",
+                        required
+                    )
 </template>
 
 
@@ -27,7 +59,7 @@ export default class RegisterForm extends Vue {
 
     async register() {
         try {
-            this.$auth.register(this.registerForm);
+            await this.$auth.register(this.registerForm);
             alert('You have been registered and can now log in');
             this.$router.push({ name: 'auth.login' });
         } catch( e ) {

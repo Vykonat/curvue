@@ -1,20 +1,64 @@
 <template lang="pug">
-    form( @submit.prevent="submitResetRequest" )
-        legend Reset Password
-        label( for="name" ) Enter your email
-        input( type="email", v-model="resetPasswordForm.email", name="email" )
-        br
-        label( for="token" ) Enter your token
-        input( type="text", v-model="resetPasswordForm.token", name="token" )
-        br
-        label( for="password" ) Enter your password
-        input( type="password", v-model="resetPasswordForm.password", name="password" )
-        br
-        label( for="password_confirmation" ) Confirm your password
-        input( type="password", v-model="resetPasswordForm.password_confirmation", name="password_confirmation" )
-        br
-        button( type="submit" ) Reset
-        pre {{ resetPasswordForm }}
+    cur-form( title="Reset Password", button-text="Submit reset request", @submit="submitResetRequest" )
+        template( v-slot:fields )
+            grid-row
+                grid-item
+                    cur-input(
+                        name="email",
+                        id="email",
+                        placeholder="Enter your email",
+                        type="email",
+                        validation="required|max:191|email",
+                        v-model="resetPasswordForm.email",
+                        required
+                    )
+
+            grid-row
+                grid-item
+                    cur-input(
+                        name="token",
+                        id="token",
+                        placeholder="Enter your token",
+                        validation="required",
+                        v-model="resetPasswordForm.token",
+                        required
+                    )
+
+            grid-row
+                grid-item
+                    cur-input(
+                        name="password",
+                        id="email",
+                        placeholder="Enter your email",
+                        type="email",
+                        validation="required|max:191|email",
+                        v-model="resetPasswordForm.name",
+                        required
+                    )
+
+            grid-row
+                grid-item
+                    cur-input(
+                        name="password",
+                        id="password",
+                        placeholder="Enter your password",
+                        type="password",
+                        validation="required|min:8|confirmed",
+                        v-model="resetPasswordForm.password",
+                        required
+                    )
+
+            grid-row
+                grid-item
+                    cur-input(
+                        name="password_confirmation",
+                        id="password_confirmation",
+                        placeholder="Confirm your password",
+                        type="password",
+                        validation="required",
+                        v-model="resetPasswordForm.password_confirmation",
+                        required
+                    )
 </template>
 
 
@@ -27,7 +71,7 @@ export default class RegisterForm extends Vue {
 
     async submitResetRequest() {
         try {
-            this.$auth.resetPassword(this.resetPasswordForm);
+            await this.$auth.resetPassword(this.resetPasswordForm);
             alert('Your password has been reset.');
             this.$router.push({ name: 'auth.login' });
         } catch( e ) {

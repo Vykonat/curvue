@@ -1,5 +1,6 @@
 <template lang="pug">
-    ResetPasswordForm
+cur-layout( name="Default" )
+    reset-password-form
 </template>
 
 <script lang="ts">

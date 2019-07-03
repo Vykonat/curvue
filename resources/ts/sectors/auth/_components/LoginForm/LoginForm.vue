@@ -1,14 +1,29 @@
 <template lang="pug">
-    form( @submit.prevent="login" )
-        legend Login
-        label( for="username" ) Enter your username
-        input( type="text", v-model="loginForm.username", name="username" )
-        br
-        label( for="password" ) Enter your password
-        input( type="password", v-model="loginForm.password", name="password" )
-        br
-        button( type="submit" ) login
-        pre {{ loginForm }}
+    cur-form( title="Login", button-text="Login", @submit="login" )
+        template( v-slot:fields )
+            grid-row
+                grid-item
+                    cur-input(
+                        name="username",
+                        id="username",
+                        placeholder="Enter your email",
+                        type="email",
+                        validation="required|max:191|email",
+                        v-model="loginForm.username",
+                        required
+                    )
+
+            grid-row
+                grid-item
+                    cur-input(
+                        name="password",
+                        id="password",
+                        placeholder="Enter your password",
+                        type="password",
+                        validation="required|min:8",
+                        v-model="loginForm.password",
+                        required
+                    )
 </template>
 
 

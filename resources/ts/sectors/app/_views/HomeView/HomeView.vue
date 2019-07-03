@@ -1,5 +1,5 @@
 <template lang="pug">
-article
+cur-layout( name="Default" )
     ExampleComponent
     h1( v-if="isLoggedIn" ) You're logged in!
     h1( v-else ) You're not logged in

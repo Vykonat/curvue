@@ -1,5 +1,6 @@
 <template lang="pug">
-    LoginForm
+cur-layout( name="Default" )
+    login-form
 </template>
 
 <script lang="ts">

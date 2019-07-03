@@ -1,4 +1,5 @@
 <template lang="pug">
+cur-layout( name="Default" )
     h1 The page has timed out
 </template>
 

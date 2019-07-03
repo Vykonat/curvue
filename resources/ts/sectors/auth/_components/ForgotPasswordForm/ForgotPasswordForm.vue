@@ -1,10 +1,17 @@
 <template lang="pug">
-    form( @submit.prevent="submitForgotRequest" )
-        legend Forgot Password
-        label( for="name" ) Enter your email
-        input( type="email", v-model="forgotPasswordForm.email", name="email" )
-        button( type="submit" ) submit
-        pre {{ forgotPasswordForm }}
+    cur-form( title="Forgot Password", button-text="Request password reset" @submit="submitForgotRequest" )
+        template( v-slot:fields )
+            grid-row
+                grid-item
+                    cur-input(
+                        name="username",
+                        id="username",
+                        placeholder="Enter your email",
+                        type="email",
+                        validation="required|max:191|email",
+                        v-model="forgotPasswordForm.username",
+                        required
+                    )
 </template>
 
 
@@ -17,7 +24,7 @@ export default class RegisterForm extends Vue {
 
     async submitForgotRequest() {
         try {
-            this.$auth.forgotPassword(this.forgotPasswordForm);
+            await this.$auth.forgotPassword(this.forgotPasswordForm);
             alert('an email has been sent with instructions to reset your account');
             this.$router.push({ name: 'auth.reset' });
         } catch( e ) {
