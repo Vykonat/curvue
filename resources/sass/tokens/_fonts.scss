@@ -1,7 +1,6 @@
 // General font settings
-$google-font: 'https://fonts.googleapis.com/css?family=Oxygen:300,400,700|Lato:300,400,700';
-$font-family-headings: 'Oxygen', Helvetica, sans-serif;
-$font-family: 'Lato', Helvetica, sans-serif;
+$font-family-headings: 'Montserrat', Helvetica, sans-serif;
+$font-family: 'Ubuntu', Helvetica, sans-serif;
 
 // Factors for increasing text size at larger view-ports
 $font-size-factor-tablet-landscape: 1.125;
@@ -11,11 +10,11 @@ $font-size-factor-large-desktop: 1.25;
 $sizes: (
     default: space(18),
     h1: space(48),
-    h2: space(32),
-    h3: space(24),
-    h4: space(20),
-    h5: space(16),
-    h6: space(14),
+    h2: space(36),
+    h3: space(28),
+    h4: space(24),
+    h5: space(20),
+    h6: space(18),
     small: space(14),
 );
 
