@@ -6,7 +6,14 @@ html( lang=str_replace('_', '-', app()->getLocale()) )
 
         title Curvue
 
-        link( href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu&display=swap", rel="stylesheet")
+        script.
+            function loadAsyncStyleSheets() {
+                for( var el = document.getElementsByTagName('head')[0], t = ["https://use.fontawesome.com/releases/v5.1.0/css/all.css", "https://fonts.googleapis.com/css?family=Montserrat|Ubuntu&display=swap"], s = 0; s < t.length; s++ ) {
+                    var a = document.createElement('link'), l = document.createAttribute('rel'), n = document.createAttribute('href');
+                    l.value = 'stylesheet', n.value = t[s], a.setAttributeNode(l), a.setAttributeNode(n), el.appendChild(a);
+                }
+            }
+            window.addEventListener('load', loadAsyncStyleSheets, !1);
 
     body
         #app 
