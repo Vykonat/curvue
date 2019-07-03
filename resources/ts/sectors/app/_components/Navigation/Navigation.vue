@@ -1,22 +1,27 @@
 <template lang="pug">
-navbar
-    template( v-slot:left )
-        router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
-    template( v-if="$auth.check()", v-slot:right )
-        logout-button
-    template( v-else, v-slot:right )
-        cur-button( 
-            tag="router-link", 
-            :target="{ name: 'auth.login' }", 
-            variant="primary", 
-            :isGhost="true", 
-        ) Login
+article.navigation
+    navbar
+        template( v-slot:middle )
+            router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
+        template( v-if="$auth.check()", v-slot:right )
+            logout-button
+        template( v-else, v-slot:right )
+            cur-button( 
+                tag="router-link", 
+                :target="{ name: 'auth.login' }", 
+                variant="primary", 
+                :isGhost="true", 
+            ) Login
 
-        cur-button( 
-            tag="router-link", 
-            :target="{ name: 'auth.register' }", 
-            variant="accent", 
-        ) Register
+            cur-button( 
+                tag="router-link", 
+                :target="{ name: 'auth.register' }", 
+                variant="accent", 
+            ) Register
+
+    nav-drawer
+        nav-drawer-group( title="Navigation" )
+            nav-drawer-group-item( icon="fas fa-home" :to="{ name: 'app.home' }" ) Home
 </template>
 
 <script lang="ts">

@@ -1,0 +1,13 @@
+$nav-drawer-transition: transform 300ms ease-in-out;
+$nav-drawer-index: z("drawer");
+$nav-drawer-bg: color("background", "light");
+$nav-drawer-color: color("text");
+$nav-drawer-max-width: 80%;
+$nav-drawer-padding: space(16);
+$nav-drawer-margin: space(52) 0 0 0;
+$nav-drawer-width: 300px; 
+
+$nav-drawer-hamburger-left: space(16);
+$nav-drawer-hamburger-top:  space();
+$nav-drawer-hamburger-color: color("primary");
+$nav-drawer-hamburger-padding: space(2) space();

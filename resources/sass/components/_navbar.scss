@@ -2,5 +2,5 @@ $nav-bar-bg: color("background", "light");
 $nav-bar-width: 100%;
 $nav-bar-height: space(52);
 $nav-bar-padding: space();
-$nav-bar-index: z-index("navigation");
+$nav-bar-index: z("navigation");
 $nav-bar-border: none;
