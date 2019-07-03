@@ -1,5 +1,10 @@
 <template lang="pug">
-    cur-button( v-if="$auth.check()", variant="primary", isGhost, @click="logout" ) Logout
+    cur-button( 
+        v-if="$auth.check()", 
+        variant="primary", 
+        :isGhost="true", 
+        @click="logout" 
+    ) Logout
 </template>
 
 <script lang="ts">

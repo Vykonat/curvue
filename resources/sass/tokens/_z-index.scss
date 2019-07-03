@@ -1,0 +1,12 @@
+$z-indexes: (
+    navigation: 1,
+    sidebar: 2,
+    modal: 3,
+    notification: 4,
+);
+
+@function z-index($z-index) {
+    @if map-has-key($z-indexes, $z-index) {
+        @return map-get($z-indexes, $z-index);
+    }
+}

@@ -1,19 +1,28 @@
 <template lang="pug">
-article
-    ul( v-if="isLoggedIn" )
-        li( v-for="(link, i) in authNavLinks")
-            RouterLink( :to="{ name: link.target, params: link.params }", v-text="link.title" )
-        li
-            LogoutButton
+navbar
+    template( v-slot:left )
+        router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
+    template( v-if="$auth.check()", v-slot:right )
+        logout-button
+    template( v-else, v-slot:right )
+        cur-button( 
+            tag="router-link", 
+            :target="{ name: 'auth.login' }", 
+            variant="primary", 
+            :isGhost="true", 
+        ) Login
 
-    ul( v-else )
-        li( v-for="(link, i) in guestNavLinks")
-            RouterLink( :to="{ name: link.target, params: link.params }", v-text="link.title" )
+        cur-button( 
+            tag="router-link", 
+            :target="{ name: 'auth.register' }", 
+            variant="accent", 
+        ) Register
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import LogoutButton from "../../../auth/_components/LogoutButton/LogoutButton.vue";
+import { APP_NAME } from "../../../../common/config/app.config";
 
 interface INavItem {
     title: string,
@@ -26,40 +35,24 @@ interface INavItem {
     }
 })
 export default class Navigation extends Vue {
-    guestNavLinks: INavItem[] = [
-        {
-            title: 'Login',
-            target: 'auth.login'
-        },
 
-        {
-            title: 'Register',
-            target: 'auth.register'
-        },
-
-        {
-            title: 'Forgot Password',
-            target: 'auth.forgot'
-        },
-
-        {
-            title: 'reset',
-            target: 'auth.reset',
-            params: {
-                token: 5,
-            },
-        },
-    ]
-
-    authNavLinks: INavItem[] = [
-        {
-            title: 'Home',
-            target: 'app.home'
-        },
-    ]
-
-    get isLoggedIn(): boolean {
-        return this.$auth.check();
+    get appName() {
+        return APP_NAME;
     }
 }
 </script>
+
+
+<style lang="scss" scoped>
+@import '~styles/app';
+
+.brand {
+    font-size: fontSize(h3);
+    font-weight: bold;
+    color: color("text");
+
+    &:hover {
+        color: color("text");
+    }
+}
+</style>

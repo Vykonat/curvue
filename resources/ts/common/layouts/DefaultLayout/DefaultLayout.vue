@@ -1,8 +1,9 @@
 <template lang="pug">
 .DefaultLayout
     navigation
-    grid
-        slot
+    .contentBelowNav
+        grid
+            slot
 </template>
 
 <script lang="ts">
