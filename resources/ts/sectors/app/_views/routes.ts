@@ -8,6 +8,9 @@ export const AppRoutes: RouteConfig[] = [
         component: () => lazyLoadRoute(
             import(/* webpackChunkName: "Home_Page" */ "./HomeView/HomeView.vue")
         ),
+        meta: {
+            requiresAuth: true
+        }
     },
 
     {
