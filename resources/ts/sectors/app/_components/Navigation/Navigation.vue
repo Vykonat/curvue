@@ -1,9 +1,14 @@
 <template lang="pug">
-    ul
-        li( v-for="(link, i) in navLinks")
+article
+    ul( v-if="isLoggedIn" )
+        li( v-for="(link, i) in authNavLinks")
             RouterLink( :to="{ name: link.target, params: link.params }", v-text="link.title" )
         li
             LogoutButton
+
+    ul( v-else )
+        li( v-for="(link, i) in guestNavLinks")
+            RouterLink( :to="{ name: link.target, params: link.params }", v-text="link.title" )
 </template>
 
 <script lang="ts">
@@ -21,12 +26,7 @@ interface INavItem {
     }
 })
 export default class Navigation extends Vue {
-    navLinks: INavItem[] = [
-        {
-            title: 'Home',
-            target: 'app.home'
-        },
-
+    guestNavLinks: INavItem[] = [
         {
             title: 'Login',
             target: 'auth.login'
@@ -50,5 +50,16 @@ export default class Navigation extends Vue {
             },
         },
     ]
+
+    authNavLinks: INavItem[] = [
+        {
+            title: 'Home',
+            target: 'app.home'
+        },
+    ]
+
+    get isLoggedIn(): boolean {
+        return this.$auth.check();
+    }
 }
 </script>

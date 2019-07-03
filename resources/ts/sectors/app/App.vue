@@ -1,11 +1,10 @@
 <template lang="pug">
-.app
-    Navigation
-    RouterView
+component( :is="layout" )
+    router-view( :key="$route.fullPath", :layout.sync="layout" )
 </template>
 
-<script>
-import { Component, Vue } from "vue-property-decorator";
+<script lang="ts">
+import { Component, Vue, Provide } from "vue-property-decorator";
 import Navigation from "./_components/Navigation/Navigation.vue";
 
 @Component({
@@ -13,8 +12,7 @@ import Navigation from "./_components/Navigation/Navigation.vue";
         Navigation: Navigation,
     }
 })
-export default class App extends Vue{}
+export default class App extends Vue {
+    @Provide() layout: string = "div";
+}
 </script>
-
-<style>
-</style>

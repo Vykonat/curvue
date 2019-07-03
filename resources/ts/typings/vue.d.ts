@@ -6,4 +6,11 @@ declare module "vue/types/vue" {
         $auth: any;
         $router: VueRouter;
     }
+
+    interface VueConstructor<V extends Vue = Vue> {
+        $auth: any;
+        options: any;
+        router: VueRouter;
+        contains: any;
+    }
 }
