@@ -21,5 +21,8 @@ const apolloProvider = new VueApollo({
 export const app = new VueApp({
     router,
     apolloProvider,
+    data: {
+        user: null,
+    },
     render: (h: any) => h(App),
 }).$mount('#app');
