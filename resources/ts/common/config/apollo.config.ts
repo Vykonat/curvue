@@ -27,9 +27,6 @@ const addAuthHeader = new ApolloLink((operation, forward) => {
     return (<any>forward)(operation)
 })
 
-// Cache implementation
-const cache = new InMemoryCache()
-
 export const onLogin = async (apolloClient: any, token: string) => {
     if( typeof localStorage !== 'undefined' && token ) {
         localStorage.setItem( AUTH_TOKEN, token );

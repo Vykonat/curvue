@@ -1,10 +1,12 @@
 import Register from "../../sectors/auth/_gql/mutations/registerMutation.gql";
 import Login from "../../sectors/auth/_gql/mutations/loginMutation.gql";
 import Logout from "../../sectors/auth/_gql/mutations/logoutMutation.gql";
+import Auth from "../../sectors/auth/_gql/queries/authQuery.gql";
 import ForgotPassword from "../../sectors/auth/_gql/mutations/forgotPasswordMutation.gql";
 import ResetPassword from "../../sectors/auth/_gql/mutations/resetPasswordMutation.gql";
 
 import { apolloClient, onLogin, onLogout } from '../config/apollo.config';
+import { app } from "../../app";
 import _Vue from "vue";
 
 const Plugin = {
@@ -17,8 +19,8 @@ const Plugin = {
                 return apolloClient.mutate({
                     mutation: Register,
                     variables: {
-                        data: data
-                    }
+                        data: data,
+                    },
                 })
             },
 
@@ -26,8 +28,8 @@ const Plugin = {
                 return apolloClient.mutate({
                     mutation: ForgotPassword,
                     variables: {
-                        data: data
-                    }
+                        data: data,
+                    },
                 })
             },
 
@@ -35,37 +37,40 @@ const Plugin = {
                 return apolloClient.mutate({
                     mutation: ResetPassword,
                     variables: {
-                        data: data
-                    }
+                        data: data,
+                    },
                 })
             },
 
             //Attempts to log the user in with supplied credentials
-            login(data: ILoginInput) {
-                return apolloClient.mutate({
+            async login(data: ILoginInput) {
+                const response = await apolloClient.mutate({
                     mutation: Login,
                     variables: {
-                        data: data
+                        data: data,
                     }
-                })
-                .then( data => {
-                    const access_token = data.data.login.access_token;
-                    onLogin(apolloClient, access_token);
-                })
+                });
+                const access_token = response.data.login.access_token;
+                const user = response.data.login.user;
+                app.$data.user = user;
+                onLogin(apolloClient, access_token);
             },
 
             //Logs the user out and clears local tokens
-            logout() {
-                return apolloClient.mutate({
+            async logout() {
+                await apolloClient.mutate({
                     mutation: Logout,
-                })
-                .then( () => {
-                    onLogout(apolloClient)
-                })
+                });
+                app.$data.user = null;
+                onLogout(apolloClient);
+            },
+
+            user() {
+                return app.$data.user;
             },
 
             check() {
-                return localStorage.getItem('apollo-token');
+                return app.$data.user !== null;
             }
         }
     }
