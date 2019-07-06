@@ -1,5 +1,6 @@
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
+import { ApolloLink } from "apollo-link";
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AUTH_TOKEN } from "./app.config";
 
@@ -10,11 +11,20 @@ const httpLink = createHttpLink({
     // You should use an absolute URL here
     uri: 'http://localhost:8000/graphql',
     headers: {
-        'Authorization': `Bearer ${localStorage.getItem( AUTH_TOKEN )}`,
         'X-CSRF-TOKEN': (<HTMLMetaElement>token).content,
         'X-Requested-With': 'XMLHttpRequest',
         'Accept': 'application/json'
     }
+})
+
+const addAuthHeader = new ApolloLink((operation, forward) => {
+    const token = localStorage.getItem( AUTH_TOKEN )
+    operation.setContext({
+        headers: {
+            authorization: token ? `Bearer ${token}` : null
+        }
+    })
+    return (<any>forward)(operation)
 })
 
 // Cache implementation
@@ -46,6 +56,7 @@ export const onLogout = async(apolloClient: any) => {
 
 // Create the apollo client
 export const apolloClient = new ApolloClient({
-    link: httpLink,
-    cache,
+    link: addAuthHeader.concat(httpLink),
+    cache: new InMemoryCache(),
+    connectToDevTools: true
 })
