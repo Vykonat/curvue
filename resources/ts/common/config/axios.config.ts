@@ -20,9 +20,6 @@ if (token) {
 }
 
 Vue.axios.defaults.validateStatus = (status =>
-    status === 422 ||
-    status === 401 ||
-    status === 403 ||
     status >= 200 &&
     status < 300
 );
