@@ -3,6 +3,7 @@
     navigation
     .contentBelowNav
         grid
+            breadcrumb( :items="$route.meta.breadcrumbs" )
             slot
 </template>
 

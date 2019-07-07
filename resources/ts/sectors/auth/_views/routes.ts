@@ -10,6 +10,16 @@ export const AuthRoutes: RouteConfig[] = [
         ),
         meta: {
             auth: false,
+            breadcrumbs: [
+                {
+                    label: 'Home',
+                    target: '/'
+                },
+                {
+                    label: 'login',
+                    target: '/login',
+                },
+            ]
         }
     },
 
@@ -21,6 +31,16 @@ export const AuthRoutes: RouteConfig[] = [
         ),
         meta: {
             auth: false,
+            breadcrumbs: [
+                {
+                    label: 'Home',
+                    target: '/'
+                },
+                {
+                    label: 'Register',
+                    target: '/register',
+                },
+            ]
         }
     },
 
@@ -32,6 +52,16 @@ export const AuthRoutes: RouteConfig[] = [
         ),
         meta: {
             auth: false,
+            breadcrumbs: [
+                {
+                    label: 'Home',
+                    target: '/'
+                },
+                {
+                    label: 'Forgot Password',
+                    target: '/forgot-password',
+                },
+            ]
         }
     },
 
@@ -43,6 +73,20 @@ export const AuthRoutes: RouteConfig[] = [
         ),
         meta: {
             auth: false,
+            breadcrumbs: [
+                {
+                    label: 'Home',
+                    target: '/'
+                },
+                {
+                    label: 'Forgot Password',
+                    target: '/forgot-password',
+                },
+                {
+                    label: 'Reset Password',
+                    target: '/password/reset',
+                },
+            ]
         }
     },
 ]

@@ -8,9 +8,6 @@ export const AppRoutes: RouteConfig[] = [
         component: () => lazyLoadRoute(
             import(/* webpackChunkName: "Home_Page" */ "./HomeView/HomeView.vue")
         ),
-        meta: {
-            auth: true,
-        }
     },
 
     {
@@ -18,6 +15,18 @@ export const AppRoutes: RouteConfig[] = [
         name: 'app.404',
         component: () => lazyLoadRoute(
             import(/* webpackChunkName: "Not_Found_Page" */ "./NotFoundView/NotFoundView.vue")
-        )
+        ),
+        meta: {
+            breadcrumbs: [
+                {
+                    label: 'Home',
+                    target: '/'
+                },
+                {
+                    label: 'MOBFN',
+                    target: '/',
+                },
+            ]
+        }
     }
 ]
