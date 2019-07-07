@@ -1,6 +1,6 @@
 <template lang='pug'>
     article( :class = "cssClasses")
-        cwd-avatar( :src="image", v-if="image", :alt="title" )
+        cur-avatar( :src="image", v-if="image", :alt="title" )
 
         section
             h4( v-if="title" ) {{ title }}
@@ -31,6 +31,10 @@ export default class PanelHeader extends Vue {
 @import '~styles/app';
 @import '~styles/components/panel';
 
+small {
+    color: color("divider");
+}
+
 .PanelHeader {
     display: block;
     padding: $panel-padding;
@@ -38,6 +42,7 @@ export default class PanelHeader extends Vue {
     &.withImage {
         display:        flex;
         flex-direction: row;
+        align-items: center;
 
         img {
             flex-shrink:   0;
