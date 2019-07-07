@@ -4,12 +4,12 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="username",
-                        id="username",
+                        name="email",
+                        id="email",
                         placeholder="Enter your email",
                         type="email",
                         validation="required|max:191|email",
-                        v-model="forgotPasswordForm.username",
+                        v-model="forgotPasswordForm.email",
                         required
                     )
 </template>
@@ -22,13 +22,15 @@ import { Component, Vue } from "vue-property-decorator";
 export default class RegisterForm extends Vue {
     forgotPasswordForm = {};
 
+    async doSubmit() {
+        const response = await this.axios.post('../password/email', this.forgotPasswordForm);
+    }
+
     async submitForgotRequest() {
         try {
-            await this.$auth.forgotPassword(this.forgotPasswordForm);
-            alert('an email has been sent with instructions to reset your account');
-            this.$router.push({ name: 'auth.reset' });
-        } catch( e ) {
-            console.log(e);
+            await this.doSubmit();
+        } catch {
+            alert('errors.generic_error');
         }
     }
 }

@@ -11,5 +11,13 @@
 |
 */
 
-Route::get('/{any}', 'AppController@index')->where('any', '.*');
-Auth::routes();
+Route::group([
+    'middleware' => 'guest',
+], function () {
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+});
+
+Route::get('password/reset/{token}', 'AppController@index')->name('password.reset');
+
+Route::get('{any}', 'AppController@index')->where('any', '^(?!api\/)[\/\w\.-]*');

@@ -57,13 +57,23 @@ import { Component, Vue } from "vue-property-decorator";
 export default class RegisterForm extends Vue {
     registerForm = {};
 
-    async register() {
+    async doRegister() {
+        await this.$auth.register({
+            params: this.registerForm,
+            redirect: false,
+            success(response) {
+                alert('auth.created');
+                this.$router.push({ name: 'login' });
+                return
+            },
+        });
+    }
+
+    async register(evt: Event) {
         try {
-            await this.$auth.register(this.registerForm);
-            alert('You have been registered and can now log in');
-            this.$router.push({ name: 'auth.login' });
-        } catch( e ) {
-            console.log(e);
+            await this.doRegister();
+        } catch {
+            alert('error');
         }
     }
 }

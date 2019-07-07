@@ -4,12 +4,12 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="username",
-                        id="username",
+                        name="email",
+                        id="email",
                         placeholder="Enter your email",
                         type="email",
                         validation="required|max:191|email",
-                        v-model="loginForm.username",
+                        v-model="loginForm.email",
                         required
                     )
 
@@ -32,15 +32,33 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class LoginForm extends Vue {
-    loginForm = {};
+    loginForm = {
+        rememberMe: true,
+    };
+
+    async doLogin() {
+        await this.$auth.login({
+            data: this.loginForm,
+            rememberMe: this.loginForm.rememberMe,
+            success(response) {
+                const { status } = response;
+
+                if (status === 401) {
+                    this.authError = true;
+                    alert('auth.failed');
+                    return;
+                }
+            },
+        });
+    }
 
     async login() {
         try {
-            await this.$auth.login(this.loginForm);
-            alert('You have logged in');
-            this.$router.push({ name: 'app.home' });
-        } catch( e ) {
-            console.log(e);
+            await this.doLogin();
+            alert('auth.success')
+            this.$router.push({ name: 'app.home' })
+        } catch {
+            alert('errors.generic_error');
         }
     }
 }

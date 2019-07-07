@@ -1,6 +1,11 @@
-import axios from 'axios'
+import Vue from "vue";
+import VueAxios from "vue-axios";
+import axios from "axios";
+
+Vue.use(VueAxios, axios);
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.baseURL = '/api';
 
 /**
  * Select the meta header containing the csrf token and pass its value through on every
@@ -13,3 +18,11 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+Vue.axios.defaults.validateStatus = (status =>
+    status === 422 ||
+    status === 401 ||
+    status === 403 ||
+    status >= 200 &&
+    status < 300
+);

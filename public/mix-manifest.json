@@ -7,5 +7,6 @@
     "/js/Home_Page.app.js": "/js/Home_Page.app.js",
     "/js/Login_Page.app.js": "/js/Login_Page.app.js",
     "/js/Not_Found_Page.app.js": "/js/Not_Found_Page.app.js",
-    "/js/Register_Page.app.js": "/js/Register_Page.app.js"
+    "/js/Register_Page.app.js": "/js/Register_Page.app.js",
+    "/js/Reset_Password_Page.app.js": "/js/Reset_Password_Page.app.js"
 }

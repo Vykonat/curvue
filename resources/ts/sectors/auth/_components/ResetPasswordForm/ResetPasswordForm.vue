@@ -16,29 +16,6 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="token",
-                        id="token",
-                        placeholder="Enter your token",
-                        validation="required",
-                        v-model="resetPasswordForm.token",
-                        required
-                    )
-
-            grid-row
-                grid-item
-                    cur-input(
-                        name="password",
-                        id="email",
-                        placeholder="Enter your email",
-                        type="email",
-                        validation="required|max:191|email",
-                        v-model="resetPasswordForm.name",
-                        required
-                    )
-
-            grid-row
-                grid-item
-                    cur-input(
                         name="password",
                         id="password",
                         placeholder="Enter your password",
@@ -67,15 +44,25 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class RegisterForm extends Vue {
-    resetPasswordForm = {};
+    resetPasswordForm = {
+        token: '',
+    };
+
+    async mounted() {
+        this.resetPasswordForm.token = this.$route.params.token;
+    }
+
+    async doSubmit() {
+        const response = await this.axios.post('../password/reset', this.resetPasswordForm);
+        alert('password changed');
+        this.$router.push({ name: 'auth.login' });
+    }
 
     async submitResetRequest() {
         try {
-            await this.$auth.resetPassword(this.resetPasswordForm);
-            alert('Your password has been reset.');
-            this.$router.push({ name: 'auth.login' });
-        } catch( e ) {
-            console.log(e);
+            await this.doSubmit();
+        } catch {
+            alert('errors.generic_error');
         }
     }
 }

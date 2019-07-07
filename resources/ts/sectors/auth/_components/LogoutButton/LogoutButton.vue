@@ -14,9 +14,11 @@ import { Component, Vue } from "vue-property-decorator";
 export default class LogoutButton extends Vue {
     async logout() {
         try {
-            await this.$auth.logout();
+            await this.$auth.logout({
+                makeRequest: true,
+                redirect: { name: 'auth.login' }
+            })
             alert('You have been logged out');
-            this.$router.push({ name: 'auth.login' }) 
         } catch( e ) {
             console.log(e);
         }

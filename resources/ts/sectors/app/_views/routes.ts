@@ -9,7 +9,7 @@ export const AppRoutes: RouteConfig[] = [
             import(/* webpackChunkName: "Home_Page" */ "./HomeView/HomeView.vue")
         ),
         meta: {
-            requiresAuth: true
+            auth: true,
         }
     },
 
