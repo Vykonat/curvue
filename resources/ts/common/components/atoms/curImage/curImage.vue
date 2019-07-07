@@ -7,7 +7,7 @@ component( :is="component", ref="image" )
 import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
 
 @Component
-export default class cwdImage extends Vue {
+export default class curImage extends Vue {
 
     $refs!: {
         image: HTMLImageElement
