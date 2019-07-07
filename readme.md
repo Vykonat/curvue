@@ -1,5 +1,5 @@
 # Curvue
-###A Laravel Vue boilerplate for developers that want to sleep again
+## A Laravel Vue boilerplate for developers that want to sleep again
 
 ## Main dependencies
 
@@ -10,6 +10,9 @@ Front-end:
 * [Typescript](https://github.com/microsoft/TypeScript)
 * [Pug](https://github.com/pugjs/pug/tree/master/packages/pug)
 * [Vue Apollo](https://github.com/Akryum/vue-apollo)
+* [Vue Auth](https://github.com/websanova/vue-auth/)
+* [Vee Validate](https://github.com/baianat/vee-validate)
+* [Vue Router](https://github.com/vuejs/vue-router)
 
 Back-end:
 
@@ -17,8 +20,7 @@ Back-end:
 * [Laravel Pug](https://github.com/BKWLD/laravel-pug)
 * [GraphQL Playground](https://github.com/mll-lab/laravel-graphql-playground)
 * [Lighthouse](https://github.com/nuwave/lighthouse)
-* [Larevel Passport](https://github.com/laravel/passport)
-* [Lighthouse GraphQL Passport Auth](https://github.com/joselfonseca/lighthouse-graphql-passport-auth/blob/master/src/GraphQL/Mutations/Login.php)
+* [JWT Auth](https://github.com/tymondesigns/jwt-auth)
 
 ## Adding the root level account
 In your .env file locate the following lines:
