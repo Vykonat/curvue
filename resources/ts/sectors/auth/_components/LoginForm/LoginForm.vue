@@ -24,6 +24,15 @@
                         v-model="loginForm.password",
                         required
                     )
+
+            grid-row
+                grid-item
+                    cur-checkbox(
+                        label="Remember Me?",
+                        v-model='loginForm.rememberMe',
+                        name="keep_connected",
+                        id="keep_connected",
+                    )
 </template>
 
 
@@ -33,7 +42,7 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class LoginForm extends Vue {
     loginForm = {
-        rememberMe: true,
+        rememberMe: false,
     };
 
     async doLogin() {
