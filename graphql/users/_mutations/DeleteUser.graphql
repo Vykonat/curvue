@@ -1,0 +1,3 @@
+extend type Mutation @middleware(checks: ["api"]) {
+    deleteUser( id: ID! ): User! @delete(model: "App\\Models\\User")
+}

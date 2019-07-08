@@ -1,0 +1,3 @@
+extend type Mutation @middleware(checks: ["admin"]) {
+    editUser( id: ID!, input: UserInput! @spread ): User! @update(model: "App\\Models\\User" )
+}
