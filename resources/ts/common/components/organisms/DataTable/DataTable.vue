@@ -39,7 +39,7 @@ export default class DataTable extends Vue {
     @Prop({ required: true }) header!: object;        // Items for the header of the table
     @Prop({ required: true }) data!: any[];           // Data for the body of the table
     @Prop({ default: 0 }) page!: number;              // The current page in the pagination
-    @Prop({ required: true }) maxRows!: number;           // The number of rows to show per page
+    @Prop({ default: 5 }) maxRows!: number;           // The number of rows to show per page
     @Prop({ default: true }) showSearch!: boolean;    // Whether or not to show the search
     @Prop({ default: '' }) sortKey!: string;          // The key for the column to sort
     @Prop({ default: '' }) placeholder!: string;      // Placeholder text for the search bar
@@ -55,12 +55,12 @@ export default class DataTable extends Vue {
 
     maxRowsOptions = [
         {
-            label: '1',
-            value: 1,
+            label: '5',
+            value: 5,
         },
         {
-            label: '2',
-            value: 2,
+            label: '10',
+            value: 10,
         },
         {
             label: '25',
