@@ -1,0 +1,11 @@
+$select-bg: color("background", "light");
+$select-shadow: none;
+$select-margin: 0;
+$select-padding: space() space(12);
+$select-border: 1px solid color("divider");
+$select-color: color("text");
+$select-font-size: fontSize();
+$select-arrow-color: color("primary");
+
+$select-multi-max-height: space(84);
+$select-multi-option-padding: space(4) 0;
