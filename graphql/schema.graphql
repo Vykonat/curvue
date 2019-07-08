@@ -11,5 +11,5 @@ type Query {
 }
 
 type Mutation {
-    createUser( data: UserInput! @spread ): User! @create
+    createUser( data: CreateUserInput! @spread ): User! @create
 }
