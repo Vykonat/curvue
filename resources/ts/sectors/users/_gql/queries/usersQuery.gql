@@ -1,0 +1,10 @@
+query UsersQuery {
+    users {
+        id
+        role_id
+        name
+        email
+        created_at
+        updated_at
+    }
+}
