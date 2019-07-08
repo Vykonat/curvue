@@ -20,8 +20,11 @@ panel
                     tr( v-if="count === 0" )
                         td.dataTableNoResults( :colspan="columns.length - 1" )
                             p No results
-
-            pagination( :show="maxPages > 1", :pages="maxPages", :current-page="currentPage + 1", @change="paginationClick" )
+            grid-row
+                grid-item
+                    pagination( :v-if="maxPages > 1", :pages="maxPages", :current-page="currentPage + 1", @change="paginationClick" )
+                grid-item    
+                    cur-select.dataTableSelect( placeholder="Items per page: ", :options="maxRowsOptions", name="dataTablePerPageSelect", id="dataTablePerPageSelect", v-model="maxRows" )
 </template>
 
 <script lang='ts'>
@@ -36,7 +39,7 @@ export default class DataTable extends Vue {
     @Prop({ required: true }) header!: object;        // Items for the header of the table
     @Prop({ required: true }) data!: any[];           // Data for the body of the table
     @Prop({ default: 0 }) page!: number;              // The current page in the pagination
-    @Prop({ default: 5 }) maxRows!: number;           // The number of rows to show per page
+    @Prop({ required: true }) maxRows!: number;           // The number of rows to show per page
     @Prop({ default: true }) showSearch!: boolean;    // Whether or not to show the search
     @Prop({ default: '' }) sortKey!: string;          // The key for the column to sort
     @Prop({ default: '' }) placeholder!: string;      // Placeholder text for the search bar
@@ -49,6 +52,25 @@ export default class DataTable extends Vue {
     @Provide() internalSortDirection: string = ''; // The stored sort direction in the table
     @Provide() currentPage: number = 0;            // The currently stored page of the tables data
     @Provide() searchTerm: string = '';            // User provided search term stored in the data table
+
+    maxRowsOptions = [
+        {
+            label: '1',
+            value: 1,
+        },
+        {
+            label: '2',
+            value: 2,
+        },
+        {
+            label: '25',
+            value: 25,
+        },
+        {
+            label: '50',
+            value: 50,
+        },
+    ]
 
     /**
      * Data table computed properties
@@ -76,11 +98,15 @@ export default class DataTable extends Vue {
         }
 
         const searchRegex: RegExp = new RegExp(`${query}`, 'gmi');
-        const filter = (row: any) => {
+        const filter = (row: IDataTableHeaderItem[]) => {
             let match: boolean = false;
 
             Object.keys(row).forEach((key: string) => {
                 const column: IDataTableHeaderItem = this.header[key];
+
+                if( typeof column === "undefined" || column.visible === false ) {
+                    return;
+                }
 
                 if (column.visible && match === false) {
                     match = searchRegex.exec(row[key].toString().toLowerCase()) !== null;
@@ -266,5 +292,9 @@ export default class DataTable extends Vue {
     &:last-child {
         border-right: none;
     }
+}
+
+.dataTableSelect {
+    margin-top: space(4);
 }
 </style>
