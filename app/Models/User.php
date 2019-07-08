@@ -12,12 +12,31 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
 
     /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // auto-sets values on creation and update
+        static::saving(function ($user) {
+            if(isset($user->role_id)) {
+                return;
+            } else {
+                $user->role_id = 2;
+            }
+        });
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -36,7 +55,25 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'id' => 'integer',
+        'role_id' => 'integer',
     ];
+
+    /**
+     * Checks if a user is an administrator
+     */
+    public function isAdmin()
+    {
+        return $this->role_id === 1;
+    }
+
+    /**
+     * Checks if a user is a patron user
+     */
+    public function isPatron()
+    {
+        return $this->role_id === 2;
+    }
 
     public function getJWTIdentifier()
     {
