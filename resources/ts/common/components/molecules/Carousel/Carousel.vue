@@ -5,7 +5,7 @@ article.Carousel(
         @mouseleave="pause = false"
     )
 
-    FadeAnimation(
+    fade-animation(
         v-for = "(image, i) in preloadedImages",
         :key = "i",
     )
@@ -19,7 +19,7 @@ article.Carousel(
                 span &copy; {{ image.getAttribute('title') }}
 
     ul.indicator( 
-        v-if="showIndicator"
+        v-if="showIndicators"
         )
         li(
             v-for="(image, id) in preloadedImages"
