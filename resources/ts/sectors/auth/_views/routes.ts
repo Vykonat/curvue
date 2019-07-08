@@ -1,5 +1,6 @@
 import { RouteConfig } from 'vue-router/types/router';
-import { lazyLoadRoute } from "../../../common/utils/lazyLoadRoute.util"
+import { lazyLoadRoute } from "../../../common/utils/lazyLoadRoute.util";
+import { requiresGuestMeta } from "../../../common/utils/meta.util"
 
 export const AuthRoutes: RouteConfig[] = [
     {
@@ -9,7 +10,7 @@ export const AuthRoutes: RouteConfig[] = [
             import(/* webpackChunkName: "Login_Page" */ "./LoginView/LoginView.vue")
         ),
         meta: {
-            auth: false,
+            ...requiresGuestMeta,
             breadcrumbs: [
                 {
                     label: 'Home',
@@ -30,7 +31,7 @@ export const AuthRoutes: RouteConfig[] = [
             import(/* webpackChunkName: "Register_Page" */ "./RegisterView/RegisterView.vue")
         ),
         meta: {
-            auth: false,
+            ...requiresGuestMeta,
             breadcrumbs: [
                 {
                     label: 'Home',
@@ -51,7 +52,7 @@ export const AuthRoutes: RouteConfig[] = [
             import(/* webpackChunkName: "Forgot_Password_Page" */ "./ForgotPasswordView/ForgotPasswordView.vue")
         ),
         meta: {
-            auth: false,
+            ...requiresGuestMeta,
             breadcrumbs: [
                 {
                     label: 'Home',
@@ -72,7 +73,7 @@ export const AuthRoutes: RouteConfig[] = [
             import(/* webpackChunkName: "Reset_Password_Page" */ "./ResetPasswordView/ResetPasswordView.vue")
         ),
         meta: {
-            auth: false,
+            ...requiresGuestMeta,
             breadcrumbs: [
                 {
                     label: 'Home',
