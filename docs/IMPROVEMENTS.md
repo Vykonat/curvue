@@ -2,5 +2,4 @@
 
 ## Authentication
 * Eventually, just move all auth controller actions to graphql mutations and add a custom driver for vue-auth
-* Password reset route is currently broken
 * Email sent in forgotten password request currently has the wrong link
