@@ -1,7 +1,0 @@
-query AuthQuery {
-    auth {
-        id
-        name
-        email
-    }
-}
