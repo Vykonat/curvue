@@ -27,21 +27,14 @@ cur-layout( name="Stack" )
         )
             template( v-slot:text ) Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.
             template( v-slot:button ) Click for more
-        ExampleComponent
         h1( v-if="$auth.check()" ) You're logged in!
         h1( v-else ) You're not logged in
 </template> 
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
-import ExampleComponent from "../../_components/ExampleComponent.vue";
 import { APP_NAME } from "../../../../common/config/app.config";
 
-@Component({
-    components: {
-        ExampleComponent: ExampleComponent,
-    }
-})
 export default class HomeView extends Vue {
     APP_NAME = APP_NAME;
 }
