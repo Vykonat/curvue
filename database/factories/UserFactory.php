@@ -20,6 +20,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => config('app.adminUserName'),
         'email' => config('app.adminUserEmail'),
+        'role_id' => 1,
         'email_verified_at' => now(),
         'password' => config('app.adminUserPassword'),
         'remember_token' => Str::random(10),
