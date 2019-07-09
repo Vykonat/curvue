@@ -3,10 +3,13 @@
     "/css/app.css": "/css/app.css",
     "/js/manifest.js": "/js/manifest.js",
     "/js//js/vendor.app.js": "/js//js/vendor.app.js",
+    "/js/Admin_Users_Page.app.js": "/js/Admin_Users_Page.app.js",
     "/js/Forgot_Password_Page.app.js": "/js/Forgot_Password_Page.app.js",
     "/js/Home_Page.app.js": "/js/Home_Page.app.js",
     "/js/Login_Page.app.js": "/js/Login_Page.app.js",
     "/js/Not_Found_Page.app.js": "/js/Not_Found_Page.app.js",
     "/js/Register_Page.app.js": "/js/Register_Page.app.js",
-    "/js/Reset_Password_Page.app.js": "/js/Reset_Password_Page.app.js"
+    "/js/Reset_Password_Page.app.js": "/js/Reset_Password_Page.app.js",
+    "/js/User_Form.app.js": "/js/User_Form.app.js",
+    "/js/Collapse_Animation.app.js": "/js/Collapse_Animation.app.js"
 }
