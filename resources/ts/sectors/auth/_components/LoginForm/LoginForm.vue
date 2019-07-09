@@ -1,12 +1,12 @@
 <template lang="pug">
-    cur-form( title="Login", button-text="Login", @submit="login" )
+    cur-form( :title="$t('auth.login')", :button-text="$t('auth.login')", @submit="login" )
         template( v-slot:fields )
             grid-row
                 grid-item
                     cur-input(
-                        name="email",
+                        :name="$t('users.email')",
+                        :placeholder="$t('users.email_placeholder')",
                         id="email",
-                        placeholder="Enter your email",
                         type="email",
                         validation="required|max:191|email",
                         v-model="loginForm.email",
@@ -16,9 +16,9 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="password",
+                        :name="$t('users.password')",
+                        :placeholder="$t('users.password_placeholder')",
                         id="password",
-                        placeholder="Enter your password",
                         type="password",
                         validation="required|min:8",
                         v-model="loginForm.password",
@@ -28,7 +28,7 @@
             grid-row
                 grid-item
                     cur-checkbox(
-                        label="Remember Me?",
+                        :label="$t('auth.remember')",
                         v-model='loginForm.rememberMe',
                         name="keep_connected",
                         id="keep_connected",
@@ -54,7 +54,7 @@ export default class LoginForm extends Vue {
 
                 if (status === 401) {
                     this.authError = true;
-                    alert('auth.failed');
+                    alert(this.$t('auth.login_fail'));
                     return;
                 }
             },
@@ -64,10 +64,10 @@ export default class LoginForm extends Vue {
     async login() {
         try {
             await this.doLogin();
-            alert('auth.success')
+            alert(this.$t('auth.login_success'))
             this.$router.push({ name: 'app.home' })
         } catch {
-            alert('errors.generic_error');
+            alert(this.$t('errors.generic_error'));
         }
     }
 }

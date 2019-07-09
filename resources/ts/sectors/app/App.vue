@@ -1,7 +1,7 @@
 <template lang="pug">
 component( :is="layout" )
     router-view( :key="$route.fullPath", :layout.sync="layout", v-if="$auth.ready()" )
-    h3( v-else ) Loading...
+    h3( v-else ) {{ $t('core.loading') }}
 </template>
 
 <script lang="ts">

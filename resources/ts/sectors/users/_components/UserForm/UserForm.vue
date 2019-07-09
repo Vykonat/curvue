@@ -1,12 +1,12 @@
 <template lang="pug">
-cur-form( :title="isAdd ? 'Add User' : 'Edit User'", :button-text="isAdd ? 'Add User' : 'Edit User'", @submit="sendData" )
+cur-form( :title="userFormTitle", :button-text="userFormTitle", @submit="sendData" )
     template( v-slot:fields )
         grid-row
             grid-item
                 cur-input( 
-                    name="name",
+                    :name="$t('users.name')",
+                    :placeholder="$t('users.name_placeholder')",
                     id="name",
-                    placeholder="Enter your name"
                     type="text",
                     validation="max: 191",
                     v-model="user.name",
@@ -16,9 +16,9 @@ cur-form( :title="isAdd ? 'Add User' : 'Edit User'", :button-text="isAdd ? 'Add 
         grid-row
             grid-item
                 cur-input( 
-                    name="email",
+                    :name="$t('users.email')",
+                    :placeholder="$t('users.email_placeholder')",
                     id="email",
-                    placeholder="Enter your email"
                     type="email",
                     validation="max: 191|email",
                     v-model="user.email",
@@ -28,9 +28,9 @@ cur-form( :title="isAdd ? 'Add User' : 'Edit User'", :button-text="isAdd ? 'Add 
         grid-row
             grid-item
                 cur-input( 
-                    name="password",
+                    :name="$t('users.password')",
+                    :placeholder="$t('users.password_placeholder')",
                     id="password",
-                    placeholder="Enter your password"
                     type="password",
                     validation="min: 8|confirmed",
                     v-model="user.password",
@@ -40,9 +40,9 @@ cur-form( :title="isAdd ? 'Add User' : 'Edit User'", :button-text="isAdd ? 'Add 
         grid-row
             grid-item
                 cur-input(
-                    name="password_confirmation",
+                    :name="$t('users.password_confirmation')",
+                    :placeholder="$t('users.password_confirmation_placeholder')",
                     id="password_confirmation",
-                    placeholder="Confirm your password"
                     type="password",
                     validation="min: 8",
                     v-model="user.password_confirmation",
@@ -52,9 +52,9 @@ cur-form( :title="isAdd ? 'Add User' : 'Edit User'", :button-text="isAdd ? 'Add 
         grid-row
             grid-item( fill )
                 input( type="radio", id="Admin", name="role_id", value="1", v-model="user.role_id" )
-                label( for="Admin" ) Admin
+                label( for="Admin" ) {{ $t('roles.admin') }}
                 input( type="radio", id="Patron", name="role_id", value="2", v-model="user.role_id" )
-                label( for="Patron" ) Patron
+                label( for="Patron" ) {{ $t('roles.patron' )}}
 </template>
 
 <script lang="ts">
@@ -83,10 +83,16 @@ export default class UserForm extends Vue {
         })
 
         if( this.isAdd ) {
-            alert('users.created');
+            alert(this.$t('resource.created', {resource:"User"}));
         } else {
-            alert('users.updated');
+            alert(this.$t('resource.updated', {resource:"User"}));
         }
+    }
+
+    get userFormTitle() {
+        return this.isAdd 
+            ? this.$t('resource.add', {resource: "User"}) 
+            : this.$t('resource.edit', {resource: "User"})
     }
 }
 </script>

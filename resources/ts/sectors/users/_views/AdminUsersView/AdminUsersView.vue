@@ -9,7 +9,7 @@
                     grid.contentBelowNav
                         grid-row
                             grid-item( fill )
-                                | Loading...
+                                | {{ $t('core.loading') }}
                 
                 //- Error Handler
                 .error.apollo(v-else-if='error') 
@@ -25,13 +25,13 @@
                     grid.contentBelowNav
                         grid-row
                             grid-item
-                                cur-button( variant="success", @click="handleUserAdd" ) Add user
+                                cur-button( variant="success", @click="handleUserAdd" ) {{ $t('resource.add', {resource:"User"})}}
                         grid-row
                             grid-item( fill )
                                 data-table(
                                     :header="usersDataTableHeader", 
                                     :data="data.users",
-                                    placeholder="search in users",
+                                    :placeholder="searchInputPlaceHolder",
                                 )
                                     template( v-slot:actions="{ row }" )
                                         cur-button(
@@ -53,6 +53,7 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from "vue-property-decorator";
+import DeleteUser from "../../_gql/mutations/deleteUser.gql";
 
 @Component({
     components: {
@@ -127,16 +128,25 @@ export default class AdminUsersView extends Vue {
 
 
     async handleUserDelete({ id }, query): Promise<void> {
-        console.log(id);
-        // const result = await this.$apollo.mutate({
-        //     mutation: DeleteUser,
-        //     variables: {
-        //         id,
-        //     },
-        // });
+        if(! confirm('are you sure?')) return
+        
+        const result = await this.$apollo.mutate({
+            mutation: DeleteUser,
+            variables: {
+                id,
+            },
+        });
 
-        // alert('users.deleted');
-        // query.refetch();
+        alert(this.$t('resource.deleted', {resource: "User"}));
+        query.refetch();
+    }
+
+
+    get searchInputPlaceHolder() {
+        /**
+         * Necessary to use this getter, not sure what's wrong
+         */
+        return this.$t('resource.search', {resource: "Users"});
     }
 }
 </script>

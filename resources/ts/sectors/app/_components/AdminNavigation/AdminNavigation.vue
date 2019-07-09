@@ -4,11 +4,11 @@ article.navigation
         template( v-slot:middle )
             router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
         template( v-if="$auth.check()", v-slot:right )
-            cur-button( :is-ghost="true", tag="router-link", :target="{ name: 'app.home' }", variant="accent" ) Return to app
+            cur-button( :is-ghost="true", tag="router-link", :target="{ name: 'app.home' }", variant="accent" ) {{ $t('navigation.home') }}
 
     nav-drawer
         nav-drawer-group( title="Navigation" )
-            nav-drawer-group-item( icon="fas fa-users" :to="{ name: 'admin.users' }" ) Users
+            nav-drawer-group-item( icon="fas fa-users" :to="{ name: 'admin.users' }" ) {{ $t('navigation.users') }}
 </template>
 
 <script lang="ts">

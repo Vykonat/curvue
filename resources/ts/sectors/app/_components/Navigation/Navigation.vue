@@ -11,17 +11,17 @@ article.navigation
                 :target="{ name: 'auth.login' }", 
                 variant="primary", 
                 :isGhost="true", 
-            ) Login
+            ) {{ $t('auth.login') }}
 
             cur-button( 
                 tag="router-link", 
                 :target="{ name: 'auth.register' }", 
                 variant="accent", 
-            ) Register
+            ) {{ $t('auth.register') }}
 
     nav-drawer
-        nav-drawer-group( title="Navigation" )
-            nav-drawer-group-item( icon="fas fa-home" :to="{ name: 'app.home' }" ) Home
+        nav-drawer-group( :title="$t('navigation.navigation')" )
+            nav-drawer-group-item( icon="fas fa-home" :to="{ name: 'app.home' }" ) {{ $t('navigation.home') }}
 </template>
 
 <script lang="ts">

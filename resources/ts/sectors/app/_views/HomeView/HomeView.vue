@@ -7,9 +7,9 @@ cur-layout( name="Stack" )
                     grid-row
                         grid-item( fill )
                             h1.title {{ APP_NAME }}
-                            h4.subTitle The Laravel Vue boilerplate for developers that want sleep again
+                            h4.subTitle {{ $t('core.slogan') }}
                             br
-                            cur-button( variant="primary", tag="a", target="https://github.com/Vykonat/curvue" ) Source Code
+                            cur-button( variant="primary", tag="a", target="https://github.com/Vykonat/curvue" ) {{ $t('core.cta') }}
         page-section(
             title="title",
             :link="{ name: 'auth.register' }"

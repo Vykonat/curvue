@@ -3,6 +3,7 @@
 /public/storage
 /public/js
 /public/css
+/resources/ts/vue-i18n-locales.generated.js
 /storage/*.key
 /vendor
 .env

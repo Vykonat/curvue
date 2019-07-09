@@ -4,7 +4,7 @@
         variant="primary", 
         :isGhost="true", 
         @click="logout" 
-    ) Logout
+    ) {{ $t('auth.logout') }}
 </template>
 
 <script lang="ts">
@@ -18,7 +18,7 @@ export default class LogoutButton extends Vue {
                 makeRequest: true,
                 redirect: { name: 'auth.login' }
             })
-            alert('You have been logged out');
+            alert(this.$t('auth.logged_out'));
         } catch( e ) {
             console.log(e);
         }

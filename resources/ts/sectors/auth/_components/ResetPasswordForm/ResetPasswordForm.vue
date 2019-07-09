@@ -4,9 +4,9 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="email",
+                        :name="$t('users.email')",
+                        :placeholder="$t('users.email_placeholder')",
                         id="email",
-                        placeholder="Enter your email",
                         type="email",
                         validation="required|max:191|email",
                         v-model="resetPasswordForm.email",
@@ -16,9 +16,9 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="password",
+                        :name="$t('users.password')",
+                        :placeholder="$t('users.password_placeholder')",
                         id="password",
-                        placeholder="Enter your password",
                         type="password",
                         validation="required|min:8|confirmed",
                         v-model="resetPasswordForm.password",
@@ -28,9 +28,9 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="password_confirmation",
+                        :name="$t('users.password_confirmation')",
+                        :placeholder="$t('users.password_confirmation_placeholder')",
                         id="password_confirmation",
-                        placeholder="Confirm your password",
                         type="password",
                         validation="required",
                         v-model="resetPasswordForm.password_confirmation",
@@ -54,7 +54,7 @@ export default class RegisterForm extends Vue {
 
     async doSubmit() {
         const response = await this.axios.post('../password/reset', this.resetPasswordForm);
-        alert('password changed');
+        alert(this.$t('auth.reset_success'));
         this.$router.push({ name: 'auth.login' });
     }
 
@@ -62,7 +62,7 @@ export default class RegisterForm extends Vue {
         try {
             await this.doSubmit();
         } catch {
-            alert('errors.generic_error');
+            alert(this.$t('auth.reset_fail'));
         }
     }
 }

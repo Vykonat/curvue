@@ -1,12 +1,12 @@
 <template lang="pug">
-    cur-form( title="Register", button-text="register", @submit="register" )
+    cur-form( :title="$t('auth.register')", :button-text="$t('auth.register')", @submit="register" )
         template( v-slot:fields )
             grid-row
                 grid-item
                     cur-input(
-                        name="name",
+                        :name="$t('users.name')",
+                        :placeholder="$t('users.name_placeholder')",
                         id="name",
-                        placeholder="Enter your name",
                         validation="required|min:3|max:191",
                         v-model="registerForm.name",
                         required
@@ -15,9 +15,9 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="email",
+                        :name="$t('users.email')",
+                        :placeholder="$t('users.email_placeholder')",
                         id="email",
-                        placeholder="Enter your email",
                         type="email",
                         validation="required|max:191|email",
                         v-model="registerForm.email",
@@ -27,9 +27,9 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="password",
+                        :name="$t('users.password')",
+                        :placeholder="$t('users.password_placeholder')",
                         id="password",
-                        placeholder="Enter your password",
                         type="password",
                         validation="required|min:8|confirmed",
                         v-model="registerForm.password",
@@ -39,9 +39,9 @@
             grid-row
                 grid-item
                     cur-input(
-                        name="password_confirmation",
+                        :name="$t('users.password_confirmation')",
+                        :placeholder="$t('users.password_confirmation_placeholder')",
                         id="password_confirmation",
-                        placeholder="Confirm your password",
                         type="password",
                         validation="required",
                         v-model="registerForm.password_confirmation",
@@ -62,7 +62,7 @@ export default class RegisterForm extends Vue {
             params: this.registerForm,
             redirect: false,
             success(response) {
-                alert('auth.created');
+                alert(this.$t('auth.register_success'));
                 this.$router.push({ name: 'login' });
                 return
             },
@@ -73,7 +73,7 @@ export default class RegisterForm extends Vue {
         try {
             await this.doRegister();
         } catch {
-            alert('error');
+            alert(this.$t('auth.register_fail'));
         }
     }
 }
