@@ -1,6 +1,7 @@
 import { RouteConfig } from 'vue-router/types/router';
 import { lazyLoadRoute } from "../../../common/utils/lazyLoadRoute.util";
-import { requiresGuestMeta } from "../../../common/utils/meta.util"
+import { requiresGuestMeta } from "../../../common/utils/meta.util";
+import { i18n } from "../../../common/config/i18n.config";
 
 export const AuthRoutes: RouteConfig[] = [
     {
@@ -13,12 +14,12 @@ export const AuthRoutes: RouteConfig[] = [
             ...requiresGuestMeta,
             breadcrumbs: [
                 {
-                    label: 'Home',
-                    target: '/'
+                    label: i18n.t('navigation.home'),
+                    target: { name: 'app.home' }
                 },
                 {
-                    label: 'login',
-                    target: '/login',
+                    label: i18n.t('auth.login'),
+                    target: { name: 'auth.login' },
                 },
             ]
         }
@@ -34,12 +35,12 @@ export const AuthRoutes: RouteConfig[] = [
             ...requiresGuestMeta,
             breadcrumbs: [
                 {
-                    label: 'Home',
-                    target: '/'
+                    label: i18n.t('navigation.home'),
+                    target: { name: 'app.home' }
                 },
                 {
-                    label: 'Register',
-                    target: '/register',
+                    label: i18n.t('auth.register'),
+                    target: { name: 'auth.register' },
                 },
             ]
         }
@@ -55,12 +56,12 @@ export const AuthRoutes: RouteConfig[] = [
             ...requiresGuestMeta,
             breadcrumbs: [
                 {
-                    label: 'Home',
-                    target: '/'
+                    label: i18n.t('navigation.home'),
+                    target: { name: 'app.home' }
                 },
                 {
-                    label: 'Forgot Password',
-                    target: '/forgot-password',
+                    label: i18n.t('auth.forgot'),
+                    target: { name: 'auth.forgot' },
                 },
             ]
         }
@@ -76,16 +77,16 @@ export const AuthRoutes: RouteConfig[] = [
             ...requiresGuestMeta,
             breadcrumbs: [
                 {
-                    label: 'Home',
-                    target: '/'
+                    label: i18n.t('navigation.home'),
+                    target: { name: 'app.home' }
                 },
                 {
-                    label: 'Forgot Password',
-                    target: '/forgot-password',
+                    label: i18n.t('auth.forgot'),
+                    target: { name: 'auth.forgot' },
                 },
                 {
-                    label: 'Reset Password',
-                    target: '/password/reset',
+                    label: i18n.t('auth.reset'),
+                    target: { name: 'auth.reset' },
                 },
             ]
         }

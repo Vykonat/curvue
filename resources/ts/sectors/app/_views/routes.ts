@@ -1,5 +1,6 @@
 import { RouteConfig } from 'vue-router/types/router';
-import { lazyLoadRoute } from "../../../common/utils/lazyLoadRoute.util"
+import { lazyLoadRoute } from "../../../common/utils/lazyLoadRoute.util";
+import { i18n } from "../../../common/config/i18n.config";
 
 export const AppRoutes: RouteConfig[] = [
     {
@@ -19,11 +20,11 @@ export const AppRoutes: RouteConfig[] = [
         meta: {
             breadcrumbs: [
                 {
-                    label: 'Home',
-                    target: '/'
+                    label: i18n.t('navigation.home'),
+                    target: { name: 'app.home' },
                 },
                 {
-                    label: 'MOBFN',
+                    label: i18n.t('navigation.404'),
                     target: '/',
                 },
             ]
