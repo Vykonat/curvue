@@ -11,8 +11,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Navigation from "../../../sectors/app/_components/Navigation/Navigation.vue";
-import Sidebar from "../../../sectors/app/_components/Sidebar/Sidebar.vue";
+import Navigation from "../../sectors/app/_components/Navigation/Navigation.vue";
+import Sidebar from "../../sectors/app/_components/Sidebar/Sidebar.vue";
 
 @Component({
     components: {

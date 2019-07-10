@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import AdminNavigation from "../../../sectors/app/_components/AdminNavigation/AdminNavigation.vue";
+import AdminNavigation from "../../sectors/app/_components/AdminNavigation/AdminNavigation.vue";
 
 @Component({
     components: {

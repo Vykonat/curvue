@@ -7,7 +7,7 @@ export default class curLayout extends Vue {
     @Prop({ required: true }) name!: string
 
     created() {
-        Vue.component( this.name, () => import(`../../../layouts/${this.name}Layout/${this.name}Layout.vue`) );
+        Vue.component( this.name, () => import(/* webpackChunkName: "[request]" */ `../../../layouts/${this.name}Layout.vue`) );
         this.$parent.$emit('update:layout', this.name);
     }
 
