@@ -13,7 +13,7 @@ cur-layout( name="Stack" )
         page-section(
             title="title",
             :link="{ name: 'auth.register' }"
-            image="https://picsum.photos/1600/950"
+            :image="randomPhoto",
         )
             template( v-slot:text ) Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.
             template( v-slot:button ) Click for more
@@ -21,7 +21,7 @@ cur-layout( name="Stack" )
         page-section(
             title="title",
             :link="{ name: 'auth.login' }"
-            image="https://picsum.photos/1600/900"
+            :image="randomPhoto",
             :flip="true",
             background="alternative",
         )
@@ -34,9 +34,14 @@ cur-layout( name="Stack" )
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { APP_NAME } from "../../../../common/config/app.config";
+import { generateRandomPhoto } from "../../../../common/utils/generateRandomPhoto.util";
 
 export default class HomeView extends Vue {
     APP_NAME = APP_NAME;
+    
+    private get randomPhoto() {
+        return generateRandomPhoto();
+    }
 }
 </script>
 
