@@ -2,6 +2,8 @@
 /public/hot
 /public/storage
 /public/**/*.js
+/public/**/*.br
+/public/**/*.gz
 /public/**/*.css
 /public/mix-manifest.json
 /resources/ts/vue-i18n-locales.generated.js

@@ -12,6 +12,8 @@
 const mix = require('laravel-mix');
 const cleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const BrotliPlugin = require('brotli-webpack-plugin');
 const isProd = process.env.NODE_ENV === "production";
 
 const devPlugins = [
@@ -23,6 +25,19 @@ const productionPlugins = [
 		cache: true,
 		parallel: true,
 		sourceMap: true
+   }),
+   new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.7
+   }),
+   new BrotliPlugin({
+      filename: '[path].br[query]',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.7
    })
 ];
 
