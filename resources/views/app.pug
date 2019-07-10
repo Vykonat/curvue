@@ -15,10 +15,13 @@ html( lang=str_replace('_', '-', app()->getLocale()) )
             }
             window.addEventListener('load', loadAsyncStyleSheets, !1);
 
+        link( rel="stylesheet", href=mix('/assets/css/app.css') )
+
     body
         #app 
             | #{__('core.loading')}
 
-        script( src=('/js/manifest.js') )
-        script( src=('/js/js/vendor.app.js') )
-        script( src=('/js/js/app.app.js') )
+        script( src=mix('/assets/js/manifest.js') )
+        script( src=mix('/assets/js/vendor.js') )
+        script( src=mix('/assets/js/app.js') )
+

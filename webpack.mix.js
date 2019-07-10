@@ -1,6 +1,3 @@
-const mix = require('laravel-mix');
-const cleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,14 +9,60 @@ const cleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
  |
  */
 
-mix.ts('resources/ts/app.ts', 'public/js').extract()
-   .sass('resources/sass/app.scss', 'public/css')
+const mix = require('laravel-mix');
+const cleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const isProd = process.env.NODE_ENV === "production";
+
+const devPlugins = [
+   new cleanObsoleteChunks()
+];
+
+const productionPlugins = [
+   new UglifyJsPlugin({
+		cache: true,
+		parallel: true,
+		sourceMap: true
+   })
+];
+
+const plugins = isProd ? [ ...productionPlugins, ...devPlugins ] : [ ...devPlugins ];
+
+mix.ts('resources/ts/app.ts', 'public/assets/js')
+   .sass('resources/sass/app.scss', 'public/assets/css')
    .webpackConfig({
+      devtool: isProd ? '' : 'inline-source-map',
+
+      output: {
+         filename: "[name].js",
+         chunkFilename: "[name].js",
+         publicPath: '/',
+      },
+
+      optimization: {
+         splitChunks: {
+            chunks: 'async',
+            name: true,
+            cacheGroups: {
+               vendors: {
+                  test: /[\\/]node_modules[\\/]/,
+                  priority: -10
+               },
+               default: {
+                  minChunks: 2,
+                  priority: -20,
+                  reuseExistingChunk: true
+               }
+            }
+         }
+      },
+
       module: {
          rules: [
             {
                test: /\.pug$/,
-               loader: 'pug-plain-loader'
+               loader: 'pug-plain-loader',
+               exclude: /node_modules/,
             },
             {
                test: /\.(graphql|gql)$/,
@@ -29,19 +72,13 @@ mix.ts('resources/ts/app.ts', 'public/js').extract()
          ],
       },
 
-      output: {
-         filename: '[name].js', 
-         chunkFilename: 'js/[name].app.js', 
-         publicPath: '/',
-      },
-
       resolve: {
          alias: {
             styles: path.resolve(__dirname, 'resources/sass'),
          },
       },
 
-      plugins: [
-         new cleanObsoleteChunks(),
-      ]
+      plugins: plugins
    })
+   .extract()
+   .version()
