@@ -2,7 +2,8 @@
 article.navigation
     navbar
         template( v-slot:middle )
-            router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
+            router-link.brand( :to="{ name: 'app.home' }" )
+                cur-image( src="/assets/images/curvue-logo.svg" )
         template( v-if="$auth.check()", v-slot:right )
             logout-button
         template( v-else, v-slot:right )
@@ -52,7 +53,9 @@ export default class Navigation extends Vue {
 @import '~styles/app';
 
 .brand {
-    font-size: fontSize(h3);
+    width: space(32);
+    height: space(32);
+    margin-top: space();
     font-weight: bold;
     color: color("text");
 
