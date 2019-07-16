@@ -3,7 +3,7 @@ article.navigation
     navbar
         template( v-slot:middle )
             router-link.brand( :to="{ name: 'app.home' }" )
-                cur-image( src="/assets/images/curvue-logo.svg" )
+                cur-image( src="/assets/images/curvue-logo.svg", alt="Curvue logo" )
         template( v-if="$auth.check()", v-slot:right )
             logout-button
         template( v-else, v-slot:right )
