@@ -38,6 +38,7 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
+        "sw-precache-webpack-plugin": "^0.11.5",
         "ts-loader": "^6.0.4",
         "typescript": "^3.5.2",
         "uglifyjs-webpack-plugin": "^2.1.3",

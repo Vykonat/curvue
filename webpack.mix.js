@@ -14,10 +14,34 @@ const cleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const isProd = process.env.NODE_ENV === "production";
 
 const devPlugins = [
-   new cleanObsoleteChunks()
+   new cleanObsoleteChunks(),
+   new SWPrecacheWebpackPlugin({
+      cacheId: 'curvue',
+      filename: 'sw.js',
+      staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html}'],
+      minify: true,
+      stripPrefix: 'public/',
+      handleFetch: true,
+      dynamicUrlToDependencies: {
+          '/': ['resources/views/app.pug'],
+      },
+      staticFileGlobsIgnorePatterns: [/\.map$/, /mix-manifest\.json$/, /manifest\.json$/, /sw\.js$/],
+      runtimeCaching: [
+          {
+              urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+              handler: 'cacheFirst'
+          },
+          {
+              urlPattern: /^https:\/\/use\.fontawesome\.com\//,
+              handler: 'cacheFirst'
+          }
+      ],
+      //  importScripts: ['./js/push_message.js'] <--- eventually
+  })
 ];
 
 const productionPlugins = [
