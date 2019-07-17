@@ -51,9 +51,9 @@ cur-form( :title="userFormTitle", :button-text="userFormTitle", @submit="sendDat
 
         grid-row
             grid-item( fill )
-                input( type="radio", id="Admin", name="role_id", value="1", v-model="user.role_id" )
+                input( type="radio", id="Admin", name="role_id", value=1, v-model="user.role_id" )
                 label( for="Admin" ) {{ $t('roles.admin') }}
-                input( type="radio", id="Patron", name="role_id", value="2", v-model="user.role_id" )
+                input( type="radio", id="Patron", name="role_id", value=2, v-model="user.role_id" )
                 label( for="Patron" ) {{ $t('roles.patron' )}}
 </template>
 

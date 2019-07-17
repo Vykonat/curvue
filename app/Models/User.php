@@ -22,9 +22,7 @@ class User extends Authenticatable implements JWTSubject
 
         // auto-sets values on creation and update
         static::saving(function ($user) {
-            if(isset($user->role_id)) {
-                return;
-            } else {
+            if(! isset($user->role_id)) {
                 $user->role_id = 2;
             }
         });

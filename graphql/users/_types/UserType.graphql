@@ -2,6 +2,7 @@ type User {
     id: ID!
     role_id: Int!
     name: String!
+    role: String! @field(resolver: "App\\GraphQL\\Mutations\\UserRoleStringResolver@resolve")
     email: String!
     created_at: DateTime!
     updated_at: DateTime!

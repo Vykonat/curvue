@@ -1,0 +1,3 @@
+extend type Mutation {
+    createUser( data: CreateUserInput! @spread ): User! @create
+}

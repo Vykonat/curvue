@@ -81,6 +81,10 @@ export default class AdminUsersView extends Vue {
             title: 'Email',
         },
 
+        role: {
+            title: 'Role',
+        },
+
         role_id: {
             visible: false,
         },
@@ -121,6 +125,7 @@ export default class AdminUsersView extends Vue {
         const form = { ...user };
         this.userForm.role_id = user.role_id;
         delete form.__typename;
+        delete form.role;
         delete form.created_at;
         delete form.updated_at;
         this.userForm = form;
