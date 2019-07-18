@@ -1,9 +1,9 @@
 query UserQuery($id: ID!) {
-    user(id: $id) {
-        id
-        role_id
-        role
-        name
-        email
-    }
+  user(id: $id) {
+    id
+    role_id
+    role
+    name
+    email
+  }
 }

@@ -1,82 +1,73 @@
-// General font settings
 $font-family-headings: 'Montserrat', Helvetica, sans-serif;
 $font-family: 'Ubuntu', Helvetica, sans-serif;
 
-// Factors for increasing text size at larger view-ports
 $font-size-factor-tablet-landscape: 1.125;
 $font-size-factor-large-desktop: 1.25;
 
-// font sizes
-$sizes: (
-    default: space(18),
-    h1: space(48),
-    h2: space(36),
-    h3: space(28),
-    h4: space(24),
-    h5: space(20),
-    h6: space(18),
-    small: space(14),
+$font-sizes: (
+  default: space(18),
+  h1: space(48),
+  h2: space(36),
+  h3: space(28),
+  h4: space(24),
+  h5: space(20),
+  h6: space(18),
+  small: space(14)
 );
 
-@function fontSize($font-size: "default") {
-    @if map-has-key($sizes, $font-size) {
-        @return map-get($sizes, $font-size);
-    };
+@function fontSize($font-size: 'default') {
+  @if map-has-key($font-sizes, $font-size) {
+    @return map-get($font-sizes, $font-size);
+  }
 
-    @error 'Unsupported font size';
-} 
-
-// line heights
-$heights: (
-    content: (
-        default: 1.6,
-    ),
-    
-    headings: (
-        default: 1.2,
-        small: 1.4,
-    ),
-);
-
-@function lineHeight($type, $height: "default") {
-    @if map-has-key($heights, $type) {
-        @return map-get(map-get($heights, $type), $height);
-    };
-
-    @error 'Unsupported line height';
+  @error 'Unsupported font size';
 }
 
-// font weights
-$weights: (
-    content: (
-        default: 400,
-        bold: 600,
-    ),
-
-    headings: (
-        default: 700,
-    ),
+$line-heights: (
+  content: (
+    default: 1.6
+  ),
+  headings: (
+    default: 1.2,
+    small: 1.4
+  )
 );
 
-@function fontWeight($type, $weight: "default") {
-    @if map-has-key($weights, $type) {
-        @return map-get(map-get($weights, $type), $weight);
-    };
+@function lineHeight($type, $height: 'default') {
+  @if map-has-key($line-heights, $type) {
+    @return map-get(map-get($line-heights, $type), $height);
+  }
 
-    @error 'Unsupported font weight';
+  @error 'Unsupported line height';
 }
 
-// Letter spacing
-$spaces: (
-    default: 0.01em,
-    headings: -0.1rem,
+$font-weights: (
+  content: (
+    default: 400,
+    bold: 600
+  ),
+  headings: (
+    default: 700
+  )
 );
 
-@function letterSpacing($letter-spacing: "default") {
-    @if map-has-key($spaces, $letter-spacing) {
-        @return map-get($spaces, $letter-spacing);
-    };
+@function fontWeight($type, $weight: 'default') {
+  @if map-has-key($font-weights, $type) {
+    @return map-get(map-get($font-weights, $type), $weight);
+  }
 
-    @error 'Unsupported letter spacing';
-} 
+  @error 'Unsupported font weight';
+}
 
+$letter-spaces: (
+  default: 0.01em,
+  headings: -0.1rem
+);
+
+@function letterSpacing($letter-spacing: 'default') {
+  @if map-has-key($letter-spaces, $letter-spacing) {
+    @return map-get($letter-spaces, $letter-spacing);
+  }
+
+  @error 'Unsupported letter spacing';
+}

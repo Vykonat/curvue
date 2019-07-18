@@ -1,14 +1,15 @@
-body, html {
-    width: 100%;
-    color: color("text");
-    background-color: color("background");
-    overflow-x: hidden;
+body,
+html {
+  width: 100%;
+  color: color('text');
+  background-color: color('background');
+  overflow-x: hidden;
 
-    i {
-        margin-top: space(2);
-    }
+  i {
+    margin-top: space(2);
+  }
 }
 
 .contentBelowNav {
-    margin-top: space(52) + space();
+  margin-top: space(52) + space();
 }

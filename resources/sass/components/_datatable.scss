@@ -1,19 +1,19 @@
-$data-table-no-results-border: 1px solid color("danger");
+$data-table-no-results-border: 1px solid color('danger');
 $data-table-no-results-padding: space(32) 0;
 $data-table-no-results-opacity: 0.5;
 $data-table-min-width: $screen-phone;
 
-$data-table-header-border: 1px solid color("divider");
-$data-table-header-bg: color("background");
-$data-table-header-font-weight: fontWeight("content", "bold");
+$data-table-header-border: 1px solid color('divider');
+$data-table-header-bg: color('background');
+$data-table-header-font-weight: fontWeight('content', 'bold');
 $data-table-header-column-padding: space() space(16);
 $data-table-header-icon-color: inherit;
-$data-table-header-icon-hover-color: color("primary");
+$data-table-header-icon-hover-color: color('primary');
 $data-table-header-icon-opacity: 0.3;
 $data-table-header-icon-margin: 0 0 0 space();
 
-$data-table-row-border: 1px solid color("divider");
-$data-table-row-hover-bg: color("background", "dark");
-$data-table-row-hover-color: color("text");
+$data-table-row-border: 1px solid color('divider');
+$data-table-row-hover-bg: color('background', 'dark');
+$data-table-row-hover-color: color('text');
 
 $data-table-row-column-padding: space() space(16);

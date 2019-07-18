@@ -5,7 +5,7 @@ export interface IDataTableHeader {
 export interface IDataTableHeaderItem {
     title?: string;
     visible?: boolean;
-    sortKey?: string;
+    sortKey?: string; 
     slot?: string;
     sortable?: boolean;
 }

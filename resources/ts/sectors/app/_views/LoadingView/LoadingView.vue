@@ -1,5 +1,5 @@
 <template lang="pug">
-cur-layout( name="Default" )
+  cur-layout( name="Default" )
     h1 Loading View...
 </template>
 

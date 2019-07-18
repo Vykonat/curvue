@@ -1,72 +1,57 @@
-/*
-All brand colors should be defined in this file.
-Please follow the same format as below for defining new colors
-Most colors should be taken care of by default
-*/
-
-$colors: (
-    primary: (
-        default: hsla(354, 69%, 50%, 1),
-        dark: hsla(354, 69%, 40%, 1),
-        light: hsla(354, 69%, 60%, 1),
-    ),
-
-    accent: (
-        default: hsla(199, 100%, 29%),
-        dark: hsla(199, 100%, 19%, 1),
-        light: hsla(199, 100%, 39%, 1),
-    ),
-
-    info: (
-        default: hsla(199, 100%, 29%, 1),
-        dark: hsla(199, 100%, 19%, 1),
-        light: hsla(199, 100%, 39%, 1),
-    ),
-
-    warn: (
-        default: hsla(47, 81%, 56%, 1),
-        dark: hsla(47, 81%, 46%, 1),
-        light: hsla(47, 81%, 66%, 1),
-    ),
-
-    success: (
-        default: hsla(133, 55%, 45%, 1),
-        dark: hsla(133, 55%, 35%, 1),
-        light: hsla(133, 55%, 55%, 1),
-    ),
-
-    danger: (
-        default: hsl(4, 100%, 41%),
-        dark: hsl(4, 100%, 31%),
-        light: hsl(4, 100%, 51%),
-    ),
-
-    background: (
-        default: hsla(86, 15%, 95%, 1),
-        dark: hsla(202, 26%, 80%, 1),
-        light: hsla(203, 27%, 100%, 1),
-        inverse: hsla(203, 27%, 10%, 1),
-    ),
-
-    text: (
-        default: hsla(0, 0%, 20%, 1),
-        inverse: hsla(255, 100%, 100%, 1),
-    ),
-
-    shadow: (
-        default: hsla(203, 27%, 10%, 1),
-    ),
-
-    divider: (
-        default: hsla(200, 5%, 77%, 1),
-        inverse: hsla(200, 5%, 23%, 1),
-    ),
+$brand-colors: (
+  primary: (
+    default: hsla(354, 69%, 50%, 1),
+    dark: hsla(354, 69%, 40%, 1),
+    light: hsla(354, 69%, 60%, 1)
+  ),
+  accent: (
+    default: hsla(199, 100%, 29%),
+    dark: hsla(199, 100%, 19%, 1),
+    light: hsla(199, 100%, 39%, 1)
+  ),
+  info: (
+    default: hsla(199, 100%, 29%, 1),
+    dark: hsla(199, 100%, 19%, 1),
+    light: hsla(199, 100%, 39%, 1)
+  ),
+  warn: (
+    default: hsla(47, 81%, 56%, 1),
+    dark: hsla(47, 81%, 46%, 1),
+    light: hsla(47, 81%, 66%, 1)
+  ),
+  success: (
+    default: hsla(133, 55%, 45%, 1),
+    dark: hsla(133, 55%, 35%, 1),
+    light: hsla(133, 55%, 55%, 1)
+  ),
+  danger: (
+    default: hsl(4, 100%, 41%),
+    dark: hsl(4, 100%, 31%),
+    light: hsl(4, 100%, 51%)
+  ),
+  background: (
+    default: hsla(86, 15%, 95%, 1),
+    dark: hsla(202, 26%, 80%, 1),
+    light: hsla(203, 27%, 100%, 1),
+    inverse: hsla(203, 27%, 10%, 1)
+  ),
+  text: (
+    default: hsla(0, 0%, 20%, 1),
+    inverse: hsla(255, 100%, 100%, 1)
+  ),
+  shadow: (
+    default: hsla(203, 27%, 10%, 1)
+  ),
+  divider: (
+    default: hsla(200, 5%, 77%, 1),
+    inverse: hsla(200, 5%, 23%, 1)
+  )
 );
 
-@function color($color, $tone: "default") {
-    @if map-has-key($colors, $color) {
-        @return map-get(map-get($colors, $color), $tone)
-    };
+@function color($color, $tone: 'default') {
+  @if map-has-key($brand-colors, $color) {
+    @return map-get(map-get($brand-colors, $color), $tone);
+  }
 
-    @error 'Color is not supported, refer to colors.scss for supported colors and tone';
+  @error 'Color is not supported, refer to colors.scss for supported colors and tone';
 }

@@ -1,20 +1,20 @@
 <template lang="pug">
-.DefaultLayout
+  .DefaultLayout
     navigation
     .contentBelowNav
-        grid
-            breadcrumb( :items="$route.meta.breadcrumbs" )
-            slot
+      grid
+        breadcrumb( :items="$route.meta.breadcrumbs" )
+        slot
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Navigation from "../../sectors/app/_components/Navigation/Navigation.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import Navigation from '../../sectors/app/_components/Navigation/Navigation.vue';
 
 @Component({
-    components: {
-        Navigation: Navigation
-    }
+  components: {
+    Navigation: Navigation
+  }
 })
 export default class DefaultLayout extends Vue {}
 </script>

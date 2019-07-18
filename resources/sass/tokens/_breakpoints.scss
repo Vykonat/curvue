@@ -15,10 +15,10 @@ $screen-small-desktop-gutter: space();
 $screen-large-desktop-gutter: space();
 
 $grid-breakpoints: (
-    default: 0px,
-    phone: $screen-phone,
-    tabletPortrait: $screen-tablet-portrait,
-    tabletLandscape: $screen-tablet-landscape,
-    smallDesktop: $screen-small-desktop,
-    largeDesktop: $screen-large-desktop
+  default: 0px,
+  phone: $screen-phone,
+  tabletPortrait: $screen-tablet-portrait,
+  tabletLandscape: $screen-tablet-landscape,
+  smallDesktop: $screen-small-desktop,
+  largeDesktop: $screen-large-desktop
 );

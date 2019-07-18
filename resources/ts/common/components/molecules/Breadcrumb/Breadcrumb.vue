@@ -1,21 +1,21 @@
 <template lang="pug">
-    ul.Breadcrumb
-        li.item( v-for="(item, i) in items", :key="i" )
-            router-link( :to="item.target", v-if="i < items.length - 1" ) {{ item.label }}
-            span( v-else ) {{ item.label }}
+  ul.Breadcrumb
+    li.item( v-for="(item, i) in items", :key="i" )
+      router-link( :to="item.target", v-if="i < items.length - 1" ) {{ item.label }}
+      span( v-else ) {{ item.label }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 
 interface IBreadcrumbItem {
-    target: string,
-    label: string,
+  target: string;
+  label: string;
 }
 
 @Component
 export default class Breadcrumb extends Vue {
-    @Prop({ required: true }) items!: IBreadcrumbItem[]
+  @Prop({ required: true }) items!: IBreadcrumbItem[];
 }
 </script>
 
@@ -24,26 +24,26 @@ export default class Breadcrumb extends Vue {
 @import "~styles/components/breadcrumb";
 
 .Breadcrumb {
-    padding: $breadcrumb-padding;
-    margin: $breadcrumb-margin;
-    list-style: none;
+  padding: $breadcrumb-padding;
+  margin: $breadcrumb-margin;
+  list-style: none;
 }
 
 .item {
-    display: inline-block;
-    padding: space() 0;
+  display: inline-block;
+  padding: space() 0;
 
+  &:before {
+    padding: space();
+    content: $breadcrumb-separator;
+  }
+
+  &:first-child {
     &:before {
-        padding: space();
-        content: $breadcrumb-separator;
+      padding: 0;
+      content: "";
     }
-
-    &:first-child {
-        &:before {
-            padding: 0;
-            content: '';
-        }
-    }
+  }
 }
 </style>
 

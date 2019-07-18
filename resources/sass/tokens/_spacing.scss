@@ -1,27 +1,27 @@
-$space-units:(
-    default: 0.8rem,
-    2: 0.2rem,
-    4: 0.4rem,
-    12: 1.2rem,
-    14: 1.4rem,
-    16: 1.6rem,
-    18: 1.8rem,
-    20: 2rem,
-    24: 2.4rem,
-    28: 2.8rem,
-    32: 3.2rem,
-    36: 3.6rem,
-    40: 4rem,
-    48: 4.8rem,
-    52: 5.2rem,
-    64: 6.4rem,
-    84: 8.4rem,
+$space-units: (
+  default: 0.8rem,
+  2: 0.2rem,
+  4: 0.4rem,
+  12: 1.2rem,
+  14: 1.4rem,
+  16: 1.6rem,
+  18: 1.8rem,
+  20: 2rem,
+  24: 2.4rem,
+  28: 2.8rem,
+  32: 3.2rem,
+  36: 3.6rem,
+  40: 4rem,
+  48: 4.8rem,
+  52: 5.2rem,
+  64: 6.4rem,
+  84: 8.4rem
 );
 
-@function space($space-unit: "default") {
-    @if map-has-key($space-units, $space-unit) {
-        @return map-get($space-units, $space-unit);
-    }
+@function space($space-unit: 'default') {
+  @if map-has-key($space-units, $space-unit) {
+    @return map-get($space-units, $space-unit);
+  }
 
-    @error 'Space unit not supported!'
+  @error 'Space unit not supported!';
 }

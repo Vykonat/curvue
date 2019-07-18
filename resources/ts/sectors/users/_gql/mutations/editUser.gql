@@ -1,8 +1,8 @@
 mutation EditUser($id: ID!, $data: EditUserInput!) {
-    editUser(id: $id, data: $data) {
-        id
-        name
-        email
-        role_id
-    }
+  editUser(id: $id, data: $data) {
+    id
+    name
+    email
+    role_id
+  }
 }

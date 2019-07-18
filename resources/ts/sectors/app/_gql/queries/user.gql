@@ -1,6 +1,0 @@
-query UserQuery($id: ID!) {
-    user(id: $id) {
-        name
-        email
-    }
-}

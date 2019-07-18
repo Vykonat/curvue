@@ -1,16 +1,16 @@
 <template lang="pug">
-cur-layout( name="Default" )
+  cur-layout( name="Default" )
     reset-password-form
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import ResetPasswordForm from "../../_components/ResetPasswordForm/ResetPasswordForm.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import ResetPasswordForm from '../../_components/ResetPasswordForm/ResetPasswordForm.vue';
 
 @Component({
-    components: {
-        ResetPasswordForm: ResetPasswordForm
-    }
+  components: {
+    ResetPasswordForm: ResetPasswordForm
+  }
 })
 export default class ResetPasswordView extends Vue {}
 </script>

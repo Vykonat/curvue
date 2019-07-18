@@ -1,14 +1,14 @@
 $indexes: (
-    navigation: 1,
-    drawer: 2,
-    modal: 3,
-    notification: 4,
+  navigation: 1,
+  drawer: 2,
+  modal: 3,
+  notification: 4
 );
 
 @function z($index) {
-    @if map-has-key($indexes, $index) {
-        @return map-get($indexes, $index);
-    }
+  @if map-has-key($indexes, $index) {
+    @return map-get($indexes, $index);
+  }
 
-    @error 'Index `#{index}` is not supported!'
+  @error 'Index `#{index}` is not supported!';
 }

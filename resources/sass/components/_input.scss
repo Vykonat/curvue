@@ -1,25 +1,25 @@
-$input-border-bottom: 1px solid color("divider");
+$input-border-bottom: 1px solid color('divider');
 $input-background-color: transparent;
 $input-padding: space() 0;
 $input-margin: space(16) 0;
 $input-font-size: inherit;
-$input-color: color("text");
+$input-color: color('text');
 $input-height: space(32);
 
 $input-placeholder-top: 0;
 $input-placeholder-color: $input-color;
 $input-placeholder-font-size: $input-font-size;
-$input-placeholder-font-weight: fontWeight("content");
+$input-placeholder-font-weight: fontWeight('content');
 $input-placeholder-active-font-size: 75%;
-$input-placeholder-active-font-weight: fontWeight("content");
-$input-placeholder-active-font-color: color("accent");
+$input-placeholder-active-font-weight: fontWeight('content');
+$input-placeholder-active-font-color: color('accent');
 $input-placeholder-active-height: space(16);
 
 $input-bar-height: space(2);
-$input-bar-color: color("divider");
+$input-bar-color: color('divider');
 
 $input-message-height: space(16);
 $input-message-padding: space(4) 0 0 0;
 $input-message-color: $input-color;
 $input-message-font-size: 75%;
-$input-message-font-weight: fontWeight("content");
+$input-message-font-weight: fontWeight('content');

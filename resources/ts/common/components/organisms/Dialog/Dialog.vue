@@ -1,43 +1,43 @@
 <template lang="pug">
-notification(
+  notification(
     :title="notificationTitle",
     :text="message"
-)
+  )
     section.buttons( v-if="isConfirm" )
-        cur-button( variant="success", @click="ok" ) {{ $t('core.confirm') }}
-        cur-button( variant="danger", @click="cancel" ) {{ $t('core.cancel') }}
+      cur-button( variant="success", @click="ok" ) {{ $t('core.confirm') }}
+      cur-button( variant="danger", @click="cancel" ) {{ $t('core.cancel') }}
     section.buttons( v-else )
-        cur-button( variant="success", @click="cancel" ) {{ $t('core.ok') }}
+      cur-button( variant="success", @click="cancel" ) {{ $t('core.ok') }}
 
 </template>
 
 <script lang="ts">
-import { DialogComponent } from 'vue-modal-dialogs';
-import { Component, Prop } from 'vue-property-decorator';
+import { DialogComponent } from "vue-modal-dialogs";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Dialog extends DialogComponent<boolean> {
-    @Prop({ default: false }) isConfirm!: boolean;
-    @Prop({ default: '', required: true }) message!: string;
+  @Prop({ default: false }) isConfirm!: boolean;
+  @Prop({ default: "", required: true }) message!: string;
 
-    private get notificationTitle() {
-        return this.$t('core.new', {resource:'Notification'});
-    }
+  private get notificationTitle() {
+    return this.$t("core.new", { resource: "Notification" });
+  }
 
-    cancel(): void {
-        this.$close(false);
-    }
+  cancel(): void {
+    this.$close(false);
+  }
 
-    ok(): void {
-        this.$close(true);
-    }
+  ok(): void {
+    this.$close(true);
+  }
 }
 </script>
 
 <style lang="scss">
 .buttons {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
 </style>

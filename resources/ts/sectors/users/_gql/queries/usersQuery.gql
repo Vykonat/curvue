@@ -1,11 +1,11 @@
 query UsersQuery {
-    users {
-        id
-        role_id
-        role
-        name
-        email
-        created_at
-        updated_at
-    }
+  users {
+    id
+    role_id
+    role
+    name
+    email
+    created_at
+    updated_at
+  }
 }

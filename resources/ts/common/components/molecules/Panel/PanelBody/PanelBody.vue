@@ -1,14 +1,13 @@
 <template lang='pug'>
-    article.PanelBody
-        slot
+  .PanelBody
+    slot
 </template>
 
 <script lang='ts'>
 import { Component, Vue, Prop } from 'vue-property-decorator';
- 
+
 @Component
-export default class PanelBody extends Vue {
-}
+export default class PanelBody extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -16,7 +15,7 @@ export default class PanelBody extends Vue {
 @import '~styles/components/panel';
 
 .PanelBody {
-    display: block;
-    padding: $panel-padding;
+  display: block;
+  padding: $panel-padding;
 }
 </style>

@@ -1,40 +1,40 @@
 <template lang='pug'>
-    transition(
-        name="collapse",
-    )
-        slot
+  transition(
+    name="collapse",
+  )
+    slot
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class CollapseAnimation extends Vue {};
+export default class CollapseAnimation extends Vue {}
 </script>
 
 
 <style lang="scss" scoped>
-@import "~styles/app";
+@import '~styles/app';
 
 .collapse-enter-active,
 .collapse-leave-active,
 .collapse-enter-active,
 .collapse-leave-active {
-    transition-duration: 0.5s;
-    transition-property: height, opacity, transform;
-    transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-    overflow: hidden;
+  transition-duration: 0.5s;
+  transition-property: height, opacity, transform;
+  transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+  overflow: hidden;
 }
 
 .collapse-enter,
 .collapse-leave-active {
-    opacity: 0;
-    transform: translate(0, 100%);
+  opacity: 0;
+  transform: translate(0, 100%);
 }
 
 .collapse-leave-active,
 .collapse-enter {
-    opacity: 0;
-    transform: translate(0, -100%);
+  opacity: 0;
+  transform: translate(0, -100%);
 }
 </style>
