@@ -38,6 +38,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import dialog from "../../../../common/utils/dialog.util";
 
 @Component
 export default class LoginForm extends Vue {
@@ -54,7 +55,7 @@ export default class LoginForm extends Vue {
 
                 if (status === 401) {
                     this.authError = true;
-                    alert(this.$t('auth.login_fail'));
+                    dialog(this.$t('auth.login_fail'), false);
                     return;
                 }
             },
@@ -64,10 +65,10 @@ export default class LoginForm extends Vue {
     async login() {
         try {
             await this.doLogin();
-            alert(this.$t('auth.login_success'))
+            dialog('auth.login_success', false);
             this.$router.push({ name: 'app.home' })
         } catch {
-            alert(this.$t('errors.generic_error'));
+            dialog(this.$t('errors.generic_error'), false);
         }
     }
 }

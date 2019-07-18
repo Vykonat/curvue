@@ -54,6 +54,7 @@
 <script lang="ts">
 import { Component, Vue, Provide } from "vue-property-decorator";
 import DeleteUser from "../../_gql/mutations/deleteUser.gql";
+import dialog from "../../../../common/utils/dialog.util";
 
 @Component({
     components: {
@@ -133,7 +134,7 @@ export default class AdminUsersView extends Vue {
 
 
     async handleUserDelete({ id }, query): Promise<void> {
-        if(! confirm('are you sure?')) return
+        if(! await dialog(this.$t('resource.delete_confirmation', {resource: 'User'}), true) ) return
         
         const result = await this.$apollo.mutate({
             mutation: DeleteUser,
@@ -142,7 +143,7 @@ export default class AdminUsersView extends Vue {
             },
         });
 
-        alert(this.$t('resource.deleted', {resource: "User"}));
+        dialog(this.$t('resource.deleted', {resource: "User"}), false);
         query.refetch();
     }
 

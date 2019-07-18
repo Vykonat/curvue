@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import dialog from "../../../../common/utils/dialog.util";
 
 @Component
 export default class LogoutButton extends Vue {
@@ -18,7 +19,7 @@ export default class LogoutButton extends Vue {
                 makeRequest: true,
                 redirect: { name: 'auth.login' }
             })
-            alert(this.$t('auth.logged_out'));
+            dialog('auth.logged_out', false);
         } catch( e ) {
             console.log(e);
         }

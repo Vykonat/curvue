@@ -1,7 +1,8 @@
 <template lang="pug">
-component( :is="layout" )
-    router-view( :key="$route.fullPath", :layout.sync="layout", v-if="$auth.ready()" )
-    h3( v-else ) {{ $t('core.loading') }}
+.app( v-if="$auth.ready()" )
+    dialogs-wrapper( wrapper-name="default" )
+    component( :is="layout" )
+        router-view( :key="$route.fullPath", :layout.sync="layout", v-if="$auth.ready()" )
 </template>
 
 <script lang="ts">

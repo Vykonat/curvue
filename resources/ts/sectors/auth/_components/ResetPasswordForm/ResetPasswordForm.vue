@@ -41,6 +41,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import dialog from "../../../../common/utils/dialog.util";
 
 @Component
 export default class RegisterForm extends Vue {
@@ -54,7 +55,7 @@ export default class RegisterForm extends Vue {
 
     async doSubmit() {
         const response = await this.axios.post('../password/reset', this.resetPasswordForm);
-        alert(this.$t('auth.reset_success'));
+        dialog(this.$t('auth.reset_success'), false);
         this.$router.push({ name: 'auth.login' });
     }
 
@@ -62,7 +63,7 @@ export default class RegisterForm extends Vue {
         try {
             await this.doSubmit();
         } catch {
-            alert(this.$t('auth.reset_fail'));
+            dialog(this.$t('auth.reset_fail'), false);
         }
     }
 }

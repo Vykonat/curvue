@@ -52,6 +52,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import dialog from "../../../../common/utils/dialog.util";
 
 @Component
 export default class RegisterForm extends Vue {
@@ -62,7 +63,7 @@ export default class RegisterForm extends Vue {
             params: this.registerForm,
             redirect: false,
             success(response) {
-                alert(this.$t('auth.register_success'));
+                dialog(this.$t('auth.register_success'), false);
                 this.$router.push({ name: 'login' });
                 return
             },
@@ -73,7 +74,7 @@ export default class RegisterForm extends Vue {
         try {
             await this.doRegister();
         } catch {
-            alert(this.$t('auth.register_fail'));
+            dialog(this.$t('auth.register_fail'), false);
         }
     }
 }

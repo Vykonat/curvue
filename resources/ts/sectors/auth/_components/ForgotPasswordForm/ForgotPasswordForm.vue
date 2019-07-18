@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import dialog from "../../../../common/utils/dialog.util";
 
 @Component
 export default class RegisterForm extends Vue {
@@ -29,9 +30,9 @@ export default class RegisterForm extends Vue {
     async submitForgotRequest() {
         try {
             await this.doSubmit();
-            alert(this.$t('auth.forgot_submitted'));
+            dialog(this.$t('auth.forgot_submitted'), false);
         } catch {
-            alert('errors.generic_error');
+            dialog(this.$t('errors.generic_error'), false);
         }
     }
 }

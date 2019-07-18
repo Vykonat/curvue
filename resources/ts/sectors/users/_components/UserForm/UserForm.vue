@@ -60,6 +60,7 @@ cur-form( :title="userFormTitle", :button-text="userFormTitle", @submit="sendDat
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { apolloClient } from "../../../../common/config/apollo.config";
+import dialog from "../../../../common/utils/dialog.util";
 import CreateUser from "../../_gql/mutations/createUser.gql";
 import EditUser from "../../_gql/mutations/editUser.gql";
 
@@ -83,9 +84,9 @@ export default class UserForm extends Vue {
         })
 
         if( this.isAdd ) {
-            alert(this.$t('resource.created', {resource:"User"}));
+            dialog(this.$t('resource.created', {resource: 'User'}), false);
         } else {
-            alert(this.$t('resource.updated', {resource:"User"}));
+            dialog(this.$t('resource.updated', {resource: 'User'}), false);
         }
     }
 
