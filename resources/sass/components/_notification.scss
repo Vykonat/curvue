@@ -1,0 +1,14 @@
+$notifications-index: z(notification);
+$notifications-padding: space();
+$notifications-max-width: space(84) * 8;
+
+$notification-padding: space(16) space(32) space(16) space(16);
+$notification-margin: 0 0 space() 0;
+$notification-max-height: space(84) * 3.5;
+$notification-close-bg: color("background");
+$notification-close-width: space(32);
+$notification-close-cross-color: color("danger");
+
+$notification-confirm-cross-color: color("success");
+
+$notification-default-bg: color("background", "inverse");
