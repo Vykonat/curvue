@@ -5,6 +5,14 @@
         slot
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class CollapseAnimation extends Vue {};
+</script>
+
+
 <style lang="scss" scoped>
 @import "~styles/app";
 

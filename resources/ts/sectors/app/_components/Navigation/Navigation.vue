@@ -28,24 +28,13 @@ article.navigation
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import LogoutButton from "../../../auth/_components/LogoutButton/LogoutButton.vue";
-import { APP_NAME } from "../../../../common/config/app.config";
 
-interface INavItem {
-    title: string,
-    target: string,
-    params?: any
-}
 @Component({
     components: {
         LogoutButton: LogoutButton,
     }
 })
-export default class Navigation extends Vue {
-
-    get appName() {
-        return APP_NAME;
-    }
-}
+export default class Navigation extends Vue {}
 </script>
 
 
@@ -55,12 +44,6 @@ export default class Navigation extends Vue {
 .brand {
     width: space(32);
     height: space(32);
-    margin-top: space();
-    font-weight: bold;
-    color: color("text");
-
-    &:hover {
-        color: color("text");
-    }
+    margin-top: space(4);
 }
 </style>

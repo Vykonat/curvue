@@ -4,6 +4,7 @@ return [
     'navigation' => 'Navigation',
     'home' => 'Home',
     'users' => 'Users',
-    'admin' => 'Manage',
+    'admin' => 'Admin',
+    'manage' => 'Manage',
     '404' => 'You\'re lost',
 ];

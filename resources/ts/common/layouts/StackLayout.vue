@@ -1,9 +1,8 @@
 <template lang="pug">
 .StackLayout
     navigation
-    .contentBelowNav
-        breadcrumb( :items="$route.meta.breadcrumbs" )
-        slot
+    breadcrumb( :items="$route.meta.breadcrumbs" )
+    slot
 </template>
 
 <script lang="ts">
@@ -15,6 +14,6 @@ import Navigation from "../../sectors/app/_components/Navigation/Navigation.vue"
         Navigation: Navigation
     }
 })
-export default class DefaultLayout extends Vue {}
+export default class StackLayout extends Vue {}
 </script>
 
