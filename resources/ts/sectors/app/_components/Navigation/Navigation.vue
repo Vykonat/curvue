@@ -26,6 +26,7 @@
 
       nav-drawer-group( :title="$t('navigation.legal')" )
         nav-drawer-group-item( icon="fas fa-cookie-bite" :to="{ name: 'app.cookies' }" ) {{ $t('navigation.cookies') }}
+        nav-drawer-group-item( icon="fas fa-user-secret" :to="{ name: 'app.privacy' }" ) {{ $t('navigation.privacy') }}
 </template>
 
 <script lang="ts">

@@ -36,6 +36,29 @@ export const AppRoutes: RouteConfig[] = [
   },
 
   {
+    path: '/privacy-policy',
+    name: 'app.privacy',
+    component: () =>
+      lazyLoadRoute(
+        import(
+          /* webpackChunkName: "Privacy_Policy_Page" */ './PrivacyPolicyView/PrivacyPolicyView.vue'
+        )
+      ),
+    meta: {
+      breadcrumbs: [
+        {
+          label: i18n.t('navigation.home'),
+          target: { name: 'app.home' }
+        },
+        {
+          label: i18n.t('navigation.privacy'),
+          target: { name: 'app.privacy' }
+        }
+      ]
+    }
+  },
+
+  {
     path: '*',
     name: 'app.404',
     component: () =>

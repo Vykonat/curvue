@@ -8,5 +8,6 @@ return [
     'manage' => 'Manage',
     'legal' => 'Legal',
     'cookies' => 'Cookie Consent',
+    'privacy' => 'Privacy Policy',
     '404' => 'You\'re lost',
 ];
