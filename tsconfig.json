@@ -1,13 +1,14 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "strict": true,
-        "noImplicitAny": false,
-        "module": "esNext",
-        "moduleResolution": "node",
-        "experimentalDecorators": true,
-    },
-    "include": [
-        "resources/ts/**/*"
-    ]
+  "compilerOptions": {
+    "target": "es5",
+    "strict": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "module": "esNext",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+  },
+  "include": [
+    "resources/ts/**/*"
+  ]
 }
