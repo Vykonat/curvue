@@ -23,6 +23,9 @@
     nav-drawer
       nav-drawer-group( :title="$t('navigation.navigation')" )
         nav-drawer-group-item( icon="fas fa-home" :to="{ name: 'app.home' }" ) {{ $t('navigation.home') }}
+
+      nav-drawer-group( :title="$t('navigation.legal')" )
+        nav-drawer-group-item( icon="fas fa-cookie-bite" :to="{ name: 'app.cookies' }" ) {{ $t('navigation.cookies') }}
 </template>
 
 <script lang="ts">

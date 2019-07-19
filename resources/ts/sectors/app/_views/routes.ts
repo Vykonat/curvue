@@ -13,6 +13,29 @@ export const AppRoutes: RouteConfig[] = [
   },
 
   {
+    path: '/cookie-consent',
+    name: 'app.cookies',
+    component: () =>
+      lazyLoadRoute(
+        import(
+          /* webpackChunkName: "Cookie_Consent_Page" */ './CookieConsentView/CookieConsentView.vue'
+        )
+      ),
+    meta: {
+      breadcrumbs: [
+        {
+          label: i18n.t('navigation.home'),
+          target: { name: 'app.home' }
+        },
+        {
+          label: i18n.t('navigation.cookies'),
+          target: { name: 'app.cookies' }
+        }
+      ]
+    }
+  },
+
+  {
     path: '*',
     name: 'app.404',
     component: () =>
