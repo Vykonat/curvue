@@ -70,7 +70,7 @@ export default class AdminUsersView extends Vue {
 
   @Provide() usersDataTableHeader = {
     id: {
-      visible: false
+      title: 'id'
     },
 
     name: {

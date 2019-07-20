@@ -57,7 +57,6 @@ jobs:
           name: Run Tests
           command: |
             mkdir -p out/tests
-            mv tests-jest.xml out/tests/tests-jest.xml
             composer test -- --log-junit out/tests/tests-phpunit.xml
       - store_artifacts:
           path: out/tests

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -10,114 +11,124 @@
  */
 
 const mix = require('laravel-mix');
-const cleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
+const path = require('path');
+const CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-const isProd = process.env.NODE_ENV === "production";
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+
+const isProd = process.env.NODE_ENV === 'production';
 
 const devPlugins = [
-   new cleanObsoleteChunks(),
-   new SWPrecacheWebpackPlugin({
-      cacheId: 'curvue',
-      filename: 'sw.js',
-      staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html}'],
-      minify: true,
-      stripPrefix: 'public/',
-      handleFetch: true,
-      dynamicUrlToDependencies: {
-          '/': ['resources/views/app.pug'],
+  new CleanObsoleteChunks(),
+  new SWPrecacheWebpackPlugin({
+    cacheId: 'curvue',
+    filename: 'sw.js',
+    staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html}'],
+    minify: true,
+    stripPrefix: 'public/',
+    handleFetch: true,
+    dynamicUrlToDependencies: {
+      '/': ['resources/views/app.pug']
+    },
+    staticFileGlobsIgnorePatterns: [
+      /\.map$/,
+      /mix-manifest\.json$/,
+      /manifest\.json$/,
+      /sw\.js$/
+    ],
+    runtimeCaching: [
+      {
+        urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+        handler: 'cacheFirst'
       },
-      staticFileGlobsIgnorePatterns: [/\.map$/, /mix-manifest\.json$/, /manifest\.json$/, /sw\.js$/],
-      runtimeCaching: [
-          {
-              urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
-              handler: 'cacheFirst'
-          },
-          {
-              urlPattern: /^https:\/\/use\.fontawesome\.com\//,
-              handler: 'cacheFirst'
-          }
-      ],
-      //  importScripts: ['./js/push_message.js'] <--- eventually
+      {
+        urlPattern: /^https:\/\/use\.fontawesome\.com\//,
+        handler: 'cacheFirst'
+      }
+    ]
+    //  importScripts: ['./js/push_message.js'] <--- eventually
   })
 ];
 
 const productionPlugins = [
-   new UglifyJsPlugin({
-		cache: true,
-		parallel: true,
-		sourceMap: true
-   }),
-   new CompressionPlugin({
-      filename: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.7
-   }),
-   new BrotliPlugin({
-      filename: '[path].br[query]',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.7
-   })
+  new UglifyJsPlugin({
+    cache: true,
+    parallel: true,
+    sourceMap: true
+  }),
+  new CompressionPlugin({
+    filename: '[path].gz[query]',
+    algorithm: 'gzip',
+    test: /\.js$|\.css$|\.html$/,
+    threshold: 10240,
+    minRatio: 0.7
+  }),
+  new BrotliPlugin({
+    filename: '[path].br[query]',
+    test: /\.js$|\.css$|\.html$/,
+    threshold: 10240,
+    minRatio: 0.7
+  })
 ];
 
-const plugins = isProd ? [ ...productionPlugins, ...devPlugins ] : [ ...devPlugins ];
+const plugins = isProd
+  ? [...productionPlugins, ...devPlugins]
+  : [...devPlugins];
 
-mix.ts('resources/ts/app.ts', 'public/assets/js')
-   .sass('resources/sass/app.scss', 'public/assets/css')
-   .webpackConfig({
-      devtool: isProd ? '' : 'inline-source-map',
+mix
+  .ts('resources/ts/app.ts', 'public/assets/js')
+  .sass('resources/sass/app.scss', 'public/assets/css')
+  .webpackConfig({
+    devtool: isProd ? '' : 'inline-source-map',
 
-      output: {
-         filename: "[name].js",
-         chunkFilename: "[name].js",
-         publicPath: '/',
-      },
+    output: {
+      filename: '[name].js',
+      chunkFilename: '[name].js',
+      publicPath: '/'
+    },
 
-      optimization: {
-         splitChunks: {
-            chunks: 'async',
-            name: true,
-            cacheGroups: {
-               vendors: {
-                  test: /[\\/]node_modules[\\/]/,
-                  priority: -10
-               },
-               default: {
-                  minChunks: 2,
-                  priority: -20,
-                  reuseExistingChunk: true
-               }
-            }
-         }
-      },
+    optimization: {
+      splitChunks: {
+        chunks: 'async',
+        name: true,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+          }
+        }
+      }
+    },
 
-      module: {
-         rules: [
-            {
-               test: /\.pug$/,
-               loader: 'pug-plain-loader',
-               exclude: /node_modules/,
-            },
-            {
-               test: /\.(graphql|gql)$/,
-               loader: 'graphql-tag/loader',
-               exclude: /node_modules/,
-            },
-         ],
-      },
+    module: {
+      rules: [
+        {
+          test: /\.pug$/,
+          loader: 'pug-plain-loader',
+          exclude: /node_modules/
+        },
+        {
+          test: /\.(graphql|gql)$/,
+          loader: 'graphql-tag/loader',
+          exclude: /node_modules/
+        }
+      ]
+    },
 
-      resolve: {
-         alias: {
-            styles: path.resolve(__dirname, 'resources/sass'),
-         },
-      },
+    resolve: {
+      alias: {
+        styles: path.resolve(__dirname, 'resources/sass')
+      }
+    },
 
-      plugins: plugins
-   })
-   .extract()
-   .version()
+    plugins
+  })
+  .extract()
+  .version();

@@ -1,6 +1,6 @@
 {
   "files.exclude": {
-    ".babelrc": true,
+    ".babelrc": false,
     ".editorconfig": true,
     ".gitattributes": true,
     "artisan": true,
@@ -9,7 +9,6 @@
     "package-lock.json": true,
     "phpunit-log-junit-fix.php": true,
     "phpunit.xml": true,
-    "tests-jest.xml": true,
     "yarn.lock": true,
     "node_modules/": true,
     "server.php": true,
