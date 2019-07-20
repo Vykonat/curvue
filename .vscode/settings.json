@@ -1,0 +1,22 @@
+{
+  "files.exclude": {
+    ".babelrc": true,
+    ".editorconfig": true,
+    ".gitattributes": true,
+    "artisan": true,
+    "composer.lock": true,
+    "tslint.json": false,
+    "package-lock.json": true,
+    "phpunit-log-junit-fix.php": true,
+    "phpunit.xml": true,
+    "tests-jest.xml": true,
+    "yarn.lock": true,
+    "node_modules/": true,
+    "server.php": true,
+    "vendor/": true,
+    ".eslintrc.json": true,
+    ".prettierrc": true,
+    ".styleci.yml": true,
+  },
+  "git.ignoreLimitWarning": true
+}
