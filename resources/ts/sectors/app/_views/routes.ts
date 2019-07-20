@@ -59,6 +59,29 @@ export const AppRoutes: RouteConfig[] = [
   },
 
   {
+    path: '/terms-of-use',
+    name: 'app.terms',
+    component: () =>
+      lazyLoadRoute(
+        import(
+          /* webpackChunkName: "Privacy_Policy_Page" */ './TermsOfUseView/TermsOfUseView.vue'
+        )
+      ),
+    meta: {
+      breadcrumbs: [
+        {
+          label: i18n.t('navigation.home'),
+          target: { name: 'app.home' }
+        },
+        {
+          label: i18n.t('navigation.terms'),
+          target: { name: 'app.terms' }
+        }
+      ]
+    }
+  },
+
+  {
     path: '*',
     name: 'app.404',
     component: () =>
