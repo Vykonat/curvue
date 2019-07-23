@@ -11,7 +11,7 @@ import { i18n } from './common/config/i18n.config';
 import './bootstrap';
 
 Vue.use(VueApollo);
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, { inject: false });
 Vue.use(VueAuth, authConfig);
 
 const VueApp: any = Vue;
