@@ -78,6 +78,9 @@ const plugins = isProd
   : [...devPlugins];
 
 mix
+  .options({
+    processCssUrls: false
+  })
   .ts('resources/ts/app.ts', 'public/assets/js')
   .sass('resources/sass/app.scss', 'public/assets/css')
   .webpackConfig({
@@ -130,5 +133,4 @@ mix
 
     plugins
   })
-  .extract()
   .version();

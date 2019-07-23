@@ -24,8 +24,6 @@ html( lang=str_replace('_', '-', app()->getLocale()) )
         #app 
             | #{__('core.loading')}
 
-        script( src=mix('/assets/js/manifest.js') )
-        script( src=mix('/assets/js/vendor.js') )
         script( src=mix('/assets/js/app.js') )
 
         script.
