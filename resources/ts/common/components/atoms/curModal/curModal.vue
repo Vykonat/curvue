@@ -24,7 +24,7 @@ export default class curModal extends Vue {
   @Prop({ default: false }) fitContent!: boolean;
 
   get modalCssClasses() {
-    const classes: string[] = ['Modal'];
+    const classes: string[] = ['curModal'];
 
     if (this.fitContent) {
       classes.push('fitContent');
@@ -63,7 +63,7 @@ export default class curModal extends Vue {
 @import '~styles/app';
 @import '~styles/components/modal';
 
-.Modal {
+.curModal {
   @include shadow();
   position: fixed;
   top: space();
