@@ -1,10 +1,10 @@
 <template lang='pug'>
-    component( :is="component", ref="image" )
-        slot
+  component( :is="component", ref="image" )
+    slot
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop, Provide } from "vue-property-decorator";
+import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
 
 @Component
 export default class curImage extends Vue {
@@ -18,7 +18,7 @@ export default class curImage extends Vue {
   @Provide() observer: any = null;
 
   get component() {
-    return this.native ? "img" : "div";
+    return this.native ? 'img' : 'div';
   }
 
   setImage() {
@@ -40,7 +40,7 @@ export default class curImage extends Vue {
 
   createObserver() {
     this.observer = new IntersectionObserver(this.handleObserver, {
-      rootMargin: "0px",
+      rootMargin: '0px',
       threshold: 0.1
     });
     this.observer.observe(this.$refs.image);
