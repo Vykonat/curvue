@@ -5,17 +5,17 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop, Provide } from "vue-property-decorator";
+import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
 
 @Component({
   components: {
     CollapseAnimation: () =>
       import(
-        /* webpackChunkName: "Collapse_Animation" */ "../../../animations/CollapseAnimation/CollapseAnimation.vue"
+        /* webpackChunkName: "Collapse_Animation" */ '../../../animations/CollapseAnimation/CollapseAnimation.vue'
       )
   }
 })
-export default class cwdModal extends Vue {
+export default class curModal extends Vue {
   $refs!: {
     modal: any;
   };
@@ -24,44 +24,44 @@ export default class cwdModal extends Vue {
   @Prop({ default: false }) fitContent!: boolean;
 
   get modalCssClasses() {
-    const classes: string[] = ["Modal"];
+    const classes: string[] = ['Modal'];
 
     if (this.fitContent) {
-      classes.push("fitContent");
+      classes.push('fitContent');
     }
 
     return classes;
   }
-  
+
   handleDocumentClick(e: Event) {
     if (this.$refs.modal && this.$refs.modal.contains(e.target) === false) {
-      this.$emit("close");
+      this.$emit('close');
     }
   }
 
   handleDocumentKeyDown(e: KeyboardEvent) {
-    if (e.key === "Escape") {
-      this.$emit("close");
+    if (e.key === 'Escape') {
+      this.$emit('close');
     }
   }
 
   beforeMount() {
-    document.addEventListener("mousedown", this.handleDocumentClick);
-    document.addEventListener("touchstart", this.handleDocumentClick);
-    document.addEventListener("keydown", this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentClick);
+    document.addEventListener('touchstart', this.handleDocumentClick);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   beforeDestroy() {
-    document.removeEventListener("mousedown", this.handleDocumentClick);
-    document.removeEventListener("touchstart", this.handleDocumentClick);
-    document.removeEventListener("keydown", this.handleDocumentKeyDown);
+    document.removeEventListener('mousedown', this.handleDocumentClick);
+    document.removeEventListener('touchstart', this.handleDocumentClick);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 }
 </script>
 
 <style lang='scss' scoped>
-@import "~styles/app";
-@import "~styles/components/modal";
+@import '~styles/app';
+@import '~styles/components/modal';
 
 .Modal {
   @include shadow();
