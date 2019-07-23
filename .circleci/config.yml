@@ -57,6 +57,7 @@ jobs:
           name: Run Tests
           command: |
             mkdir -p out/tests
+            yarn test
             composer test -- --log-junit out/tests/tests-phpunit.xml
       - store_artifacts:
           path: out/tests

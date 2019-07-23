@@ -1,6 +1,25 @@
 {
-    "presets": ["@babel/preset-env"],
-    "plugins": [
-        ["@babel/plugin-proposal-decorators", { "legacy": true }]
-    ]
+  "presets": ["@babel/env", "@babel/typescript"],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", {
+      "legacy": true
+    }]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        ["@babel/plugin-syntax-dynamic-import"],
+        ["@babel/plugin-proposal-decorators", {
+          "legacy": true
+        }]
+      ],
+      "presets": [
+        ["@babel/env", {
+          "targets": {
+            "node": "current"
+          }
+        }]
+      ]
+    }
+  }
 }

@@ -6,7 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "module": "esNext",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
+    "experimentalDecorators": true
   },
   "include": [
     "resources/ts/**/*"
