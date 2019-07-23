@@ -19,7 +19,7 @@ import { Component, Vue, Prop, Inject } from 'vue-property-decorator';
 import { Validator } from 'vee-validate';
 
 @Component
-export default class Checkbox extends Vue {
+export default class curCheckbox extends Vue {
   @Inject({ default: new Validator({}, {}) }) $validator: any;
 
   @Prop({ required: true }) name!: string;
