@@ -8,7 +8,8 @@ describe('Form Atom Component', () => {
       propsData: {
         title: 'Form Test',
         buttonText: 'Form Test'
-      }
+      },
+      stubs: ['cur-button', 'grid-item', 'grid-row']
     });
     expect(wrapper.findAll(`.curForm`)).toHaveLength(1);
   });
