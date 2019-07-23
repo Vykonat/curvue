@@ -46,7 +46,6 @@
     "graphql": "^14.4.1",
     "graphql-tag": "^2.10.1",
     "jest": "^24.8.0",
-    "jest-serializer-vue": "^2.0.2",
     "laravel-mix": "^4.0.7",
     "lodash": "^4.17.14",
     "prettier": "^1.18.2",
@@ -79,6 +78,22 @@
     "vue-router": "^3.0.6"
   },
   "jest": {
+    "collectCoverage": false,
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": -10
+      }
+    },
+    "coverageReporters": [
+      "lcov"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{ts,vue}",
+      "!**/node_modules/**"
+    ],
     "moduleFileExtensions": [
       "js",
       "ts",
@@ -89,9 +104,6 @@
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "vue-jest",
       "^.+\\.ts$": "ts-jest"
-    },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-vue"
-    ]
+    }
   }
 }
