@@ -1,5 +1,5 @@
 <template lang="pug">
-  article( :class = "cssClasses" )
+  article( :class = "inputCssClasses" )
     input(
       v-validate="validation",
       :data-vv-as="name",
@@ -34,14 +34,12 @@ export default class curInput extends Vue {
   @Prop({ default: '' }) placeholder!: string;
   @Prop({ default: '' }) value!: string;
   @Prop({ default: 'text' }) type!: string;
-  @Prop({ default: '' }) message!: string;
-  @Prop({ default: '' }) errorMessage!: string;
   @Prop({ default: '' }) validation!: string;
   @Prop({ default: false }) required!: boolean;
   @Prop({ default: false }) disabled!: boolean;
   @Prop({ default: false }) readonly!: boolean;
 
-  get cssClasses() {
+  get inputCssClasses() {
     const classes: string[] = ['curInput'];
 
     if (this.disabled) {
@@ -61,10 +59,6 @@ export default class curInput extends Vue {
 
   get isValid() {
     return !this.$validator.errors.first(this.name);
-  }
-
-  get messageOrError() {
-    return this.isValid ? this.message : this.errorMessage;
   }
 
   get handlers() {
