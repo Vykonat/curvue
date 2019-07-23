@@ -80,7 +80,7 @@ export default class curInput extends Vue {
 }
 </script>
 
-<style lang="scss" module>
+<style lang="scss" scoped>
 @import '~styles/app';
 @import '~styles/components/input';
 
