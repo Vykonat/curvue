@@ -54,11 +54,21 @@ jobs:
             - node_modules
 
       - run:
-          name: Run Tests
+          name: Vue tests
           command: |
             mkdir -p out/tests
-            yarn test
+            yarn test:unit
+
+      -run:
+          name: Composer tests
+          command: |
             composer test -- --log-junit out/tests/tests-phpunit.xml
+
+      - run:
+          name: Vulnerability tests
+          command: |
+            yarn test:vuln
+
       - store_artifacts:
           path: out/tests
           destination: test-results
