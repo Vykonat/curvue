@@ -21,7 +21,7 @@ import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
 import { variationValidator } from '../../../utils/variationValidator.util';
 
 @Component
-export default class cwdButton extends Vue {
+export default class curButton extends Vue {
   $refs!: {
     button: any;
   };
@@ -35,7 +35,7 @@ export default class cwdButton extends Vue {
   @Prop({ default: false }) isGhost!: boolean;
 
   get buttonCssClasses() {
-    const classes: string[] = ['ripple', 'button'];
+    const classes: string[] = ['ripple', 'curButton'];
     if (this.isOutlined || this.isGhost) {
       classes.push('outlinedButton');
     }
@@ -84,7 +84,7 @@ export default class cwdButton extends Vue {
 @import '~styles/app';
 @import '~styles/components/button';
 
-.button {
+.curButton {
   display: inline-block;
   margin: $button-margin;
   padding: $button-padding;
