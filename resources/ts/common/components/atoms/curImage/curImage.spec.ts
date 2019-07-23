@@ -6,22 +6,28 @@ describe('Image Atom Component', () => {
     test('Renders the Image component', () => {
       const wrapper: Wrapper<curImage> = shallowMount(curImage, {
         propsData: {
-          src: 'https://www.picsum.photos/1600/900'
+          src: '/foo'
         }
       });
-      expect(wrapper).toMatchSnapshot();
+      const actual = wrapper.html();
+      const expected = '<img src="/foo">';
+
+      expect(actual).toBe(expected);
     });
   });
 
   describe('Image - div', () => {
-    test('Renders the Image component', () => {
+    test('Renders the Div component', () => {
       const wrapper: Wrapper<curImage> = shallowMount(curImage, {
         propsData: {
           native: false,
-          src: 'https://www.picsum.photos/1600/900'
+          src: '/foo'
         }
       });
-      expect(wrapper).toMatchSnapshot();
+      const actual = wrapper.html();
+      const expected = '<div style="background-image: url(/foo);"></div>';
+
+      expect(actual).toBe(expected);
     });
   });
 });
