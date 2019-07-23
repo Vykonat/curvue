@@ -59,7 +59,7 @@ jobs:
             mkdir -p out/tests
             yarn test:unit
 
-      -run:
+      - run:
           name: Composer tests
           command: |
             composer test -- --log-junit out/tests/tests-phpunit.xml
