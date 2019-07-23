@@ -105,7 +105,8 @@ describe('Button Atom Component', () => {
           tag: 'router-link',
           target: '/router-test',
           disabled: true
-        }
+        },
+        stubs: ['router-link']
       });
 
       wrapper.find(`.curButton`).trigger('click');
