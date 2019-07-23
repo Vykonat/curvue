@@ -15,7 +15,6 @@
     "vendor/": true,
     ".eslintrc.json": true,
     ".prettierrc": true,
-    ".styleci.yml": true,
   },
   "git.ignoreLimitWarning": true
 }
