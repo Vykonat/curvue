@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Grid extends Vue {}
@@ -8,14 +8,14 @@ export default class Grid extends Vue {}
  
  
 <template lang='pug'>
-  article( class="Grid" )
+  .Grid
     slot
 </template>
  
  
  
 <style lang='scss' scoped>
-@import "~styles/app";
+@import '~styles/app';
 
 .Grid {
   max-width: 625px;
