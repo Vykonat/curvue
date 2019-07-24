@@ -1,3 +1,12 @@
+<template lang='pug'>
+  .CookieConsent( v-if="show", ref="cookieConsent" )
+    .content
+      slot
+
+    .cookieConsentCloseButton( role="button", @click="onConsent", aria-label="Accept cookie consent and close" )
+      i.fas.fa-times.fa-2x
+</template>
+
 <script lang='ts'>
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
@@ -17,20 +26,7 @@ export default class CookieConsent extends Vue {
   }
 }
 </script>
- 
- 
- 
-<template lang='pug'>
-  .CookieConsent( v-if="show", ref="cookieConsent" )
-    .content
-      slot
 
-    .cookieConsentCloseButton( role="button", @click="onConsent", aria-label="Accept cookie consent and close" )
-      i.fas.fa-times.fa-2x
-</template>
- 
- 
- 
 <style lang='scss' scoped>
 @import '~styles/app';
 @import '~styles/components/cookieConsent';
