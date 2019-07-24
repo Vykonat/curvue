@@ -2,7 +2,7 @@ import { shallowMount, Wrapper } from '@vue/test-utils';
 import Notification from './Notification.vue';
 
 describe('Notification Molecule Component', () => {
-  test('Renders the notification progress component', () => {
+  test('Renders the notification component', () => {
     const wrapper: Wrapper<Notification> = shallowMount(Notification, {
       propsData: {
         title: 'test',
@@ -28,7 +28,7 @@ describe('Notification Molecule Component', () => {
     expect(wrapper.findAll(`.text`)).toHaveLength(1);
   });
 
-  test('Removes notification afer a set time', done => {
+  test('Removes notification after a set time', done => {
     const wrapper: Wrapper<Notification> = shallowMount(Notification, {
       propsData: {
         title: 'test',
