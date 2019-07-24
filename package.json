@@ -7,7 +7,7 @@
   "author": "_Judicium",
   "license": "MIT",
   "scripts": {
-    "test:unit": "jest",
+    "test:unit": "jest --runInBand",
     "test:vuln": "snyk test",
     "dev": "yarn development",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
