@@ -68,6 +68,8 @@
     "webpack-clean-obsolete-chunks": "^0.4.0"
   },
   "dependencies": {
+    "@sentry/browser": "^5.5.0",
+    "@sentry/integrations": "^5.5.0",
     "@websanova/vue-auth": "^2.21.14-beta",
     "vee-validate": "^2.2.11",
     "vue-axios": "^2.1.4",

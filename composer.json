@@ -21,6 +21,7 @@
     "martinlindhe/laravel-vue-i18n-generator": "^0.1.39",
     "mll-lab/laravel-graphql-playground": "^1.0",
     "nuwave/lighthouse": "^3.7",
+    "sentry/sentry-laravel": "1.1.0",
     "tymon/jwt-auth": "1.0.*"
   },
   "require-dev": {
