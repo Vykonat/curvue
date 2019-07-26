@@ -2,23 +2,21 @@
   article.calendar
     section.header
       h4( 
-        :native = "false", 
         @keypress.enter.space.stop.prevent="setSelecting('year')", 
-        @click = "setSelecting('year')", 
-        role = "button", 
-        tab-index = "0", 
-        :aria-label = "selectedYear"
+        @click="setSelecting('year')", 
+        role="button", 
+        tab-index="0", 
+        :aria-label="selectedYear"
       ) {{ selectedYear }}
       h5( 
-        :native = "false"
-        @click = "setSelecting('date')",
+        @click="setSelecting('date')",
         @keypress.enter.space.stop.prevent="setSelecting('date')",
-        role = "button", 
-        tab-index = "0", 
-        :aria-label = "calculatedDate | calendarHeaderDate"
+        role="button", 
+        tab-index="0", 
+        :aria-label="calculatedDate | calendarHeaderDate"
       ) {{ calculatedDate | calendarHeaderDate }}
 
-    section.body( v-if = "selecting === 'date'")
+    section.body( v-if="selecting==='date'")
       .date
         span.arrow( 
           @click="setByMonth(currentMonth - 1)"
@@ -27,7 +25,7 @@
           :aria-label="$t('calendar.previousMonth' /* previous month */)"
           tabindex="0"
         )
-        span.currentDate {{ new Date(currentYear, currentMonth, 1) | calendarMonthlyNav}}
+        span.currentDate {{ new Date(currentYear, currentMonth, 1) | calendarMonthlyNav }}
         span.arrow( 
           @click="setByMonth(currentMonth + 1)"
           @keypress.enter.space.stop.prevent="setByMonth(currentMonth + 1)"
@@ -39,11 +37,11 @@
       table
         thead
           tr
-            td.disabledDay( v-for = "(weekday, idx) in weekdays", :key = "`weekday-${idx}`")
+            td.disabledDay( v-for="(weekday, idx) in weekdays", :key="`weekday-${idx}`")
               span {{ $t('calendar.' + weekday + '_short') }}
             
-        tbody( v-if = "calendar" )
-          tr( v-for = "(days, idx) in calendar", :key = "`days-${idx}`" )
+        tbody( v-if="calendar" )
+          tr( v-for="(days, idx) in calendar", :key="`days-${idx}`" )
             td(
               :class = "[day.currentDay ? 'currentDay' : '', day.disabled ? 'disabledDay' : '', day.selected ? 'selectedDay' : '']"
               v-for = "(day, idx) in days",
@@ -56,7 +54,7 @@
             )
               span {{ day.day }}
     
-    section.year( v-if = "selecting === year" )
+    section.year( v-else-if="selecting==='year'" )
       span(
         :class="[year.selected ? 'selected' : '']",
         :id="`${year.year}-calendar-year`",
@@ -492,7 +490,7 @@ export default class Calendar extends Vue {
   overflow-y: scroll;
   text-align: center;
 
-  div {
+  span {
     cursor: pointer;
     padding: space() 0;
     transition: background-color 0.15s;
