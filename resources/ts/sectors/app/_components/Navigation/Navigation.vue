@@ -2,8 +2,7 @@
  .navigation
     navbar
       template( v-slot:middle )
-        router-link.brand( :to="{ name: 'app.home' }" )
-          cur-image( src="/assets/images/curvue-logo.svg", alt="Curvue logo" )
+        router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
       template( v-if="$auth.check()", v-slot:right )
         logout-button
       template( v-else, v-slot:right )
@@ -33,13 +32,22 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import LogoutButton from '../../../auth/_components/LogoutButton/LogoutButton.vue';
+import { APP_NAME } from '../../../../common/config/app.config';
 
 @Component({
   components: {
     LogoutButton: LogoutButton
   }
 })
-export default class Navigation extends Vue {}
+export default class AdminNavigation extends Vue {
+  get appName(): string {
+    if (typeof APP_NAME !== 'undefined') {
+      return APP_NAME;
+    }
+
+    return 'Lavuql';
+  }
+}
 </script>
 
 
@@ -47,8 +55,9 @@ export default class Navigation extends Vue {}
 @import '~styles/app';
 
 .brand {
-  width: space(32);
-  height: space(32);
+  font-size: fontSize(h4);
+  font-weight: fontWeight('headings');
+  color: color('text');
   margin-top: space(4);
 }
 </style>

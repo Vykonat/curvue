@@ -1,9 +1,9 @@
 {
-  "name": "curvue/curvue",
+  "name": "lavuql/lavuql",
   "type": "project",
-  "description": "Curvue, the boilerplate for developers that want to sleep again.",
+  "description": "A Laravel Vue and GraphQL PWA boilerplate that focuses on performance and best practices.",
   "keywords": [
-    "curvue",
+    "lavuql",
     "vue",
     "boilerplate",
     "laravel",
