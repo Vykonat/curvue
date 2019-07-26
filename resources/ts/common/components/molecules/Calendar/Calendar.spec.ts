@@ -7,7 +7,7 @@ describe('Calendar Molecule Component', () => {
       mocks: {
         $t: () => {}
       },
-      stubs: ['cur-button']
+      stubs: ['lvql-button']
     });
     expect(wrapper.findAll(`.calendar`)).toHaveLength(1);
     expect(wrapper.findAll(`.body`)).toHaveLength(1);
