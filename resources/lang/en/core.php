@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'slogan' => 'The Laravel Vue boilerplate for developers that want sleep again',
+    'slogan' => 'A Laravel Vue and GraphQL PWA boilerplate that focuses on performance and best practices.',
     'cta' => 'Source Code',
     'loading' => 'Loading...',
     'ok' => 'Ok',

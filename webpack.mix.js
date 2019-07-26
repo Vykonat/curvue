@@ -23,7 +23,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const devPlugins = [
   new CleanObsoleteChunks(),
   new SWPrecacheWebpackPlugin({
-    cacheId: 'curvue',
+    cacheId: 'lavuql',
     filename: 'sw.js',
     staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html}'],
     minify: true,

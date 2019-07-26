@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "curvue",
+  "name": "lavuql",
   "version": "1.0.0",
-  "description": "Curvue, the boilerplate for developers that want sleep again.",
+  "description": "A Laravel Vue and GraphQL PWA boilerplate that focuses on performance and best practices.",
   "main": "index.js",
   "author": "_Judicium",
   "license": "MIT",
