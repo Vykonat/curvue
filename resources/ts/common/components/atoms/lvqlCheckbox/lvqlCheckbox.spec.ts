@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 import { shallowMount, Wrapper } from '@vue/test-utils';
-import curCheckbox from './curCheckbox.vue';
+import lvqlCheckbox from './lvqlCheckbox.vue';
 
 describe('Checkbox Atom Component', () => {
   describe('Checkbox', () => {
     test('Renders the checkbox component', () => {
-      const wrapper: Wrapper<curCheckbox> = shallowMount(curCheckbox, {
+      const wrapper: Wrapper<lvqlCheckbox> = shallowMount(lvqlCheckbox, {
         propsData: {
           label: 'test',
           name: 'test',
@@ -16,7 +16,7 @@ describe('Checkbox Atom Component', () => {
     });
 
     test('Emits an onClick event', () => {
-      const wrapper: Wrapper<curCheckbox> = shallowMount(curCheckbox, {
+      const wrapper: Wrapper<lvqlCheckbox> = shallowMount(lvqlCheckbox, {
         propsData: {
           label: 'test',
           name: 'test',
@@ -29,7 +29,7 @@ describe('Checkbox Atom Component', () => {
     });
 
     test('Prevents click event when disabled', () => {
-      const wrapper: Wrapper<curCheckbox> = shallowMount(curCheckbox, {
+      const wrapper: Wrapper<lvqlCheckbox> = shallowMount(lvqlCheckbox, {
         propsData: {
           label: 'test',
           name: 'test',
@@ -44,7 +44,7 @@ describe('Checkbox Atom Component', () => {
 
   describe('Radio', () => {
     test('Renders the radio component', () => {
-      const wrapper: Wrapper<curCheckbox> = shallowMount(curCheckbox, {
+      const wrapper: Wrapper<lvqlCheckbox> = shallowMount(lvqlCheckbox, {
         propsData: {
           radio: true,
           label: 'test',

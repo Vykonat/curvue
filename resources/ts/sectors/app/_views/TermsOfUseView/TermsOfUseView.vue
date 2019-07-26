@@ -1,5 +1,5 @@
 <template lang="pug">
-  cur-layout( name="Default" )
+  lvql-layout( name="Default" )
     h1 Terms of use View...
 </template>
 

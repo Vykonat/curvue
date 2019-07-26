@@ -1,10 +1,10 @@
 import { shallowMount, Wrapper } from '@vue/test-utils';
-import curImage from './curImage.vue';
+import lvqlImage from './lvqlImage.vue';
 
 describe('Image Atom Component', () => {
   describe('Image - native', () => {
     test('Renders the Image component', () => {
-      const wrapper: Wrapper<curImage> = shallowMount(curImage, {
+      const wrapper: Wrapper<lvqlImage> = shallowMount(lvqlImage, {
         propsData: {
           src: '/foo'
         }
@@ -18,7 +18,7 @@ describe('Image Atom Component', () => {
 
   describe('Image - div', () => {
     test('Renders the Div component', () => {
-      const wrapper: Wrapper<curImage> = shallowMount(curImage, {
+      const wrapper: Wrapper<lvqlImage> = shallowMount(lvqlImage, {
         propsData: {
           native: false,
           src: '/foo'

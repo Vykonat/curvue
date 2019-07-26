@@ -26,7 +26,7 @@ import { Component, Vue, Prop, Inject } from 'vue-property-decorator';
 import { Validator } from 'vee-validate';
 
 @Component
-export default class curInput extends Vue {
+export default class lvqlInput extends Vue {
   @Inject({ default: new Validator({}, {}) }) $validator: any;
 
   @Prop({ required: true }) name!: string;
@@ -40,7 +40,7 @@ export default class curInput extends Vue {
   @Prop({ default: false }) readonly!: boolean;
 
   get inputCssClasses() {
-    const classes: string[] = ['curInput'];
+    const classes: string[] = ['lvqlInput'];
 
     if (this.disabled) {
       classes.push('disabled');
@@ -78,7 +78,7 @@ export default class curInput extends Vue {
 @import '~styles/app';
 @import '~styles/components/input';
 
-.curInput {
+.lvqlInput {
   position: relative;
   margin: $input-margin;
   justify-content: center;

@@ -1,6 +1,6 @@
 <template lang='pug'>
   article.DatePicker
-    cur-input(
+    lvql-input(
       :name="name",
       :id="id",
       :placeholder="placeholder",
@@ -13,7 +13,7 @@
     
     span {{ date | datePicker }}
 
-    cur-modal( :show="show", @close="show=false" )
+    lvql-modal( :show="show", @close="show=false" )
       calendar.calendar(
         :min-date="minDate",
         :max-date="maxDate",
