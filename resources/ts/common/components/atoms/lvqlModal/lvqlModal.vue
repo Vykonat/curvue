@@ -15,7 +15,7 @@ import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
       )
   }
 })
-export default class curModal extends Vue {
+export default class lvqlModal extends Vue {
   $refs!: {
     modal: any;
   };
@@ -24,7 +24,7 @@ export default class curModal extends Vue {
   @Prop({ default: false }) fitContent!: boolean;
 
   get modalCssClasses() {
-    const classes: string[] = ['curModal'];
+    const classes: string[] = ['lvqlModal'];
 
     if (this.fitContent) {
       classes.push('fitContent');
@@ -63,7 +63,7 @@ export default class curModal extends Vue {
 @import '~styles/app';
 @import '~styles/components/modal';
 
-.curModal {
+.lvqlModal {
   @include shadow();
   position: fixed;
   top: space();

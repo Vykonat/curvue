@@ -1,11 +1,11 @@
 import { shallowMount, Wrapper } from '@vue/test-utils';
-import curLayout from './curLayout.vue';
+import lvqlLayout from './lvqlLayout.vue';
 
 const layouts: string[] = ['Default', 'Admin', 'Sidebar', 'Stack'];
 
 describe('Layout Atom Component', () => {
   test('Renders the layout component', () => {
-    const wrapper: Wrapper<curLayout> = shallowMount(curLayout, {
+    const wrapper: Wrapper<lvqlLayout> = shallowMount(lvqlLayout, {
       propsData: {
         name: 'Default'
       }
@@ -16,7 +16,7 @@ describe('Layout Atom Component', () => {
 
   test('Updates the parents layout', () => {
     layouts.forEach((layout: string) => {
-      const wrapper: Wrapper<curLayout> = shallowMount(curLayout, {
+      const wrapper: Wrapper<lvqlLayout> = shallowMount(lvqlLayout, {
         propsData: {
           name: layout
         }

@@ -1,5 +1,5 @@
 <template lang='pug'>
-  form.curForm( @submit.prevent="$emit('submit')" )
+  form.lvqlForm( @submit.prevent="$emit('submit')" )
     grid-row
       grid-item
         h3.formTitle {{ title }}
@@ -8,14 +8,14 @@
 
     grid-row
       grid-item
-        cur-button.formButton( type="submit", variant="primary" ) {{ buttonText }}
+        lvql-button.formButton( type="submit", variant="primary" ) {{ buttonText }}
 </template> 
 
 <script lang='ts'>
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
-export default class curForm extends Vue {
+export default class lvqlForm extends Vue {
   @Prop({ required: true }) title!: string;
   @Prop({ required: true }) buttonText!: string;
 }
@@ -24,7 +24,7 @@ export default class curForm extends Vue {
 <style lang='scss' scoped>
 @import '~styles/app';
 
-.curForm {
+.lvqlForm {
   display: flex;
   flex-direction: column;
   align-content: center;

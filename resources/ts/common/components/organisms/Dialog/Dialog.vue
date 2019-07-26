@@ -4,24 +4,24 @@
     :text="message"
   )
     section.buttons( v-if="isConfirm" )
-      cur-button( variant="success", @click="ok" ) {{ $t('core.confirm') }}
-      cur-button( variant="danger", @click="cancel" ) {{ $t('core.cancel') }}
+      lvql-button( variant="success", @click="ok" ) {{ $t('core.confirm') }}
+      lvql-button( variant="danger", @click="cancel" ) {{ $t('core.cancel') }}
     section.buttons( v-else )
-      cur-button( variant="success", @click="cancel" ) {{ $t('core.ok') }}
+      lvql-button( variant="success", @click="cancel" ) {{ $t('core.ok') }}
 
 </template>
 
 <script lang="ts">
-import { DialogComponent } from "vue-modal-dialogs";
-import { Component, Prop } from "vue-property-decorator";
+import { DialogComponent } from 'vue-modal-dialogs';
+import { Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class Dialog extends DialogComponent<boolean> {
   @Prop({ default: false }) isConfirm!: boolean;
-  @Prop({ default: "", required: true }) message!: string;
+  @Prop({ default: '', required: true }) message!: string;
 
   private get notificationTitle() {
-    return this.$t("core.new", { resource: "Notification" });
+    return this.$t('core.new', { resource: 'Notification' });
   }
 
   cancel(): void {

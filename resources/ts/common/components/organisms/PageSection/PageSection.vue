@@ -4,13 +4,13 @@
       fade-animation
         grid-row( :class="[flip ? 'flip' : '']" )
           grid-item.image
-            cur-image( :src="image", :alt="image" )
+            lvql-image( :src="image", :alt="image" )
           grid-item.text
             h3 {{ title }}
             slot( name="text" )
             br
             br
-            cur-button( variant="primary", v-if="link", tag="router-link", :target="link" )
+            lvql-button( variant="primary", v-if="link", tag="router-link", :target="link" )
               slot( name="button" )
 </template>
 

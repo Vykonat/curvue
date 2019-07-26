@@ -6,14 +6,14 @@
       template( v-if="$auth.check()", v-slot:right )
         logout-button
       template( v-else, v-slot:right )
-        cur-button( 
+        lvql-button( 
           tag="router-link", 
           :target="{ name: 'auth.login' }", 
           variant="primary", 
           :isGhost="true", 
         ) {{ $t('auth.login') }}
 
-        cur-button( 
+        lvql-button( 
           tag="router-link", 
           :target="{ name: 'auth.register' }", 
           variant="accent", 

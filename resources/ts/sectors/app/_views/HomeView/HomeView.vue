@@ -1,5 +1,5 @@
 <template lang="pug">
-  cur-layout( name="Stack" )
+  lvql-layout( name="Stack" )
     .HomeView
       .carouselWrapper
         carousel
@@ -9,7 +9,7 @@
                 h1.title {{ APP_NAME }}
                 h4.subTitle {{ $t('core.slogan') }}
                 br
-                cur-button( variant="primary", tag="a", target="https://github.com/Vykonat/lavuql" ) {{ $t('core.cta') }}
+                lvql-button( variant="primary", tag="a", target="https://github.com/Vykonat/lavuql" ) {{ $t('core.cta') }}
 
       page-section(
         title="title",

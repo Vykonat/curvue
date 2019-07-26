@@ -25,7 +25,7 @@ panel
         grid-item
           pagination( :v-if="maxPages > 1", :pages="maxPages", :current-page="currentPage + 1", @change="paginationClick" )
         grid-item    
-          cur-select.dataTableSelect( placeholder="Items per page: ", :options="maxRowsOptions", name="dataTablePerPageSelect", id="dataTablePerPageSelect", v-model="maxRows" )
+          lvql-select.dataTableSelect( placeholder="Items per page: ", :options="maxRowsOptions", name="dataTablePerPageSelect", id="dataTablePerPageSelect", v-model="maxRows" )
 </template>
 
 <script lang='ts'>

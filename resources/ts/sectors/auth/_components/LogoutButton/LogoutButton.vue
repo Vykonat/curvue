@@ -1,5 +1,5 @@
 <template lang="pug">
-  cur-button( 
+  lvql-button( 
     v-if="$auth.check()", 
     variant="primary", 
     :isGhost="true", 

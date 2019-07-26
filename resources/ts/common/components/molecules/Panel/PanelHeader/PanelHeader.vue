@@ -1,6 +1,6 @@
 <template lang='pug'>
   article( :class="panelHeaderCssClasses")
-    cur-avatar( :src="image", v-if="image", :alt="title" )
+    lvql-avatar( :src="image", v-if="image", :alt="title" )
 
     section
       h4( v-if="title" ) {{ title }}

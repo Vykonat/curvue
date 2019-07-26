@@ -1,5 +1,5 @@
 import { shallowMount, Wrapper } from '@vue/test-utils';
-import curSelect from './curSelect.vue';
+import lvqlSelect from './lvqlSelect.vue';
 
 describe('Select Atom Component', () => {
   const options = [
@@ -18,7 +18,7 @@ describe('Select Atom Component', () => {
   ];
 
   test('Renders the select component', () => {
-    const wrapper: Wrapper<curSelect> = shallowMount(curSelect, {
+    const wrapper: Wrapper<lvqlSelect> = shallowMount(lvqlSelect, {
       propsData: {
         options,
         name: 'Select Test',

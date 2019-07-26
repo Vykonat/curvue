@@ -1,5 +1,5 @@
 <template lang="pug">
-  cur-layout( name="Admin" )
+  lvql-layout( name="Admin" )
     apollo-query(
       :query="require('../../_gql/queries/usersQuery.gql')"
     )
@@ -17,12 +17,12 @@
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          cur-modal( :show="isUserModalShown", @close="closeUserModal(query)" )
+          lvql-modal( :show="isUserModalShown", @close="closeUserModal(query)" )
             user-form( :is-add="isUserFormAdd", :user="userForm" )
           grid
             grid-row
               grid-item
-                cur-button( variant="success", @click="handleUserAdd" ) {{ $t('resource.add', {resource:"User"})}}
+                lvql-button( variant="success", @click="handleUserAdd" ) {{ $t('resource.add', {resource:"User"})}}
             grid-row
               grid-item( fill )
                 data-table(
@@ -31,14 +31,14 @@
                   :placeholder="searchInputPlaceHolder",
                 )
                   template( v-slot:actions="{ row }" )
-                    cur-button(
+                    lvql-button(
                       variant="accent",
                       :isGhost="true",
                       @click="handleUserEdit(row)",
                     )
                       i.fas.fa-pencil-alt
 
-                    cur-button(
+                    lvql-button(
                       v-if="row.role_id !== 1"
                       variant="danger",
                       :isGhost="true",

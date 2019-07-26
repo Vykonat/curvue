@@ -69,8 +69,8 @@
       ) {{ year.year }}
 
     section.footer
-      cur-button( variant="danger", @click.stop.prevent="onClose", :is-ghost="true" ) {{ ($t('core.cancel')) }}
-      cur-button( variant="accent", @click.stop.prevent="onChange" ) {{ ($t('core.confirm')) }}
+      lvql-button( variant="danger", @click.stop.prevent="onClose", :is-ghost="true" ) {{ ($t('core.cancel')) }}
+      lvql-button( variant="accent", @click.stop.prevent="onChange" ) {{ ($t('core.confirm')) }}
 </template>
 
 <script lang='ts'>
