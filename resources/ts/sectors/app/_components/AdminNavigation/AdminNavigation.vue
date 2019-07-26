@@ -2,8 +2,7 @@
   .navigation
     navbar
       template( v-slot:middle )
-        router-link.brand( :to="{ name: 'app.home' }" )
-          cur-image( src="/assets/images/curvue-logo.svg", alt="Curvue logo" )
+        router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
       template( v-if="$auth.check()", v-slot:right )
         cur-button( :is-ghost="true", tag="router-link", :target="{ name: 'app.home' }", variant="accent" ) {{ $t('navigation.home') }}
 
@@ -14,9 +13,18 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { APP_NAME } from '../../../../common/config/app.config';
 
 @Component
-export default class Navigation extends Vue {}
+export default class AdminNavigation extends Vue {
+  private get appName(): string {
+    if (typeof APP_NAME !== 'undefined') {
+      return APP_NAME;
+    }
+
+    return 'Lavuql';
+  }
+}
 </script>
 
 
@@ -24,8 +32,9 @@ export default class Navigation extends Vue {}
 @import '~styles/app';
 
 .brand {
-  width: space(32);
-  height: space(32);
-  margin-top: space(4) * 1.5;
+  font-size: fontSize(h4);
+  font-weight: fontWeight('headings');
+  color: color('text');
+  margin-top: space(4);
 }
 </style>
