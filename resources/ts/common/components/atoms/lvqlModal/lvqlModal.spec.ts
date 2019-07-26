@@ -1,9 +1,9 @@
 import { shallowMount, Wrapper } from '@vue/test-utils';
-import curModal from './curModal.vue';
+import lvqlModal from './lvqlModal.vue';
 
 describe('Modal Atom Component', () => {
   test('Renders and shows the modal component', () => {
-    const wrapper: Wrapper<curModal> = shallowMount(curModal, {
+    const wrapper: Wrapper<lvqlModal> = shallowMount(lvqlModal, {
       slots: {
         default: `<p>test</p>`
       },
@@ -19,7 +19,7 @@ describe('Modal Atom Component', () => {
     document.addEventListener = jest.fn();
     document.removeEventListener = jest.fn();
 
-    const wrapper: Wrapper<curModal> = shallowMount(curModal);
+    const wrapper: Wrapper<lvqlModal> = shallowMount(lvqlModal);
     wrapper.destroy();
 
     expect(document.addEventListener).toHaveBeenCalledTimes(3);
@@ -27,7 +27,7 @@ describe('Modal Atom Component', () => {
   });
 
   test('Closes on outside click', () => {
-    const wrapper = shallowMount(curModal, {
+    const wrapper = shallowMount(lvqlModal, {
       propsData: {
         show: true
       },
@@ -48,7 +48,7 @@ describe('Modal Atom Component', () => {
   });
 
   test('Closes on escape button', () => {
-    const wrapper = shallowMount(curModal, {
+    const wrapper = shallowMount(lvqlModal, {
       propsData: {
         show: true
       },

@@ -1,9 +1,9 @@
 <template lang="pug">
-  cur-form( :title="userFormTitle", :button-text="userFormTitle", @submit="sendData" )
+  lvql-form( :title="userFormTitle", :button-text="userFormTitle", @submit="sendData" )
     template( v-slot:fields )
       grid-row
         grid-item
-          cur-input( 
+          lvql-input( 
             :name="$t('users.name')",
             :placeholder="$t('users.name_placeholder')",
             id="name",
@@ -15,7 +15,7 @@
 
       grid-row
         grid-item
-          cur-input( 
+          lvql-input( 
             :name="$t('users.email')",
             :placeholder="$t('users.email_placeholder')",
             id="email",
@@ -27,7 +27,7 @@
 
       grid-row
         grid-item
-          cur-input( 
+          lvql-input( 
             :name="$t('users.password')",
             :placeholder="$t('users.password_placeholder')",
             id="password",
@@ -39,7 +39,7 @@
 
       grid-row
         grid-item
-          cur-input(
+          lvql-input(
             :name="$t('users.password_confirmation')",
             :placeholder="$t('users.password_confirmation_placeholder')",
             id="password_confirmation",

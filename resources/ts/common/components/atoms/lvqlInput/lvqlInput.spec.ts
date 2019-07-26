@@ -1,9 +1,9 @@
 import { shallowMount, Wrapper } from '@vue/test-utils';
-import curInput from './curInput.vue';
+import lvqlInput from './lvqlInput.vue';
 
 describe('Input Atom Component', () => {
   test('Renders the input component', () => {
-    const wrapper: Wrapper<curInput> = shallowMount(curInput, {
+    const wrapper: Wrapper<lvqlInput> = shallowMount(lvqlInput, {
       propsData: {
         label: 'Input Test',
         id: 'input-test',
@@ -11,12 +11,12 @@ describe('Input Atom Component', () => {
       }
     });
 
-    expect(wrapper.findAll(`.curInput`)).toHaveLength(1);
+    expect(wrapper.findAll(`.lvqlInput`)).toHaveLength(1);
     expect(wrapper.findAll(`#input-test`)).toHaveLength(1);
   });
 
   test('Renders the disabled input component', () => {
-    const wrapper: Wrapper<curInput> = shallowMount(curInput, {
+    const wrapper: Wrapper<lvqlInput> = shallowMount(lvqlInput, {
       propsData: {
         label: 'Input Test',
         id: 'input-test',
@@ -29,7 +29,7 @@ describe('Input Atom Component', () => {
   });
 
   test('Emits an input event', () => {
-    const wrapper: Wrapper<curInput> = shallowMount(curInput, {
+    const wrapper: Wrapper<lvqlInput> = shallowMount(lvqlInput, {
       propsData: {
         label: 'Input Test',
         id: 'input-test',
@@ -42,7 +42,7 @@ describe('Input Atom Component', () => {
   });
 
   test('Prevents input event in disabled state', () => {
-    const wrapper: Wrapper<curInput> = shallowMount(curInput, {
+    const wrapper: Wrapper<lvqlInput> = shallowMount(lvqlInput, {
       propsData: {
         label: 'Input Test',
         id: 'input-test',

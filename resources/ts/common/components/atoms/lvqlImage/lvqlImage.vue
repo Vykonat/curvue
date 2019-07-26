@@ -7,7 +7,7 @@
 import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
 
 @Component
-export default class curImage extends Vue {
+export default class lvqlImage extends Vue {
   $refs!: {
     image: HTMLImageElement;
   };

@@ -1,16 +1,16 @@
 <template lang="pug">
-  cur-layout( name="Default" )  
+  lvql-layout( name="Default" )  
     register-form
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import RegisterForm from "../../_components/RegisterForm/RegisterForm.vue"
+import { Component, Vue } from 'vue-property-decorator';
+import RegisterForm from '../../_components/RegisterForm/RegisterForm.vue';
 
 @Component({
-    components: {
-        RegisterForm: RegisterForm
-    }
+  components: {
+    RegisterForm: RegisterForm
+  }
 })
 export default class RegisterView extends Vue {}
 </script>

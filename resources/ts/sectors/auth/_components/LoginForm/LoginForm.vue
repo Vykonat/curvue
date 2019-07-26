@@ -1,9 +1,9 @@
 <template lang="pug">
-  cur-form( :title="$t('auth.login')", :button-text="$t('auth.login')", @submit="login" )
+  lvql-form( :title="$t('auth.login')", :button-text="$t('auth.login')", @submit="login" )
     template( v-slot:fields )
       grid-row
         grid-item
-          cur-input(
+          lvql-input(
             :name="$t('users.email')",
             :placeholder="$t('users.email_placeholder')",
             id="email",
@@ -15,7 +15,7 @@
 
       grid-row
         grid-item
-          cur-input(
+          lvql-input(
             :name="$t('users.password')",
             :placeholder="$t('users.password_placeholder')",
             id="password",
@@ -27,7 +27,7 @@
 
       grid-row
         grid-item
-          cur-checkbox(
+          lvql-checkbox(
             :label="$t('auth.remember')",
             v-model='loginForm.rememberMe',
             name="keep_connected",

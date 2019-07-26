@@ -23,8 +23,8 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Inject, Prop } from "vue-property-decorator";
-import { Validator } from "vee-validate";
+import { Component, Vue, Inject, Prop } from 'vue-property-decorator';
+import { Validator } from 'vee-validate';
 
 export interface ISelectOption {
   label: string;
@@ -32,44 +32,44 @@ export interface ISelectOption {
 }
 
 @Component
-export default class curSelect extends Vue {
+export default class lvqlSelect extends Vue {
   @Inject({ default: new Validator({}, {}) }) $validator;
 
   @Prop({ required: true }) name!: string;
   @Prop({ required: true }) id!: string;
   @Prop({ required: true }) options!: any[];
-  @Prop({ default: "" }) value!: string;
+  @Prop({ default: '' }) value!: string;
   @Prop() multiple: boolean | undefined;
   @Prop() required: boolean | undefined;
   @Prop() disabled: boolean | undefined;
   @Prop() validation: string | undefined;
-  @Prop({ default: "off" }) autocomplete!: string;
-  @Prop({ default: "" }) placeholder!: string;
+  @Prop({ default: 'off' }) autocomplete!: string;
+  @Prop({ default: '' }) placeholder!: string;
 
   get isValid() {
     return !this.$validator.errors.first(this.name);
   }
 
   get selectCssClasses() {
-    const classes: string[] = ["curSelect"];
+    const classes: string[] = ['lvqlSelect'];
 
     if (this.multiple) {
-      classes.push("multiple");
+      classes.push('multiple');
     }
 
     if (this.disabled) {
-      classes.push("disabled");
+      classes.push('disabled');
     }
 
     if (!this.isValid) {
-      classes.push("error");
+      classes.push('error');
     }
 
     return classes;
   }
 
   get currentValueAsArray(): string[] {
-    return this.value.toString().split("|");
+    return this.value.toString().split('|');
   }
 
   get handlers() {
@@ -99,18 +99,18 @@ export default class curSelect extends Vue {
     }
 
     this.$emit(
-      "input",
-      selected.map((option: ISelectOption) => option.value).join("|")
+      'input',
+      selected.map((option: ISelectOption) => option.value).join('|')
     );
   }
 }
 </script>
 
 <style lang='scss' scoped>
-@import "~styles/app";
-@import "~styles/components/select";
+@import '~styles/app';
+@import '~styles/components/select';
 
-.curSelect {
+.lvqlSelect {
   overflow: hidden;
   background: $select-bg;
   box-shadow: $select-shadow;
@@ -167,7 +167,7 @@ export default class curSelect extends Vue {
 
   &:before,
   &:after {
-    content: "";
+    content: '';
     transition: all 0.25s ease-in-out;
     position: absolute;
     background-color: $select-arrow-color;
@@ -189,6 +189,6 @@ export default class curSelect extends Vue {
 }
 
 .error {
-  border: 1px solid color("danger");
+  border: 1px solid color('danger');
 }
 </style>

@@ -13,7 +13,7 @@ describe('Data Table Organism Component', () => {
         data
       },
       stubs: [
-        'cur-select',
+        'lvql-select',
         'grid-item',
         'grid-row',
         'pagination',

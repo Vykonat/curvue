@@ -1,9 +1,9 @@
 <template lang="pug">
-  cur-form( title="Reset Password", button-text="Submit reset request", @submit="submitResetRequest" )
+  lvql-form( title="Reset Password", button-text="Submit reset request", @submit="submitResetRequest" )
     template( v-slot:fields )
       grid-row
         grid-item
-          cur-input(
+          lvql-input(
             :name="$t('users.email')",
             :placeholder="$t('users.email_placeholder')",
             id="email",
@@ -15,7 +15,7 @@
   
       grid-row
         grid-item
-          cur-input(
+          lvql-input(
             :name="$t('users.password')",
             :placeholder="$t('users.password_placeholder')",
             id="password",
@@ -27,7 +27,7 @@
 
       grid-row
         grid-item
-          cur-input(
+          lvql-input(
             :name="$t('users.password_confirmation')",
             :placeholder="$t('users.password_confirmation_placeholder')",
             id="password_confirmation",

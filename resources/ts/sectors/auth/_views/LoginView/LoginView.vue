@@ -1,5 +1,5 @@
 <template lang="pug">
-  cur-layout( name="Default" )
+  lvql-layout( name="Default" )
     login-form
 </template>
 

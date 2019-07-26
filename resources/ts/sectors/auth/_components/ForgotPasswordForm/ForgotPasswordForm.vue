@@ -1,9 +1,9 @@
 <template lang="pug">
-  cur-form( :title="$t('auth.forgot')", :button-text="$t('auth.forgot')" @submit="submitForgotRequest" )
+  lvql-form( :title="$t('auth.forgot')", :button-text="$t('auth.forgot')" @submit="submitForgotRequest" )
     template( v-slot:fields )
       grid-row
         grid-item
-          cur-input(
+          lvql-input(
             :name="$('auth.email')",
             :placeholder="$('auth.email_placeholder')",
             id="email",

@@ -1,18 +1,18 @@
 <template lang='pug'>
-  cur-image( :src="src", :alt="alt", :class="avatarCssClasses" )
+  lvql-image( :src="src", :alt="alt", :class="avatarCssClasses" )
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
-export default class curAvatar extends Vue {
+export default class lvqlAvatar extends Vue {
   @Prop({ required: true }) src!: string;
   @Prop({ required: true }) alt!: string;
-  @Prop({ default: "medium" }) size!: string;
+  @Prop({ default: 'medium' }) size!: string;
 
   get avatarCssClasses() {
-    const classes: string[] = ["curAvatar"];
+    const classes: string[] = ['lvqlAvatar'];
     classes.push(`${this.size}`);
     return classes;
   }
@@ -20,9 +20,9 @@ export default class curAvatar extends Vue {
 </script>
 
 <style lang='scss' scoped>
-@import "~styles/app";
+@import '~styles/app';
 
-.curAvatar {
+.lvqlAvatar {
   border-radius: 50%;
 }
 
