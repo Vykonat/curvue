@@ -31,7 +31,7 @@ export default class PageSection extends Vue {
   @Prop({ default: '' }) title!: string;
 
   get pageSectionCssClasses() {
-    const classes: string[] = ['pageSection'];
+    const classes: string[] = ['PageSection'];
 
     classes.push(`${this.background}`);
 
@@ -43,7 +43,7 @@ export default class PageSection extends Vue {
 <style lang='scss' scoped>
 @import '~styles/app';
 
-.pageSection {
+.PageSection {
   padding: space(52) 0;
 
   @include media(tabletPortrait) {

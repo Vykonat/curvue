@@ -9,7 +9,7 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Provide } from "vue-property-decorator";
+import { Component, Vue, Provide } from 'vue-property-decorator';
 
 @Component
 export default class NavDrawer extends Vue {
@@ -20,45 +20,27 @@ export default class NavDrawer extends Vue {
   @Provide() open: boolean = false; // Whether or not the nav drawer is open
 
   get navDrawerCssClasses() {
-    const classes: string[] = ["NavDrawer"];
+    const classes: string[] = ['NavDrawer'];
 
     if (this.open) {
-      classes.push("open");
+      classes.push('open');
     }
 
     return classes;
   }
 
   get hamburgerClasses() {
-    const classes: string[] = ["hamburger"];
+    const classes: string[] = ['hamburger'];
 
     if (this.open) {
-      classes.push("open");
+      classes.push('open');
     }
 
     return classes;
   }
 
-  get isMobileScreenSize() {
-    if (window.matchMedia("(min-width: 728px)").matches) {
-      return true;
-    }
-  }
-
   toggleNavDrawer() {
     this.open = !this.open;
-  }
-
-  determineInitOpen() {
-    if (this.isMobileScreenSize) {
-      this.open = true;
-    } else {
-      this.open = false;
-    }
-  }
-
-  mounted() {
-    this.determineInitOpen();
   }
 
   handleDocumentClick(e: Event) {
@@ -69,29 +51,29 @@ export default class NavDrawer extends Vue {
 
   handleKeyDown(e: KeyboardEvent) {
     switch (e.key) {
-      case "escape": {
+      case 'escape': {
         this.toggleNavDrawer();
       }
     }
   }
 
   beforeMount() {
-    document.addEventListener("click", this.handleDocumentClick);
-    document.addEventListener("touchstart", this.handleDocumentClick);
-    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener('click', this.handleDocumentClick);
+    document.addEventListener('touchstart', this.handleDocumentClick);
+    document.addEventListener('keydown', this.handleKeyDown);
   }
 
   beforeDestroy() {
-    document.removeEventListener("click", this.handleDocumentClick);
-    document.removeEventListener("touchstart", this.handleDocumentClick);
-    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener('click', this.handleDocumentClick);
+    document.removeEventListener('touchstart', this.handleDocumentClick);
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 }
 </script>
 
 <style lang='scss' scoped>
-@import "~styles/app";
-@import "~styles/components/navDrawer";
+@import '~styles/app';
+@import '~styles/components/navDrawer';
 
 .NavDrawer {
   @include shadow();
@@ -161,7 +143,7 @@ export default class NavDrawer extends Vue {
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       display: block;
     }
 
