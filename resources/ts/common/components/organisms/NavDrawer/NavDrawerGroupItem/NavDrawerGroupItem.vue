@@ -1,15 +1,3 @@
-<script lang='ts'>
-import { Component, Vue, Prop } from "vue-property-decorator";
-
-@Component
-export default class cwdSidebarGroupItem extends Vue {
-  @Prop({ default: "" }) to!: string;
-  @Prop({ default: "" }) icon!: string;
-}
-</script>
-
-
-
 <template lang='pug'>
   li.NavDrawerGroupItem
     div( v-if="to" )
@@ -22,11 +10,19 @@ export default class cwdSidebarGroupItem extends Vue {
       slot
 </template>
 
+<script lang='ts'>
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
+@Component
+export default class cwdSidebarGroupItem extends Vue {
+  @Prop({ default: '' }) to!: string;
+  @Prop({ default: '' }) icon!: string;
+}
+</script>
 
 <style lang='scss' scoped>
-@import "~styles/app";
-@import "~styles/components/navDrawer";
+@import '~styles/app';
+@import '~styles/components/navDrawer';
 
 .NavDrawerGroupItem {
   display: block;
@@ -36,17 +32,17 @@ export default class cwdSidebarGroupItem extends Vue {
     flex-direction: row;
     align-items: center;
     padding: space();
-    font-weight: fontWeight("content");
+    font-weight: fontWeight('content');
     font-size: fontSize();
-    color: color("text");
+    color: color('text');
     text-decoration: none;
 
     &:hover {
-      font-weight: fontWeight("content", "bold");
-      background: color("background", "dark");
+      font-weight: fontWeight('content', 'bold');
+      background: color('background', 'dark');
 
       i {
-        color: color("primary");
+        color: color('primary');
       }
     }
 
