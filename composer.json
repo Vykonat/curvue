@@ -1,5 +1,6 @@
 {
   "name": "lavuql/lavuql",
+  "version": "1.0.0",
   "type": "project",
   "description": "A Laravel Vue and GraphQL PWA boilerplate that focuses on performance and best practices.",
   "keywords": [
