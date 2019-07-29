@@ -73,12 +73,12 @@
       "@php artisan key:generate --ansi"
     ],
     "test": "\"vendor/bin/phpunit\"",
-    "start": [
-      "@composer install -n --prefer-dist",
-      "@php artisan key:generate",
+    "update": [
+      "@composer install --optimize-autoloader -n --prefer-dist",
+      "@php artisan config:cache",
+      "@php artisan optimize",
       "@php artisan jwt:secret",
-      "@php artisan vue-i18n:generate",
-      "@php artisan migrate --seed"
+      "@php artisan vue-i18n:generate"
     ]
   }
 }
