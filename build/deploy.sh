@@ -23,6 +23,7 @@ yarn production
 # Add ignored compiled files
 git add -f public/**/*.css
 git add -f public/**/*.js
+git add -f public/mix-manifest.json
 
 # Push to the deploy branch
 git add .
