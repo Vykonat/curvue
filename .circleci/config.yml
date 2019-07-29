@@ -31,7 +31,7 @@ jobs:
           command: |
             cp .env.testing.example .env
             composer self-update
-            composer start
+            composer release
 
       - save_cache:
           key: composer-v1-{{ checksum "composer.lock" }}
