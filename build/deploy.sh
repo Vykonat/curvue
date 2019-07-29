@@ -29,5 +29,10 @@ git add .
 git commit -am "[${CI_COMMIT_SHA:0:8}]: $MESSAGE"
 git push origin deploy
 
+# test before final depoy
+yarn test:unit --runInBand
+yarn test:vuln
+composer test
+
 # Deploy the deploy branch to production
 dep deploy
