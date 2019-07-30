@@ -28,14 +28,14 @@ git add -f public/**/*.js.gz
 git add -f public/*.js
 git add -f public/*.js.br
 git add -f public/*.js.gz
-git add -f publix/mix-manifest.json
+git add -f public/mix-manifest.json
 
 # Push to the deploy branch
 git add .
 git commit -am "[${CI_COMMIT_SHA:0:8}]: $MESSAGE"
 git push origin deploy
 
-# test before final depoy
+# test before final deploy
 yarn test:unit --runInBand
 yarn test:vuln
 composer test
