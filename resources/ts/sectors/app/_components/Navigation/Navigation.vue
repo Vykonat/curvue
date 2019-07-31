@@ -5,6 +5,7 @@
         router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
 
     nav-drawer
+      language-select
       div( v-if="$auth.check()" )
         logout-button
       div( v-else )
@@ -32,11 +33,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import LogoutButton from '../../../auth/_components/LogoutButton/LogoutButton.vue';
+import LanguageSelect from '../LanguageSelect/LanguageSelect.vue';
 import { APP_NAME } from '../../../../common/config/app.config';
 
 @Component({
   components: {
-    LogoutButton: LogoutButton
+    LogoutButton: LogoutButton,
+    LanguageSelect: LanguageSelect
   }
 })
 export default class AdminNavigation extends Vue {
