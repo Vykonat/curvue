@@ -13,8 +13,8 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class LanguageSelect extends Vue {
   languages = [
-    { value: 'en', label: 'english' },
-    { value: 'fr', label: 'french' }
+    { value: 'en', label: 'English' },
+    { value: 'fr', label: 'Français' }
   ];
 
   changeLanguage(lang: string) {
