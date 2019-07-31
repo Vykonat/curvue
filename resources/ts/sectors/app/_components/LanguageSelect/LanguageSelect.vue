@@ -18,7 +18,7 @@ export default class LanguageSelect extends Vue {
   ];
 
   changeLanguage(lang: string) {
-      this.$i18n.locale=lang;
+    this.$i18n.locale = lang;
   }
 }
 </script>
