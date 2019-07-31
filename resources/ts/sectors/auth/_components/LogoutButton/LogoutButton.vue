@@ -2,7 +2,6 @@
   lvql-button( 
     v-if="$auth.check()", 
     variant="primary", 
-    :isGhost="true", 
     @click="logout" 
   ) {{ $t('auth.logout') }}
 </template>

@@ -28,6 +28,8 @@ export default class lvqlForm extends Vue {
   display: flex;
   flex-direction: column;
   align-content: center;
+  padding: space(12);
+  background: color('background', 'light');
 }
 
 .formButton {

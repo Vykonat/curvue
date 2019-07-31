@@ -30,8 +30,8 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Provide, Prop } from "vue-property-decorator";
-import FadeAnimation from "../../../animations/FadeAnimation/FadeAnimation.vue";
+import { Component, Vue, Provide, Prop } from 'vue-property-decorator';
+import FadeAnimation from '../../../animations/FadeAnimation/FadeAnimation.vue';
 
 interface ICarouselImage {
   copyright?: string;
@@ -49,21 +49,21 @@ export default class Carousel extends Vue {
     default: (): ICarouselImage[] => [
       {
         url:
-          "https://images.unsplash.com/photo-1539110306704-fabc10bdcad9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=efe8aac1b05db7b932b2c413db103f99&auto=format&fit=crop&w=749&q=80",
-        alt: "a default image for the carousel",
-        copyright: "Jonatan Pie"
+          'https://images.unsplash.com/photo-1469949376458-094571676254?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
+        alt: 'a default image for the carousel',
+        copyright: 'Jonatan Pie'
       },
       {
         url:
-          "https://images.unsplash.com/photo-1539107430259-d4b0b1d3d14b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ffc01c1b1f5ef9e46312df0722f20a3d&auto=format&fit=crop&w=889&q=80",
-        alt: "a default image for the carousel",
-        copyright: "Ethan Weil"
+          'https://images.unsplash.com/photo-1490131681458-a08259e7627d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80',
+        alt: 'a default image for the carousel',
+        copyright: 'Ethan Weil'
       },
       {
         url:
-          "https://images.unsplash.com/photo-1539023918645-8a5a85a822c0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0175a16297fc459b9d6e8598cb4f0e35&auto=format&fit=crop&w=1500&q=80",
-        alt: "a default image for the carousel",
-        copyright: "Greg Rosenke"
+          'https://images.unsplash.com/photo-1502154024274-8cd40923ba51?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
+        alt: 'a default image for the carousel',
+        copyright: 'Greg Rosenke'
       }
     ]
   })
@@ -128,8 +128,8 @@ export default class Carousel extends Vue {
 </script>
 
 <style lang='scss' scoped>
-@import "~styles/app";
-@import "~styles/components/carousel";
+@import '~styles/app';
+@import '~styles/components/carousel';
 
 .Carousel {
   position: relative;
