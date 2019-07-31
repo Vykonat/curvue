@@ -52,6 +52,7 @@
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import DeleteUser from '../../_gql/mutations/deleteUser.gql';
 import dialog from '../../../../common/utils/dialog.util';
+import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 
 @Component({
   components: {
@@ -59,6 +60,20 @@ import dialog from '../../../../common/utils/dialog.util';
       import(
         /* webpackChunkName: "User_Form" */ '../../_components/UserForm/UserForm.vue'
       )
+  },
+  metaInfo: {
+    ...setMetaInfo(
+      'Manage Users',
+      'Lavuql user management page',
+      'admin/users',
+      ''
+    ),
+    meta: [
+      {
+        name: 'robots',
+        content: 'noindex'
+      }
+    ]
   }
 })
 export default class AdminUsersView extends Vue {

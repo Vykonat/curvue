@@ -5,8 +5,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 
-@Component
+@Component({
+  metaInfo: {
+    ...setMetaInfo('Error', 'Lavuql timout page', '', ''),
+    meta: [
+      {
+        name: 'robots',
+        content: 'noindex'
+      }
+    ]
+  }
+})
 export default class TimeoutView extends Vue {}
 </script>
 

@@ -34,7 +34,13 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { APP_NAME } from '../../../../common/config/app.config';
 import { generateRandomPhoto } from '../../../../common/utils/generateRandomPhoto.util';
+import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 
+@Component({
+  metaInfo: {
+    ...setMetaInfo('Home', 'Lavuql home page', '', '')
+  }
+})
 export default class HomeView extends Vue {
   APP_NAME = APP_NAME;
 

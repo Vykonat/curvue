@@ -111,9 +111,9 @@ small {
 }
 
 a {
-  color: color('primary');
+  color: color('accent');
 
   &:hover {
-    color: color('primary', 'dark');
+    color: color('accent', 'dark');
   }
 }

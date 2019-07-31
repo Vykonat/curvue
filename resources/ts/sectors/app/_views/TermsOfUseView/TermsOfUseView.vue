@@ -5,8 +5,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 
-@Component
-export default class CookieConsentView extends Vue {}
+@Component({
+  metaInfo: {
+    ...setMetaInfo('Terms', 'Lavuql terms of use page', 'terms-of-use', '')
+  }
+})
+export default class TermsOfUseView extends Vue {}
 </script>
 

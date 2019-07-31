@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
 interface IBreadcrumbItem {
   target: string;
@@ -20,8 +20,8 @@ export default class Breadcrumb extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~styles/app";
-@import "~styles/components/breadcrumb";
+@import '~styles/app';
+@import '~styles/components/breadcrumb';
 
 .Breadcrumb {
   padding: $breadcrumb-padding;
@@ -41,7 +41,7 @@ export default class Breadcrumb extends Vue {
   &:first-child {
     &:before {
       padding: 0;
-      content: "";
+      content: '';
     }
   }
 }
