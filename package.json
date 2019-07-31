@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "lavuql",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Laravel Vue and GraphQL PWA boilerplate that focuses on performance and best practices.",
   "main": "index.js",
   "author": "_Judicium",

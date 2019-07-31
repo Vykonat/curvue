@@ -3,6 +3,6 @@ $pagination-padding: 0;
 $pagination-label-padding: space(16);
 $pagination-label-min-width: space(52);
 $pagination-button-size: space(52);
-$pagination-button-bg: color('background', 'dark');
+$pagination-button-bg: color('background');
 $pagination-arrow-color: color('primary');
-$pagination-arrow-disabled-color: color('background');
+$pagination-arrow-disabled-color: color('divider');

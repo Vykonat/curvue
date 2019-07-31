@@ -1,18 +1,18 @@
 $brand-colors: (
   primary: (
-    default: hsla(354, 69%, 50%, 1),
-    dark: hsla(354, 69%, 40%, 1),
-    light: hsla(354, 69%, 60%, 1)
+    default: hsl(6, 56%, 28%),
+    dark: hsl(6, 56%, 18%),
+    light: hsl(6, 56%, 38%)
   ),
   accent: (
-    default: hsla(199, 100%, 29%),
-    dark: hsla(199, 100%, 19%, 1),
-    light: hsla(199, 100%, 39%, 1)
+    default: hsl(350, 12%, 47%),
+    dark: hsl(350, 12%, 37%),
+    light: hsl(350, 12%, 57%)
   ),
   info: (
-    default: hsla(199, 100%, 29%, 1),
-    dark: hsla(199, 100%, 19%, 1),
-    light: hsla(199, 100%, 39%, 1)
+    default: hsl(185, 60%, 56%),
+    dark: hsl(185, 60%, 46%),
+    light: hsl(185, 60%, 66%)
   ),
   warn: (
     default: hsla(47, 81%, 56%, 1),
@@ -20,31 +20,31 @@ $brand-colors: (
     light: hsla(47, 81%, 66%, 1)
   ),
   success: (
-    default: hsla(133, 55%, 45%, 1),
-    dark: hsla(133, 55%, 35%, 1),
-    light: hsla(133, 55%, 55%, 1)
+    default: hsl(125, 70%, 73%),
+    dark: hsl(125, 70%, 63%),
+    light: hsl(125, 70%, 83%)
   ),
   danger: (
-    default: hsl(4, 100%, 41%),
-    dark: hsl(4, 100%, 31%),
-    light: hsl(4, 100%, 51%)
+    default: hsl(4, 92%, 46%),
+    dark: hsl(4, 92%, 36%),
+    light: hsl(4, 92%, 56%)
   ),
   background: (
-    default: hsla(86, 15%, 95%, 1),
-    dark: hsla(202, 26%, 80%, 1),
-    light: hsla(203, 27%, 100%, 1),
-    inverse: hsla(203, 27%, 10%, 1)
+    default: hsl(240, 7%, 11%),
+    dark: hsl(240, 7%, 1%),
+    light: hsl(240, 7%, 21%),
+    inverse: hsl(240, 7%, 89%)
   ),
   text: (
-    default: hsla(0, 0%, 20%, 1),
-    inverse: hsla(255, 100%, 100%, 1)
+    inverse: hsla(0, 0%, 20%, 1),
+    default: hsla(255, 100%, 100%, 1)
   ),
   shadow: (
-    default: hsla(203, 27%, 10%, 1)
+    default: hsl(276, 100%, 1%)
   ),
   divider: (
-    default: hsla(200, 5%, 77%, 1),
-    inverse: hsla(200, 5%, 23%, 1)
+    default: hsl(240, 7%, 31%),
+    inverse: hsl(276, 100%, 80%)
   )
 );
 

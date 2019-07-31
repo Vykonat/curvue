@@ -69,7 +69,7 @@ export default class PageSection extends Vue {
 }
 
 .alternative {
-  background: color('accent');
+  background: color('background', 'inverse');
   color: color('text', 'inverse');
 }
 </style>

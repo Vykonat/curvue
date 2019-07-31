@@ -69,11 +69,7 @@ export default class HomeView extends Vue {
 
 .title,
 .subTitle {
-  text-shadow: 0 2px 1px color('background', 'inverse');
-}
-
-.subTitle {
-  color: color('text', 'inverse');
+  text-shadow: 0 2px 1px color('shadow');
 }
 
 .title {
