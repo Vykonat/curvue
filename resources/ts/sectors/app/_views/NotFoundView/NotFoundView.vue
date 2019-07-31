@@ -5,8 +5,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 
-@Component
+@Component({
+  metaInfo: {
+    ...setMetaInfo('Not Found', 'Lavuql 404 error page', '', ''),
+    meta: [
+      {
+        name: 'robots',
+        content: 'noindex'
+      }
+    ]
+  }
+})
 export default class NotFoundView extends Vue {}
 </script>
 

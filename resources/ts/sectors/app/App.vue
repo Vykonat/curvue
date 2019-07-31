@@ -14,8 +14,13 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
+import { defaultMetaOptions } from '../../common/config/vue-meta.config';
 
-@Component
+@Component({
+  metaInfo: {
+    ...defaultMetaOptions
+  }
+})
 export default class App extends Vue {
   isNavigating: boolean = true;
   @Provide() layout: string = 'div';
