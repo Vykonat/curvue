@@ -3,23 +3,23 @@
     navbar
       template( v-slot:middle )
         router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
-      template( v-if="$auth.check()", v-slot:right )
+
+    nav-drawer
+      div( v-if="$auth.check()" )
         logout-button
-      template( v-else, v-slot:right )
+      div( v-else )
         lvql-button( 
           tag="router-link", 
           :target="{ name: 'auth.login' }", 
           variant="primary", 
-          :isGhost="true", 
         ) {{ $t('auth.login') }}
 
         lvql-button( 
           tag="router-link", 
           :target="{ name: 'auth.register' }", 
-          variant="accent", 
+          variant="accent",
+          :isGhost="true",
         ) {{ $t('auth.register') }}
-
-    nav-drawer
       nav-drawer-group( :title="$t('navigation.navigation')" )
         nav-drawer-group-item( icon="fas fa-home" :to="{ name: 'app.home' }" ) {{ $t('navigation.home') }}
 

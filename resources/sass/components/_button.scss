@@ -25,37 +25,37 @@ $button-variations: (
   ),
   'primary': (
     'bg': color('primary'),
-    'color': color('text', 'inverse'),
+    'color': color('text'),
     'hover-bg': color('primary', 'dark'),
-    'hover-color': color('text', 'inverse'),
-    'border': 1px solid color('primary')
+    'hover-color': color('text'),
+    'border': 1px solid color('primary', 'dark')
   ),
   'accent': (
     'bg': color('accent'),
     'color': color('text', 'inverse'),
     'hover-bg': color('accent', 'dark'),
     'hover-color': color('text', 'inverse'),
-    'border': 1px solid color('accent')
+    'border': 1px solid color('accent', 'dark')
   ),
   'success': (
     'bg': color('success'),
-    'color': color('text'),
+    'color': color('text', 'inverse'),
     'hover-bg': color('success', 'dark'),
     'hover-color': color('text', 'inverse'),
-    'border': 1px solid color('success')
+    'border': 1px solid color('success', 'dark')
   ),
   'warn': (
     'bg': color('warn'),
     'color': color('text', 'inverse'),
     'hover-bg': color('warn', 'dark'),
     'hover-color': color('text', 'inverse'),
-    'border': 1px solid color('warn')
+    'border': 1px solid color('warn', 'dark')
   ),
   'danger': (
     'bg': color('danger'),
     'color': color('text', 'inverse'),
     'hover-bg': color('danger', 'dark'),
     'hover-color': color('text', 'inverse'),
-    'border': 1px solid color('danger')
+    'border': 1px solid color('danger', 'dark')
   )
 );
