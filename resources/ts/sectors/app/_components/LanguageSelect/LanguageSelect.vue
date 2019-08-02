@@ -3,6 +3,7 @@
       name="language-select",
       id="language-select",
       :options="languages",
+      :value="$i18n.locale",
       @input="changeLanguage"
   )
 </template>
