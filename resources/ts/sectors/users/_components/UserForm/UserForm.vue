@@ -60,6 +60,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { apolloClient } from '../../../../common/config/apollo.config';
+import { cacheAddUser } from '../../_gql/cache/UsersCache';
 import dialog from '../../../../common/utils/dialog.util';
 import CreateUser from '../../_gql/mutations/createUser.gql';
 import EditUser from '../../_gql/mutations/editUser.gql';
@@ -78,9 +79,21 @@ export default class UserForm extends Vue {
   }
 
   sendData() {
+    const vm = this;
     apolloClient.mutate({
       mutation: this.activeMutation,
-      variables: { id: this.user.id, data: this.user }
+      variables: { id: this.user.id, data: this.user },
+      update: (store, { data: { userToAdd } }) => {
+        cacheAddUser(store, userToAdd);
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        CreateUser: {
+          id: '',
+          name: this.user.name,
+          email: this.user.email
+        }
+      }
     });
 
     if (this.isAdd) {

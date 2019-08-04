@@ -53,6 +53,7 @@ import { Component, Vue, Provide } from 'vue-property-decorator';
 import DeleteUser from '../../_gql/mutations/deleteUser.gql';
 import dialog from '../../../../common/utils/dialog.util';
 import { setMetaInfo } from '../../../../common/config/vue-meta.config';
+import { cacheRemoveUser } from '../../_gql/cache/UsersCache';
 
 @Component({
   components: {
@@ -159,6 +160,16 @@ export default class AdminUsersView extends Vue {
       mutation: DeleteUser,
       variables: {
         id
+      },
+      update: (store, { data: { userToRemove } }) => {
+        cacheRemoveUser(store, userToRemove);
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        DeleteUser: {
+          __typename: 'User',
+          id
+        }
       }
     });
 
