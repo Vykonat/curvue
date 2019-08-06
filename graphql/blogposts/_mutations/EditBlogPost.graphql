@@ -1,0 +1,3 @@
+extend type Mutation {
+  editBlogPost(id: ID!, data: EditBlogPostInput! @spread): BlogPost! @update
+}

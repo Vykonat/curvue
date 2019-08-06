@@ -1,0 +1,10 @@
+type BlogPost {
+  id: ID!
+  title: String!
+  slug: String!
+  description: String!
+  content: String!
+  user: User! @belongsTo(relation: "user")
+  created_at: DateTime!
+  updated_at: DateTime!
+}
