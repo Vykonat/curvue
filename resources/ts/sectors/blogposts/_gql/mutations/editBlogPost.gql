@@ -1,0 +1,7 @@
+#import "../fragments/BlogPostFragment.gql"
+
+mutation EditBlogPost($id: ID!, $data: EditBlogPostInput!) {
+  editBlogPost(id: $id, data: $data) {
+    ...BlogPost
+  }
+}

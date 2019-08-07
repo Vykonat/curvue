@@ -1,0 +1,14 @@
+fragment BlogPost on BlogPost {
+  id
+  title
+  slug
+  description
+  content
+  user {
+    id
+    name
+    email
+  }
+  created_at
+  updated_at
+}

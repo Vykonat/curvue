@@ -1,0 +1,7 @@
+#import "../fragments/BlogPostFragment.gql"
+
+mutation CreateBlogPost($data: CreateBlogPostInput!) {
+  createBlogPost(data: $data) {
+    ...BlogPost
+  }
+}
