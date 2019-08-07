@@ -120,13 +120,11 @@ export default class AdminUsersView extends Vue {
     }
   };
 
-  closeUserModal(query): void {
+  closeUserModal(): void {
     this.isUserModalShown = false;
     this.userForm = {
       role_id: 2
     };
-
-    query.refetch();
   }
 
   handleUserAdd() {
@@ -147,7 +145,7 @@ export default class AdminUsersView extends Vue {
     this.userForm = form;
   }
 
-  async handleUserDelete({ id }, query): Promise<void> {
+  async handleUserDelete({ id }): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'User' }),
@@ -174,7 +172,6 @@ export default class AdminUsersView extends Vue {
     });
 
     dialog(this.$t('resource.deleted', { resource: 'User' }), false);
-    query.refetch();
   }
 
   get searchInputPlaceHolder() {

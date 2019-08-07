@@ -121,11 +121,9 @@ export default class AdminBlogPostsView extends Vue {
     }
   };
 
-  closeBlogPostModal(query): void {
+  closeBlogPostModal(): void {
     this.isBlogPostModalShown = false;
     this.blogPostForm = {};
-
-    query.refetch();
   }
 
   handleBlogPostAdd() {
@@ -146,7 +144,7 @@ export default class AdminBlogPostsView extends Vue {
     this.blogPostForm = form;
   }
 
-  async handleBlogPostDelete({ id }, query): Promise<void> {
+  async handleBlogPostDelete({ id }): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'Blog Post' }),
@@ -173,7 +171,6 @@ export default class AdminBlogPostsView extends Vue {
     });
 
     dialog(this.$t('resource.deleted', { resource: 'Blog Post' }), false);
-    query.refetch();
   }
 
   get searchInputPlaceHolder() {
