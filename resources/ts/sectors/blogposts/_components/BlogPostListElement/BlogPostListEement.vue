@@ -10,9 +10,11 @@
 
       grid-row.description
         grid-item( fill )
-          | {{ description }}
+          truncate( :permanent="true" ) {{ description }}
 
-        lvql-button.Button( variant="primary", tag="router-link", :target="{name: 'blog.show', params: { slug: this.blogPost.slug }}" ) Read More
+      grid-row
+        grid-item
+          lvql-button.Button( variant="primary", tag="router-link", :target="{name: 'blog.show', params: { slug: this.blogPost.slug }}" ) Read More
 </template>
 
 <script lang="ts">
