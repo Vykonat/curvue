@@ -14,13 +14,13 @@ article.Truncate
     v-else-if="showMoreButton && !permanent",
     href="#",
     @click.prevent="showMore"
-    ) {{ $t('components.truncate_showMore') }}
+    ) {{ $t('truncate.showMore') }}
 
   a(
     v-else-if="!showMoreButton && !permanent"
     href="#",
     @click.prevent="showLess"
-  ) {{ $t('components.truncate_showLess') }}
+  ) {{ $t('truncate.showLess') }}
 
   br( v-else )
 </template>
