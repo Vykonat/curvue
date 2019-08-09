@@ -24,17 +24,19 @@ lvql-layout( name="Default" )
             section.left
               | {{ data.singleBlogPost.content }}
             section.right
-              h1 Sidebar Here
+              blog-post-sidebar( :url="data.singleBlogPost.slug" )
 </template>
 
 <script lang='ts'>
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 import BlogPostHeader from '../../_components/BlogPostHeader/BlogPostHeader.vue';
+import BlogPostSidebar from '../../_components/BlogPostSidebar/BlogPostSidebar.vue';
 
 @Component({
   components: {
-    BlogPostHeader: BlogPostHeader
+    BlogPostHeader: BlogPostHeader,
+    BlogPostSidebar: BlogPostSidebar
   },
 
   metaInfo: {

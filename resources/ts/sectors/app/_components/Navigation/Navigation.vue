@@ -45,13 +45,13 @@ import userRoles from '../../../../common/config/userRoles.config';
     LanguageSelect: LanguageSelect
   }
 })
-export default class AdminNavigation extends Vue {
+export default class Navigation extends Vue {
   private get appName(): string {
     if (typeof APP_NAME !== 'undefined') {
       return APP_NAME;
     }
 
-    return 'Lavuql';
+    return 'App name';
   }
 
   private get isAdmin(): boolean {

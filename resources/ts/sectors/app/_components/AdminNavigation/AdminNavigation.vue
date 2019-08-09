@@ -23,7 +23,7 @@ export default class AdminNavigation extends Vue {
       return APP_NAME;
     }
 
-    return 'Lavuql';
+    return 'App name';
   }
 }
 </script>
