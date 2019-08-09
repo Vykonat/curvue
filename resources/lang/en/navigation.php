@@ -6,6 +6,7 @@ return [
     'users' => 'Users',
     'admin' => 'Admin',
     'blogPosts' => 'Blog Posts',
+    'blogPost' => 'Viewing Post',
     'manage' => 'Manage',
     'legal' => 'Legal',
     'cookies' => 'Cookie Consent',

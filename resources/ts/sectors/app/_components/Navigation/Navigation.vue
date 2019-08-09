@@ -8,6 +8,7 @@
       language-select
       div( v-if="$auth.check()" )
         logout-button
+        lvql-button( v-if="isAdmin", variant="accent", :is-ghost="true", tag="router-link", :target="{ name: 'admin.users' }") {{$t('navigation.admin')}}
       div( v-else )
         lvql-button( 
           tag="router-link", 
@@ -23,6 +24,7 @@
         ) {{ $t('auth.register') }}
       nav-drawer-group( :title="$t('navigation.navigation')" )
         nav-drawer-group-item( icon="fas fa-home" :to="{ name: 'app.home' }" ) {{ $t('navigation.home') }}
+        nav-drawer-group-item( icon="fas fa-book" :to="{ name: 'blog.index' }" ) {{ $t('navigation.blogPosts') }}
 
       nav-drawer-group( :title="$t('navigation.legal')" )
         nav-drawer-group-item( icon="fas fa-cookie-bite" :to="{ name: 'app.cookies' }" ) {{ $t('navigation.cookies') }}
@@ -35,6 +37,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import LogoutButton from '../../../auth/_components/LogoutButton/LogoutButton.vue';
 import LanguageSelect from '../LanguageSelect/LanguageSelect.vue';
 import { APP_NAME } from '../../../../common/config/app.config';
+import userRoles from '../../../../common/config/userRoles.config';
 
 @Component({
   components: {
@@ -43,12 +46,16 @@ import { APP_NAME } from '../../../../common/config/app.config';
   }
 })
 export default class AdminNavigation extends Vue {
-  get appName(): string {
+  private get appName(): string {
     if (typeof APP_NAME !== 'undefined') {
       return APP_NAME;
     }
 
     return 'Lavuql';
+  }
+
+  private get isAdmin(): boolean {
+    return this.$auth.user().role_id === userRoles.ADMIN;
   }
 }
 </script>

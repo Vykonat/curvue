@@ -9,6 +9,7 @@
     nav-drawer
       nav-drawer-group( :title="$t('navigation.manage')" )
         nav-drawer-group-item( icon="fas fa-users" :to="{ name: 'admin.users' }" ) {{ $t('navigation.users') }}
+        nav-drawer-group-item( icon="fas fa-book" :to="{ name: 'admin.blogPosts' }" ) {{ $t('navigation.blogPosts') }}
 </template>
 
 <script lang="ts">

@@ -5,8 +5,58 @@ import { i18n } from '../../../common/config/i18n.config';
 
 export const BlogPostRoutes: RouteConfig[] = [
   {
+    path: '/blog-post/:slug',
+    name: 'blog.show',
+    component: () =>
+      lazyLoadRoute(
+        import(
+          /* webpackChunkName: "Blog_Post_Page" */ './BlogPostView/BlogPostView.vue'
+        )
+      ),
+    meta: {
+      breadcrumbs: [
+        {
+          label: i18n.t('navigation.home'),
+          target: { name: 'app.home' }
+        },
+        {
+          label: i18n.t('navigation.blogPosts'),
+          target: { name: 'blog.index' }
+        },
+        {
+          label: i18n.t('navigation.blogPost'),
+          target: { name: 'blog.show' }
+        }
+      ]
+    }
+  },
+
+  {
+    path: '/blog-posts',
+    name: 'blog.index',
+    component: () =>
+      lazyLoadRoute(
+        import(
+          /* webpackChunkName: "Blog_Posts_Index_Page" */ './BlogPostsIndexView/BlogPostsIndexView.vue'
+        )
+      ),
+    meta: {
+      breadcrumbs: [
+        {
+          label: i18n.t('navigation.home'),
+          target: { name: 'app.home' }
+        },
+        {
+          label: i18n.t('navigation.blogPosts'),
+          target: { name: 'blog.index' }
+        }
+      ]
+    }
+  },
+
+  {
     path: '/admin/blog-posts',
-    name: 'admin.blogposts',
+    name: 'admin.blogPosts',
     component: () =>
       lazyLoadRoute(
         import(

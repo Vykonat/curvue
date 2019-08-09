@@ -1,0 +1,7 @@
+#import "../fragments/BlogPostFragment.gql"
+
+query SingleBlogPost($slug: String) {
+  singleBlogPost(slug: $slug) {
+    ...BlogPost
+  }
+}
