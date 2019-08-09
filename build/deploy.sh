@@ -36,7 +36,7 @@ git commit -am "[${CI_COMMIT_SHA:0:8}]: $MESSAGE"
 git push origin deploy
 
 # test before final deploy
-yarn test:unit --runInBand
+yarn test:unit
 yarn test:vuln
 composer test
 
