@@ -1,0 +1,10 @@
+type Comment {
+  id: ID!
+  content: String!
+  commentable_id: Int!
+  commentable_type: String!
+  user: User! @belongsTo(relation: "User")
+  replies: [Comment!] @hasMany
+  created_at: DateTime!
+  updated_at: DateTime!
+}

@@ -6,6 +6,7 @@ type User {
     @field(resolver: "App\\GraphQL\\Mutations\\UserRoleStringResolver@resolve")
   email: String!
   blog_posts: [BlogPost!]! @hasMany(relation: "blogPosts")
+  comments: [Comment!]! @hasMany(relation: "comments")
   created_at: DateTime!
   updated_at: DateTime!
 }

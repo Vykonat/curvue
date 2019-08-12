@@ -1,0 +1,3 @@
+extend type Mutation {
+  editComment(id: ID!, data: EditCommentInput! @spread): Comment! @update
+}

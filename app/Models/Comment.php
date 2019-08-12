@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-class BlogPost extends Model
+class Comment extends Model
 {
     /**
      * The "booting" method of the model.
@@ -17,33 +17,30 @@ class BlogPost extends Model
         parent::boot();
 
         // auto-sets values on creation
-        static::saving(function ($post) {
+        static::saving(function ($comment) {
             $user = Auth::user();
 
             if($user) {
-                $post->user_id = $user->id;
+                $comment->user_id = $user->id;
             }
 
-            $post->slug = str_slug($post->title . ' ' . time(), '-');
-            $post->user_id = 1;
+            $comment->user_id = 1;
         });
     }
 
-    protected $fillable = [
-        'title', 'description', 'content',
-    ];
+    protected $fillable = ['content', 'commentable_id', 'commentable_type'];
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
-    public function user()
+    public function user() 
     {
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function commentable() 
+    {
+        return $this->morphTo();
+    }
+
+    public function replies()
     {
         return $this->morphMany(Comment::class, 'commentable');
     }

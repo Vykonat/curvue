@@ -158,8 +158,8 @@ export default class AdminBlogPostsView extends Vue {
       variables: {
         id
       },
-      update: (store, { data: { userToRemove } }) => {
-        cacheRemoveBlogPost(store, userToRemove);
+      update: (store, { data: { blogPostToRemove } }) => {
+        cacheRemoveBlogPost(store, blogPostToRemove);
       },
       optimisticResponse: {
         __typename: 'Mutation',
