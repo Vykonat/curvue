@@ -1,8 +1,13 @@
 input EditUserInput {
-    id: Int
-    name: String! @rules(apply: ["required", "between:3, 191"])
-    email: String! @rules(apply: ["required", "email", "max:191"])
-    role_id: Int @rules(apply: ["between:1,2"])
-    password: String @rules(apply: ["min: 8", "confirmed"]) @bcrypt
-    password_confirmation: String @rules(apply: ["min: 8"]) @bcrypt
+  id: Int
+  name: String! @rules(apply: ["required", "between:3, 191"])
+  email: String! @rules(apply: ["required", "email", "max:191"])
+  role_id: Int @rules(apply: ["between:1,2"])
+  role: String @rules(apply: ["max: 191"])
+  blog_posts: [BlogPost]
+  comments: [Comment]
+  created_at: DateTime!
+  updated_at: DateTime!
+  password: String @rules(apply: ["min: 8", "confirmed"]) @bcrypt
+  password_confirmation: String @rules(apply: ["min: 8"]) @bcrypt
 }

@@ -1,11 +1,7 @@
+#import "../fragments/UserFragment.gql"
+
 query UsersQuery {
   users {
-    id
-    role_id
-    role
-    name
-    email
-    created_at
-    updated_at
+    ...User
   }
 }

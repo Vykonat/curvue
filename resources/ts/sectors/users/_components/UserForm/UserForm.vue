@@ -67,40 +67,69 @@ import EditUser from '../../_gql/mutations/editUser.gql';
 
 @Component
 export default class UserForm extends Vue {
-  @Prop({ required: true }) user;
+  @Prop({ required: true }) user!: Partial<IUser>;
   @Prop({ default: true }) isAdd!: boolean;
 
-  get activeMutation() {
-    if (this.isAdd) {
-      return CreateUser;
-    }
-
-    return EditUser;
-  }
-
-  sendData() {
+  private sendCreateUserInfo() {
     const vm = this;
     apolloClient.mutate({
-      mutation: this.activeMutation,
-      variables: { id: this.user.id, data: this.user },
-      update: (store, { data: { userToAdd } }) => {
-        cacheAddUser(store, userToAdd);
+      mutation: CreateUser,
+      variables: { data: this.user },
+      update: (store, { data: { createUser } }) => {
+        cacheAddUser(store, createUser);
       },
       optimisticResponse: {
         __typename: 'Mutation',
-        CreateUser: {
-          id: '',
+        createUser: {
+          __typename: 'User',
+          id: this.user.id,
           name: this.user.name,
-          email: this.user.email
+          email: this.user.email,
+          role_id: this.user.role_id,
+          role: this.user.role,
+          comments: this.user.comments,
+          created_at: this.user.created_at,
+          updated_at: this.user.updated_at,
+          blog_posts: this.user.blog_posts
         }
       }
     });
+    dialog(this.$t('resource.created', { resource: 'User' }), false);
+  }
 
+  private sendEditUserInfo() {
+    const vm = this;
+    apolloClient.mutate({
+      mutation: EditUser,
+      variables: { id: this.user.id, data: this.user },
+      update: (store, { data: { editUser } }) => {
+        cacheAddUser(store, editUser);
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        editUser: {
+          __typename: 'User',
+          id: this.user.id,
+          name: this.user.name,
+          email: this.user.email,
+          role_id: this.user.role_id,
+          role: this.user.role,
+          comments: this.user.comments,
+          created_at: this.user.created_at,
+          updated_at: this.user.updated_at,
+          blog_posts: this.user.blog_posts
+        }
+      }
+    });
+    dialog(this.$t('resource.updated', { resource: 'User' }), false);
+  }
+
+  sendData() {
     if (this.isAdd) {
-      dialog(this.$t('resource.created', { resource: 'User' }), false);
-    } else {
-      dialog(this.$t('resource.updated', { resource: 'User' }), false);
+      return this.sendCreateUserInfo();
     }
+
+    return this.sendEditUserInfo();
   }
 
   get userFormTitle() {

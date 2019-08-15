@@ -78,9 +78,9 @@ import { cacheRemoveUser } from '../../_gql/cache/UsersCache';
   }
 })
 export default class AdminUsersView extends Vue {
-  isUserModalShown = false;
-  isUserFormAdd = true;
-  userForm = {
+  isUserModalShown: boolean = false;
+  isUserFormAdd: boolean = true;
+  userForm: Partial<IUser> = {
     role_id: 2
   };
 
@@ -102,6 +102,14 @@ export default class AdminUsersView extends Vue {
     },
 
     role_id: {
+      visible: false
+    },
+
+    blog_posts: {
+      visible: false
+    },
+
+    comments: {
       visible: false
     },
 
@@ -127,25 +135,32 @@ export default class AdminUsersView extends Vue {
     };
   }
 
-  handleUserAdd() {
+  handleUserAdd(): void {
     this.isUserFormAdd = true;
     this.isUserModalShown = true;
   }
 
-  handleUserEdit(user): void {
+  handleUserEdit(user: IUser): void {
     this.isUserFormAdd = false;
     this.isUserModalShown = true;
 
     const form = { ...user };
     this.userForm.role_id = user.role_id;
     delete form.__typename;
-    delete form.role;
-    delete form.created_at;
-    delete form.updated_at;
     this.userForm = form;
   }
 
-  async handleUserDelete({ id }): Promise<void> {
+  async handleUserDelete({
+    id,
+    name,
+    email,
+    role,
+    role_id,
+    blog_posts,
+    comments,
+    created_at,
+    updated_at
+  }): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'User' }),
@@ -159,14 +174,23 @@ export default class AdminUsersView extends Vue {
       variables: {
         id
       },
-      update: (store, { data: { userToRemove } }) => {
-        cacheRemoveUser(store, userToRemove);
+      update: (store, { data: { deleteUser } }) => {
+        cacheRemoveUser(store, deleteUser);
       },
       optimisticResponse: {
         __typename: 'Mutation',
-        DeleteUser: {
+        id,
+        deleteUser: {
           __typename: 'User',
-          id
+          id,
+          name,
+          email,
+          role,
+          role_id,
+          blog_posts,
+          comments,
+          created_at,
+          updated_at
         }
       }
     });
