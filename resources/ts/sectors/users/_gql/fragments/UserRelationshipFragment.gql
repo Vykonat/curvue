@@ -1,0 +1,5 @@
+fragment UserRelationship on User {
+  id
+  name
+  email
+}

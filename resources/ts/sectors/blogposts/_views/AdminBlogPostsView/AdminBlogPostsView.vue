@@ -101,6 +101,10 @@ export default class AdminBlogPostsView extends Vue {
       visible: false
     },
 
+    content: {
+      visible: false
+    },
+
     user: {
       title: 'Author',
       slot: 'author'
@@ -137,14 +141,20 @@ export default class AdminBlogPostsView extends Vue {
 
     const form = { ...blogPost };
     delete form.__typename;
-    delete form.slug;
     delete form.user;
-    delete form.created_at;
-    delete form.updated_at;
     this.blogPostForm = form;
   }
 
-  async handleBlogPostDelete({ id }): Promise<void> {
+  async handleBlogPostDelete({
+    id,
+    title,
+    slug,
+    description,
+    content,
+    user,
+    created_at,
+    updated_at
+  }): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'Blog Post' }),
@@ -158,14 +168,21 @@ export default class AdminBlogPostsView extends Vue {
       variables: {
         id
       },
-      update: (store, { data: { blogPostToRemove } }) => {
-        cacheRemoveBlogPost(store, blogPostToRemove);
+      update: (store, { data: { deleteBlogPost } }) => {
+        cacheRemoveBlogPost(store, deleteBlogPost);
       },
       optimisticResponse: {
         __typename: 'Mutation',
-        DeleteBlogPost: {
-          __typename: 'blogPost',
-          id
+        deleteBlogPost: {
+          __typename: 'BlogPost',
+          id,
+          title,
+          slug,
+          description,
+          content,
+          user,
+          created_at,
+          updated_at
         }
       }
     });

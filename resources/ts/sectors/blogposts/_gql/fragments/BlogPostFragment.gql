@@ -1,3 +1,5 @@
+#import "../../../users/_gql/fragments/UserRelationshipFragment.gql"
+
 fragment BlogPost on BlogPost {
   id
   title
@@ -5,9 +7,7 @@ fragment BlogPost on BlogPost {
   description
   content
   user {
-    id
-    name
-    email
+    ...UserRelationship
   }
   created_at
   updated_at

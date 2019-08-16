@@ -3,7 +3,7 @@ import BlogPostsQuery from '../queries/BlogPostsQuery.gql';
 export function cacheAddBlogPostToList(list: any[], item: any) {
   const index: number = list.findIndex(i => i.id === item.id);
 
-  if (index !== -1) {
+  if (index === -1) {
     list.push(item);
   }
 }
@@ -20,7 +20,7 @@ export function cacheAddBlogPost(store: any, item: any) {
   const query = { query: BlogPostsQuery };
 
   const data = store.readQuery(query);
-  cacheAddBlogPostToList(data.blogPosts, item);
+  cacheAddBlogPostToList(data.allBlogPosts, item);
   store.writeQuery({ ...query, data });
 }
 
@@ -28,6 +28,6 @@ export function cacheRemoveBlogPost(store: any, item: any) {
   const query = { query: BlogPostsQuery };
 
   const data = store.readQuery(query);
-  cacheRemoveBlogPostFromList(data.BlogPosts, item);
+  cacheRemoveBlogPostFromList(data.allBlogPosts, item);
   store.writeQuery({ ...query, data });
 }
