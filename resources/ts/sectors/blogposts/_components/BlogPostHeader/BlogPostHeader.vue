@@ -45,6 +45,7 @@ export default class PostHeader extends Vue {
     url('https://picsum.photos/1600/900');
   justify-content: center;
   align-items: center;
+  color: color('text', 'inverse');
 }
 
 h2 {

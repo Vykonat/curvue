@@ -8,7 +8,7 @@
       language-select
       div( v-if="$auth.check()" )
         logout-button
-        lvql-button( v-if="isAdmin", variant="accent", :is-ghost="true", tag="router-link", :target="{ name: 'admin.users' }") {{$t('navigation.admin')}}
+        lvql-button( v-if="isAdmin", variant="primary", :is-ghost="true", tag="router-link", :target="{ name: 'admin.users' }") {{$t('navigation.admin')}}
       div( v-else )
         lvql-button( 
           tag="router-link", 
@@ -67,7 +67,7 @@ export default class Navigation extends Vue {
 .brand {
   font-size: fontSize(h4);
   font-weight: fontWeight('headings');
-  color: color('text');
+  color: color('primary');
   margin-top: space(4);
 }
 </style>

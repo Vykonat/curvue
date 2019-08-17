@@ -1,13 +1,13 @@
 $brand-colors: (
   primary: (
-    default: hsl(6, 56%, 28%),
-    dark: hsl(6, 56%, 18%),
-    light: hsl(6, 56%, 38%)
+    default: hsl(355, 54%, 44%),
+    dark: hsl(355, 54%, 34%),
+    light: hsl(355, 54%, 54%)
   ),
   accent: (
-    default: hsl(28, 25%, 77%),
-    dark: hsl(28, 25%, 67%),
-    light: hsl(28, 25%, 87%)
+    default: hsl(187, 43%, 30%),
+    dark: hsl(187, 43%, 20%),
+    light: hsl(187, 43%, 40%)
   ),
   info: (
     default: hsl(185, 60%, 56%),
@@ -20,24 +20,24 @@ $brand-colors: (
     light: hsla(47, 81%, 66%, 1)
   ),
   success: (
-    default: hsl(125, 70%, 73%),
-    dark: hsl(125, 70%, 63%),
-    light: hsl(125, 70%, 83%)
+    default: hsl(163, 100%, 33%),
+    dark: hsl(163, 100%, 23%),
+    light: hsl(163, 100%, 43%)
   ),
   danger: (
-    default: hsl(4, 92%, 46%),
-    dark: hsl(4, 92%, 36%),
-    light: hsl(4, 92%, 56%)
+    default: hsl(355, 54%, 44%),
+    dark: hsl(355, 54%, 34%),
+    light: hsl(355, 54%, 54%)
   ),
   background: (
-    default: hsl(240, 7%, 11%),
-    dark: hsl(240, 7%, 1%),
-    light: hsl(240, 7%, 21%),
-    inverse: hsl(240, 7%, 89%)
+    default: hsl(187, 43%, 97%),
+    dark: hsl(187, 43%, 95%),
+    light: hsl(187, 43%, 99%),
+    inverse: hsl(345, 6%, 13%)
   ),
   text: (
-    inverse: hsla(0, 0%, 20%, 1),
-    default: hsla(255, 100%, 100%, 1)
+    inverse: hsl(60, 100%, 100%),
+    default: hsl(0, 0%, 20%)
   ),
   shadow: (
     default: hsl(276, 100%, 1%)

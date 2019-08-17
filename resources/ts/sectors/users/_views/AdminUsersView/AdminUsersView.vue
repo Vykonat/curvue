@@ -22,7 +22,7 @@
           grid
             grid-row
               grid-item
-                lvql-button( variant="success", @click="handleUserAdd" ) {{ $t('resource.add', {resource:"User"})}}
+                lvql-button( variant="primary", @click="handleUserAdd" ) {{ $t('resource.add', {resource:"User"})}}
             grid-row
               grid-item( fill )
                 data-table(

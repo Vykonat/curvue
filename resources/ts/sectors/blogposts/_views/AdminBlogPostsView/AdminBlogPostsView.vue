@@ -22,7 +22,7 @@
           grid
             grid-row
               grid-item
-                lvql-button( variant="success", @click="handleBlogPostAdd" ) {{ $t('resource.add', {resource:"Blog Post"})}}
+                lvql-button( variant="primary", @click="handleBlogPostAdd" ) {{ $t('resource.add', {resource:"Blog Post"})}}
             grid-row
               grid-item( fill )
                 data-table(

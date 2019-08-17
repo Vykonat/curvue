@@ -62,6 +62,8 @@ export default class BlogPostView extends Vue {}
 }
 
 .right {
+  flex: 0 0 100%;
+
   @include media(tabletPortrait) {
     flex: 0 0 33.3333333333333%;
     padding-left: space(4);
