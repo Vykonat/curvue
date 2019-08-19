@@ -19,7 +19,7 @@
         lvql-button( 
           tag="router-link", 
           :target="{ name: 'auth.register' }", 
-          variant="accent",
+          variant="primary",
           :isGhost="true",
         ) {{ $t('auth.register') }}
       nav-drawer-group( :title="$t('navigation.navigation')" )
@@ -67,7 +67,11 @@ export default class Navigation extends Vue {
 .brand {
   font-size: fontSize(h4);
   font-weight: fontWeight('headings');
-  color: color('primary');
+  color: color('text', 'inverse');
   margin-top: space(4);
+
+  &:hover {
+    color: color('primary', 'dark');
+  }
 }
 </style>

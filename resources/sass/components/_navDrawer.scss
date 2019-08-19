@@ -1,7 +1,7 @@
 $nav-drawer-transition: transform 300ms ease-in-out;
 $nav-drawer-index: z('drawer');
-$nav-drawer-bg: color('background');
-$nav-drawer-color: color('text');
+$nav-drawer-bg: color('background', 'inverse');
+$nav-drawer-color: color('text', 'inverse');
 $nav-drawer-max-width: 80%;
 $nav-drawer-padding: space(16);
 $nav-drawer-margin: space(52) 0 0 0;

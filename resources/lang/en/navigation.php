@@ -5,6 +5,7 @@ return [
     'home' => 'Home',
     'users' => 'Users',
     'admin' => 'Admin',
+    'comments' => 'Comments',
     'blogPosts' => 'Blog Posts',
     'blogPost' => 'Viewing Post',
     'manage' => 'Manage',
