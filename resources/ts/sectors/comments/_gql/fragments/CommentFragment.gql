@@ -1,16 +1,15 @@
 #import "../../../users/_gql/fragments/UserRelationshipFragment.gql"
-#import "../../../comments/_gql/fragments/CommentRelationshipFragment.gql"
+#import "./CommentRelationshipFragment.gql"
 
-fragment BlogPost on BlogPost {
+fragment Comment on Comment {
   id
-  title
-  slug
-  description
+  commentable_type
+  commentable_id
   content
   user {
     ...UserRelationship
   }
-  comments {
+  replies {
     ...CommentRelationship
   }
   created_at

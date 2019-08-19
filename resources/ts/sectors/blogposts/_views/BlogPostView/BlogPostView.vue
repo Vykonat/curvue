@@ -25,6 +25,7 @@ lvql-layout( name="Default" )
               | {{ data.singleBlogPost.content }}
             section.right
               blog-post-sidebar( :url="data.singleBlogPost.slug" )
+        comments-wrapper( :comments="data.singleBlogPost.comments", type="App\\Models\\BlogPost", :type-id="data.singleBlogPost.id" )
 </template>
 
 <script lang='ts'>
@@ -36,14 +37,17 @@ import BlogPostSidebar from '../../_components/BlogPostSidebar/BlogPostSidebar.v
 @Component({
   components: {
     BlogPostHeader: BlogPostHeader,
-    BlogPostSidebar: BlogPostSidebar
+    BlogPostSidebar: BlogPostSidebar,
+    CommentsWrapper: () =>
+      import(
+        /* webpackChunkName: "Comments_Blog_Post_Wrapper" */ '../../../comments/_components/CommentsWrapper/CommentsWrapper.vue'
+      )
   },
 
   metaInfo: {
     ...setMetaInfo(
       Vue.router.currentRoute.params.slug,
       'Lavuql single post view page',
-      Vue.router.currentRoute.fullPath,
       ''
     )
   }
