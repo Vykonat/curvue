@@ -68,7 +68,7 @@ import { cacheRemoveComment } from '../../_gql/cache/CommentsCache';
     meta: [
       {
         name: 'robots',
-        content: 'noindex'
+        content: 'NOINDEX, NOFOLLOW'
       }
     ]
   }

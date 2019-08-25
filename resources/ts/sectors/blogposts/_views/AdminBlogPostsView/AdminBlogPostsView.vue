@@ -74,7 +74,7 @@ import { cacheRemoveBlogPost } from '../../_gql/cache/BlogPostsCache';
     meta: [
       {
         name: 'robots',
-        content: 'noindex'
+        content: 'NOINDEX, NOFOLLOW'
       }
     ]
   }

@@ -72,7 +72,7 @@ import { cacheRemoveUser } from '../../_gql/cache/UsersCache';
     meta: [
       {
         name: 'robots',
-        content: 'noindex'
+        content: 'NOINDEX, NOFOLLOW'
       }
     ]
   }
