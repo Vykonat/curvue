@@ -48,6 +48,7 @@ import BlogPostSidebar from '../../_components/BlogPostSidebar/BlogPostSidebar.v
     ...setMetaInfo(
       Vue.router.currentRoute.params.slug,
       'Lavuql single post view page',
+      'blog-posts/' + Vue.router.currentRoute.params.slug,
       ''
     )
   }

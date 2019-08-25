@@ -64,7 +64,12 @@ import { cacheRemoveComment } from '../../_gql/cache/CommentsCache';
       )
   },
   metaInfo: {
-    ...setMetaInfo('Manage Comments', 'Lavuql comments management page', ''),
+    ...setMetaInfo(
+      'Manage Comments',
+      'Lavuql comments management page',
+      'admin/comments',
+      ''
+    ),
     meta: [
       {
         name: 'robots',
