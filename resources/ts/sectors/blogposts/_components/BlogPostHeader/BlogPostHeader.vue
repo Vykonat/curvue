@@ -1,10 +1,7 @@
 <template lang='pug'>
   .blogPostHeaderContainer
-    grid
-      grid-row
-        grid-item( fill )
-          h2 {{ title }}
-          | {{ date }}
+    h2 {{ title }}
+    | {{ date }}
 </template>
 
 <script lang='ts'>
