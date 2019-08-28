@@ -67,7 +67,7 @@ import EditUser from '../../_gql/mutations/editUser.gql';
 
 @Component
 export default class UserForm extends Vue {
-  @Prop({ required: true }) user!: Partial<IUser>;
+  @Prop({ required: true }) user!: IUserInput | IUser;
   @Prop({ default: true }) isAdd!: boolean;
 
   private sendCreateUserInfo() {
@@ -86,11 +86,11 @@ export default class UserForm extends Vue {
           name: this.user.name,
           email: this.user.email,
           role_id: this.user.role_id,
-          role: this.user.role,
-          comments: this.user.comments,
-          created_at: this.user.created_at,
-          updated_at: this.user.updated_at,
-          blog_posts: this.user.blog_posts
+          role: 'Patron',
+          blog_posts: [],
+          comments: [],
+          created_at: Date.now(),
+          updated_at: Date.now()
         }
       }
     });
@@ -113,11 +113,11 @@ export default class UserForm extends Vue {
           name: this.user.name,
           email: this.user.email,
           role_id: this.user.role_id,
-          role: this.user.role,
-          comments: this.user.comments,
-          created_at: this.user.created_at,
-          updated_at: this.user.updated_at,
-          blog_posts: this.user.blog_posts
+          role: '',
+          blog_posts: [],
+          comments: [],
+          created_at: Date.now(),
+          updated_at: Date.now()
         }
       }
     });

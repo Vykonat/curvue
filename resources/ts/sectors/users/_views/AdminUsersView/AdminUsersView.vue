@@ -17,7 +17,7 @@
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          lvql-modal( :show="isUserModalShown", @close="closeUserModal(query)" )
+          lvql-modal( :show="isUserModalShown", @close="closeUserModal" )
             user-form( :is-add="isUserFormAdd", :user="userForm" )
           grid
             grid-row
@@ -42,7 +42,7 @@
                       v-if="row.role_id !== 1"
                       variant="danger",
                       :isGhost="true",
-                      @click="handleUserDelete(row, query)"
+                      @click="handleUserDelete(row)"
                     )
                       i.fas.fa-trash
 
@@ -80,8 +80,13 @@ import { cacheRemoveUser } from '../../_gql/cache/UsersCache';
 export default class AdminUsersView extends Vue {
   isUserModalShown: boolean = false;
   isUserFormAdd: boolean = true;
-  userForm: Partial<IUser> = {
-    role_id: 2
+  userForm: IUserInput = {
+    id: 0,
+    name: '',
+    email: '',
+    role_id: 2,
+    password: '',
+    password_confirmation: ''
   };
 
   @Provide() usersDataTableHeader = {
@@ -131,7 +136,12 @@ export default class AdminUsersView extends Vue {
   closeUserModal(): void {
     this.isUserModalShown = false;
     this.userForm = {
-      role_id: 2
+      id: 0,
+      name: '',
+      email: '',
+      role_id: 2,
+      password: '',
+      password_confirmation: ''
     };
   }
 
@@ -140,27 +150,14 @@ export default class AdminUsersView extends Vue {
     this.isUserModalShown = true;
   }
 
-  handleUserEdit(user: IUser): void {
+  handleUserEdit(user: IUserInput): void {
     this.isUserFormAdd = false;
     this.isUserModalShown = true;
 
-    const form = { ...user };
-    this.userForm.role_id = user.role_id;
-    delete form.__typename;
-    this.userForm = form;
+    this.userForm = { ...user };
   }
 
-  async handleUserDelete({
-    id,
-    name,
-    email,
-    role,
-    role_id,
-    blog_posts,
-    comments,
-    created_at,
-    updated_at
-  }): Promise<void> {
+  async handleUserDelete(user: IUser): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'User' }),
@@ -172,25 +169,25 @@ export default class AdminUsersView extends Vue {
     const result = await this.$apollo.mutate({
       mutation: DeleteUser,
       variables: {
-        id
+        id: user.id
       },
       update: (store, { data: { deleteUser } }) => {
         cacheRemoveUser(store, deleteUser);
       },
       optimisticResponse: {
         __typename: 'Mutation',
-        id,
+        id: user.id,
         deleteUser: {
           __typename: 'User',
-          id,
-          name,
-          email,
-          role,
-          role_id,
-          blog_posts,
-          comments,
-          created_at,
-          updated_at
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role_id: user.role_id,
+          role: user.role,
+          blog_posts: user.blog_posts,
+          comments: user.comments,
+          created_at: user.created_at,
+          updated_at: user.updated_at
         }
       }
     });

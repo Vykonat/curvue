@@ -1,6 +1,6 @@
 import UsersQuery from '../queries/usersQuery.gql';
 
-export function cacheAddUserToList(list: any[], item: any) {
+export function cacheAddUserToList(list: any[], item: IUserInput) {
   const index: number = list.findIndex(i => i.id === item.id);
 
   if (index === -1) {
