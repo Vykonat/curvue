@@ -1,4 +1,5 @@
 fragment User on User {
+  __typename
   id
   role_id
   name

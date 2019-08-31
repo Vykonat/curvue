@@ -2,12 +2,14 @@ $brand-colors: (
   primary: (
     default: hsl(167, 42%, 51%),
     dark: hsl(167, 42%, 41%),
-    light: hsl(167, 42%, 61%)
+    light: hsl(167, 42%, 61%),
+    translucent: hsla(167, 42%, 51%, 0.5)
   ),
   accent: (
     default: hsl(246, 33%, 27%),
     dark: hsl(246, 33%, 17%),
-    light: hsl(246, 33%, 37%)
+    light: hsl(246, 33%, 37%),
+    translucent: hsla(246, 33%, 27%, 0.5)
   ),
   info: (
     default: hsl(185, 60%, 56%),
@@ -15,9 +17,9 @@ $brand-colors: (
     light: hsl(185, 60%, 66%)
   ),
   warn: (
-    default: hsla(47, 81%, 56%, 1),
-    dark: hsla(47, 81%, 46%, 1),
-    light: hsla(47, 81%, 66%, 1)
+    default: hsl(18, 100%, 43%),
+    dark: hsl(18, 100%, 33%),
+    light: hsl(18, 100%, 53%)
   ),
   success: (
     default: hsl(167, 42%, 51%),

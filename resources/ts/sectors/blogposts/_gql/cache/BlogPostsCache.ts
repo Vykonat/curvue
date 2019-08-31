@@ -1,33 +1,21 @@
 import BlogPostsQuery from '../queries/BlogPostsQuery.gql';
+import {
+  cacheAddItemToList,
+  cacheRemoveItemFromList
+} from '../../../../common/utils/cache.util';
 
-export function cacheAddBlogPostToList(list: any[], item: any) {
-  const index: number = list.findIndex(i => i.id === item.id);
-
-  if (index === -1) {
-    list.push(item);
-  }
-}
-
-export function cacheRemoveBlogPostFromList(list: any[], item: any) {
-  const index: number = list.findIndex(i => i.id === item.id);
-
-  if (index !== -1) {
-    list.splice(index, 1);
-  }
-}
-
-export function cacheAddBlogPost(store: any, item: any) {
+export function cacheAddBlogPost(store: any, item: IBlogPostInput) {
   const query = { query: BlogPostsQuery };
 
   const data = store.readQuery(query);
-  cacheAddBlogPostToList(data.allBlogPosts, item);
+  cacheAddItemToList(data.allBlogPosts, item);
   store.writeQuery({ ...query, data });
 }
 
-export function cacheRemoveBlogPost(store: any, item: any) {
+export function cacheRemoveBlogPost(store: any, item: IBlogPost) {
   const query = { query: BlogPostsQuery };
 
   const data = store.readQuery(query);
-  cacheRemoveBlogPostFromList(data.allBlogPosts, item);
+  cacheRemoveItemFromList(data.allBlogPosts, item);
   store.writeQuery({ ...query, data });
 }

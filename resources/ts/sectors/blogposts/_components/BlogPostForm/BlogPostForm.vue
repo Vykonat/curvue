@@ -45,7 +45,7 @@ import EditBlogPost from '../../_gql/mutations/editBlogPost.gql';
 
 @Component
 export default class BlogPostForm extends Vue {
-  @Prop({ required: true }) blogPost!: Partial<IBlogPost>;
+  @Prop({ required: true }) blogPost!: IBlogPostInput;
   @Prop({ default: true }) isAdd!: boolean;
 
   private sendCreateBlogPostInfo() {
@@ -62,12 +62,13 @@ export default class BlogPostForm extends Vue {
           __typename: 'BlogPost',
           id: this.blogPost.id,
           title: this.blogPost.title,
-          slug: this.blogPost.slug,
+          slug: this.blogPost.title,
           description: this.blogPost.description,
           content: this.blogPost.content,
-          user: this.blogPost.user,
-          created_at: this.blogPost.created_at,
-          updated_at: this.blogPost.updated_at
+          user: { __typename: 'User', ...this.$auth.user() },
+          comments: [],
+          created_at: Date.now(),
+          updated_at: Date.now()
         }
       }
     });
@@ -89,12 +90,13 @@ export default class BlogPostForm extends Vue {
           __typename: 'BlogPost',
           id: this.blogPost.id,
           title: this.blogPost.title,
-          slug: this.blogPost.slug,
+          slug: this.blogPost.title,
           description: this.blogPost.description,
           content: this.blogPost.content,
-          user: this.blogPost.user,
-          created_at: this.blogPost.created_at,
-          updated_at: this.blogPost.updated_at
+          user: { __typename: 'User', ...this.$auth.user() },
+          comments: [],
+          created_at: Date.now(),
+          updated_at: Date.now()
         }
       }
     });

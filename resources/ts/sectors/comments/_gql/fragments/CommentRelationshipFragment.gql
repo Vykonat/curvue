@@ -1,4 +1,5 @@
 fragment CommentRelationship on Comment {
+  __typename
   id
   content
   created_at

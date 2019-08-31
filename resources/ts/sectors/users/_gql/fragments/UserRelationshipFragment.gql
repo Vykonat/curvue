@@ -1,4 +1,5 @@
 fragment UserRelationship on User {
+  __typename
   id
   name
   email

@@ -17,3 +17,5 @@ declare type IUserInput = Pick<
   IUser,
   'id' | 'name' | 'email' | 'role_id' | 'password' | 'password_confirmation'
 >;
+
+declare type IUserRelationship = Pick<IUser, 'id' | 'name' | 'email'>;

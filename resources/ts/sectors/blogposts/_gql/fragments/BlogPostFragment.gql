@@ -2,6 +2,7 @@
 #import "../../../comments/_gql/fragments/CommentRelationshipFragment.gql"
 
 fragment BlogPost on BlogPost {
+  __typename
   id
   title
   slug
