@@ -3,20 +3,19 @@ import {
   cacheRemoveItemFromList
 } from '../../../../common/utils/cache.util';
 import CommentsQuery from '../queries/CommentsQuery.gql';
-// import BlogPostQuery from '../../../blogposts/_gql/queries/BlogPostQuery.gql';
 
-export function cacheAddComment(store: any, item: any) {
-  const query = { query: CommentsQuery };
+export function cacheAddComment(store: any, { type, id }, item: IComment) {
+  const query = { query: CommentsQuery, variables: { type, id } };
 
   const data = store.readQuery(query);
-  cacheAddItemToList(data.allComments, item);
+  cacheAddItemToList(data.comments, item);
   store.writeQuery({ ...query, data });
 }
 
-export function cacheRemoveComment(store: any, item: any) {
-  const query = { query: CommentsQuery };
+export function cacheRemoveComment(store: any, { type, id }, item: IComment) {
+  const query = { query: CommentsQuery, variables: { type, id } };
 
   const data = store.readQuery(query);
-  cacheRemoveItemFromList(data.allComments, item);
+  cacheRemoveItemFromList(data.comments, item);
   store.writeQuery({ ...query, data });
 }

@@ -1,7 +1,7 @@
 #import "../fragments/BlogPostFragment.gql"
 
-query allBlogPosts {
-  allBlogPosts {
+query BlogPosts {
+  blogPosts {
     ...BlogPost
   }
 }

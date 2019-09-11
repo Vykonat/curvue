@@ -27,7 +27,7 @@
               grid-item( fill )
                 data-table(
                   :header="commentsDataTableHeader", 
-                  :data="data.allComments",
+                  :data="data.comments",
                   :placeholder="searchInputPlaceHolder",
                 )
                   template( v-slot:author="{ row }" )
@@ -173,7 +173,11 @@ export default class AdminCommentsView extends Vue {
         id
       },
       update: (store, { data: { deleteComment } }) => {
-        cacheRemoveComment(store, deleteComment);
+        cacheRemoveComment(
+          store,
+          { type: commentable_type, id: commentable_id },
+          deleteComment
+        );
       },
       optimisticResponse: {
         __typename: 'Mutation',

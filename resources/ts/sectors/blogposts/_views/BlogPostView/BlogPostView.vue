@@ -18,14 +18,14 @@ lvql-layout( name="Default" )
               pre {{ error }}
 
       .result.apollo(v-else-if='data')
-        blog-post-header( :blog-post="data.singleBlogPost" )
+        blog-post-header( :blog-post="data.blogPost" )
         grid.blogPostContentContainer
           grid-row
             section.left
-              | {{ data.singleBlogPost.content }}
+              | {{ data.blogPost.content }}
             section.right
-              blog-post-sidebar( :url="data.singleBlogPost.slug" )
-        comments-wrapper( :comments="data.singleBlogPost.comments", type="App\\Models\\BlogPost", :type-id="data.singleBlogPost.id" )
+              blog-post-sidebar( :url="data.blogPost.slug" )
+        comments-wrapper( type="App\\Models\\BlogPost", :type-id="data.blogPost.id" )
 </template>
 
 <script lang='ts'>

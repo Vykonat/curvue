@@ -27,7 +27,7 @@
               grid-item( fill )
                 data-table(
                   :header="blogPostsDataTableHeader", 
-                  :data="data.allBlogPosts",
+                  :data="data.blogPosts",
                   :placeholder="searchInputPlaceHolder",
                 )
                   template( v-slot:author="{ row }")

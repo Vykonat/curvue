@@ -1,3 +1,0 @@
-extend type Query {
-  singleComment(id: ID! @eq): Comment! @find(model: "App\\Models\\Comment")
-}

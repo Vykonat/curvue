@@ -1,7 +1,7 @@
 #import "../fragments/CommentFragment.gql"
 
 query SingleComment($id: ID!) {
-  singleComment(id: $id) 
+  comment(id: $id) 
     ...Comment
   }
 }

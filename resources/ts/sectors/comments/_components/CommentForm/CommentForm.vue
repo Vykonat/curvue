@@ -24,16 +24,22 @@ import EditComment from '../../_gql/mutations/EditComment.gql';
 
 @Component
 export default class CommentForm extends Vue {
-  @Prop({ required: true }) comment!: Partial<IComment>;
+  @Prop({ required: true }) comment!: ICommentInput;
   @Prop({ default: true }) isAdd!: boolean;
 
-  private sendCreateCommentInfo() {
-    const vm = this;
+  private sendCreateCommentInfo(): void {
     apolloClient.mutate({
       mutation: CreateComment,
       variables: { data: this.comment },
       update: (store, { data: { createComment } }) => {
-        cacheAddComment(store, createComment);
+        cacheAddComment(
+          store,
+          {
+            type: this.comment.commentable_type,
+            id: this.comment.commentable_id
+          },
+          createComment
+        );
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -43,22 +49,28 @@ export default class CommentForm extends Vue {
           commentable_type: this.comment.commentable_type,
           commentable_id: this.comment.commentable_id,
           content: this.comment.content,
-          user: this.comment.user,
-          created_at: this.comment.created_at,
-          updated_at: this.comment.updated_at
+          user: { __typename: 'User', ...this.$auth.user() },
+          created_at: Date.now(),
+          updated_at: Date.now()
         }
       }
     });
     dialog(this.$t('resource.created', { resource: 'Comment' }), false);
   }
 
-  private sendEditCommentInfo() {
-    const vm = this;
+  private sendEditCommentInfo(): void {
     apolloClient.mutate({
       mutation: EditComment,
       variables: { id: this.comment.id, data: this.comment },
       update: (store, { data: { editComment } }) => {
-        cacheAddComment(store, editComment);
+        cacheAddComment(
+          store,
+          {
+            type: this.comment.commentable_type,
+            id: this.comment.commentable_id
+          },
+          editComment
+        );
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -68,7 +80,10 @@ export default class CommentForm extends Vue {
           id: this.comment.id,
           commentable_type: this.comment.commentable_type,
           commentable_id: this.comment.commentable_id,
-          content: this.comment.content
+          content: this.comment.content,
+          user: { __typename: 'User', ...this.$auth.user() },
+          created_at: Date.now(),
+          updated_at: Date.now()
         }
       }
     });

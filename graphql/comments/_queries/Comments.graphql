@@ -1,0 +1,3 @@
+extend type Query {
+  comments(type: String!, id: ID! @eq): [Comment!]!
+}

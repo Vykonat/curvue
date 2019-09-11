@@ -18,7 +18,7 @@ lvql-layout( name="Default" )
 
         .result.apollo(v-else-if='data')
           grid-row
-            grid-item.blogPostWrapper( v-for="blogPost, i in data.allBlogPosts", :key="i" )
+            grid-item.blogPostWrapper( v-for="blogPost, i in data.blogPosts", :key="i" )
               blog-post-list-element( :blog-post="blogPost" )
 </template>
 

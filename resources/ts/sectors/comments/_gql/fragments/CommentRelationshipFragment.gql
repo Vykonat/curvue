@@ -1,10 +1,14 @@
+#import "../../../users/_gql/fragments/UserRelationshipFragment.gql"
+
 fragment CommentRelationship on Comment {
   __typename
   id
   content
+  commentable_id
+  commentable_type
   created_at
   updated_at
   user {
-    name
+    ...UserRelationship
   }
 }

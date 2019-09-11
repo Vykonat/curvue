@@ -1,13 +1,30 @@
 <template lang="pug">
-div
-  lvql-modal( :show="isCommentModalShown", @close="closeCommentModal" )
-    comment-form( :is-add="isCommentFormAdd", :comment="commentForm" )
-    
-  lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
-  
-  grid-row( v-for="comment in comments", :key="comment.id" )
-    grid-item( fill )
-      comment-list-element( :comment="comment", @editComment="handleCommentEdit(comment)", @deleteComment="handleCommentDelete(comment)" )
+apollo-query(
+      :query="require('../../_gql/queries/CommentsQuery.gql')",
+      :variables="{ type: type, id: typeId }"
+    )
+      template( slot-scope="{ result: { data, loading, error}, query }" )
+        .loading.apollo(v-if='loading')
+          grid
+            grid-row
+              grid-item( fill )
+                | {{ $t('core.loading') }}
+                
+        .error.apollo(v-else-if='error') 
+          grid
+            grid-row
+              grid-item( fill )
+                pre {{ error }}
+
+        .result.apollo(v-else-if='data')
+          lvql-modal( :show="isCommentModalShown", @close="closeCommentModal")
+            comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
+            
+          lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
+          
+          grid-row( v-for="comment in data.comments", :key="comment.id" )
+            grid-item( fill )
+              comment-list-element( :comment="comment", @editComment="handleCommentEdit(comment)", @deleteComment="handleCommentDelete(comment)" )
 </template>
 
 <script lang="ts">
@@ -28,24 +45,29 @@ import CommentListElement from '../../_components/CommentListElement/CommentList
   }
 })
 export default class CommentsWrapper extends Vue {
-  @Prop({ required: true }) comments!: IComment[];
   @Prop({ required: true }) type!: string;
   @Prop({ required: true }) typeId!: number;
 
   isCommentModalShown: boolean = false;
   isCommentFormAdd: boolean = true;
-  commentForm: Partial<IComment> = {};
+  commentForm: ICommentInput = {
+    id: 0,
+    commentable_id: this.typeId,
+    commentable_type: this.type,
+    content: ''
+  };
 
   closeCommentModal(): void {
     this.isCommentModalShown = false;
-    this.commentForm = {};
+    this.commentForm = {
+      id: 0,
+      commentable_id: this.typeId,
+      commentable_type: this.type,
+      content: ''
+    };
   }
 
   handleCommentAdd(): void {
-    this.commentForm = {
-      commentable_id: this.typeId,
-      commentable_type: this.type
-    };
     this.isCommentFormAdd = true;
     this.isCommentModalShown = true;
   }
@@ -54,15 +76,13 @@ export default class CommentsWrapper extends Vue {
     this.isCommentFormAdd = false;
     this.isCommentModalShown = true;
 
-    const form = { ...comment };
-    this.commentForm.commentable_id = comment.commentable_id;
-    this.commentForm.commentable_type = comment.commentable_type;
-    delete form.__typename;
-    delete form.user;
-    delete form.replies;
-    delete form.created_at;
-    delete form.updated_at;
-    this.commentForm = form;
+    delete comment.__typename;
+    delete comment.user;
+    delete comment.replies;
+    delete comment.created_at;
+    delete comment.updated_at;
+
+    this.commentForm = { ...comment };
   }
 
   async handleCommentDelete({
@@ -89,12 +109,12 @@ export default class CommentsWrapper extends Vue {
         id
       },
       update: (store, { data: { deleteComment } }) => {
-        cacheRemoveComment(store, deleteComment);
+        cacheRemoveComment(store, {type: this.type, id: this.typeId}, deleteComment);
       },
       optimisticResponse: {
         __typename: 'Mutation',
         id,
-        deleteUser: {
+        deleteComment: {
           __typename: 'Comment',
           id,
           commentable_id,
