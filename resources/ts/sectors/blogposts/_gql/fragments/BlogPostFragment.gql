@@ -1,13 +1,18 @@
+#import "../../../users/_gql/fragments/UserRelationshipFragment.gql"
+#import "../../../comments/_gql/fragments/CommentRelationshipFragment.gql"
+
 fragment BlogPost on BlogPost {
+  __typename
   id
   title
   slug
   description
   content
   user {
-    id
-    name
-    email
+    ...UserRelationship
+  }
+  comments {
+    ...CommentRelationship
   }
   created_at
   updated_at

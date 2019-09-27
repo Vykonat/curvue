@@ -17,17 +17,17 @@
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          lvql-modal( :show="isBlogPostModalShown", @close="closeBlogPostModal(query)" )
+          lvql-modal( :show="isBlogPostModalShown", @close="closeBlogPostModal" )
             blog-post-form( :is-add="isBlogPostFormAdd", :blogPost="blogPostForm" )
           grid
             grid-row
               grid-item
-                lvql-button( variant="success", @click="handleBlogPostAdd" ) {{ $t('resource.add', {resource:"Blog Post"})}}
+                lvql-button( variant="primary", @click="handleBlogPostAdd" ) {{ $t('resource.add', {resource:"Blog Post"})}}
             grid-row
               grid-item( fill )
                 data-table(
                   :header="blogPostsDataTableHeader", 
-                  :data="data.allBlogPosts",
+                  :data="data.blogPosts",
                   :placeholder="searchInputPlaceHolder",
                 )
                   template( v-slot:author="{ row }")
@@ -35,6 +35,14 @@
                   template( v-slot:actions="{ row }" )
                     lvql-button(
                       variant="accent",
+                      :isGhost="true",
+                      tag="router-link",
+                      :target="{ name: 'blog.show', params: { slug: row.slug } }"
+                    )
+                      i.fas.fa-eye
+
+                    lvql-button(
+                      variant="warn",
                       :isGhost="true",
                       @click="handleBlogPostEdit(row)",
                     )
@@ -44,7 +52,7 @@
                       v-if="row.role_id !== 1"
                       variant="danger",
                       :isGhost="true",
-                      @click="handleBlogPostDelete(row, query)"
+                      @click="handleBlogPostDelete(row)"
                     )
                       i.fas.fa-trash
 
@@ -74,15 +82,20 @@ import { cacheRemoveBlogPost } from '../../_gql/cache/BlogPostsCache';
     meta: [
       {
         name: 'robots',
-        content: 'noindex'
+        content: 'NOINDEX, NOFOLLOW'
       }
     ]
   }
 })
 export default class AdminBlogPostsView extends Vue {
-  isBlogPostModalShown = false;
-  isBlogPostFormAdd = true;
-  blogPostForm = {};
+  isBlogPostModalShown: boolean = false;
+  isBlogPostFormAdd: boolean = true;
+  blogPostForm: IBlogPostInput = {
+    id: 0,
+    title: '',
+    description: '',
+    content: ''
+  };
 
   @Provide() blogPostsDataTableHeader = {
     id: {
@@ -98,6 +111,10 @@ export default class AdminBlogPostsView extends Vue {
     },
 
     description: {
+      visible: false
+    },
+
+    content: {
       visible: false
     },
 
@@ -123,7 +140,12 @@ export default class AdminBlogPostsView extends Vue {
 
   closeBlogPostModal(): void {
     this.isBlogPostModalShown = false;
-    this.blogPostForm = {};
+    this.blogPostForm = {
+      id: 0,
+      title: '',
+      description: '',
+      content: ''
+    };
   }
 
   handleBlogPostAdd() {
@@ -131,20 +153,21 @@ export default class AdminBlogPostsView extends Vue {
     this.isBlogPostModalShown = true;
   }
 
-  handleBlogPostEdit(blogPost): void {
+  handleBlogPostEdit(blogPost: IBlogPost): void {
     this.isBlogPostFormAdd = false;
     this.isBlogPostModalShown = true;
 
-    const form = { ...blogPost };
-    delete form.__typename;
-    delete form.slug;
-    delete form.user;
-    delete form.created_at;
-    delete form.updated_at;
-    this.blogPostForm = form;
+    delete blogPost.__typename;
+    delete blogPost.slug;
+    delete blogPost.comments;
+    delete blogPost.user;
+    delete blogPost.created_at;
+    delete blogPost.updated_at;
+
+    this.blogPostForm = blogPost;
   }
 
-  async handleBlogPostDelete({ id }): Promise<void> {
+  async handleBlogPostDelete(blogPost: IBlogPost): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'Blog Post' }),
@@ -156,16 +179,24 @@ export default class AdminBlogPostsView extends Vue {
     const result = await this.$apollo.mutate({
       mutation: DeleteBlogPost,
       variables: {
-        id
+        id: blogPost.id
       },
-      update: (store, { data: { userToRemove } }) => {
-        cacheRemoveBlogPost(store, userToRemove);
+      update: (store, { data: { deleteBlogPost } }) => {
+        cacheRemoveBlogPost(store, deleteBlogPost);
       },
       optimisticResponse: {
         __typename: 'Mutation',
-        DeleteBlogPost: {
-          __typename: 'blogPost',
-          id
+        deleteBlogPost: {
+          __typename: 'BlogPost',
+          id: blogPost.id,
+          title: blogPost.title,
+          slug: blogPost.slug,
+          description: blogPost.description,
+          content: blogPost.content,
+          comments: blogPost.comments,
+          user: blogPost.user,
+          created_at: blogPost.created_at,
+          updated_at: blogPost.updated_at
         }
       }
     });

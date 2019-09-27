@@ -27,9 +27,9 @@ import BlogPostHeader from '../BlogPostHeader/BlogPostHeader.vue';
   }
 })
 export default class BlogPostListElement extends Vue {
-  @Prop({ required: true }) blogPost;
+  @Prop({ required: true }) blogPost!: IBlogPost;
 
-  get blogPostSubtitle() {
+  get blogPostSubtitle(): string {
     return `Written on ${this.blogPost.created_at} by ${this.blogPost.user.name}`;
   }
 
@@ -37,7 +37,7 @@ export default class BlogPostListElement extends Vue {
     return this.blogPost.description;
   }
 
-  get date(): string {
+  get date(): number {
     return this.blogPost.created_at;
   }
 }

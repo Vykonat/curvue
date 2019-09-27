@@ -5,6 +5,7 @@ import { AppRoutes } from '../../sectors/app/_views/routes';
 import { AuthRoutes } from '../../sectors/auth/_views/routes';
 import { UserRoutes } from '../../sectors/users/_views/routes';
 import { BlogPostRoutes } from '../../sectors/blogposts/_views/routes';
+import { CommentRoutes } from '../../sectors/comments/_views/routes';
 
 Vue.use(Router);
 
@@ -14,6 +15,7 @@ export const router = new Router({
     ...UserRoutes,
     ...AuthRoutes,
     ...BlogPostRoutes,
+    ...CommentRoutes,
     ...AppRoutes //! Must be kept at bottom for 404 UX
   ],
 

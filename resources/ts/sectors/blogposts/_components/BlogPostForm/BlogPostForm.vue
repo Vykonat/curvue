@@ -44,42 +44,71 @@ import CreateBlogPost from '../../_gql/mutations/createBlogPost.gql';
 import EditBlogPost from '../../_gql/mutations/editBlogPost.gql';
 
 @Component
-export default class UserForm extends Vue {
-  @Prop({ required: true }) blogPost;
+export default class BlogPostForm extends Vue {
+  @Prop({ required: true }) blogPost!: IBlogPostInput;
   @Prop({ default: true }) isAdd!: boolean;
 
-  get activeMutation() {
-    if (this.isAdd) {
-      return CreateBlogPost;
-    }
-
-    return EditBlogPost;
-  }
-
-  sendData() {
+  private sendCreateBlogPostInfo() {
     const vm = this;
     apolloClient.mutate({
-      mutation: this.activeMutation,
-      variables: { id: this.blogPost.id, data: this.blogPost },
-      update: (store, { data: { blogPostToAdd } }) => {
-        cacheAddBlogPost(store, blogPostToAdd);
+      mutation: CreateBlogPost,
+      variables: { data: this.blogPost },
+      update: (store, { data: { createBlogPost } }) => {
+        cacheAddBlogPost(store, createBlogPost);
       },
       optimisticResponse: {
         __typename: 'Mutation',
-        CreateBlogPost: {
-          id: '',
+        createBlogPost: {
+          __typename: 'BlogPost',
+          id: this.blogPost.id,
           title: this.blogPost.title,
+          slug: this.blogPost.title,
           description: this.blogPost.description,
-          content: this.blogPost.content
+          content: this.blogPost.content,
+          user: { __typename: 'User', ...this.$auth.user() },
+          comments: [],
+          created_at: Date.now(),
+          updated_at: Date.now()
         }
       }
     });
+    dialog(this.$t('resource.created', { resource: 'Blog Post' }), false);
+  }
 
+  private sendEditBlogPostInfo() {
+    const vm = this;
+    apolloClient.mutate({
+      mutation: EditBlogPost,
+      variables: { id: this.blogPost.id, data: this.blogPost },
+      update: (store, { data: { editBlogPost } }) => {
+        cacheAddBlogPost(store, editBlogPost);
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        id: this.blogPost.id,
+        editBlogPost: {
+          __typename: 'BlogPost',
+          id: this.blogPost.id,
+          title: this.blogPost.title,
+          slug: this.blogPost.title,
+          description: this.blogPost.description,
+          content: this.blogPost.content,
+          user: { __typename: 'User', ...this.$auth.user() },
+          comments: [],
+          created_at: Date.now(),
+          updated_at: Date.now()
+        }
+      }
+    });
+    dialog(this.$t('resource.updated', { resource: 'Blog Post' }), false);
+  }
+
+  sendData() {
     if (this.isAdd) {
-      dialog(this.$t('resource.created', { resource: 'Blog Post' }), false);
-    } else {
-      dialog(this.$t('resource.updated', { resource: 'Blog Post' }), false);
+      return this.sendCreateBlogPostInfo();
     }
+
+    return this.sendEditBlogPostInfo();
   }
 
   get blogPostFormTitle() {

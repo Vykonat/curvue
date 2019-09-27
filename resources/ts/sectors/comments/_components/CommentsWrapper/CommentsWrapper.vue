@@ -1,0 +1,134 @@
+<template lang="pug">
+apollo-query(
+      :query="require('../../_gql/queries/CommentsQuery.gql')",
+      :variables="{ type: type, id: typeId }"
+    )
+      template( slot-scope="{ result: { data, loading, error}, query }" )
+        .loading.apollo(v-if='loading')
+          grid
+            grid-row
+              grid-item( fill )
+                | {{ $t('core.loading') }}
+                
+        .error.apollo(v-else-if='error') 
+          grid
+            grid-row
+              grid-item( fill )
+                pre {{ error }}
+
+        .result.apollo(v-else-if='data')
+          lvql-modal( :show="isCommentModalShown", @close="closeCommentModal")
+            comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
+            
+          lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
+          
+          grid-row( v-for="comment in data.comments", :key="comment.id" )
+            grid-item( fill )
+              comment-list-element( :comment="comment", @editComment="handleCommentEdit(comment)", @deleteComment="handleCommentDelete(comment)" )
+</template>
+
+<script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import DeleteComment from '../../_gql/mutations/DeleteComment.gql';
+import dialog from '../../../../common/utils/dialog.util';
+import { cacheRemoveComment } from '../../_gql/cache/CommentsCache';
+import CommentListElement from '../../_components/CommentListElement/CommentListElement.vue';
+
+@Component({
+  components: {
+    CommentForm: () =>
+      import(
+        /* webpackChunkName: "Comment_Form" */ '../../_components/CommentForm/CommentForm.vue'
+      ),
+
+    CommentListElement: CommentListElement
+  }
+})
+export default class CommentsWrapper extends Vue {
+  @Prop({ required: true }) type!: string;
+  @Prop({ required: true }) typeId!: number;
+
+  isCommentModalShown: boolean = false;
+  isCommentFormAdd: boolean = true;
+  commentForm: ICommentInput = {
+    id: 0,
+    commentable_id: this.typeId,
+    commentable_type: this.type,
+    content: ''
+  };
+
+  closeCommentModal(): void {
+    this.isCommentModalShown = false;
+    this.commentForm = {
+      id: 0,
+      commentable_id: this.typeId,
+      commentable_type: this.type,
+      content: ''
+    };
+  }
+
+  handleCommentAdd(): void {
+    this.isCommentFormAdd = true;
+    this.isCommentModalShown = true;
+  }
+
+  handleCommentEdit(comment: IComment): void {
+    this.isCommentFormAdd = false;
+    this.isCommentModalShown = true;
+
+    delete comment.__typename;
+    delete comment.user;
+    delete comment.replies;
+    delete comment.created_at;
+    delete comment.updated_at;
+
+    this.commentForm = { ...comment };
+  }
+
+  async handleCommentDelete({
+    id,
+    commentable_id,
+    commentable_type,
+    content,
+    user,
+    replies,
+    created_at,
+    updated_at
+  }): Promise<void> {
+    if (
+      !(await dialog(
+        this.$t('resource.delete_confirmation', { resource: 'Comment' }),
+        true
+      ))
+    )
+      return;
+
+    const result = await this.$apollo.mutate({
+      mutation: DeleteComment,
+      variables: {
+        id
+      },
+      update: (store, { data: { deleteComment } }) => {
+        cacheRemoveComment(store, {type: this.type, id: this.typeId}, deleteComment);
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        id,
+        deleteComment: {
+          __typename: 'Comment',
+          id,
+          commentable_id,
+          commentable_type,
+          content,
+          user,
+          replies,
+          created_at,
+          updated_at
+        }
+      }
+    });
+
+    dialog(this.$t('resource.deleted', { resource: 'Comment' }), false);
+  }
+}
+</script>

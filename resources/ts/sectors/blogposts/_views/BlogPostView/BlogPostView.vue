@@ -18,13 +18,14 @@ lvql-layout( name="Default" )
               pre {{ error }}
 
       .result.apollo(v-else-if='data')
-        blog-post-header( :blog-post="data.singleBlogPost" )
+        blog-post-header( :blog-post="data.blogPost" )
         grid.blogPostContentContainer
           grid-row
             section.left
-              | {{ data.singleBlogPost.content }}
+              | {{ data.blogPost.content }}
             section.right
-              blog-post-sidebar( :url="data.singleBlogPost.slug" )
+              blog-post-sidebar( :url="data.blogPost.slug" )
+        comments-wrapper( type="App\\Models\\BlogPost", :type-id="data.blogPost.id" )
 </template>
 
 <script lang='ts'>
@@ -36,14 +37,18 @@ import BlogPostSidebar from '../../_components/BlogPostSidebar/BlogPostSidebar.v
 @Component({
   components: {
     BlogPostHeader: BlogPostHeader,
-    BlogPostSidebar: BlogPostSidebar
+    BlogPostSidebar: BlogPostSidebar,
+    CommentsWrapper: () =>
+      import(
+        /* webpackChunkName: "Comments_Blog_Post_Wrapper" */ '../../../comments/_components/CommentsWrapper/CommentsWrapper.vue'
+      )
   },
 
   metaInfo: {
     ...setMetaInfo(
       Vue.router.currentRoute.params.slug,
       'Lavuql single post view page',
-      Vue.router.currentRoute.fullPath,
+      'blog-posts/' + Vue.router.currentRoute.params.slug,
       ''
     )
   }
@@ -62,6 +67,8 @@ export default class BlogPostView extends Vue {}
 }
 
 .right {
+  flex: 0 0 100%;
+
   @include media(tabletPortrait) {
     flex: 0 0 33.3333333333333%;
     padding-left: space(4);

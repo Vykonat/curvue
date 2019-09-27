@@ -1,8 +1,7 @@
+#import "../fragments/UserFragment.gql"
+
 mutation EditUser($id: ID!, $data: EditUserInput!) {
   editUser(id: $id, data: $data) {
-    id
-    name
-    email
-    role_id
+    ...User
   }
 }

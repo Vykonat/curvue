@@ -1,10 +1,7 @@
 <template lang='pug'>
   .blogPostHeaderContainer
-    grid
-      grid-row
-        grid-item( fill )
-          h2 {{ title }}
-          | {{ date }}
+    h2 {{ title }}
+    | {{ date }}
 </template>
 
 <script lang='ts'>
@@ -12,7 +9,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
 export default class PostHeader extends Vue {
-  @Prop() blogPost;
+  @Prop({ required: true }) blogPost!: IBlogPost;
 
   get title() {
     return this.blogPost.title;
@@ -38,13 +35,14 @@ export default class PostHeader extends Vue {
   display: flex;
   flex-direction: column;
   background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.5) 100%
+      20deg,
+      transparent,
+      color('accent', 'translucent')
     ),
     url('https://picsum.photos/1600/900');
   justify-content: center;
   align-items: center;
+  color: color('text', 'inverse');
 }
 
 h2 {

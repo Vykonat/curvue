@@ -90,4 +90,9 @@ class User extends Authenticatable implements JWTSubject
     public function blogPosts() {
         return $this->hasMany(BlogPost::class);
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

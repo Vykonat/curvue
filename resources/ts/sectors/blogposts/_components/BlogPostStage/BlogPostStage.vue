@@ -13,7 +13,7 @@ import { APP_NAME } from '../../../../common/config/app.config';
 
 @Component
 export default class BlogPostStage extends Vue {
-  get appName() {
+  private get appName() {
     return APP_NAME;
   }
 }
@@ -28,13 +28,13 @@ export default class BlogPostStage extends Vue {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(
+  background-image: url('https://picsum.photos/1500/900'),
+    linear-gradient(
       60deg,
-      hsla(354, 69%, 40%, 1) 0%,
-      hsla(354, 69%, 50%, 0.5) 50%,
-      hsla(354, 69%, 40%, 1) 100%
-    ),
-    url('https://picsum.photos/1500/900');
+      color('primary', 'light') 0%,
+      color('primary', 'dark') 50%,
+      color('primary') 100%
+    );
   justify-content: center;
   align-items: center;
 }

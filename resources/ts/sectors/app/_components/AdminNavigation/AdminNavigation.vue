@@ -4,12 +4,13 @@
       template( v-slot:middle )
         router-link.brand( :to="{ name: 'app.home' }" ) {{ appName }}
       template( v-if="$auth.check()", v-slot:right )
-        lvql-button( :is-ghost="true", tag="router-link", :target="{ name: 'app.home' }", variant="accent" ) {{ $t('navigation.home') }}
+        lvql-button( :is-ghost="true", tag="router-link", :target="{ name: 'app.home' }", variant="primary" ) {{ $t('navigation.home') }}
 
     nav-drawer
       nav-drawer-group( :title="$t('navigation.manage')" )
         nav-drawer-group-item( icon="fas fa-users" :to="{ name: 'admin.users' }" ) {{ $t('navigation.users') }}
         nav-drawer-group-item( icon="fas fa-book" :to="{ name: 'admin.blogPosts' }" ) {{ $t('navigation.blogPosts') }}
+        nav-drawer-group-item( icon="fas fa-comments" :to="{ name: 'admin.comments' }" ) {{ $t('navigation.comments') }}
 </template>
 
 <script lang="ts">
@@ -35,7 +36,7 @@ export default class AdminNavigation extends Vue {
 .brand {
   font-size: fontSize(h4);
   font-weight: fontWeight('headings');
-  color: color('text');
+  color: color('primary');
   margin-top: space(4);
 }
 </style>

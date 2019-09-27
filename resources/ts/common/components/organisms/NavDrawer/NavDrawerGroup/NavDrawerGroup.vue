@@ -23,7 +23,7 @@ export default class NavDrawerGroup extends Vue {
 
 .NavDrawerGroup {
   display: block;
-  margin: 0 0 space(16) 0;
+  margin: 0 0 space(20) 0;
 
   ul {
     padding: 0;
@@ -35,7 +35,6 @@ export default class NavDrawerGroup extends Vue {
     font-size: fontSize();
     border-bottom: 1px solid color('divider');
     padding-bottom: space(4);
-    margin-bottom: space(16);
   }
 }
 </style>

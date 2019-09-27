@@ -5,6 +5,7 @@ type BlogPost {
   description: String!
   content: String!
   user: User! @belongsTo(relation: "user")
+  comments: [Comment!]! @hasMany(relation: "comments")
   created_at: DateTime!
   updated_at: DateTime!
 }
