@@ -22,9 +22,9 @@ class Comment extends Model
 
             if($user) {
                 $comment->user_id = $user->id;
+            } else {
+                $comment->user_id = 1;
             }
-
-            $comment->user_id = 1;
         });
     }
 

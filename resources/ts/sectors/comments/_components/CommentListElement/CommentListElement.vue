@@ -43,7 +43,11 @@ export default class CommentListElement extends Vue {
   }
 
   get isAuthorized(): boolean {
-    return this.$auth.user().role_id === userRoles.ADMIN;
+    if (this.$auth.user().role_id === userRoles.ADMIN) {
+      return true;
+    }
+
+    return this.$auth.user().id == this.comment.user.id;
   }
 }
 </script>
