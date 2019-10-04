@@ -15,7 +15,9 @@
     "watch-poll": "yarn watch -- --watch-poll",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "yarn production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -54,7 +56,6 @@
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
-    "snyk": "^1.197.0",
     "sw-precache-webpack-plugin": "^0.11.5",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
@@ -78,7 +79,8 @@
     "vue-meta": "^2.2.0",
     "vue-modal-dialogs": "^3.0.0",
     "vue-property-decorator": "^8.2.1",
-    "vue-router": "^3.0.6"
+    "vue-router": "^3.0.6",
+    "snyk": "^1.230.5"
   },
   "jest": {
     "collectCoverage": false,
@@ -108,5 +110,6 @@
       ".*\\.(vue)$": "vue-jest",
       "^.+\\.ts$": "ts-jest"
     }
-  }
+  },
+  "snyk": true
 }
