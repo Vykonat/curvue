@@ -4,6 +4,7 @@ type Comment {
   commentable_id: Int!
   commentable_type: String!
   user: User! @belongsTo
+  likes: [Like!] @hasMany
   replies: [Comment!] @hasMany(relation: "replies")
   created_at: DateTime!
   updated_at: DateTime!

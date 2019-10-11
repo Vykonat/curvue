@@ -1,0 +1,8 @@
+type Like {
+  id: ID!
+  likeable_id: Int!
+  likeable_type: String!
+  user: User! @belongsTo
+  created_at: DateTime!
+  updated_at: DateTime!
+}
