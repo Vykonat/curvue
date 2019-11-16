@@ -1,6 +1,7 @@
 declare interface IComment {
   __typename: string;
   id: number;
+  user_id: number;
   commentable_type: string;
   commentable_id: number;
   content: string;

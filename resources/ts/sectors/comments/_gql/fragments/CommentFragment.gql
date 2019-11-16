@@ -4,6 +4,7 @@
 fragment Comment on Comment {
   __typename
   id
+  user_id
   commentable_type
   commentable_id
   content

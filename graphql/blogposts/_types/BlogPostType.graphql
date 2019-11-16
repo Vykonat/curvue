@@ -5,7 +5,7 @@ type BlogPost {
   description: String!
   content: String!
   user: User! @belongsTo(relation: "user")
-  likes: [Like!] @hasMany
+  likes: [Like!] @hasMany(relation: "likes")
   comments: [Comment!]! @hasMany @lazyLoad(relation: "comments")
   created_at: DateTime!
   updated_at: DateTime!
