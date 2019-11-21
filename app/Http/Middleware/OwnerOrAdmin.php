@@ -13,9 +13,10 @@ class OwnerOrAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $resource)
     {
-        $user_id = $request->json('variables')['data']['user_id'];
+        $resourceId = \DB::table($resource)->find($request->json('variables')['id']);
+        $user_id = $resourceId->user_id;
 
         if( $request->user()->isAdmin() ) {
             return $next($request);
