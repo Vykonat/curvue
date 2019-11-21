@@ -1,6 +1,6 @@
 #import "../fragments/BlogPostFragment.gql"
 
-query BlogPost($slug: String) {
+query BlogPost($slug: String!) {
   blogPost(slug: $slug) {
     ...BlogPost
   }
