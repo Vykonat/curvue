@@ -78,7 +78,8 @@ export default class CommentsWrapper extends Vue {
 
     delete comment.__typename;
     delete comment.user;
-    delete comment.replies;
+    delete comment.comments;
+    delete comment.comments_count;
     delete comment.created_at;
     delete comment.updated_at;
 
@@ -109,7 +110,11 @@ export default class CommentsWrapper extends Vue {
         id
       },
       update: (store, { data: { deleteComment } }) => {
-        cacheRemoveComment(store, {type: this.type, id: this.typeId}, deleteComment);
+        cacheRemoveComment(
+          store,
+          { type: this.type, id: this.typeId },
+          deleteComment
+        );
       },
       optimisticResponse: {
         __typename: 'Mutation',

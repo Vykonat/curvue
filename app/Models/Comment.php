@@ -5,26 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
+use App\Http\Traits\DateAttributeTransformations;
+use App\Http\Traits\Likeable;
+use App\Http\Traits\Commentable;
+
 class Comment extends Model
 {
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
+    use DateAttributeTransformations;
+    use Likeable;
+    use Commentable;
+
     protected static function boot()
     {
         parent::boot();
 
-        // auto-sets values on creation
-        static::saving(function ($comment) {
-            $user = Auth::user();
-
-            if($user) {
-                $comment->user_id = $user->id;
-            } else {
-                $comment->user_id = 1;
-            }
+        static::saving(function($comment) {
+            $comment->user_id = Auth::user() ? Auth::user()->id : 1;
         });
     }
 
@@ -38,15 +34,5 @@ class Comment extends Model
     public function commentable() 
     {
         return $this->morphTo();
-    }
-
-    public function replies()
-    {
-        return $this->morphMany(Comment::class, 'commentable');
-    }
-
-    public function likes()
-    {
-        return $this->morphMany(Like::class, 'likeable');
     }
 }

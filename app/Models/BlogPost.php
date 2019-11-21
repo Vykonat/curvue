@@ -3,10 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Auth;
+
+use App\Http\Traits\DateAttributeTransformations;
+use App\Http\Traits\Likeable;
+use App\Http\Traits\Commentable;
 
 class BlogPost extends Model
 {
+    use DateAttributeTransformations;
+    use Likeable;
+    use Commentable;
+
     /**
      * The "booting" method of the model.
      *
@@ -18,14 +27,8 @@ class BlogPost extends Model
 
         // auto-sets values on creation
         static::saving(function ($post) {
-            $user = Auth::user();
-
-            if($user) {
-                $post->user_id = $user->id;
-            }
-
-            $post->slug = str_slug($post->title . ' ' . time(), '-');
-            $post->user_id = 1;
+            $post->user_id = Auth::user() ? Auth::user()->id : 1;
+            $post->slug = Str::slug($post->title . ' ' . time(), '-');
         });
     }
 
@@ -41,15 +44,5 @@ class BlogPost extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function comments()
-    {
-        return $this->morphMany(Comment::class, 'commentable');
-    }
-
-    public function likes()
-    {
-        return $this->morphMany(Like::class, 'likeable');
     }
 }

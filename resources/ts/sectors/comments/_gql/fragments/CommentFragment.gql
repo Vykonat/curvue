@@ -7,11 +7,12 @@ fragment Comment on Comment {
   user_id
   commentable_type
   commentable_id
+  comments_count
   content
   user {
     ...UserRelationship
   }
-  replies {
+  comments {
     ...CommentRelationship
   }
   created_at

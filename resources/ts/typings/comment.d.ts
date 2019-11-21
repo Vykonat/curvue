@@ -4,9 +4,10 @@ declare interface IComment {
   user_id: number;
   commentable_type: string;
   commentable_id: number;
+  comments_count: number;
   content: string;
   user: IUserRelationship;
-  replies: ICommentRelationship;
+  comments: ICommentRelationship;
   created_at: number;
   updated_at: number;
 }
