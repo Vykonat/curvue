@@ -34,8 +34,10 @@ export default class CommentListElement extends Vue {
     return 'loading author name';
   }
 
-  get date(): number {
-    return this.comment.created_at;
+  get date(): string {
+    return this.comment.is_updated
+      ? `Updated ${this.comment.updated_at}`
+      : this.comment.created_at;
   }
 
   get content(): string {

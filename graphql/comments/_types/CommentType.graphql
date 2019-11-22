@@ -5,6 +5,7 @@ type Comment {
   commentable_type: String!
   user_id: Int!
   comments_count: Int!
+  is_updated: Boolean!
   user: User! @belongsTo(relation: "user")
   likes: [Like!] @hasMany(relation: "likes")
   comments: [Comment!] @hasMany(relation: "comments")

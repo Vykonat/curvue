@@ -8,6 +8,7 @@ fragment BlogPost on BlogPost {
   slug
   description
   content
+  is_updated
   comments_count
   user {
     ...UserRelationship

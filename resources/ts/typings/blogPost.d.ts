@@ -5,10 +5,12 @@ declare interface IBlogPost {
   slug: string;
   description: string;
   content: string;
+  comments_count: number;
   comments: IComment[];
   user: IUserRelationship;
-  created_at: number;
-  updated_at: number;
+  created_at: string;
+  updated_at: string;
+  is_updated: boolean;
 }
 
 declare type IBlogPostInput = Pick<

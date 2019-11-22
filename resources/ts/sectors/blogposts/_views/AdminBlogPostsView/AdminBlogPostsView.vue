@@ -165,6 +165,8 @@ export default class AdminBlogPostsView extends Vue {
     delete blogPost.slug;
     delete blogPost.comments;
     delete blogPost.user;
+    delete blogPost.comments_count;
+    delete blogPost.is_updated;
     delete blogPost.created_at;
     delete blogPost.updated_at;
 
