@@ -37,8 +37,10 @@ export default class BlogPostListElement extends Vue {
     return this.blogPost.description;
   }
 
-  get date(): number {
-    return this.blogPost.created_at;
+  get date(): string {
+    return this.blogPost.is_updated
+      ? `updated ${this.blogPost.updated_at}`
+      : this.blogPost.created_at;
   }
 }
 </script>
