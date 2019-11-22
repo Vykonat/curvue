@@ -105,7 +105,7 @@ export default class AdminCommentsView extends Vue {
       title: 'Author'
     },
 
-    replies: {
+    comments: {
       visible: false
     },
 
@@ -143,7 +143,7 @@ export default class AdminCommentsView extends Vue {
     this.commentForm.commentable_type = comment.commentable_type;
     delete form.__typename;
     delete form.user;
-    delete form.replies;
+    delete form.comments;
     delete form.created_at;
     delete form.updated_at;
     this.commentForm = form;
@@ -155,7 +155,7 @@ export default class AdminCommentsView extends Vue {
     commentable_type,
     content,
     user,
-    replies,
+    comments,
     created_at,
     updated_at
   }): Promise<void> {
@@ -189,7 +189,7 @@ export default class AdminCommentsView extends Vue {
           commentable_type,
           content,
           user,
-          replies,
+          comments,
           created_at,
           updated_at
         }

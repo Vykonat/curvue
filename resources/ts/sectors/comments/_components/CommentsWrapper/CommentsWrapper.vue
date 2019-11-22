@@ -92,7 +92,7 @@ export default class CommentsWrapper extends Vue {
     commentable_type,
     content,
     user,
-    replies,
+    comments,
     created_at,
     updated_at
   }): Promise<void> {
@@ -126,7 +126,7 @@ export default class CommentsWrapper extends Vue {
           commentable_type,
           content,
           user,
-          replies,
+          comments,
           created_at,
           updated_at
         }
