@@ -79,6 +79,7 @@ export default class CommentsWrapper extends Vue {
     delete comment.__typename;
     delete comment.user;
     delete comment.comments;
+    delete comment.is_updated;
     delete comment.comments_count;
     delete comment.created_at;
     delete comment.updated_at;
