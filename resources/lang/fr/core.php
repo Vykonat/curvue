@@ -8,4 +8,6 @@ return [
     'cancel' => 'Annuler',
     'confirm' => 'Confirmer',
     'new' => 'Nouveau :resource',
+    'edit' => 'modifier',
+    'delete' => 'Supprimer'
 ];
