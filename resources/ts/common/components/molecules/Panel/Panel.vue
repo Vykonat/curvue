@@ -15,7 +15,7 @@ export default class Panel extends Vue {}
 @import '~styles/components/panel';
 
 .Panel {
-  @include shadow('true');
+  @include shadow();
   background-color: $panel-bg;
   margin: $panel-margin;
   transition: 0.4s all ease-in-out;

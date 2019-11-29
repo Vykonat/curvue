@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Auth;
 
 use App\Http\Traits\DateAttributeTransformations;
-use App\Http\Traits\Likeable;
 use App\Http\Traits\Commentable;
 
 class Comment extends Model
 {
     use DateAttributeTransformations;
-    use Likeable;
     use Commentable;
 
     protected static function boot()
@@ -29,6 +27,11 @@ class Comment extends Model
     public function user() 
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function commentable() 

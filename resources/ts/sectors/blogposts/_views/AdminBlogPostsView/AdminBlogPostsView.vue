@@ -126,7 +126,6 @@ export default class AdminBlogPostsView extends Vue {
     comments_count: {
       title: 'Comments'
     },
-
     created_at: {
       title: 'Created'
     },

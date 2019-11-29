@@ -7,15 +7,13 @@ use Illuminate\Support\Str;
 use Auth;
 
 use App\Http\Traits\DateAttributeTransformations;
-use App\Http\Traits\Likeable;
 use App\Http\Traits\Commentable;
 
 class BlogPost extends Model
 {
     use DateAttributeTransformations;
-    use Likeable;
-    use Commentable;
-
+    use commentable;
+    
     /**
      * The "booting" method of the model.
      *
@@ -39,6 +37,11 @@ class BlogPost extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function user()

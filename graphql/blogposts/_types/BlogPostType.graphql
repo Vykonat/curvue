@@ -4,10 +4,9 @@ type BlogPost {
   slug: String!
   description: String!
   content: String!
-  comments_count: Int!
-  is_updated: Boolean!
+  comments_count: Int
+  is_updated: Boolean
   user: User! @belongsTo(relation: "user")
-  likes: [Like!] @hasMany(relation: "likes")
   comments: [Comment!]! @hasMany @lazyLoad(relation: "comments")
   created_at: String!
   updated_at: String!
