@@ -126,6 +126,15 @@ export default class AdminBlogPostsView extends Vue {
     comments_count: {
       title: 'Comments'
     },
+
+    is_updated: {
+      visible: false
+    },
+
+    comments: {
+      visible: false
+    },
+
     created_at: {
       title: 'Created'
     },
@@ -199,6 +208,8 @@ export default class AdminBlogPostsView extends Vue {
           description: blogPost.description,
           content: blogPost.content,
           comments: blogPost.comments,
+          is_updated: blogPost.is_updated,
+          comments_count: blogPost.comments_count,
           user: blogPost.user,
           created_at: blogPost.created_at,
           updated_at: blogPost.updated_at
