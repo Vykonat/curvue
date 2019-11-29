@@ -67,7 +67,7 @@ export default class Navigation extends Vue {
 .brand {
   font-size: fontSize(h4);
   font-weight: fontWeight('headings');
-  color: color('text', 'inverse');
+  color: color('primary');
   margin-top: space(4);
 
   &:hover {
