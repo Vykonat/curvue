@@ -6,7 +6,7 @@ return [
     'users' => 'Users',
     'admin' => 'Admin',
     'comments' => 'Comments',
-    'blogPosts' => 'Blog Posts',
+    'blogPosts' => 'Blog',
     'blogPost' => 'Viewing Post',
     'manage' => 'Manage',
     'legal' => 'Legal',

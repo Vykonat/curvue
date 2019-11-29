@@ -66,6 +66,8 @@ export default class BlogPostForm extends Vue {
           description: this.blogPost.description,
           content: this.blogPost.content,
           user: { __typename: 'User', ...this.$auth.user() },
+          is_updated: false,
+          comments_count: 0,
           comments: [],
           created_at: Date.now(),
           updated_at: Date.now()
@@ -94,6 +96,8 @@ export default class BlogPostForm extends Vue {
           description: this.blogPost.description,
           content: this.blogPost.content,
           user: { __typename: 'User', ...this.$auth.user() },
+          is_updated: true,
+          comments_count: 0,
           comments: [],
           created_at: Date.now(),
           updated_at: Date.now()
