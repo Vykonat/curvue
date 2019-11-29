@@ -4,6 +4,8 @@ export function cacheAddItemToList(list: any[], item: any) {
   if (index === -1) {
     list.push(item);
   }
+
+  list.splice(index, 1, item);
 }
 
 export function cacheRemoveItemFromList(list: any[], item: any) {

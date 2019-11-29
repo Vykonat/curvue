@@ -49,6 +49,10 @@ export default class CommentForm extends Vue {
           commentable_type: this.comment.commentable_type,
           commentable_id: this.comment.commentable_id,
           content: this.comment.content,
+          user_id: this.$auth.user().id,
+          is_updated: false,
+          comments_count: 0,
+          comments: [],
           user: { __typename: 'User', ...this.$auth.user() },
           created_at: 'Just now',
           updated_at: 'Just now'
@@ -81,9 +85,13 @@ export default class CommentForm extends Vue {
           commentable_type: this.comment.commentable_type,
           commentable_id: this.comment.commentable_id,
           content: this.comment.content,
+          user_id: this.$auth.user().id,
+          is_updated: false,
+          comments_count: 0,
+          comments: [],
           user: { __typename: 'User', ...this.$auth.user() },
           created_at: 'Just now',
-          updated_at: 'Updated just now'
+          updated_at: 'Just now'
         }
       }
     });
