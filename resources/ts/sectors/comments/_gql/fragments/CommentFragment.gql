@@ -4,13 +4,16 @@
 fragment Comment on Comment {
   __typename
   id
+  user_id
   commentable_type
   commentable_id
+  comments_count
+  is_updated
   content
   user {
     ...UserRelationship
   }
-  replies {
+  comments {
     ...CommentRelationship
   }
   created_at

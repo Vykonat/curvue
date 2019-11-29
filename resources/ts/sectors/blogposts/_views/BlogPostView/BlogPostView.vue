@@ -25,7 +25,7 @@ lvql-layout( name="Default" )
               | {{ data.blogPost.content }}
             section.right
               blog-post-sidebar( :url="data.blogPost.slug" )
-        comments-wrapper( type="App\\Models\\BlogPost", :type-id="data.blogPost.id" )
+        comments-wrapper( type="App\\Models\\BlogPost", :type-id="data.blogPost.id", :count="data.blogPost.comments_count" )
 </template>
 
 <script lang='ts'>

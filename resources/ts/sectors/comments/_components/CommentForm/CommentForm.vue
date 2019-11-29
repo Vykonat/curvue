@@ -50,8 +50,8 @@ export default class CommentForm extends Vue {
           commentable_id: this.comment.commentable_id,
           content: this.comment.content,
           user: { __typename: 'User', ...this.$auth.user() },
-          created_at: Date.now(),
-          updated_at: Date.now()
+          created_at: 'Just now',
+          updated_at: 'Just now'
         }
       }
     });
@@ -82,8 +82,8 @@ export default class CommentForm extends Vue {
           commentable_id: this.comment.commentable_id,
           content: this.comment.content,
           user: { __typename: 'User', ...this.$auth.user() },
-          created_at: Date.now(),
-          updated_at: Date.now()
+          created_at: 'Just now',
+          updated_at: 'Updated just now'
         }
       }
     });

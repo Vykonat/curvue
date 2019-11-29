@@ -1,13 +1,16 @@
 declare interface IComment {
   __typename: string;
   id: number;
+  user_id: number;
   commentable_type: string;
   commentable_id: number;
+  comments_count: number;
+  is_updated: boolean;
   content: string;
   user: IUserRelationship;
-  replies: ICommentRelationship;
-  created_at: number;
-  updated_at: number;
+  comments: ICommentRelationship;
+  created_at: string;
+  updated_at: string;
 }
 
 declare type ICommentInput = Pick<

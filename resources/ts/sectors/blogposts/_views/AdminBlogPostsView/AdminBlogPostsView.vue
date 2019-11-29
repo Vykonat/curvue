@@ -99,7 +99,7 @@ export default class AdminBlogPostsView extends Vue {
 
   @Provide() blogPostsDataTableHeader = {
     id: {
-      title: 'id'
+      title: 'ID'
     },
 
     title: {
@@ -123,6 +123,9 @@ export default class AdminBlogPostsView extends Vue {
       slot: 'author'
     },
 
+    comments_count: {
+      title: 'Comments'
+    },
     created_at: {
       title: 'Created'
     },
@@ -161,6 +164,8 @@ export default class AdminBlogPostsView extends Vue {
     delete blogPost.slug;
     delete blogPost.comments;
     delete blogPost.user;
+    delete blogPost.comments_count;
+    delete blogPost.is_updated;
     delete blogPost.created_at;
     delete blogPost.updated_at;
 

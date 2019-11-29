@@ -5,7 +5,7 @@ import { i18n } from '../../../common/config/i18n.config';
 
 export const BlogPostRoutes: RouteConfig[] = [
   {
-    path: '/blog-post/:slug',
+    path: '/post/:slug',
     name: 'blog.show',
     component: () =>
       lazyLoadRoute(
@@ -32,7 +32,7 @@ export const BlogPostRoutes: RouteConfig[] = [
   },
 
   {
-    path: '/blog-posts',
+    path: '/blog',
     name: 'blog.index',
     component: () =>
       lazyLoadRoute(
@@ -55,7 +55,7 @@ export const BlogPostRoutes: RouteConfig[] = [
   },
 
   {
-    path: '/admin/blog-posts',
+    path: '/admin/blog',
     name: 'admin.blogPosts',
     component: () =>
       lazyLoadRoute(

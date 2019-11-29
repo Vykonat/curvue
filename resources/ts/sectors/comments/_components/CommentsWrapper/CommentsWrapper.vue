@@ -19,6 +19,8 @@ apollo-query(
         .result.apollo(v-else-if='data')
           lvql-modal( :show="isCommentModalShown", @close="closeCommentModal")
             comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
+
+          h2 {{ count }} Reponses
             
           lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
           
@@ -47,6 +49,7 @@ import CommentListElement from '../../_components/CommentListElement/CommentList
 export default class CommentsWrapper extends Vue {
   @Prop({ required: true }) type!: string;
   @Prop({ required: true }) typeId!: number;
+  @Prop({ default: 0 }) count!: number;
 
   isCommentModalShown: boolean = false;
   isCommentFormAdd: boolean = true;
@@ -78,7 +81,9 @@ export default class CommentsWrapper extends Vue {
 
     delete comment.__typename;
     delete comment.user;
-    delete comment.replies;
+    delete comment.comments;
+    delete comment.is_updated;
+    delete comment.comments_count;
     delete comment.created_at;
     delete comment.updated_at;
 
@@ -91,7 +96,7 @@ export default class CommentsWrapper extends Vue {
     commentable_type,
     content,
     user,
-    replies,
+    comments,
     created_at,
     updated_at
   }): Promise<void> {
@@ -109,7 +114,11 @@ export default class CommentsWrapper extends Vue {
         id
       },
       update: (store, { data: { deleteComment } }) => {
-        cacheRemoveComment(store, {type: this.type, id: this.typeId}, deleteComment);
+        cacheRemoveComment(
+          store,
+          { type: this.type, id: this.typeId },
+          deleteComment
+        );
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -121,7 +130,7 @@ export default class CommentsWrapper extends Vue {
           commentable_type,
           content,
           user,
-          replies,
+          comments,
           created_at,
           updated_at
         }

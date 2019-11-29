@@ -49,15 +49,7 @@ export default class BlogPostsIndexView extends Vue {}
 
 .blogPostWrapper {
   @include media(tabletPortrait) {
-    flex: 0 0 50%;
-
-    &:first-child {
-      flex: 1 1 100%;
-    }
-
-    &:nth-child(n + 10) {
-      flex: 0 0 33.333333333333%;
-    }
+    flex: 1 1 100%;
   }
 }
 </style>

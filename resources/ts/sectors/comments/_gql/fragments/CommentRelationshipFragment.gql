@@ -3,6 +3,7 @@
 fragment CommentRelationship on Comment {
   __typename
   id
+  user_id
   content
   commentable_id
   commentable_type

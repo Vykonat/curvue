@@ -3,8 +3,11 @@ type Comment {
   content: String!
   commentable_id: Int!
   commentable_type: String!
-  user: User! @belongsTo
-  replies: [Comment!] @hasMany(relation: "replies")
-  created_at: DateTime!
-  updated_at: DateTime!
+  user_id: Int!
+  comments_count: Int
+  is_updated: Boolean
+  user: User! @belongsTo(relation: "user")
+  comments: [Comment!] @hasMany(relation: "comments")
+  created_at: String!
+  updated_at: String!
 }
