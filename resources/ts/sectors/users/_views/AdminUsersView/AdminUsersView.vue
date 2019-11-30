@@ -17,12 +17,12 @@
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          lvql-modal( :show="isUserModalShown", @close="closeUserModal(query)" )
+          lvql-modal( :show="isUserModalShown", @close="closeUserModal" )
             user-form( :is-add="isUserFormAdd", :user="userForm" )
           grid
             grid-row
               grid-item
-                lvql-button( variant="success", @click="handleUserAdd" ) {{ $t('resource.add', {resource:"User"})}}
+                lvql-button( variant="primary", @click="handleUserAdd" ) {{ $t('resource.add', {resource:"User"})}}
             grid-row
               grid-item( fill )
                 data-table(
@@ -42,7 +42,7 @@
                       v-if="row.role_id !== 1"
                       variant="danger",
                       :isGhost="true",
-                      @click="handleUserDelete(row, query)"
+                      @click="handleUserDelete(row)"
                     )
                       i.fas.fa-trash
 
@@ -53,6 +53,7 @@ import { Component, Vue, Provide } from 'vue-property-decorator';
 import DeleteUser from '../../_gql/mutations/deleteUser.gql';
 import dialog from '../../../../common/utils/dialog.util';
 import { setMetaInfo } from '../../../../common/config/vue-meta.config';
+import { cacheRemoveUser } from '../../_gql/cache/UsersCache';
 
 @Component({
   components: {
@@ -71,16 +72,21 @@ import { setMetaInfo } from '../../../../common/config/vue-meta.config';
     meta: [
       {
         name: 'robots',
-        content: 'noindex'
+        content: 'NOINDEX, NOFOLLOW'
       }
     ]
   }
 })
 export default class AdminUsersView extends Vue {
-  isUserModalShown = false;
-  isUserFormAdd = true;
-  userForm = {
-    role_id: 2
+  isUserModalShown: boolean = false;
+  isUserFormAdd: boolean = true;
+  userForm: IUserInput = {
+    id: 0,
+    name: '',
+    email: '',
+    role_id: 2,
+    password: '',
+    password_confirmation: ''
   };
 
   @Provide() usersDataTableHeader = {
@@ -104,6 +110,14 @@ export default class AdminUsersView extends Vue {
       visible: false
     },
 
+    blog_posts: {
+      visible: false
+    },
+
+    comments: {
+      visible: false
+    },
+
     created_at: {
       title: 'Created'
     },
@@ -119,34 +133,31 @@ export default class AdminUsersView extends Vue {
     }
   };
 
-  closeUserModal(query): void {
+  closeUserModal(): void {
     this.isUserModalShown = false;
     this.userForm = {
-      role_id: 2
+      id: 0,
+      name: '',
+      email: '',
+      role_id: 2,
+      password: '',
+      password_confirmation: ''
     };
-
-    query.refetch();
   }
 
-  handleUserAdd() {
+  handleUserAdd(): void {
     this.isUserFormAdd = true;
     this.isUserModalShown = true;
   }
 
-  handleUserEdit(user): void {
+  handleUserEdit(user: IUserInput): void {
     this.isUserFormAdd = false;
     this.isUserModalShown = true;
 
-    const form = { ...user };
-    this.userForm.role_id = user.role_id;
-    delete form.__typename;
-    delete form.role;
-    delete form.created_at;
-    delete form.updated_at;
-    this.userForm = form;
+    this.userForm = { ...user };
   }
 
-  async handleUserDelete({ id }, query): Promise<void> {
+  async handleUserDelete(user: IUser): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'User' }),
@@ -158,12 +169,30 @@ export default class AdminUsersView extends Vue {
     const result = await this.$apollo.mutate({
       mutation: DeleteUser,
       variables: {
-        id
+        id: user.id
+      },
+      update: (store, { data: { deleteUser } }) => {
+        cacheRemoveUser(store, deleteUser);
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        id: user.id,
+        deleteUser: {
+          __typename: 'User',
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role_id: user.role_id,
+          role: user.role,
+          blog_posts: user.blog_posts,
+          comments: user.comments,
+          created_at: user.created_at,
+          updated_at: user.updated_at
+        }
       }
     });
 
     dialog(this.$t('resource.deleted', { resource: 'User' }), false);
-    query.refetch();
   }
 
   get searchInputPlaceHolder() {

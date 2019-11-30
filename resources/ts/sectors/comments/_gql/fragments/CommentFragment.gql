@@ -1,0 +1,21 @@
+#import "../../../users/_gql/fragments/UserRelationshipFragment.gql"
+#import "./CommentRelationshipFragment.gql"
+
+fragment Comment on Comment {
+  __typename
+  id
+  user_id
+  commentable_type
+  commentable_id
+  comments_count
+  is_updated
+  content
+  user {
+    ...UserRelationship
+  }
+  comments {
+    ...CommentRelationship
+  }
+  created_at
+  updated_at
+}

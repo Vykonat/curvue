@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "lavuql",
-  "version": "1.1.0",
+  "version": "1.0.1",
   "description": "A Laravel Vue and GraphQL PWA boilerplate that focuses on performance and best practices.",
   "main": "index.js",
   "author": "_Judicium",
@@ -71,6 +71,7 @@
     "@sentry/browser": "^5.5.0",
     "@sentry/integrations": "^5.5.0",
     "@websanova/vue-auth": "^2.21.14-beta",
+    "animejs": "^3.1.0",
     "vee-validate": "^2.2.11",
     "vue-axios": "^2.1.4",
     "vue-class-component": "^7.1.0",
@@ -78,7 +79,8 @@
     "vue-meta": "^2.2.0",
     "vue-modal-dialogs": "^3.0.0",
     "vue-property-decorator": "^8.2.1",
-    "vue-router": "^3.0.6"
+    "vue-router": "^3.0.6",
+    "vue-social-sharing": "^2.4.5"
   },
   "jest": {
     "collectCoverage": false,

@@ -4,7 +4,7 @@ import { ApolloLink } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AUTH_TOKEN } from './app.config';
 
-let token: HTMLMetaElement | null = document.head.querySelector(
+const token: HTMLMetaElement | null = document.head.querySelector(
   "meta[name='csrf-token']"
 );
 

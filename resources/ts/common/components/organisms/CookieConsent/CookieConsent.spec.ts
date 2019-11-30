@@ -15,6 +15,9 @@ describe('Cookie Consent Organism Component', () => {
 
   test('Does not render on matched versions', () => {
     const wrapper: Wrapper<CookieConsent> = shallowMount(CookieConsent, {
+      data: () => ({
+        internalCookieConsentVersion: '1.0.0'
+      }),
       propsData: {
         currentVersion: '1.0.0',
         cookieConsentVersion: '1.0.0',

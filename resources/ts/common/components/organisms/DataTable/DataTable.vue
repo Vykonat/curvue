@@ -34,10 +34,11 @@ import { IDataTableHeaderItem, IComputedDataRowCell } from './interfaces';
 
 @Component
 export default class DataTable extends Vue {
+  maxRows: number = 5;
+
   @Prop({ required: true }) header!: object;
   @Prop({ required: true }) data!: any[];
   @Prop({ default: 0 }) page!: number;
-  @Prop({ default: 5 }) maxRows!: number;
   @Prop({ default: true }) showSearch!: boolean;
   @Prop({ default: '' }) sortKey!: string;
   @Prop({ default: '' }) placeholder!: string;

@@ -66,7 +66,7 @@ export default class LoginForm extends Vue {
     try {
       await this.doLogin();
       dialog(this.$t('auth.login_success'), false);
-      this.$router.push({ name: 'app.home' });
+      this.$router.go(-1);
     } catch {
       dialog(this.$t('errors.generic_error'), false);
     }

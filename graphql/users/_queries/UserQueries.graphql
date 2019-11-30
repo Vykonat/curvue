@@ -1,5 +1,8 @@
-extend type Query @middleware(checks: ["jwt.auth", "admin"]){
-    users: [User!]! @all
-    auth: User! @middleware(checks: ["auth:api"]) @auth
-    user(id: ID @eq): User @find(model: "App\\Models\\User")
+extend type Query @middleware(checks: ["jwt.auth"]) {
+  users: [User!]! @all
+  auth: User! @auth
+}
+
+extend type Query {
+  user(id: ID @eq): User @find(model: "App\\Models\\User")
 }

@@ -1,6 +1,7 @@
+#import "../fragments/UserFragment.gql"
+
 mutation DeleteUser($id: ID!) {
   deleteUser(id: $id) {
-    name
-    email
+    ...User
   }
 }

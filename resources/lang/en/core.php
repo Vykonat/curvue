@@ -7,5 +7,7 @@ return [
     'ok' => 'Ok',
     'cancel' => 'Cancel',
     'confirm' => 'Confirm',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
     'new' => 'New :resource',
 ];

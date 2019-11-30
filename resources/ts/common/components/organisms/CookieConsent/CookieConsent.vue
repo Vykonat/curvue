@@ -16,13 +16,18 @@ export default class CookieConsent extends Vue {
   @Prop({ required: true }) cookieConsentVersion!: string;
   @Prop({ required: true }) setCookieConsentVersion!: Function;
 
-  get show() {
-    return this.cookieConsentVersion !== this.currentVersion;
+  internalCookieConsentVersion: string =
+    typeof localStorage.getItem('cookie-consent-version') !== null
+      ? (localStorage.getItem('cookie-consent-version') as string)
+      : '';
+
+  get show(): boolean {
+    return this.internalCookieConsentVersion !== this.currentVersion;
   }
 
-  onConsent() {
+  onConsent(): void {
     this.setCookieConsentVersion(this.currentVersion);
-    this.cookieConsentVersion = this.currentVersion;
+    this.internalCookieConsentVersion = this.currentVersion;
   }
 }
 </script>

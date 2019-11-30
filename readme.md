@@ -8,6 +8,9 @@ Front-end:
 
 - [Laravel Mix](https://github.com/JeffreyWay/laravel-mix)
 - [Vue](https://github.com/vuejs/vue)
+- [Jest](https://github.com/facebook/jest)
+- [Snyk](https://github.com/snyk/snyk)
+- [Webpack](https://github.com/webpack/webpack)
 - [Typescript](https://github.com/microsoft/TypeScript)
 - [Pug](https://github.com/pugjs/pug/tree/master/packages/pug)
 - [Vue Apollo](https://github.com/Akryum/vue-apollo)
@@ -22,6 +25,7 @@ Back-end:
 - [GraphQL Playground](https://github.com/mll-lab/laravel-graphql-playground)
 - [Lighthouse](https://github.com/nuwave/lighthouse)
 - [JWT Auth](https://github.com/tymondesigns/jwt-auth)
+- [Sentry](https://github.com/getsentry/sentry)
 
 ## Adding the root level account
 

@@ -9,8 +9,8 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop, Provide } from "vue-property-decorator";
-import CollapseAnimation from "../../../animations/CollapseAnimation/CollapseAnimation.vue";
+import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
+import CollapseAnimation from '../../../animations/CollapseAnimation/CollapseAnimation.vue';
 
 @Component({
   components: {
@@ -44,8 +44,8 @@ export default class Notification extends Vue {
 </script>
 
 <style lang='scss' scoped>
-@import "~styles/app";
-@import "~styles/components/notification";
+@import '~styles/app';
+@import '~styles/components/notification';
 
 .NotificationWrapper {
   position: fixed;
@@ -72,13 +72,13 @@ export default class Notification extends Vue {
 .title {
   margin-bottom: space();
   padding-right: space(16);
-  color: color("accent");
+  color: color('primary');
 }
 
 .text {
   max-height: $notification-max-height;
   padding-right: space(16);
   margin-bottom: space();
-  color: color("text", "inverse");
+  color: color('text', 'inverse');
 }
 </style>

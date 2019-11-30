@@ -1,0 +1,3 @@
+extend type Mutation @middleware(checks: ["jwt.auth"]) {
+  deleteBlogPost(id: ID!): BlogPost! @delete @can(ability: "delete")
+}

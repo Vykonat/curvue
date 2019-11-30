@@ -14,7 +14,7 @@
       page-section(
         title="title",
         :link="{ name: 'auth.register' }"
-        :image="randomPhoto",
+        image="./assets/images/mobile.svg",
       )
         template( v-slot:text ) Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.
         template( v-slot:button ) Click for more
@@ -22,7 +22,7 @@
       page-section(
         title="title",
         :link="{ name: 'auth.login' }"
-        :image="randomPhoto",
+        image="./assets/images/ideas.svg",
         :flip="true",
         background="alternative",
       )
@@ -80,5 +80,9 @@ export default class HomeView extends Vue {
 
 .title {
   color: color('primary');
+}
+
+.subTitle {
+  color: color('text', 'inverse');
 }
 </style>

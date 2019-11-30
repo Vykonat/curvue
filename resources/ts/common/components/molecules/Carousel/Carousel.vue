@@ -49,21 +49,21 @@ export default class Carousel extends Vue {
     default: (): ICarouselImage[] => [
       {
         url:
-          'https://images.unsplash.com/photo-1469949376458-094571676254?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
+          'https://images.unsplash.com/photo-1542831371-d531d36971e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
         alt: 'a default image for the carousel',
-        copyright: 'Jonatan Pie'
+        copyright: 'Florian Olivo'
       },
       {
         url:
-          'https://images.unsplash.com/photo-1490131681458-a08259e7627d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80',
+          'https://images.unsplash.com/photo-1493514789931-586cb221d7a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=751&q=80',
         alt: 'a default image for the carousel',
-        copyright: 'Ethan Weil'
+        copyright: 'Andre Benz'
       },
       {
         url:
-          'https://images.unsplash.com/photo-1502154024274-8cd40923ba51?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
+          'https://images.unsplash.com/photo-1562159956-b5c29ef13245?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=626&q=80',
         alt: 'a default image for the carousel',
-        copyright: 'Greg Rosenke'
+        copyright: 'Prateek Gautam'
       }
     ]
   })

@@ -8,7 +8,7 @@ Vue.use(VueMeta, {
 });
 
 export const defaultMetaOptions = {
-  title: 'Home',
+  title: 'Loading...',
   titleTemplate: `${APP_NAME} | %s`,
   meta: [
     {
