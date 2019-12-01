@@ -8,9 +8,9 @@
           i.fas.fa-calendar.fa-xs
           | {{ date }}
 
-      grid-row.description
+      grid-row.passage
         grid-item( fill )
-          truncate( :permanent="true" ) {{ description }}
+          truncate( :permanent="true" ) {{ passage }}
 
       grid-row
         grid-item
@@ -29,15 +29,15 @@ import BlogPostHeader from '../BlogPostHeader/BlogPostHeader.vue';
 export default class BlogPostListElement extends Vue {
   @Prop({ required: true }) blogPost!: IBlogPost;
 
-  get blogPostSubtitle(): string {
+  private get blogPostSubtitle(): string {
     return `Written on ${this.blogPost.created_at} by ${this.blogPost.user.name}`;
   }
 
-  get description(): string {
-    return this.blogPost.description;
+  private get passage(): string {
+    return this.blogPost.passage;
   }
 
-  get date(): string {
+  private get date(): string {
     return this.blogPost.is_updated
       ? `updated ${this.blogPost.updated_at}`
       : this.blogPost.created_at;
@@ -57,7 +57,7 @@ export default class BlogPostListElement extends Vue {
   position: relative;
 }
 
-.description {
+.passage {
   padding-bottom: space(12);
 }
 

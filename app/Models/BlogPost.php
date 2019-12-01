@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 use Auth;
 
@@ -30,21 +32,43 @@ class BlogPost extends Model
         });
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'title', 'description', 'content',
+        'title', 'content',
     ];
 
-    public function getRouteKeyName()
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
-    public function comments()
+    /**
+     * Get the route passage attribute for the model.
+     */
+    public function getPassageAttribute(): string
+    {
+        return Str::limit($this->content, 400);
+    }
+
+    /**
+     * Return the blog posts comments
+     */
+    public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function user()
+    /**
+     * Return the blog posts user
+     */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

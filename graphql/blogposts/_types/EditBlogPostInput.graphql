@@ -1,6 +1,5 @@
 input EditBlogPostInput {
   id: Int!
   title: String! @rules(apply: ["required", "max:191"])
-  description: String! @rules(apply: ["required", "max:191"])
   content: String! @rules(apply: ["required", "min: 30"])
 }

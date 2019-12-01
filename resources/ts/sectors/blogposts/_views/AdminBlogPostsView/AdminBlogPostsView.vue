@@ -93,7 +93,6 @@ export default class AdminBlogPostsView extends Vue {
   blogPostForm: IBlogPostInput = {
     id: 0,
     title: '',
-    description: '',
     content: ''
   };
 
@@ -110,7 +109,7 @@ export default class AdminBlogPostsView extends Vue {
       visible: false
     },
 
-    description: {
+    passage: {
       visible: false
     },
 
@@ -155,7 +154,6 @@ export default class AdminBlogPostsView extends Vue {
     this.blogPostForm = {
       id: 0,
       title: '',
-      description: '',
       content: ''
     };
   }
@@ -171,6 +169,7 @@ export default class AdminBlogPostsView extends Vue {
 
     delete blogPost.__typename;
     delete blogPost.slug;
+    delete blogPost.passage;
     delete blogPost.comments;
     delete blogPost.user;
     delete blogPost.comments_count;
@@ -205,14 +204,14 @@ export default class AdminBlogPostsView extends Vue {
           id: blogPost.id,
           title: blogPost.title,
           slug: blogPost.slug,
-          description: blogPost.description,
-          content: blogPost.content,
-          comments: blogPost.comments,
           is_updated: blogPost.is_updated,
           comments_count: blogPost.comments_count,
-          user: blogPost.user,
           created_at: blogPost.created_at,
-          updated_at: blogPost.updated_at
+          updated_at: blogPost.updated_at,
+          passage: blogPost.passage,
+          content: blogPost.content,
+          user: blogPost.user,
+          comments: blogPost.comments
         }
       }
     });
