@@ -1,0 +1,7 @@
+extend type Query {
+  blogPosts: [BlogPost!]! @all
+  blogPost(slug: String! @eq): BlogPost! @find(model: "App\\Models\\BlogPost")
+  blogPostsByTitle(title: String! @where(operator: "in")): [BlogPost!]! @all
+  recentBlogPosts: [BlogPost!]!
+  lastWeekBlogPosts: [BlogPost!]!
+}

@@ -1,3 +1,0 @@
-extend type Query {
-  blogPosts: [BlogPost!]! @all
-}

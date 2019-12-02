@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Auth;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str;
-use Auth;
 
 use App\Http\Traits\DateAttributeTransformations;
 use App\Http\Traits\Commentable;
@@ -71,5 +72,21 @@ class BlogPost extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Order blog posts by most recent
+     */
+    public function scopeRecent()
+    {
+        return BlogPost::take(5)->orderByDesc('id')->get();
+    }
+
+    /**
+     * Get last weeks blog posts
+     */
+    public function scopeLastWeek()
+    {
+        return BlogPost::whereBetween('created_at', [carbon('1 week ago'), now()])->get();
     }
 }
