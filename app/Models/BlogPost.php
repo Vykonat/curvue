@@ -77,9 +77,9 @@ class BlogPost extends Model
     /**
      * Order blog posts by most recent
      */
-    public function scopeRecent()
+    public function scopeRecent(Builder $query): Builder
     {
-        return BlogPost::take(5)->orderByDesc('id')->get();
+        return $query->orderBy('id', 'desc')->limit(5);
     }
 
     /**
@@ -87,6 +87,6 @@ class BlogPost extends Model
      */
     public function scopeLastWeek()
     {
-        return BlogPost::whereBetween('created_at', [carbon('1 week ago'), now()])->get();
+        return BlogPost::whereBetween('created_at', [carbon('1 week ago'), now()])->orderBy('id', 'desc');
     }
 }
