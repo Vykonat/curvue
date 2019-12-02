@@ -9,5 +9,5 @@ type BlogPost {
   passage: String!
   content: String!
   user: User! @belongsTo(relation: "user")
-  comments: [Comment!]! @hasMany @lazyLoad(relation: "comments")
+  comments: [Comment!]! @morphMany @lazyLoad(relation: "comments")
 }
