@@ -21,6 +21,6 @@ class Comments
         $type = $args['type'];
         $id = $args['id'];
 
-        return $type::find($id)->comments()->get();
+        return $type::find($id)->comments()->orderBy('id', 'desc')->get();
     }
 }
