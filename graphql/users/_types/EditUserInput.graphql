@@ -6,8 +6,8 @@ input EditUserInput {
   role: String @rules(apply: ["max: 191"])
   blog_posts: [BlogPost]
   comments: [Comment]
-  created_at: String!
-  updated_at: String!
+  created_at: DateTime!
+  updated_at: DateTime!
   password: String @rules(apply: ["min: 8", "confirmed"]) @bcrypt
   password_confirmation: String @rules(apply: ["min: 8"]) @bcrypt
 }

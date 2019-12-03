@@ -23,7 +23,7 @@ panel
 
       grid-row
         grid-item
-          slot( name="paginator" )
+          pagination( :v-if="maxPages > 1", :pages="maxPages", :current-page="currentPage + 1", @change="paginationClick" )
         grid-item    
           lvql-select.dataTableSelect( placeholder="Items per page: ", :options="maxRowsOptions", name="dataTablePerPageSelect", id="dataTablePerPageSelect", v-model="maxRows" )
 </template>
@@ -38,6 +38,7 @@ export default class DataTable extends Vue {
 
   @Prop({ required: true }) header!: object;
   @Prop({ required: true }) data!: any[];
+  @Prop({ default: 0 }) page!: number;
   @Prop({ default: true }) showSearch!: boolean;
   @Prop({ default: '' }) sortKey!: string;
   @Prop({ default: '' }) placeholder!: string;
@@ -45,6 +46,7 @@ export default class DataTable extends Vue {
 
   @Provide() internalSortKey: string = '';
   @Provide() internalSortDirection: string = '';
+  @Provide() currentPage: number = 0;
   @Provide() searchTerm: string = '';
 
   maxRowsOptions = [
@@ -132,7 +134,10 @@ export default class DataTable extends Vue {
       return this.sortedData;
     }
 
-    return this.sortedData.slice(this.maxRows);
+    return this.sortedData.slice(
+      this.currentPage * this.maxRows,
+      (this.currentPage + 1) * this.maxRows
+    );
   }
 
   get columns() {
@@ -210,8 +215,16 @@ export default class DataTable extends Vue {
     this.$emit('click', this.getRowObject(cells));
   }
 
+  paginationClick(page: number) {
+    this.currentPage = page - 1;
+  }
+
   getVisibleCells(cells: IComputedDataRowCell[]) {
     return cells.filter((cell: IDataTableHeaderItem) => cell.visible);
+  }
+
+  mounted() {
+    this.currentPage = this.page;
   }
 
   @Watch('sortKey', { immediate: true })
