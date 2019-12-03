@@ -10,7 +10,7 @@
 
       grid-row.passage
         grid-item( fill )
-          truncate( :permanent="true" ) {{ passage }}
+          truncate {{ passage }}
 
       grid-row
         grid-item
