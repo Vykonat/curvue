@@ -6,7 +6,7 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
 export default class Pagination extends Vue {
@@ -15,31 +15,31 @@ export default class Pagination extends Vue {
 
   prevClick() {
     if (this.currentPage > 1) {
-      this.$emit("change", this.currentPage - 1);
+      this.$emit('prev-click');
     }
   }
 
   nextClick() {
     if (this.currentPage < this.pages) {
-      this.$emit("change", this.currentPage + 1);
+      this.$emit('next-click');
     }
   }
 
   get prevCssClasses() {
-    const classes = ["prev"];
+    const classes = ['prev'];
 
     if (this.currentPage <= 1) {
-      classes.push("disabled");
+      classes.push('disabled');
     }
 
     return classes;
   }
 
   get nextCssClasses() {
-    const classes = ["next"];
+    const classes = ['next'];
 
     if (this.currentPage >= this.pages) {
-      classes.push("disabled");
+      classes.push('disabled');
     }
 
     return classes;
@@ -48,8 +48,8 @@ export default class Pagination extends Vue {
 </script>
 
 <style lang='scss' scoped>
-@import "~styles/app";
-@import "~styles/components/pagination";
+@import '~styles/app';
+@import '~styles/components/pagination';
 
 .Pagination {
   margin: $pagination-margin;
@@ -74,7 +74,7 @@ export default class Pagination extends Vue {
 
   &:before,
   &:after {
-    content: "";
+    content: '';
     transition: all 0.25s ease-in-out;
     position: absolute;
     background-color: $pagination-arrow-color;
