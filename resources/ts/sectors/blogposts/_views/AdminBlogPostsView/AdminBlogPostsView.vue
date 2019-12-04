@@ -1,7 +1,8 @@
 <template lang="pug">
   lvql-layout( name="Admin" )
     apollo-query(
-      :query="require('../../_gql/queries/BlogPostsQuery.gql')"
+      :query="require('../../_gql/queries/BlogPostsQuery.gql')",
+      :variables="queryVariables"
     )
       template( slot-scope="{ result: { data, loading, error}, query }" )
         .loading.apollo(v-if='loading')
@@ -27,9 +28,16 @@
               grid-item( fill )
                 data-table(
                   :header="blogPostsDataTableHeader", 
-                  :data="data.blogPosts",
+                  :data="data.blogPosts.data",
                   :placeholder="searchInputPlaceHolder",
                 )
+                  template( v-slot:paginator )
+                    pagination( 
+                      :pages="data.blogPosts.paginatorInfo.lastPage", 
+                      :current-page="currentPage" 
+                      @prev-click="previousBlogPosts(query)"
+                      @next-click="nextBlogPosts(query)"
+                    )
                   template( v-slot:author="{ row }")
                     | {{ row.user.name }}
                   template( v-slot:actions="{ row }" )
@@ -49,7 +57,6 @@
                       i.fas.fa-pencil-alt
 
                     lvql-button(
-                      v-if="row.role_id !== 1"
                       variant="danger",
                       :isGhost="true",
                       @click="handleBlogPostDelete(row)"
@@ -90,10 +97,18 @@ import { cacheRemoveBlogPost } from '../../_gql/cache/BlogPostsCache';
 export default class AdminBlogPostsView extends Vue {
   isBlogPostModalShown: boolean = false;
   isBlogPostFormAdd: boolean = true;
+  currentPage: number = 1;
+
   blogPostForm: IBlogPostInput = {
     id: 0,
     title: '',
     content: ''
+  };
+
+  queryVariables = {
+    count: 5,
+    orderBy: [{ field: 'id', order: 'DESC' }],
+    page: this.currentPage
   };
 
   @Provide() blogPostsDataTableHeader = {
@@ -221,6 +236,35 @@ export default class AdminBlogPostsView extends Vue {
 
   get searchInputPlaceHolder() {
     return this.$t('resource.search', { resource: 'blog posts' });
+  }
+
+  previousBlogPosts(query) {
+    this.currentPage--;
+    this.paginationClick(query);
+  }
+  nextBlogPosts(query) {
+    this.currentPage++;
+    this.paginationClick(query);
+  }
+  paginationClick(query) {
+    query.fetchMore({
+      variables: {
+        count: 5,
+        orderBy: [{ field: 'id', order: 'DESC' }],
+        page: this.currentPage
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const newPosts = fetchMoreResult.blogPosts.data;
+        const newPaginator = fetchMoreResult.blogPosts.paginatorInfo;
+        return {
+          blogPosts: {
+            __typename: previousResult.blogPosts.__typename,
+            data: [...newPosts],
+            paginatorInfo: { ...newPaginator }
+          }
+        };
+      }
+    });
   }
 }
 </script>
