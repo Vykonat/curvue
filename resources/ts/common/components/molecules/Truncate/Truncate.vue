@@ -9,17 +9,18 @@ article.Truncate
     )
 
   a(
-    v-if="showMoreButton",
-    href="#",
-    @click.prevent="showMore"
-    ) {{ $t('truncate.showMore') }}
-
-  a(
-    v-else
+    v-if="!showMoreButton"
     href="#",
     @click.prevent="showLess"
   ) {{ $t('truncate.showLess') }}
 
+  br( v-else-if="showMoreButton && isTruncated" )
+
+  a(
+    v-else
+    href="#",
+    @click.prevent="showMore"
+    ) {{ $t('truncate.showMore') }}
 </template>
 
 <script lang='ts'>
@@ -99,7 +100,7 @@ export default class Truncate extends Vue {
     this.collapsedHeight = this.lines * this.lineHeight;
 
     if (this.offsetHeight <= this.collapsedHeight) {
-      this.showMoreButton = false;
+      this.showMoreButton = true;
       this.isTruncated = true;
       return;
     }
