@@ -2,7 +2,7 @@
 panel
   panel-body
     article.dataTableContainer
-      data-table-search( v-if="showSearch", v-model="searchTerm", :placeholder="placeholder")
+      slot( name="search" )
 
       table.dataTable
         data-table-header(
@@ -38,14 +38,12 @@ export default class DataTable extends Vue {
 
   @Prop({ required: true }) header!: object;
   @Prop({ required: true }) data!: any[];
-  @Prop({ default: true }) showSearch!: boolean;
   @Prop({ default: '' }) sortKey!: string;
   @Prop({ default: '' }) placeholder!: string;
   @Prop({ default: 'asc' }) sortDirection!: string;
 
   @Provide() internalSortKey: string = '';
   @Provide() internalSortDirection: string = '';
-  @Provide() searchTerm: string = '';
 
   maxRowsOptions = [
     {
@@ -79,32 +77,7 @@ export default class DataTable extends Vue {
   }
 
   get filteredData() {
-    const query = this.searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-    if (query.length === 0) {
-      return this.data;
-    }
-
-    const searchRegex: RegExp = new RegExp(`${query}`, 'gmi');
-    const filter = (row: IDataTableHeaderItem[]) => {
-      let match: boolean = false;
-
-      Object.keys(row).forEach((key: string) => {
-        const column: IDataTableHeaderItem = this.header[key];
-
-        if (typeof column === 'undefined' || column.visible === false) {
-          return;
-        }
-
-        if (column.visible && match === false) {
-          match = searchRegex.exec(row[key].toString().toLowerCase()) !== null;
-        }
-      });
-
-      return match;
-    };
-
-    return this.data.slice(0).filter(filter);
+    return this.data.slice(0);
   }
 
   get sortedData() {

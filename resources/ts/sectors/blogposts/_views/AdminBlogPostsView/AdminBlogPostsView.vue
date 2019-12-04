@@ -29,14 +29,23 @@
                 data-table(
                   :header="blogPostsDataTableHeader", 
                   :data="data.blogPosts.data",
-                  :placeholder="searchInputPlaceHolder",
                 )
+                  template( v-slot:search )
+                    lvql-input(
+                      id="BlogPostSearch",
+                      name="BlogPostSearch",
+                      v-model="searchTerm"
+                      :placeholder="searchInputPlaceHolder",
+                      @input="$emit('input', $event)"
+                      @keydown.enter="queryMore(query)"
+                    )
+
                   template( v-slot:paginator )
                     pagination( 
                       :pages="data.blogPosts.paginatorInfo.lastPage", 
                       :current-page="currentPage" 
-                      @prev-click="previousBlogPosts(query)"
-                      @next-click="nextBlogPosts(query)"
+                      @prevClick="previousBlogPosts(query)"
+                      @nextClick="nextBlogPosts(query)"
                     )
                   template( v-slot:author="{ row }")
                     | {{ row.user.name }}
@@ -98,6 +107,7 @@ export default class AdminBlogPostsView extends Vue {
   isBlogPostModalShown: boolean = false;
   isBlogPostFormAdd: boolean = true;
   currentPage: number = 1;
+  searchTerm: string | undefined = '';
 
   blogPostForm: IBlogPostInput = {
     id: 0,
@@ -108,7 +118,8 @@ export default class AdminBlogPostsView extends Vue {
   queryVariables = {
     count: 5,
     orderBy: [{ field: 'id', order: 'DESC' }],
-    page: this.currentPage
+    page: this.currentPage,
+    title: this.searchTerm === '' ? undefined : this.searchTerm
   };
 
   @Provide() blogPostsDataTableHeader = {
@@ -240,18 +251,21 @@ export default class AdminBlogPostsView extends Vue {
 
   previousBlogPosts(query) {
     this.currentPage--;
-    this.paginationClick(query);
+    this.queryMore(query);
   }
+
   nextBlogPosts(query) {
     this.currentPage++;
-    this.paginationClick(query);
+    this.queryMore(query);
   }
-  paginationClick(query) {
+
+  queryMore(query) {
     query.fetchMore({
       variables: {
         count: 5,
         orderBy: [{ field: 'id', order: 'DESC' }],
-        page: this.currentPage
+        page: this.searchTerm === '' ? this.currentPage : 1,
+        title: this.searchTerm === '' ? undefined : this.searchTerm
       },
       updateQuery: (previousResult, { fetchMoreResult }) => {
         const newPosts = fetchMoreResult.blogPosts.data;

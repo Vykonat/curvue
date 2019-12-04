@@ -1,7 +1,12 @@
 #import "../fragments/BlogPostFragment.gql"
 
-query BlogPosts($orderBy: [OrderByClause!], $count: Int!, $page: Int!) {
-  blogPosts(orderBy: $orderBy, count: $count, page: $page) {
+query BlogPosts(
+  $orderBy: [OrderByClause!]
+  $count: Int!
+  $page: Int!
+  $title: String
+) {
+  blogPosts(orderBy: $orderBy, count: $count, page: $page, title: $title) {
     data {
       ...BlogPost
     }
