@@ -12,7 +12,7 @@ describe('Pagination Molecule Component', () => {
     expect(wrapper.findAll(`.Pagination`)).toHaveLength(1);
   });
 
-  test('Emits a page change on click', () => {
+  test('Emits next click event', () => {
     const wrapper: Wrapper<Pagination> = shallowMount(Pagination, {
       propsData: {
         pages: 10,
@@ -21,7 +21,19 @@ describe('Pagination Molecule Component', () => {
     });
 
     wrapper.find(`.next`).trigger('click');
-    expect(wrapper.emitted().change).toBeTruthy();
+    expect(wrapper.emitted().nextClick).toBeTruthy();
+  });
+
+  test('Emits previous click event', () => {
+    const wrapper: Wrapper<Pagination> = shallowMount(Pagination, {
+      propsData: {
+        pages: 10,
+        currentPage: 10
+      }
+    });
+
+    wrapper.find(`.prev`).trigger('click');
+    expect(wrapper.emitted().prevClick).toBeTruthy();
   });
 
   test('Disables previous click on first page', () => {
@@ -33,7 +45,7 @@ describe('Pagination Molecule Component', () => {
     });
 
     wrapper.find(`.prev`).trigger('click');
-    expect(wrapper.emitted().change).toBeFalsy();
+    expect(wrapper.emitted().prevClick).toBeFalsy();
   });
 
   test('Disables next click on last page', () => {
@@ -45,6 +57,6 @@ describe('Pagination Molecule Component', () => {
     });
 
     wrapper.find(`.next`).trigger('click');
-    expect(wrapper.emitted().change).toBeFalsy();
+    expect(wrapper.emitted().nextClick).toBeFalsy();
   });
 });

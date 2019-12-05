@@ -1,14 +1,15 @@
 <template lang="pug">
   lvql-layout( name="Admin" )
     apollo-query(
-      :query="require('../../_gql/queries/BlogPostsQuery.gql')"
+      :query="require('../../_gql/queries/BlogPostsQuery.gql')",
+      :variables="queryVariables"
     )
       template( slot-scope="{ result: { data, loading, error}, query }" )
         .loading.apollo(v-if='loading')
           grid
             grid-row
               grid-item( fill )
-                | {{ $t('core.loading') }}
+                lvql-loader( size="large" )
                 
         .error.apollo(v-else-if='error') 
           grid
@@ -18,18 +19,45 @@
 
         .result.apollo(v-else-if='data')
           lvql-modal( :show="isBlogPostModalShown", @close="closeBlogPostModal" )
-            blog-post-form( :is-add="isBlogPostFormAdd", :blogPost="blogPostForm" )
+            blog-post-form( :is-add="isBlogPostFormAdd", :blogPost="blogPostForm", :variables="queryVariables" )
           grid
             grid-row
               grid-item
-                lvql-button( variant="primary", @click="handleBlogPostAdd" ) {{ $t('resource.add', {resource:"Blog Post"})}}
+                lvql-button( variant="primary", @click="handleBlogPostAdd", :loading="isLoading" ) {{ $t('resource.add', {resource:"Blog Post"})}}
             grid-row
               grid-item( fill )
                 data-table(
                   :header="blogPostsDataTableHeader", 
-                  :data="data.blogPosts",
-                  :placeholder="searchInputPlaceHolder",
+                  :data="data.blogPosts.data",
                 )
+                  template( v-slot:search )
+                    lvql-input(
+                      id="BlogPostSearch",
+                      name="BlogPostSearch",
+                      v-model="searchTerm"
+                      :placeholder="searchInputPlaceHolder",
+                      @input="$emit('input', $event)"
+                      @keydown.enter="queryMore(query)"
+                    )
+
+                  template( v-slot:perPageSelector )
+                    lvql-select( 
+                      placeholder="Items per page: ", 
+                      :options="perPageOptions", 
+                      name="blogPostsPerPageSelect", 
+                      id="blogPostsPerPageSelect", 
+                      v-model="perPage",
+                      @input="queryMore(query)"
+                    )
+
+                  template( v-slot:paginator )
+                    pagination( 
+                      :pages="data.blogPosts.paginatorInfo.lastPage", 
+                      :current-page="currentPage",
+                      :loading="isLoading",
+                      @prevClick="previousBlogPosts(query)",
+                      @nextClick="nextBlogPosts(query)"
+                    )
                   template( v-slot:author="{ row }")
                     | {{ row.user.name }}
                   template( v-slot:actions="{ row }" )
@@ -49,7 +77,6 @@
                       i.fas.fa-pencil-alt
 
                     lvql-button(
-                      v-if="row.role_id !== 1"
                       variant="danger",
                       :isGhost="true",
                       @click="handleBlogPostDelete(row)"
@@ -90,11 +117,41 @@ import { cacheRemoveBlogPost } from '../../_gql/cache/BlogPostsCache';
 export default class AdminBlogPostsView extends Vue {
   isBlogPostModalShown: boolean = false;
   isBlogPostFormAdd: boolean = true;
+  currentPage: number = 1;
+  searchTerm: string | undefined = '';
+  perPage: number = 5;
+  isLoading: boolean = false;
+
+  perPageOptions = [
+    {
+      label: '5',
+      value: 5
+    },
+    {
+      label: '10',
+      value: 10
+    },
+    {
+      label: '25',
+      value: 25
+    },
+    {
+      label: '50',
+      value: 50
+    }
+  ];
+
   blogPostForm: IBlogPostInput = {
     id: 0,
     title: '',
-    description: '',
     content: ''
+  };
+
+  queryVariables = {
+    count: this.perPage,
+    orderBy: [{ field: 'id', order: 'DESC' }],
+    page: this.currentPage,
+    title: this.searchTerm === '' ? undefined : this.searchTerm
   };
 
   @Provide() blogPostsDataTableHeader = {
@@ -110,7 +167,7 @@ export default class AdminBlogPostsView extends Vue {
       visible: false
     },
 
-    description: {
+    passage: {
       visible: false
     },
 
@@ -155,7 +212,6 @@ export default class AdminBlogPostsView extends Vue {
     this.blogPostForm = {
       id: 0,
       title: '',
-      description: '',
       content: ''
     };
   }
@@ -171,6 +227,7 @@ export default class AdminBlogPostsView extends Vue {
 
     delete blogPost.__typename;
     delete blogPost.slug;
+    delete blogPost.passage;
     delete blogPost.comments;
     delete blogPost.user;
     delete blogPost.comments_count;
@@ -196,7 +253,7 @@ export default class AdminBlogPostsView extends Vue {
         id: blogPost.id
       },
       update: (store, { data: { deleteBlogPost } }) => {
-        cacheRemoveBlogPost(store, deleteBlogPost);
+        cacheRemoveBlogPost(store, deleteBlogPost, this.queryVariables);
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -205,14 +262,14 @@ export default class AdminBlogPostsView extends Vue {
           id: blogPost.id,
           title: blogPost.title,
           slug: blogPost.slug,
-          description: blogPost.description,
-          content: blogPost.content,
-          comments: blogPost.comments,
           is_updated: blogPost.is_updated,
           comments_count: blogPost.comments_count,
-          user: blogPost.user,
           created_at: blogPost.created_at,
-          updated_at: blogPost.updated_at
+          updated_at: blogPost.updated_at,
+          passage: blogPost.passage,
+          content: blogPost.content,
+          user: blogPost.user,
+          comments: blogPost.comments
         }
       }
     });
@@ -222,6 +279,40 @@ export default class AdminBlogPostsView extends Vue {
 
   get searchInputPlaceHolder() {
     return this.$t('resource.search', { resource: 'blog posts' });
+  }
+
+  previousBlogPosts(query) {
+    this.currentPage--;
+    this.queryMore(query);
+  }
+
+  nextBlogPosts(query) {
+    this.currentPage++;
+    this.queryMore(query);
+  }
+
+  async queryMore(query) {
+    this.isLoading = true;
+    await query.fetchMore({
+      variables: {
+        count: this.perPage,
+        orderBy: [{ field: 'id', order: 'DESC' }],
+        page: this.searchTerm === '' ? this.currentPage : 1,
+        title: this.searchTerm === '' ? undefined : this.searchTerm
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const newPosts = fetchMoreResult.blogPosts.data;
+        const newPaginator = fetchMoreResult.blogPosts.paginatorInfo;
+        return {
+          blogPosts: {
+            __typename: previousResult.blogPosts.__typename,
+            data: [...newPosts],
+            paginatorInfo: { ...newPaginator }
+          }
+        };
+      }
+    });
+    this.isLoading = false;
   }
 }
 </script>

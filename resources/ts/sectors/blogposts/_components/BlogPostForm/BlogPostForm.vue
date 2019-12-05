@@ -15,17 +15,6 @@
       grid-row
         grid-item
           lvql-input( 
-            :name="$t('blogPosts.description')",
-            :placeholder="$t('blogPosts.description_placeholder')",
-            id="description",
-            validation="max: 191",
-            v-model="blogPost.description",
-            required
-          )
-
-      grid-row
-        grid-item
-          lvql-input( 
             :name="$t('blogPosts.content')",
             :placeholder="$t('blogPosts.content_placeholder')",
             id="content",
@@ -46,6 +35,7 @@ import EditBlogPost from '../../_gql/mutations/editBlogPost.gql';
 @Component
 export default class BlogPostForm extends Vue {
   @Prop({ required: true }) blogPost!: IBlogPostInput;
+  @Prop({ default: {} }) variables!: any;
   @Prop({ default: true }) isAdd!: boolean;
 
   private sendCreateBlogPostInfo() {
@@ -54,7 +44,7 @@ export default class BlogPostForm extends Vue {
       mutation: CreateBlogPost,
       variables: { data: this.blogPost },
       update: (store, { data: { createBlogPost } }) => {
-        cacheAddBlogPost(store, createBlogPost);
+        cacheAddBlogPost(store, createBlogPost, this.variables);
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -63,14 +53,14 @@ export default class BlogPostForm extends Vue {
           id: this.blogPost.id,
           title: this.blogPost.title,
           slug: this.blogPost.title,
-          description: this.blogPost.description,
+          is_updated: true,
+          comments_count: 0,
+          created_at: 'Just now',
+          updated_at: 'Just now',
+          passage: this.blogPost.content,
           content: this.blogPost.content,
           user: { __typename: 'User', ...this.$auth.user() },
-          is_updated: false,
-          comments_count: 0,
-          comments: [],
-          created_at: Date.now(),
-          updated_at: Date.now()
+          comments: []
         }
       }
     });
@@ -83,7 +73,7 @@ export default class BlogPostForm extends Vue {
       mutation: EditBlogPost,
       variables: { id: this.blogPost.id, data: this.blogPost },
       update: (store, { data: { editBlogPost } }) => {
-        cacheAddBlogPost(store, editBlogPost);
+        cacheAddBlogPost(store, editBlogPost, this.variables);
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -93,14 +83,14 @@ export default class BlogPostForm extends Vue {
           id: this.blogPost.id,
           title: this.blogPost.title,
           slug: this.blogPost.title,
-          description: this.blogPost.description,
-          content: this.blogPost.content,
-          user: { __typename: 'User', ...this.$auth.user() },
           is_updated: true,
           comments_count: 0,
-          comments: [],
-          created_at: Date.now(),
-          updated_at: Date.now()
+          created_at: 'Just now',
+          updated_at: 'Just now',
+          passage: this.blogPost.content,
+          content: this.blogPost.content,
+          user: { __typename: 'User', ...this.$auth.user() },
+          comments: []
         }
       }
     });

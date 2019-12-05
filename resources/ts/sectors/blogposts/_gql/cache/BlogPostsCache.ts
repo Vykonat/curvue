@@ -4,18 +4,22 @@ import {
   cacheRemoveItemFromList
 } from '../../../../common/utils/cache.util';
 
-export function cacheAddBlogPost(store: any, item: IBlogPostInput) {
-  const query = { query: BlogPostsQuery };
+export function cacheAddBlogPost(store: any, item: IBlogPost, variables: any) {
+  const query = { query: BlogPostsQuery, variables };
 
   const data = store.readQuery(query);
-  cacheAddItemToList(data.blogPosts, item);
+  cacheAddItemToList(data.blogPosts.data, item);
   store.writeQuery({ ...query, data });
 }
 
-export function cacheRemoveBlogPost(store: any, item: IBlogPost) {
-  const query = { query: BlogPostsQuery };
+export function cacheRemoveBlogPost(
+  store: any,
+  item: IBlogPost,
+  variables: any
+) {
+  const query = { query: BlogPostsQuery, variables };
 
   const data = store.readQuery(query);
-  cacheRemoveItemFromList(data.blogPosts, item);
+  cacheRemoveItemFromList(data.blogPosts.data, item);
   store.writeQuery({ ...query, data });
 }

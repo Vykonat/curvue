@@ -11,7 +11,6 @@ $factory->define(BlogPost::class, function (Faker $faker) {
     $slug = Str::slug($title, '-');
     return [
         'title' => $title,
-        'description' => $faker->sentence(25),
         'content' => $faker->paragraph(100),
     ];
 });

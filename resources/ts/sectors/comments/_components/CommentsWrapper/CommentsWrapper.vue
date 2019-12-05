@@ -8,7 +8,7 @@ apollo-query(
           grid
             grid-row
               grid-item( fill )
-                | {{ $t('core.loading') }}
+                lvql-loader( size="large" )
                 
         .error.apollo(v-else-if='error') 
           grid
@@ -20,7 +20,7 @@ apollo-query(
           lvql-modal( :show="isCommentModalShown", @close="closeCommentModal")
             comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
 
-          h2 {{ count }} Reponses
+          h2 {{ responseCount }}
             
           lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
           
@@ -35,6 +35,7 @@ import DeleteComment from '../../_gql/mutations/DeleteComment.gql';
 import dialog from '../../../../common/utils/dialog.util';
 import { cacheRemoveComment } from '../../_gql/cache/CommentsCache';
 import CommentListElement from '../../_components/CommentListElement/CommentListElement.vue';
+import { TranslateResult } from 'vue-i18n';
 
 @Component({
   components: {
@@ -88,6 +89,18 @@ export default class CommentsWrapper extends Vue {
     delete comment.updated_at;
 
     this.commentForm = { ...comment };
+  }
+
+  private get responseCount(): TranslateResult {
+    if (this.count === 0) {
+      return `${this.count} ${this.$t('comments.no_comments')}`;
+    }
+
+    if (this.count === 1) {
+      return `${this.count} ${this.$t('comments.count_single')}`;
+    }
+
+    return `${this.count} ${this.$t('comments.count_plural')}`;
   }
 
   async handleCommentDelete({

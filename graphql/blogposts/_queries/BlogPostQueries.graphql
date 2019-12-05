@@ -1,0 +1,9 @@
+extend type Query {
+  blogPosts(
+    orderBy: [OrderByClause!] @orderBy
+    title: String @where(operator: "like")
+  ): [BlogPost!]! @paginate
+  blogPost(slug: String! @eq): BlogPost! @find(model: "App\\Models\\BlogPost")
+  recentBlogPosts: [BlogPost!]!
+  lastWeekBlogPosts: [BlogPost!]!
+}

@@ -2,10 +2,11 @@
 
 namespace App\GraphQL\Queries;
 
+use App\Models\BlogPost;
 use GraphQL\Type\Definition\ResolveInfo;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class Comments
+class LastWeekBlogPosts
 {
     /**
      * Return a value for the field.
@@ -16,11 +17,10 @@ class Comments
      * @param  \GraphQL\Type\Definition\ResolveInfo  $resolveInfo Information about the query itself, such as the execution state, the field name, path to the field from the root, and more.
      * @return mixed
      */
-    public function resolve($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
+    public function __invoke($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
-        $type = $args['type'];
-        $id = $args['id'];
+        $blogPosts = BlogPost::LastWeek()->get();
 
-        return $type::find($id)->comments()->orderBy('id', 'desc')->get();
+        return $blogPosts;
     }
 }
