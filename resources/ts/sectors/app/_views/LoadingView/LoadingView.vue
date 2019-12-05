@@ -1,6 +1,6 @@
 <template lang="pug">
   lvql-layout( name="Default" )
-    h1 Loading View...
+    lvql-loader( size="large" )
 </template>
 
 <script lang="ts">

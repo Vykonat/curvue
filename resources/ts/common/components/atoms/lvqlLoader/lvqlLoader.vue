@@ -18,7 +18,6 @@ import { variationValidator } from '../../../utils/variationValidator.util';
 
 @Component
 export default class lvqlLoader extends Vue {
-  @Prop({ default: false }) medium!: boolean;
   @Prop({ default: 'default', validator: variationValidator }) variant!: string;
   @Prop({ default: '' }) size!: string;
 
@@ -83,6 +82,12 @@ export default class lvqlLoader extends Vue {
   &.danger {
     .path {
       stroke: color('danger');
+    }
+  }
+
+  &.default {
+    .path {
+      stroke: color('background');
     }
   }
 

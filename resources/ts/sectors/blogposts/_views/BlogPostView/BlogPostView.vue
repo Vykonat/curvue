@@ -9,7 +9,7 @@ lvql-layout( name="Default" )
         grid
           grid-row
             grid-item( fill )
-              | {{ $t('core.loading') }}
+              lvql-loader( size="large" )
                 
       .error.apollo(v-else-if='error') 
         grid

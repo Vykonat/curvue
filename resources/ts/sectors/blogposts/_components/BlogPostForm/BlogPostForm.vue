@@ -35,6 +35,7 @@ import EditBlogPost from '../../_gql/mutations/editBlogPost.gql';
 @Component
 export default class BlogPostForm extends Vue {
   @Prop({ required: true }) blogPost!: IBlogPostInput;
+  @Prop({ default: {} }) variables!: any;
   @Prop({ default: true }) isAdd!: boolean;
 
   private sendCreateBlogPostInfo() {
@@ -43,7 +44,7 @@ export default class BlogPostForm extends Vue {
       mutation: CreateBlogPost,
       variables: { data: this.blogPost },
       update: (store, { data: { createBlogPost } }) => {
-        cacheAddBlogPost(store, createBlogPost);
+        cacheAddBlogPost(store, createBlogPost, this.variables);
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -72,7 +73,7 @@ export default class BlogPostForm extends Vue {
       mutation: EditBlogPost,
       variables: { id: this.blogPost.id, data: this.blogPost },
       update: (store, { data: { editBlogPost } }) => {
-        cacheAddBlogPost(store, editBlogPost);
+        cacheAddBlogPost(store, editBlogPost, this.variables);
       },
       optimisticResponse: {
         __typename: 'Mutation',

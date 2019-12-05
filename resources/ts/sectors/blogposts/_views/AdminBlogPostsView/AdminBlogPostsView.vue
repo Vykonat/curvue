@@ -9,7 +9,7 @@
           grid
             grid-row
               grid-item( fill )
-                | {{ $t('core.loading') }}
+                lvql-loader( size="large" )
                 
         .error.apollo(v-else-if='error') 
           grid
@@ -19,11 +19,11 @@
 
         .result.apollo(v-else-if='data')
           lvql-modal( :show="isBlogPostModalShown", @close="closeBlogPostModal" )
-            blog-post-form( :is-add="isBlogPostFormAdd", :blogPost="blogPostForm" )
+            blog-post-form( :is-add="isBlogPostFormAdd", :blogPost="blogPostForm", :variables="queryVariables" )
           grid
             grid-row
               grid-item
-                lvql-button( variant="primary", @click="handleBlogPostAdd" ) {{ $t('resource.add', {resource:"Blog Post"})}}
+                lvql-button( variant="primary", @click="handleBlogPostAdd", :loading="isLoading" ) {{ $t('resource.add', {resource:"Blog Post"})}}
             grid-row
               grid-item( fill )
                 data-table(
@@ -40,11 +40,22 @@
                       @keydown.enter="queryMore(query)"
                     )
 
+                  template( v-slot:perPageSelector )
+                    lvql-select( 
+                      placeholder="Items per page: ", 
+                      :options="perPageOptions", 
+                      name="blogPostsPerPageSelect", 
+                      id="blogPostsPerPageSelect", 
+                      v-model="perPage",
+                      @input="queryMore(query)"
+                    )
+
                   template( v-slot:paginator )
                     pagination( 
                       :pages="data.blogPosts.paginatorInfo.lastPage", 
-                      :current-page="currentPage" 
-                      @prevClick="previousBlogPosts(query)"
+                      :current-page="currentPage",
+                      :loading="isLoading",
+                      @prevClick="previousBlogPosts(query)",
                       @nextClick="nextBlogPosts(query)"
                     )
                   template( v-slot:author="{ row }")
@@ -108,6 +119,27 @@ export default class AdminBlogPostsView extends Vue {
   isBlogPostFormAdd: boolean = true;
   currentPage: number = 1;
   searchTerm: string | undefined = '';
+  perPage: number = 5;
+  isLoading: boolean = false;
+
+  perPageOptions = [
+    {
+      label: '5',
+      value: 5
+    },
+    {
+      label: '10',
+      value: 10
+    },
+    {
+      label: '25',
+      value: 25
+    },
+    {
+      label: '50',
+      value: 50
+    }
+  ];
 
   blogPostForm: IBlogPostInput = {
     id: 0,
@@ -116,7 +148,7 @@ export default class AdminBlogPostsView extends Vue {
   };
 
   queryVariables = {
-    count: 5,
+    count: this.perPage,
     orderBy: [{ field: 'id', order: 'DESC' }],
     page: this.currentPage,
     title: this.searchTerm === '' ? undefined : this.searchTerm
@@ -221,7 +253,7 @@ export default class AdminBlogPostsView extends Vue {
         id: blogPost.id
       },
       update: (store, { data: { deleteBlogPost } }) => {
-        cacheRemoveBlogPost(store, deleteBlogPost);
+        cacheRemoveBlogPost(store, deleteBlogPost, this.queryVariables);
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -259,10 +291,11 @@ export default class AdminBlogPostsView extends Vue {
     this.queryMore(query);
   }
 
-  queryMore(query) {
-    query.fetchMore({
+  async queryMore(query) {
+    this.isLoading = true;
+    await query.fetchMore({
       variables: {
-        count: 5,
+        count: this.perPage,
         orderBy: [{ field: 'id', order: 'DESC' }],
         page: this.searchTerm === '' ? this.currentPage : 1,
         title: this.searchTerm === '' ? undefined : this.searchTerm
@@ -279,6 +312,7 @@ export default class AdminBlogPostsView extends Vue {
         };
       }
     });
+    this.isLoading = false;
   }
 }
 </script>

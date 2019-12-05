@@ -12,6 +12,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 export default class Pagination extends Vue {
   @Prop({ required: true }) pages!: number;
   @Prop({ required: true }) currentPage!: number;
+  @Prop({ default: true }) loading!: boolean;
 
   prevClick() {
     if (this.currentPage > 1) {
@@ -28,7 +29,7 @@ export default class Pagination extends Vue {
   get prevCssClasses() {
     const classes = ['prev'];
 
-    if (this.currentPage <= 1) {
+    if (this.currentPage <= 1 || this.loading) {
       classes.push('disabled');
     }
 
@@ -38,7 +39,7 @@ export default class Pagination extends Vue {
   get nextCssClasses() {
     const classes = ['next'];
 
-    if (this.currentPage >= this.pages) {
+    if (this.currentPage >= this.pages || this.loading) {
       classes.push('disabled');
     }
 
