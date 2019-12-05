@@ -1,9 +1,8 @@
 <template lang='pug'>
 panel
   panel-body
+    slot( name="search" )
     article.dataTableContainer
-      slot( name="search" )
-
       table.dataTable
         data-table-header(
           :columns="columns", 
@@ -21,11 +20,11 @@ panel
             td.dataTableNoResults( :colspan="columns.length - 1" )
               p No results
 
-      grid-row
-        grid-item
-          slot( name="paginator" )
-        grid-item    
-          lvql-select.dataTableSelect( placeholder="Items per page: ", :options="maxRowsOptions", name="dataTablePerPageSelect", id="dataTablePerPageSelect", v-model="maxRows" )
+    grid-row
+      grid-item
+        slot( name="paginator" )
+      grid-item
+        slot( name="perPageSelector" )
 </template>
 
 <script lang='ts'>
@@ -34,8 +33,6 @@ import { IDataTableHeaderItem, IComputedDataRowCell } from './interfaces';
 
 @Component
 export default class DataTable extends Vue {
-  maxRows: number = 5;
-
   @Prop({ required: true }) header!: object;
   @Prop({ required: true }) data!: any[];
   @Prop({ default: '' }) sortKey!: string;
@@ -45,35 +42,8 @@ export default class DataTable extends Vue {
   @Provide() internalSortKey: string = '';
   @Provide() internalSortDirection: string = '';
 
-  maxRowsOptions = [
-    {
-      label: '5',
-      value: 5
-    },
-    {
-      label: '10',
-      value: 10
-    },
-    {
-      label: '25',
-      value: 25
-    },
-    {
-      label: '50',
-      value: 50
-    }
-  ];
-
   get count() {
     return this.filteredData.length;
-  }
-
-  get maxPages() {
-    if (this.maxRows === 0) {
-      return 0;
-    }
-
-    return Math.ceil(this.count / this.maxRows);
   }
 
   get filteredData() {
@@ -101,11 +71,7 @@ export default class DataTable extends Vue {
   }
 
   get displayData() {
-    if (this.maxRows === 0 || this.maxRows >= this.count) {
-      return this.sortedData;
-    }
-
-    return this.sortedData.slice(this.maxRows);
+    return this.sortedData.slice(0);
   }
 
   get columns() {
@@ -205,6 +171,7 @@ export default class DataTable extends Vue {
 
 .dataTableContainer {
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .dataTable {
@@ -236,9 +203,5 @@ export default class DataTable extends Vue {
   &:last-child {
     border-right: none;
   }
-}
-
-.dataTableSelect {
-  margin-top: space(4);
 }
 </style>
