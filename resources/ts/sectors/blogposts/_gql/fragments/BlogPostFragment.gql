@@ -6,16 +6,16 @@ fragment BlogPost on BlogPost {
   id
   title
   slug
-  description
-  content
   is_updated
   comments_count
+  created_at
+  updated_at
+  passage
+  content
   user {
     ...UserRelationship
   }
   comments {
     ...CommentRelationship
   }
-  created_at
-  updated_at
 }

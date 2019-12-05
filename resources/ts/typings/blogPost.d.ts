@@ -3,17 +3,14 @@ declare interface IBlogPost {
   id: number;
   title: string;
   slug: string;
-  description: string;
-  content: string;
   comments_count: number;
-  comments: IComment[];
-  user: IUserRelationship;
+  is_updated: boolean;
   created_at: string;
   updated_at: string;
-  is_updated: boolean;
+  content: string;
+  passage: string;
+  user: IUserRelationship;
+  comments: IComment[];
 }
 
-declare type IBlogPostInput = Pick<
-  IBlogPost,
-  'id' | 'title' | 'description' | 'content'
->;
+declare type IBlogPostInput = Pick<IBlogPost, 'id' | 'title' | 'content'>;

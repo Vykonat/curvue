@@ -11,15 +11,11 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 export default class PostHeader extends Vue {
   @Prop({ required: true }) blogPost!: IBlogPost;
 
-  get title(): string {
+  private get title(): string {
     return this.blogPost.title;
   }
 
-  get description(): string {
-    return this.blogPost.description;
-  }
-
-  get date(): string {
+  private get date(): string {
     return this.blogPost.is_updated
       ? `Updated ${this.blogPost.updated_at}`
       : this.blogPost.created_at;

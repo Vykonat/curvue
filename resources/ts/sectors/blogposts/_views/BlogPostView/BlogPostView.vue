@@ -9,7 +9,7 @@ lvql-layout( name="Default" )
         grid
           grid-row
             grid-item( fill )
-              | {{ $t('core.loading') }}
+              lvql-loader( size="large" )
                 
       .error.apollo(v-else-if='error') 
         grid
@@ -24,6 +24,7 @@ lvql-layout( name="Default" )
             section.left
               | {{ data.blogPost.content }}
             section.right
+              recent-blog-posts
               blog-post-sidebar( :url="data.blogPost.slug" )
         comments-wrapper( type="App\\Models\\BlogPost", :type-id="data.blogPost.id", :count="data.blogPost.comments_count" )
 </template>
@@ -41,6 +42,10 @@ import BlogPostSidebar from '../../_components/BlogPostSidebar/BlogPostSidebar.v
     CommentsWrapper: () =>
       import(
         /* webpackChunkName: "Comments_Blog_Post_Wrapper" */ '../../../comments/_components/CommentsWrapper/CommentsWrapper.vue'
+      ),
+    RecentBlogPosts: () =>
+      import(
+        /* webpackChunkName: "Recent_Blog_Posts" */ '../../_components/RecentBlogPosts/RecentBlogPosts.vue'
       )
   },
 

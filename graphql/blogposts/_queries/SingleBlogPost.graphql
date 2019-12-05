@@ -1,3 +1,0 @@
-extend type Query {
-  blogPost(slug: String! @eq): BlogPost @find(model: "App\\Models\\BlogPost")
-}

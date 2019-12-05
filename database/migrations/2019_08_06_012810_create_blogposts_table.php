@@ -18,7 +18,6 @@ class CreateBlogpostsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('slug');
-            $table->mediumText('description');
             $table->mediumText('content');
             $table->timestamps();
 

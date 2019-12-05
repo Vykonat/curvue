@@ -8,21 +8,19 @@ article.Truncate
       v-if="!isTruncated"
     )
 
-  span( v-if="!showMoreButton && !permanent && isTruncated" )
-
   a(
-    v-else-if="showMoreButton && !permanent",
-    href="#",
-    @click.prevent="showMore"
-    ) {{ $t('truncate.showMore') }}
-
-  a(
-    v-else-if="!showMoreButton && !permanent"
+    v-if="!showMoreButton"
     href="#",
     @click.prevent="showLess"
   ) {{ $t('truncate.showLess') }}
 
-  br( v-else )
+  br( v-else-if="showMoreButton && isTruncated" )
+
+  a(
+    v-else
+    href="#",
+    @click.prevent="showMore"
+    ) {{ $t('truncate.showMore') }}
 </template>
 
 <script lang='ts'>
@@ -44,7 +42,6 @@ export default class Truncate extends Vue {
 
   @Prop({ default: 3 }) lines!: number;
   @Prop({ default: 250 }) duration!: number;
-  @Prop({ default: false }) permanent!: boolean;
 
   get height() {
     return this.lineHeight * (this.lines > 1 ? 2 : 0.6);
@@ -103,7 +100,7 @@ export default class Truncate extends Vue {
     this.collapsedHeight = this.lines * this.lineHeight;
 
     if (this.offsetHeight <= this.collapsedHeight) {
-      this.showMoreButton = false;
+      this.showMoreButton = true;
       this.isTruncated = true;
       return;
     }

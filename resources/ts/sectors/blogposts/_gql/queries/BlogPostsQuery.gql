@@ -1,7 +1,18 @@
 #import "../fragments/BlogPostFragment.gql"
 
-query BlogPosts {
-  blogPosts {
-    ...BlogPost
+query BlogPosts(
+  $orderBy: [OrderByClause!]
+  $count: Int!
+  $page: Int!
+  $title: String
+) {
+  blogPosts(orderBy: $orderBy, count: $count, page: $page, title: $title) {
+    data {
+      ...BlogPost
+    }
+    paginatorInfo {
+      currentPage
+      lastPage
+    }
   }
 }

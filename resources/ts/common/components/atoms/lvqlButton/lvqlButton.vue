@@ -14,6 +14,7 @@
     :aria-hidden="isDisabled",
   )
     slot.buttonContent( v-if = "loading === false" )
+    lvql-loader( v-else )
 </template>
 
 <script lang="ts">
