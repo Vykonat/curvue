@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b920c98259eca692ab1aa441ccf584a1",
+    "content-hash": "e143575a23828bf56f3fbab93bdb65cf",
     "packages": [
         {
             "name": "bkwld/laravel-pug",
@@ -7910,7 +7910,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1.3"
+        "php": "^7.4"
     },
     "platform-dev": []
 }
