@@ -1,0 +1,13 @@
+type BlogPost {
+  id: ID!
+  title: String!
+  slug: String!
+  comments_count: Int
+  is_updated: Boolean
+  created_at: String!
+  updated_at: String!
+  passage: String!
+  content: String!
+  user: User! @belongsTo(relation: "user")
+  comments: [Comment!]! @morphMany @lazyLoad(relation: "comments")
+}

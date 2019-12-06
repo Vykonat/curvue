@@ -15,6 +15,7 @@
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import { defaultMetaOptions } from '../../common/config/vue-meta.config';
+import { Route } from 'vue-router';
 
 @Component({
   metaInfo: {
@@ -23,10 +24,10 @@ import { defaultMetaOptions } from '../../common/config/vue-meta.config';
 })
 export default class App extends Vue {
   isNavigating: boolean = true;
-  @Provide() layout: string = 'div';
+  layout: string = 'div';
 
-  initProgressBar() {
-    this.$router.beforeEach((to: any, from: any, next: any) => {
+  initProgressBar(): void {
+    this.$router.beforeEach((to: Route, from: Route, next: Function) => {
       if (to.name) {
         this.isNavigating = true;
       }
@@ -37,21 +38,22 @@ export default class App extends Vue {
     });
   }
 
-  get currentCookieVersion() {
+  get currentCookieVersion(): string {
     return '1.1.0';
   }
 
-  get cookieConsentVersion() {
-    return localStorage.getItem('cookie-consent-version');
+  get cookieConsentVersion(): string {
+    const cookieJson = localStorage.getItem('cookie-consent-version');
+    return cookieJson !== null ? cookieJson : '0.0.0';
   }
 
-  setCookieConsentVersion() {
+  setCookieConsentVersion(): void {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('cookie-consent-version', this.currentCookieVersion);
     }
   }
 
-  mounted() {
+  mounted(): void {
     this.initProgressBar();
   }
 }

@@ -1,0 +1,3 @@
+extend type Mutation @middleware(checks: ["jwt.auth"]) {
+  createComment(data: CreateCommentInput! @spread): Comment! @create
+}

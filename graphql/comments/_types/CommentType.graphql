@@ -1,0 +1,13 @@
+type Comment {
+  id: ID!
+  content: String!
+  commentable_id: Int!
+  commentable_type: String!
+  user_id: Int!
+  comments_count: Int
+  is_updated: Boolean
+  user: User! @belongsTo(relation: "user")
+  comments: [Comment!] @hasMany(relation: "comments")
+  created_at: String!
+  updated_at: String!
+}

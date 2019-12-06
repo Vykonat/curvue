@@ -1,0 +1,7 @@
+#import "../fragments/CommentFragment.gql"
+
+mutation DeleteComment($id: ID!) {
+  deleteComment(id: $id) {
+    ...Comment
+  }
+}

@@ -60,34 +60,76 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { apolloClient } from '../../../../common/config/apollo.config';
+import { cacheAddUser } from '../../_gql/cache/UsersCache';
 import dialog from '../../../../common/utils/dialog.util';
 import CreateUser from '../../_gql/mutations/createUser.gql';
 import EditUser from '../../_gql/mutations/editUser.gql';
 
 @Component
 export default class UserForm extends Vue {
-  @Prop({ required: true }) user;
+  @Prop({ required: true }) user!: IUserInput | IUser;
   @Prop({ default: true }) isAdd!: boolean;
 
-  get activeMutation() {
-    if (this.isAdd) {
-      return CreateUser;
-    }
+  private sendCreateUserInfo() {
+    const vm = this;
+    apolloClient.mutate({
+      mutation: CreateUser,
+      variables: { data: this.user },
+      update: (store, { data: { createUser } }) => {
+        cacheAddUser(store, createUser);
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        createUser: {
+          __typename: 'User',
+          id: this.user.id,
+          name: this.user.name,
+          email: this.user.email,
+          role_id: this.user.role_id,
+          role: 'Patron',
+          blog_posts: [],
+          comments: [],
+          created_at: Date.now(),
+          updated_at: Date.now()
+        }
+      }
+    });
+    dialog(this.$t('resource.created', { resource: 'User' }), false);
+  }
 
-    return EditUser;
+  private sendEditUserInfo() {
+    const vm = this;
+    apolloClient.mutate({
+      mutation: EditUser,
+      variables: { id: this.user.id, data: this.user },
+      update: (store, { data: { editUser } }) => {
+        cacheAddUser(store, editUser);
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        editUser: {
+          __typename: 'User',
+          id: this.user.id,
+          name: this.user.name,
+          email: this.user.email,
+          role_id: this.user.role_id,
+          role: '',
+          blog_posts: [],
+          comments: [],
+          created_at: Date.now(),
+          updated_at: Date.now()
+        }
+      }
+    });
+    dialog(this.$t('resource.updated', { resource: 'User' }), false);
   }
 
   sendData() {
-    apolloClient.mutate({
-      mutation: this.activeMutation,
-      variables: { id: this.user.id, data: this.user }
-    });
-
     if (this.isAdd) {
-      dialog(this.$t('resource.created', { resource: 'User' }), false);
-    } else {
-      dialog(this.$t('resource.updated', { resource: 'User' }), false);
+      return this.sendCreateUserInfo();
     }
+
+    return this.sendEditUserInfo();
   }
 
   get userFormTitle() {

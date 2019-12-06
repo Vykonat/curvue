@@ -1,0 +1,7 @@
+#import "../fragments/BlogPostFragment.gql"
+
+mutation DeleteBlogPost($id: ID!) {
+  deleteBlogPost(id: $id) {
+    ...BlogPost
+  }
+}

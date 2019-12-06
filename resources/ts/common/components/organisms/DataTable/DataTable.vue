@@ -1,9 +1,8 @@
 <template lang='pug'>
 panel
   panel-body
+    slot( name="search" )
     article.dataTableContainer
-      data-table-search( v-if="showSearch", v-model="searchTerm", :placeholder="placeholder")
-
       table.dataTable
         data-table-header(
           :columns="columns", 
@@ -21,11 +20,11 @@ panel
             td.dataTableNoResults( :colspan="columns.length - 1" )
               p No results
 
-      grid-row
-        grid-item
-          pagination( :v-if="maxPages > 1", :pages="maxPages", :current-page="currentPage + 1", @change="paginationClick" )
-        grid-item    
-          lvql-select.dataTableSelect( placeholder="Items per page: ", :options="maxRowsOptions", name="dataTablePerPageSelect", id="dataTablePerPageSelect", v-model="maxRows" )
+    grid-row
+      grid-item
+        slot( name="paginator" )
+      grid-item
+        slot( name="perPageSelector" )
 </template>
 
 <script lang='ts'>
@@ -36,76 +35,19 @@ import { IDataTableHeaderItem, IComputedDataRowCell } from './interfaces';
 export default class DataTable extends Vue {
   @Prop({ required: true }) header!: object;
   @Prop({ required: true }) data!: any[];
-  @Prop({ default: 0 }) page!: number;
-  @Prop({ default: 5 }) maxRows!: number;
-  @Prop({ default: true }) showSearch!: boolean;
   @Prop({ default: '' }) sortKey!: string;
   @Prop({ default: '' }) placeholder!: string;
   @Prop({ default: 'asc' }) sortDirection!: string;
 
   @Provide() internalSortKey: string = '';
   @Provide() internalSortDirection: string = '';
-  @Provide() currentPage: number = 0;
-  @Provide() searchTerm: string = '';
-
-  maxRowsOptions = [
-    {
-      label: '5',
-      value: 5
-    },
-    {
-      label: '10',
-      value: 10
-    },
-    {
-      label: '25',
-      value: 25
-    },
-    {
-      label: '50',
-      value: 50
-    }
-  ];
 
   get count() {
     return this.filteredData.length;
   }
 
-  get maxPages() {
-    if (this.maxRows === 0) {
-      return 0;
-    }
-
-    return Math.ceil(this.count / this.maxRows);
-  }
-
   get filteredData() {
-    const query = this.searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-    if (query.length === 0) {
-      return this.data;
-    }
-
-    const searchRegex: RegExp = new RegExp(`${query}`, 'gmi');
-    const filter = (row: IDataTableHeaderItem[]) => {
-      let match: boolean = false;
-
-      Object.keys(row).forEach((key: string) => {
-        const column: IDataTableHeaderItem = this.header[key];
-
-        if (typeof column === 'undefined' || column.visible === false) {
-          return;
-        }
-
-        if (column.visible && match === false) {
-          match = searchRegex.exec(row[key].toString().toLowerCase()) !== null;
-        }
-      });
-
-      return match;
-    };
-
-    return this.data.slice(0).filter(filter);
+    return this.data.slice(0);
   }
 
   get sortedData() {
@@ -129,14 +71,7 @@ export default class DataTable extends Vue {
   }
 
   get displayData() {
-    if (this.maxRows === 0 || this.maxRows >= this.count) {
-      return this.sortedData;
-    }
-
-    return this.sortedData.slice(
-      this.currentPage * this.maxRows,
-      (this.currentPage + 1) * this.maxRows
-    );
+    return this.sortedData.slice(0);
   }
 
   get columns() {
@@ -214,16 +149,8 @@ export default class DataTable extends Vue {
     this.$emit('click', this.getRowObject(cells));
   }
 
-  paginationClick(page: number) {
-    this.currentPage = page - 1;
-  }
-
   getVisibleCells(cells: IComputedDataRowCell[]) {
     return cells.filter((cell: IDataTableHeaderItem) => cell.visible);
-  }
-
-  mounted() {
-    this.currentPage = this.page;
   }
 
   @Watch('sortKey', { immediate: true })
@@ -244,6 +171,7 @@ export default class DataTable extends Vue {
 
 .dataTableContainer {
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .dataTable {
@@ -275,9 +203,5 @@ export default class DataTable extends Vue {
   &:last-child {
     border-right: none;
   }
-}
-
-.dataTableSelect {
-  margin-top: space(4);
 }
 </style>

@@ -1,0 +1,16 @@
+fragment User on User {
+  __typename
+  id
+  role_id
+  name
+  email
+  role
+  blog_posts {
+    id
+  }
+  comments {
+    id
+  }
+  created_at
+  updated_at
+}

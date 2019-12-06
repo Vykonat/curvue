@@ -34,13 +34,19 @@ export default class cwdSidebarGroupItem extends Vue {
     padding: space();
     font-weight: fontWeight('content');
     font-size: fontSize();
-    color: color('text');
+    color: color('text', 'inverse');
     text-decoration: none;
 
     &:hover {
       font-weight: fontWeight('content', 'bold');
-      background: color('background', 'dark');
+      background: color('background', 'inverse');
 
+      i {
+        color: color('primary');
+      }
+    }
+
+    &:active {
       i {
         color: color('primary');
       }

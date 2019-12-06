@@ -5,6 +5,8 @@ return [
     'home' => 'Accueil',
     'users' => 'Utilisateurs',
     'admin' => 'Administrateur',
+    'blogPosts' => 'Blog',
+    'blogPost' => 'Voir le message',
     'manage' => 'Gérer',
     'legal' => 'Légal',
     'cookies' => 'Consentement des Cookies',
