@@ -1,6 +1,6 @@
 <template lang="pug">
   collapse-animation
-    article( v-if="isShown", :class="modalCssClasses", ref="modal" )
+    article( v-show="isShown", :class="modalCssClasses", ref="modal" )
       slot
 </template>
 
