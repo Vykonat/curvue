@@ -1,10 +1,13 @@
-<template lang='pug'>
+<template lang="pug">
   panel.CommentListElement
     panel-header( :title="author", :subtitle="date")
     panel-body
       grid-row
         grid-item( fill )
           truncate {{ content }}
+          router-link( :to="{ name: 'comments.discussion', params: {id: this.comment.id} }")
+            i.fas.fa-comments {{ comment.comments_count }}
+            | {{ $t('comments.show_discussion') }}
     panel-footer( v-if="isAuthorized" )
       lvql-button(
         :is-ghost="true",
@@ -54,7 +57,7 @@ export default class CommentListElement extends Vue {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~styles/app';
 
 .CommentListElement {

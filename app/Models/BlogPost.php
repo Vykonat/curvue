@@ -15,7 +15,7 @@ use App\Http\Traits\Commentable;
 class BlogPost extends Model
 {
     use DateAttributeTransformations;
-    use commentable;
+    use Commentable;
     
     /**
      * The "booting" method of the model.
@@ -51,19 +51,11 @@ class BlogPost extends Model
     }
 
     /**
-     * Get the route passage attribute for the model.
+     * Get the passage attribute for the model.
      */
     public function getPassageAttribute(): string
     {
         return Str::limit($this->content, 400);
-    }
-
-    /**
-     * Return the blog posts comments
-     */
-    public function comments(): MorphMany
-    {
-        return $this->morphMany(Comment::class, 'commentable');
     }
 
     /**

@@ -1,7 +1,8 @@
 <template lang="pug">
   lvql-layout( name="Admin" )
     apollo-query(
-      :query="require('../../_gql/queries/CommentsQuery.gql')"
+      :query="require('../../_gql/queries/AllCommentsQuery.gql')"
+      :variables="queryVariables"
     )
       template( slot-scope="{ result: { data, loading, error}, query }" )
         .loading.apollo(v-if='loading')
@@ -19,33 +20,55 @@
         .result.apollo(v-else-if='data')
           lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal" )
             comment-form( :is-add="isCommentFormAdd", :comment="commentForm", :type="commentForm.commentable_type", :type-id="commentForm.commentable_id" )
-          grid
-            grid-row
-              grid-item
-                lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
-            grid-row
-              grid-item( fill )
-                data-table(
-                  :header="commentsDataTableHeader", 
-                  :data="data.comments",
-                  :placeholder="searchInputPlaceHolder",
-                )
-                  template( v-slot:author="{ row }" )
-                    | {{ row.user.name }}
-                  template( v-slot:actions="{ row }" )
-                    lvql-button(
+          grid-row
+            grid-item( fill )
+              data-table(
+                :header="commentsDataTableHeader", 
+                :data="data.allComments.data",
+                :placeholder="searchInputPlaceHolder",
+              )
+                template( v-slot:perPageSelector )
+                  lvql-select( 
+                    placeholder="Items per page: ", 
+                    :options="perPageOptions", 
+                    name="commentsPerPageSelect", 
+                    id="commentsPerPageSelect", 
+                    v-model="perPage",
+                    @input="queryMore(query)"
+                  )
+
+                template( v-slot:paginator )
+                  pagination( 
+                    :pages="data.allComments.paginatorInfo.lastPage", 
+                    :current-page="currentPage",
+                    :loading="isLoading",
+                    @prevClick="previousComments(query)",
+                    @nextClick="nextComments(query)"
+                  )
+                template( v-slot:author="{ row }" )
+                  | {{ row.user.name }}
+                template( v-slot:actions="{ row }" )
+                  lvql-button(
                       variant="accent",
                       :isGhost="true",
-                      @click="handleCommentEdit(row)",
+                      tag="router-link",
+                      :target="{ name: 'comments.discussion', params: { id: row.id } }"
                     )
-                      i.fas.fa-pencil-alt
+                      i.fas.fa-eye
 
-                    lvql-button(
-                      variant="danger",
-                      :isGhost="true",
-                      @click="handleCommentDelete(row)"
-                    )
-                      i.fas.fa-trash
+                  lvql-button(
+                    variant="warn",
+                    :isGhost="true",
+                    @click="handleCommentEdit(row)",
+                  )
+                    i.fas.fa-pencil-alt
+
+                  lvql-button(
+                    variant="danger",
+                    :isGhost="true",
+                    @click="handleCommentDelete(row)"
+                  )
+                    i.fas.fa-trash
 
 </template>
 
@@ -82,6 +105,34 @@ export default class AdminCommentsView extends Vue {
   isCommentModalShown: boolean = false;
   isCommentFormAdd: boolean = true;
   commentForm: Partial<IComment> = {};
+  perPage: number = 5;
+  currentPage: number = 1;
+  isLoading: boolean = false;
+
+  perPageOptions = [
+    {
+      label: '5',
+      value: 5
+    },
+    {
+      label: '10',
+      value: 10
+    },
+    {
+      label: '25',
+      value: 25
+    },
+    {
+      label: '50',
+      value: 50
+    }
+  ];
+
+  queryVariables = {
+    first: this.perPage,
+    orderBy: [{ field: 'id', order: 'DESC' }],
+    page: this.currentPage
+  };
 
   @Provide() commentsDataTableHeader = {
     id: {
@@ -127,11 +178,6 @@ export default class AdminCommentsView extends Vue {
   closeCommentModal(): void {
     this.isCommentModalShown = false;
     this.commentForm = {};
-  }
-
-  handleCommentAdd(): void {
-    this.isCommentFormAdd = true;
-    this.isCommentModalShown = true;
   }
 
   handleCommentEdit(comment: IComment): void {
@@ -200,10 +246,40 @@ export default class AdminCommentsView extends Vue {
   }
 
   get searchInputPlaceHolder() {
-    /**
-     * Necessary to use this getter, not sure what's wrong
-     */
     return this.$t('resource.search', { resource: 'comments' });
+  }
+
+  previousComments(query) {
+    this.currentPage--;
+    this.queryMore(query);
+  }
+
+  nextComments(query) {
+    this.currentPage++;
+    this.queryMore(query);
+  }
+
+  async queryMore(query) {
+    this.isLoading = true;
+    await query.fetchMore({
+      variables: {
+        first: this.perPage,
+        orderBy: [{ field: 'id', order: 'DESC' }],
+        page: this.currentPage
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const newComments = fetchMoreResult.allComments.data;
+        const newPaginator = fetchMoreResult.allComments.paginatorInfo;
+        return {
+          allComments: {
+            __typename: previousResult.allComments.__typename,
+            data: [...newComments],
+            paginatorInfo: { ...newPaginator }
+          }
+        };
+      }
+    });
+    this.isLoading = false;
   }
 }
 </script>
