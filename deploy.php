@@ -2,6 +2,7 @@
 namespace Deployer;
 
 require 'recipe/laravel.php';
+require 'vendor/deployer/recipes/recipe/cachetool.php';
 
 // Project name
 set('application', 'lavuql');
@@ -33,4 +34,3 @@ after('deploy:failed', 'deploy:unlock');
 
 // before('deploy:symlink', 'artisan:migrate');
 after('deploy:symlink', 'cachetool:clear:opcache');
-after('deploy:symlink', 'cachetool:clear:apc');
