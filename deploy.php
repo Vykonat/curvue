@@ -34,3 +34,5 @@ after('deploy:failed', 'deploy:unlock');
 
 // before('deploy:symlink', 'artisan:migrate');
 after('deploy:symlink', 'cachetool:clear:opcache');
+after('deploy:symlink', 'cachetool:clear:apc');
+
