@@ -148,7 +148,7 @@ export default class AdminBlogPostsView extends Vue {
   };
 
   queryVariables = {
-    count: this.perPage,
+    first: this.perPage,
     orderBy: [{ field: 'id', order: 'DESC' }],
     page: this.currentPage,
     title: this.searchTerm === '' ? undefined : this.searchTerm
@@ -295,7 +295,7 @@ export default class AdminBlogPostsView extends Vue {
     this.isLoading = true;
     await query.fetchMore({
       variables: {
-        count: this.perPage,
+        first: this.perPage,
         orderBy: [{ field: 'id', order: 'DESC' }],
         page: this.searchTerm === '' ? this.currentPage : 1,
         title: this.searchTerm === '' ? undefined : this.searchTerm
@@ -316,4 +316,3 @@ export default class AdminBlogPostsView extends Vue {
   }
 }
 </script>
-
