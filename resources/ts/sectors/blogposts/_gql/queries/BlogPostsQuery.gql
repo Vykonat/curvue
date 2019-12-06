@@ -2,11 +2,11 @@
 
 query BlogPosts(
   $orderBy: [OrderByClause!]
-  $count: Int!
+  $first: Int!
   $page: Int!
   $title: String
 ) {
-  blogPosts(orderBy: $orderBy, count: $count, page: $page, title: $title) {
+  blogPosts(orderBy: $orderBy, first: $first, page: $page, title: $title) {
     data {
       ...BlogPost
     }

@@ -49,7 +49,7 @@ export default class BlogPostsIndexView extends Vue {
   cursor: number = 1;
 
   queryVariables = {
-    count: 5,
+    first: 5,
     orderBy: [{ field: 'id', order: 'DESC' }],
     page: 1
   };
@@ -58,7 +58,7 @@ export default class BlogPostsIndexView extends Vue {
     this.cursor++;
     query.fetchMore({
       variables: {
-        count: 5,
+        first: 5,
         orderBy: [{ field: 'id', order: 'DESC' }],
         page: this.cursor
       },
@@ -78,7 +78,6 @@ export default class BlogPostsIndexView extends Vue {
 }
 </script>
 
-
 <style lang="scss" scoped>
 @import '~styles/app';
 
@@ -93,4 +92,3 @@ export default class BlogPostsIndexView extends Vue {
   margin: space(16) 0;
 }
 </style>
-
