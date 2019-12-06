@@ -23,7 +23,7 @@ add('writable_dirs', []);
 // Hosts
 host('communityrails.ca')
     ->set('deploy_path', '/var/www/html/lavuql')
-    ->user('deploy')
+    ->user('lavuql-deployer')
     ->port(22);
 
 // [Optional] if deploy fails automatically unlock.
