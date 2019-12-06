@@ -18,7 +18,7 @@
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          lvql-modal( :show="isBlogPostModalShown", @close="closeBlogPostModal" )
+          lvql-modal( :is-shown="isBlogPostModalShown", @close="closeBlogPostModal" )
             blog-post-form( :is-add="isBlogPostFormAdd", :blogPost="blogPostForm", :variables="queryVariables" )
           grid
             grid-row

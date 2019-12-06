@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
   article.DatePicker
     lvql-input(
       :name="name",
@@ -13,7 +13,7 @@
     
     span {{ date | datePicker }}
 
-    lvql-modal( :show="show", @close="show=false" )
+    lvql-modal( :is-shown="show", @close="show=false" )
       calendar.calendar(
         :min-date="minDate",
         :max-date="maxDate",
@@ -27,7 +27,7 @@
 
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
 
 @Component({
@@ -84,7 +84,7 @@ export default class DatePicker extends Vue {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~styles/app';
 
 .DatePicker {

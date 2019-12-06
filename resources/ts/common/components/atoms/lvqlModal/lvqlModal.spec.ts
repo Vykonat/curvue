@@ -11,7 +11,7 @@ describe('Modal Atom Component', () => {
     });
     expect(wrapper.findAll('p')).toHaveLength(0);
 
-    wrapper.setProps({ show: true });
+    wrapper.setProps({ isShown: true });
     expect(wrapper.findAll('p')).toHaveLength(1);
   });
 
@@ -29,7 +29,7 @@ describe('Modal Atom Component', () => {
   test('Closes on outside click', () => {
     const wrapper = shallowMount(lvqlModal, {
       propsData: {
-        show: true
+        isShown: true
       },
       slots: {
         default: `<p>test</p>`
@@ -50,7 +50,7 @@ describe('Modal Atom Component', () => {
   test('Closes on escape button', () => {
     const wrapper = shallowMount(lvqlModal, {
       propsData: {
-        show: true
+        isShown: true
       },
       slots: {
         default: `<p>test</p>`

@@ -17,7 +17,7 @@ apollo-query(
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          lvql-modal( :show="isCommentModalShown", @close="closeCommentModal")
+          lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal")
             comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
 
           h2 {{ responseCount }}
@@ -93,7 +93,7 @@ export default class CommentsWrapper extends Vue {
 
   private get responseCount(): TranslateResult {
     if (this.count === 0) {
-      return `${this.count} ${this.$t('comments.no_comments')}`;
+      return `${this.$t('comments.no_comments')}`;
     }
 
     if (this.count === 1) {

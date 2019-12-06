@@ -1,10 +1,10 @@
-<template lang='pug'>
+<template lang="pug">
   collapse-animation
-    article( v-if="show", :class="modalCssClasses", ref="modal" )
+    article( v-if="isShown", :class="modalCssClasses", ref="modal" )
       slot
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
 
 @Component({
@@ -20,7 +20,7 @@ export default class lvqlModal extends Vue {
     modal: any;
   };
 
-  @Prop({ default: false }) show!: boolean;
+  @Prop({ default: false }) isShown!: boolean;
   @Prop({ default: false }) fitContent!: boolean;
 
   get modalCssClasses() {
@@ -59,7 +59,7 @@ export default class lvqlModal extends Vue {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~styles/app';
 @import '~styles/components/modal';
 

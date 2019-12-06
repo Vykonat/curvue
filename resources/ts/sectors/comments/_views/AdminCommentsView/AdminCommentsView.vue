@@ -17,7 +17,7 @@
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          lvql-modal( :show="isCommentModalShown", @close="closeCommentModal" )
+          lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal" )
             comment-form( :is-add="isCommentFormAdd", :comment="commentForm", :type="commentForm.commentable_type", :type-id="commentForm.commentable_id" )
           grid
             grid-row
@@ -207,4 +207,3 @@ export default class AdminCommentsView extends Vue {
   }
 }
 </script>
-
