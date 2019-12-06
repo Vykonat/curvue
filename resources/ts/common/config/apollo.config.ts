@@ -2,14 +2,14 @@ import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { AUTH_TOKEN } from './app.config';
+import { AUTH_TOKEN, GQL_URL } from './app.config';
 
 const token: HTMLMetaElement | null = document.head.querySelector(
   "meta[name='csrf-token']"
 );
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:8000/graphql',
+  uri: GQL_URL ? `${GQL_URL}` : '',
   headers: {
     'X-CSRF-TOKEN': (<HTMLMetaElement>token).content,
     'X-Requested-With': 'XMLHttpRequest',
