@@ -30,5 +30,28 @@ export const CommentRoutes: RouteConfig[] = [
         }
       ]
     }
+  },
+
+  {
+    path: '/discussion/:id',
+    name: 'comments.discussion',
+    component: () =>
+      lazyLoadRoute(
+        import(
+          /* webpackChunkName: "Discussion_Page" */ './DiscussionView/DiscussionView.vue'
+        )
+      ),
+    meta: {
+      breadcrumbs: [
+        {
+          label: i18n.t('navigation.home'),
+          target: { name: 'app.home' }
+        },
+        {
+          label: i18n.t('navigation.comments'),
+          target: { name: 'comments.discussion' }
+        }
+      ]
+    }
   }
 ];

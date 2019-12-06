@@ -1,0 +1,3 @@
+extend type Query {
+  allComments(orderBy: [OrderByClause!] @orderBy): [Comment!]! @paginate
+}

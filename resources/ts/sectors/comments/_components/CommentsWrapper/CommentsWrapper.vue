@@ -17,14 +17,17 @@ apollo-query(
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          lvql-modal( :show="isCommentModalShown", @close="closeCommentModal")
+          lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal")
             comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
 
           h2 {{ responseCount }}
-            
-          lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
           
-          grid-row( v-for="comment in data.comments", :key="comment.id" )
+          template( v-if="$auth.check()" )
+            lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
+          template( v-else )
+            comment-sign-up-notification
+          
+          grid-row( v-if="data.comments" v-for="comment in data.comments", :key="comment.id" )
             grid-item( fill )
               comment-list-element( :comment="comment", @editComment="handleCommentEdit(comment)", @deleteComment="handleCommentDelete(comment)" )
 </template>
@@ -35,6 +38,7 @@ import DeleteComment from '../../_gql/mutations/DeleteComment.gql';
 import dialog from '../../../../common/utils/dialog.util';
 import { cacheRemoveComment } from '../../_gql/cache/CommentsCache';
 import CommentListElement from '../../_components/CommentListElement/CommentListElement.vue';
+import CommentSignUpNotification from '../../_components/CommentSignUpNotification/CommentSignUpNotification.vue';
 import { TranslateResult } from 'vue-i18n';
 
 @Component({
@@ -44,7 +48,8 @@ import { TranslateResult } from 'vue-i18n';
         /* webpackChunkName: "Comment_Form" */ '../../_components/CommentForm/CommentForm.vue'
       ),
 
-    CommentListElement: CommentListElement
+    CommentListElement: CommentListElement,
+    CommentSignUpNotification: CommentSignUpNotification
   }
 })
 export default class CommentsWrapper extends Vue {
@@ -93,7 +98,7 @@ export default class CommentsWrapper extends Vue {
 
   private get responseCount(): TranslateResult {
     if (this.count === 0) {
-      return `${this.count} ${this.$t('comments.no_comments')}`;
+      return `${this.$t('comments.no_comments')}`;
     }
 
     if (this.count === 1) {

@@ -1,0 +1,13 @@
+#import "../fragments/CommentFragment.gql"
+
+query BlogPosts($orderBy: [OrderByClause!], $first: Int!, $page: Int!) {
+  allComments(orderBy: $orderBy, first: $first, page: $page) {
+    data {
+      ...Comment
+    }
+    paginatorInfo {
+      currentPage
+      lastPage
+    }
+  }
+}

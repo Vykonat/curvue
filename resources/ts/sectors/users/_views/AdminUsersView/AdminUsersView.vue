@@ -17,7 +17,7 @@
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          lvql-modal( :show="isUserModalShown", @close="closeUserModal" )
+          lvql-modal( :is-shown="isUserModalShown", @close="closeUserModal" )
             user-form( :is-add="isUserFormAdd", :user="userForm" )
           grid
             grid-row
@@ -203,4 +203,3 @@ export default class AdminUsersView extends Vue {
   }
 }
 </script>
-
