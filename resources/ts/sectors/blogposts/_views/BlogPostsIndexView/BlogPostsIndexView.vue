@@ -18,13 +18,14 @@ lvql-layout( name="Default" )
                 pre {{ error }}
 
         .result.apollo(v-else-if='data')
-          grid-row
-            grid-item.blogPostWrapper( v-for="blogPost, i in data.blogPosts.data", :key="i" )
-              blog-post-list-element( :blog-post="blogPost" )
+          template(v-if="data.blogPosts.data")
+            grid-row
+              grid-item.blogPostWrapper( v-for="blogPost, i in data.blogPosts.data", :key="i" )
+                blog-post-list-element( :blog-post="blogPost" )
 
-          grid-row
-            grid-item(fill)
-              lvql-button.loadMoreButton( variant="primary", :is-outline="true", @click="loadMore(query)" ) Load More
+            grid-row
+              grid-item(fill)
+                lvql-button.loadMoreButton( variant="primary", :is-outline="true", @click="loadMore(query)" ) {{ $t('core.load_more') }}
 </template>
 
 <script lang="ts">
