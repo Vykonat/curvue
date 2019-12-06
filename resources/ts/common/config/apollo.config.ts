@@ -9,7 +9,7 @@ const token: HTMLMetaElement | null = document.head.querySelector(
 );
 
 const httpLink = createHttpLink({
-  uri: GQL_URL ? `${GQL_URL}` : '',
+  uri: 'https://communityrails.ca/graphql',
   headers: {
     'X-CSRF-TOKEN': (<HTMLMetaElement>token).content,
     'X-Requested-With': 'XMLHttpRequest',
@@ -26,30 +26,6 @@ const addAuthHeader = new ApolloLink((operation, forward) => {
   });
   return (<any>forward)(operation);
 });
-
-export const onLogin = async (apolloClient: any, token: string) => {
-  if (typeof localStorage !== 'undefined' && token) {
-    localStorage.setItem(AUTH_TOKEN, token);
-  }
-
-  try {
-    await apolloClient.resetStore();
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const onLogout = async (apolloClient: any) => {
-  if (typeof localStorage !== 'undefined') {
-    localStorage.removeItem(AUTH_TOKEN);
-  }
-
-  try {
-    await apolloClient.resetStore();
-  } catch (e) {
-    console.log(e);
-  }
-};
 
 // Create the apollo client
 export const apolloClient = new ApolloClient({
