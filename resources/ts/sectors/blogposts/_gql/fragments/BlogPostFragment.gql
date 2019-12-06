@@ -8,6 +8,7 @@ fragment BlogPost on BlogPost {
   slug
   is_updated
   comments_count
+  has_commented
   created_at
   updated_at
   passage

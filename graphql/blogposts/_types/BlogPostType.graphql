@@ -4,6 +4,7 @@ type BlogPost {
   slug: String!
   comments_count: Int
   is_updated: Boolean
+  has_commented: Boolean
   created_at: String!
   updated_at: String!
   passage: String!
