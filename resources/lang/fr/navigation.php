@@ -5,6 +5,7 @@ return [
     'home' => 'Accueil',
     'users' => 'Utilisateurs',
     'admin' => 'Administrateur',
+    'comments' => 'commentaires',
     'blogPosts' => 'Blog',
     'blogPost' => 'Voir le message',
     'manage' => 'Gérer',
@@ -12,5 +13,5 @@ return [
     'cookies' => 'Consentement des Cookies',
     'privacy' => 'Politique de Confidentialité',
     'terms' => 'conditions d\'utilisation',
-    '404' => 'Tu es perdu',
+    '404' => 'Tu es perdu', 
 ];
