@@ -9413,6 +9413,11 @@ serialize-javascript@^1.4.0, serialize-javascript@^1.7.0:
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.7.0.tgz#d6e0dfb2a3832a8c94468e6eb1db97e55a192a65"
   integrity sha512-ke8UG8ulpFOxO8f8gRYabHQe/ZntKlcig2Mp+8+URDP1D8vJZ0KUt7LYo07q25Z/+JVSgpr/cui9PIp5H6/+nA==
 
+serialize-javascript@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-2.1.1.tgz#952907a04a3e3a75af7f73d92d15e233862048b2"
+  integrity sha512-MPLPRpD4FNqWq9tTIjYG5LesFouDhdyH0EPY3gVK4DRD5+g4aDqdNSzLIwceulo3Yj+PL1bPh6laE5+H6LTcrQ==
+
 serve-index@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/serve-index/-/serve-index-1.9.1.tgz#d3768d69b1e7d82e5ce050fff5b453bea12a9239"
@@ -10984,13 +10989,13 @@ vscode-languageserver-types@^3.5.0:
   resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.14.0.tgz#d3b5952246d30e5241592b6dde8280e03942e743"
   integrity sha512-lTmS6AlAlMHOvPQemVwo3CezxBp0sNB95KNPkqp3Nxd5VFEnuG1ByM0zlRWos0zjO3ZWtkvhal0COgiV1xIA4A==
 
-vue-apollo@^3.0.0-rc.1:
-  version "3.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/vue-apollo/-/vue-apollo-3.0.0-rc.2.tgz#3b59a93084cb37c19be46b9f18cd63214a782718"
-  integrity sha512-bYgC3sK77rBlLEHi4XFFAm9NTTB10/onAUzUIhioKM8BKnnFOagjykqBtA9xFRVmFvOcgZBNNbgJhzScBeTn4Q==
+vue-apollo@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/vue-apollo/-/vue-apollo-3.0.2.tgz#b198ecfa3765850a0b9f2b84ffaa7fbd8ec15f52"
+  integrity sha512-lrKyTT1L5mjDEp7nyqnTRJwD/kTpLDBIqFfZ+TGQVivjlUz6o5VA0pLYGCx5cGa1gEF/ERWc0AEdNSdKgs7Ygg==
   dependencies:
     chalk "^2.4.2"
-    serialize-javascript "^1.7.0"
+    serialize-javascript "^2.1.0"
     throttle-debounce "^2.1.0"
 
 vue-axios@^2.1.4:
