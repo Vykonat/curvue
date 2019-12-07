@@ -3,13 +3,11 @@
     template( v-slot:fields )
       grid-row
         grid-item
-          lvql-input( 
+          lvql-text-area( 
             :name="$t('comments.content')",
             :placeholder="$t('comments.content_placeholder')",
-            id="content",
-            type="text",
-            validation="min: 30",
             v-model="comment.content",
+            validation="min: 30",
             required
           )
 </template>
@@ -52,6 +50,7 @@ export default class CommentForm extends Vue {
           user_id: this.$auth.user().id,
           is_updated: false,
           comments_count: 0,
+          has_commented: false,
           comments: [],
           user: { __typename: 'User', ...this.$auth.user() },
           created_at: 'Just now',
@@ -88,6 +87,7 @@ export default class CommentForm extends Vue {
           user_id: this.$auth.user().id,
           is_updated: false,
           comments_count: 0,
+          has_commented: false,
           comments: [],
           user: { __typename: 'User', ...this.$auth.user() },
           created_at: 'Just now',

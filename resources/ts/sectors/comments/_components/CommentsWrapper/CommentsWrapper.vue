@@ -89,6 +89,7 @@ export default class CommentsWrapper extends Vue {
     delete comment.user;
     delete comment.comments;
     delete comment.is_updated;
+    delete comment.has_commented;
     delete comment.comments_count;
     delete comment.created_at;
     delete comment.updated_at;
@@ -115,6 +116,7 @@ export default class CommentsWrapper extends Vue {
     content,
     user_id,
     is_updated,
+    has_commented,
     comments_count,
     user,
     comments,
@@ -151,6 +153,7 @@ export default class CommentsWrapper extends Vue {
           commentable_type,
           user_id,
           is_updated,
+          has_commented,
           comments_count,
           content,
           user,

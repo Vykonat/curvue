@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 lvql-layout( name="Default" )
   apollo-query(
     :query="require('../../_gql/queries/BlogPostQuery.gql')",
@@ -22,14 +22,14 @@ lvql-layout( name="Default" )
         grid.blogPostContentContainer
           grid-row
             section.left
-              | {{ data.blogPost.content }}
+              mark-down {{ data.blogPost.content }}
             section.right
               recent-blog-posts
               blog-post-sidebar( :url="data.blogPost.slug" )
         comments-wrapper( type="App\\Models\\BlogPost", :type-id="data.blogPost.id", :count="data.blogPost.comments_count" )
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 import BlogPostHeader from '../../_components/BlogPostHeader/BlogPostHeader.vue';
@@ -61,7 +61,7 @@ import BlogPostSidebar from '../../_components/BlogPostSidebar/BlogPostSidebar.v
 export default class BlogPostView extends Vue {}
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~styles/app';
 
 .blogPostContentContainer {
