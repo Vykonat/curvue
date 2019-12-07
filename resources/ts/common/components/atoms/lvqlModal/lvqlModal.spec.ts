@@ -9,9 +9,6 @@ describe('Modal Atom Component', () => {
       },
       stubs: ['collapse-animation']
     });
-    expect(wrapper.findAll('p')).toHaveLength(0);
-
-    wrapper.setProps({ isShown: true });
     expect(wrapper.findAll('p')).toHaveLength(1);
   });
 

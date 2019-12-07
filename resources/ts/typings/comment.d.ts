@@ -6,6 +6,7 @@ declare interface IComment {
   commentable_id: number;
   comments_count: number;
   is_updated: boolean;
+  has_commented: boolean;
   content: string;
   user: IUserRelationship;
   comments: ICommentRelationship;
