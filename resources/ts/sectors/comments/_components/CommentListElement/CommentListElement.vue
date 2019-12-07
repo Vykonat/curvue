@@ -4,7 +4,8 @@
     panel-body
       grid-row
         grid-item( fill )
-          truncate {{ content }}
+          truncate 
+            mark-down {{ content }}
           router-link( :to="{ name: 'comments.discussion', params: {id: this.comment.id} }")
             i.fas.fa-comments {{ comment.comments_count }}
             | {{ $t('comments.show_discussion') }}

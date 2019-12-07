@@ -10,6 +10,23 @@ html {
   }
 }
 
+code,
+pre {
+  background: color('background', 'inverse') !important;
+  padding: space(16) space(12);
+  width: 600px;
+  color: color('background', 'light') !important;
+}
+
+blockquote {
+  margin-top: space();
+  padding-top: space(2);
+  padding-left: space();
+  padding-bottom: space(2);
+  margin-bottom: space(4);
+  border-left: space(4) solid color('accent');
+}
+
 .contentBelowNav {
   margin-top: space(52) + space();
 }

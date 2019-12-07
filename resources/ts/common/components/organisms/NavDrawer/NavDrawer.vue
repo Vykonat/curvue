@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
   aside( ref="sidebar" )
     button( :class="hamburgerClasses", type="button", aria-label="menu", @click="toggleNavDrawer" )
       span.box
@@ -8,7 +8,7 @@
       slot
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
 
 @Component
@@ -71,7 +71,7 @@ export default class NavDrawer extends Vue {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~styles/app';
 @import '~styles/components/navDrawer';
 
@@ -100,7 +100,7 @@ export default class NavDrawer extends Vue {
 
 .hamburger {
   position: fixed;
-  z-index: 100;
+  z-index: z('hamburger');
   top: $nav-drawer-hamburger-top;
   left: $nav-drawer-hamburger-left;
   padding: $nav-drawer-hamburger-padding;

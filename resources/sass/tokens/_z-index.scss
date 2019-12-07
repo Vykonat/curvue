@@ -1,8 +1,9 @@
 $indexes: (
   navigation: 1,
   drawer: 2,
-  modal: 3,
-  notification: 4
+  hamburger: 3,
+  modal: 4,
+  notification: 5
 );
 
 @function z($index) {

@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
   panel.blogPost
     panel-body
       blog-post-header( :blog-post="blogPost" )
@@ -10,7 +10,8 @@
 
       grid-row.passage
         grid-item( fill )
-          truncate {{ passage }}
+          truncate 
+            mark-down {{ passage }}
 
       grid-row
         grid-item
@@ -45,7 +46,7 @@ export default class BlogPostListElement extends Vue {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~styles/app';
 
 .Button {

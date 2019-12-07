@@ -14,13 +14,12 @@
 
       grid-row
         grid-item
-          lvql-input( 
-            :name="$t('blogPosts.content')",
-            :placeholder="$t('blogPosts.content_placeholder')",
-            id="content",
-            validation="min: 30",
+          lvql-text-area( 
+            :name="$t('blogPost.content')",
+            :placeholder="$t('blogPost.content_placeholder')",
             v-model="blogPost.content",
-            required,
+            validation="min: 30",
+            required
           )
 </template>
 
@@ -112,4 +111,3 @@ export default class BlogPostForm extends Vue {
   }
 }
 </script>
-
