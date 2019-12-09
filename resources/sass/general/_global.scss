@@ -10,12 +10,10 @@ html {
   }
 }
 
-code,
 pre {
-  background: color('background', 'inverse') !important;
-  padding: space(16) space(12);
-  width: 600px;
-  color: color('background', 'light') !important;
+  background: color('background', 'inverse');
+  padding: space(12) 0;
+  color: color('background', 'light');
 }
 
 blockquote {
