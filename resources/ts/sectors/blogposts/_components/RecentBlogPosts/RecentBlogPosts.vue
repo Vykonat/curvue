@@ -15,7 +15,7 @@ apollo-query(
           grid-item( fill )
             pre {{ error }}
 
-    .result.apollo(v-else-if='data.length')
+    .result.apollo(v-else-if='data.recentBlogPosts')
       panel
         panel-body 
           h3 Recent Posts

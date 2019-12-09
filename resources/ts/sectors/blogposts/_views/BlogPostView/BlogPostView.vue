@@ -17,7 +17,7 @@ lvql-layout( name="Default" )
             grid-item( fill )
               pre {{ error }}
 
-      .result.apollo(v-else-if='data.length')
+      .result.apollo(v-else-if='data.blogPost')
         blog-post-header( :blog-post="data.blogPost" )
         grid.blogPostContentContainer
           grid-row

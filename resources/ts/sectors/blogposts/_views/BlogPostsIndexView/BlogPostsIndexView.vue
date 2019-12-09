@@ -17,7 +17,7 @@ lvql-layout( name="Default" )
               grid-item( fill )
                 pre {{ error }}
 
-        .result.apollo(v-else-if='data.length')
+        .result.apollo(v-else-if='data.blogPosts')
           grid-row
             grid-item.blogPostWrapper( v-for="blogPost, i in data.blogPosts.data", :key="i" )
               blog-post-list-element( :blog-post="blogPost" )

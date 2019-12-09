@@ -17,7 +17,7 @@
               grid-item( fill )
                 pre {{ error }}
 
-        .result.apollo(v-else-if='data.length')
+        .result.apollo(v-else-if='data')
           lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal" )
             comment-form( :is-add="isCommentFormAdd", :comment="commentForm", :type="commentForm.commentable_type", :type-id="commentForm.commentable_id" )
           grid-row
@@ -69,9 +69,6 @@
                     @click="handleCommentDelete(row)"
                   )
                     i.fas.fa-trash
-
-        .no-results.apollo(v-else)
-          no-results-component
 </template>
 
 <script lang="ts">
