@@ -9,7 +9,7 @@ const token: HTMLMetaElement | null = document.head.querySelector(
 );
 
 const httpLink = createHttpLink({
-  uri: 'https://communityrails.ca/graphql',
+  uri: 'http://localhost:8000/graphql',
   headers: {
     'X-CSRF-TOKEN': (<HTMLMetaElement>token).content,
     'X-Requested-With': 'XMLHttpRequest',

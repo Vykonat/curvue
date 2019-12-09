@@ -16,7 +16,7 @@ apollo-query(
               grid-item( fill )
                 pre {{ error }}
 
-        .result.apollo(v-else-if='data.comments')
+        .result.apollo(v-else-if='data')
           lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal")
             comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
 
