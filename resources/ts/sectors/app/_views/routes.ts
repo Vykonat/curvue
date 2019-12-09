@@ -89,18 +89,6 @@ export const AppRoutes: RouteConfig[] = [
         import(
           /* webpackChunkName: "Not_Found_Page" */ './NotFoundView/NotFoundView.vue'
         )
-      ),
-    meta: {
-      breadcrumbs: [
-        {
-          label: i18n.t('navigation.home'),
-          target: { name: 'app.home' }
-        },
-        {
-          label: i18n.t('navigation.404'),
-          target: '/'
-        }
-      ]
-    }
+      )
   }
 ];

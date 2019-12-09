@@ -46,6 +46,8 @@
                     )
                       i.fas.fa-trash
 
+        .no-results.apollo(v-else)
+          no-results-component
 </template>
 
 <script lang="ts">

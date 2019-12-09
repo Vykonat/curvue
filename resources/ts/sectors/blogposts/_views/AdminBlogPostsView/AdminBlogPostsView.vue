@@ -17,7 +17,7 @@
               grid-item( fill )
                 pre {{ error }}
 
-        .result.apollo(v-else-if='data')
+        .result.apollo(v-else-if='data.length')
           lvql-modal( :is-shown="isBlogPostModalShown", @close="closeBlogPostModal" )
             blog-post-form( :is-add="isBlogPostFormAdd", :blogPost="blogPostForm", :variables="queryVariables" )
           grid
@@ -83,6 +83,8 @@
                     )
                       i.fas.fa-trash
 
+        .no-results.apollo(v-else)
+          no-results-component
 </template>
 
 <script lang="ts">

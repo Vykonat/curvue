@@ -17,15 +17,17 @@ lvql-layout( name="Default" )
               grid-item( fill )
                 pre {{ error }}
 
-        .result.apollo(v-else-if='data')
-          template(v-if="data.blogPosts.data")
-            grid-row
-              grid-item.blogPostWrapper( v-for="blogPost, i in data.blogPosts.data", :key="i" )
-                blog-post-list-element( :blog-post="blogPost" )
+        .result.apollo(v-else-if='data.length')
+          grid-row
+            grid-item.blogPostWrapper( v-for="blogPost, i in data.blogPosts.data", :key="i" )
+              blog-post-list-element( :blog-post="blogPost" )
 
-            grid-row
-              grid-item(fill)
-                lvql-button.loadMoreButton( variant="primary", :is-outline="true", @click="loadMore(query)" ) {{ $t('core.load_more') }}
+          grid-row
+            grid-item(fill)
+              lvql-button.loadMoreButton( variant="primary", :is-outline="true", @click="loadMore(query)" ) {{ $t('core.load_more') }}
+        
+        .no-results.apollo(v-else)
+          no-results-component
 </template>
 
 <script lang="ts">
@@ -38,12 +40,7 @@ import BlogPostListElement from '../../_components/BlogPostListElement/BlogPostL
     BlogPostListElement: BlogPostListElement
   },
   metaInfo: {
-    ...setMetaInfo(
-      'Blog Posts',
-      'Lavuql blog post index page',
-      'blog-posts',
-      ''
-    )
+    ...setMetaInfo('Blog Posts', 'Lavuql blog post index page', 'blog', '')
   }
 })
 export default class BlogPostsIndexView extends Vue {

@@ -17,7 +17,7 @@ lvql-layout( name="Default" )
             grid-item( fill )
               pre {{ error }}
 
-      .result.apollo(v-else-if='data')
+      .result.apollo(v-else-if='data.length')
         blog-post-header( :blog-post="data.blogPost" )
         grid.blogPostContentContainer
           grid-row
@@ -27,6 +27,9 @@ lvql-layout( name="Default" )
               recent-blog-posts
               blog-post-sidebar( :url="data.blogPost.slug" )
         comments-wrapper( type="App\\Models\\BlogPost", :type-id="data.blogPost.id", :count="data.blogPost.comments_count" )
+
+      .no-results.apollo(v-else)
+        no-results-component
 </template>
 
 <script lang="ts">
