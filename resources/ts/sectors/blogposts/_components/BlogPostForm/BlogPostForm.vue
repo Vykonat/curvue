@@ -15,8 +15,8 @@
       grid-row
         grid-item
           lvql-text-area( 
-            :name="$t('blogPost.content')",
-            :placeholder="$t('blogPost.content_placeholder')",
+            :name="$t('blogPosts.content')",
+            :placeholder="$t('blogPosts.content_placeholder')",
             v-model="blogPost.content",
             validation="min: 30",
             required
