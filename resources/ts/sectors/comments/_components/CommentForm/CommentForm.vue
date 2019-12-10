@@ -10,6 +10,8 @@
             validation="min: 30",
             required
           )
+          mark-down
+            | {{ comment.content }}
 </template>
 
 <script lang="ts">

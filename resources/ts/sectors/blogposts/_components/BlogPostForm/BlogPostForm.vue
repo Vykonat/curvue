@@ -21,6 +21,11 @@
             validation="min: 30",
             required
           )
+
+      grid-row
+        grid-item
+          mark-down
+            | {{ blogPost.content }}
 </template>
 
 <script lang="ts">
