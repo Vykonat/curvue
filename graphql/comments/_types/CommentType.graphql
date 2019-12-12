@@ -1,14 +1,17 @@
 type Comment {
   id: ID!
   content: String!
-  commentable_id: Int!
+  commentable_id: String!
   commentable_type: String!
+  commentable: Commentable @morphTo
   user_id: Int!
   has_commented: Boolean
   comments_count: Int
   is_updated: Boolean
   user: User! @belongsTo(relation: "user")
-  comments: [Comment!] @hasMany(relation: "comments")
+  comments: [Comment!] @morphMany @lazyLoad(relation: "comments")
   created_at: String!
   updated_at: String!
 }
+
+union Commentable = BlogPost | Comment

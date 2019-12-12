@@ -3,19 +3,28 @@ import {
   cacheAddItemToList,
   cacheRemoveItemFromList
 } from '../../../../common/utils/cache.util';
+import { User, QueryUsersArgs } from '../../../../typings/schema';
 
-export function cacheAddUser(store: any, item: IUserInput) {
-  const query = { query: UsersQuery };
+export function cacheAddUser(
+  store: any,
+  item: User,
+  variables: QueryUsersArgs
+) {
+  const query = { query: UsersQuery, variables };
 
   const data = store.readQuery(query);
-  cacheAddItemToList(data.users, item);
+  cacheAddItemToList(data.users.data, item);
   store.writeQuery({ ...query, data });
 }
 
-export function cacheRemoveUser(store: any, item: IUser) {
-  const query = { query: UsersQuery };
+export function cacheRemoveUser(
+  store: any,
+  item: User,
+  variables: QueryUsersArgs
+) {
+  const query = { query: UsersQuery, variables };
 
   const data = store.readQuery(query);
-  cacheRemoveItemFromList(data.users, item);
+  cacheRemoveItemFromList(data.users.data, item);
   store.writeQuery({ ...query, data });
 }

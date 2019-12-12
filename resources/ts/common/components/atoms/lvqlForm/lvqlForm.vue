@@ -1,17 +1,16 @@
-<template lang='pug'>
+<template lang="pug">
   form.lvqlForm( @submit.prevent="$emit('submit')" )
     grid-row
-      grid-item
-        h3.formTitle {{ title }}
-
+      grid-item( fill )
+        legend.formLegend {{ title }}
         slot( name="fields" )
 
     grid-row
       grid-item
         lvql-button.formButton( type="submit", variant="primary" ) {{ buttonText }}
-</template> 
+</template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
@@ -21,7 +20,7 @@ export default class lvqlForm extends Vue {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~styles/app';
 
 .lvqlForm {
@@ -36,7 +35,9 @@ export default class lvqlForm extends Vue {
   width: 100%;
 }
 
-.formTitle {
-  text-align: center;
+.formLegend {
+  padding-bottom: space();
+  font-size: fontSize('h5');
+  font-weight: fontWeight('headings');
 }
 </style>

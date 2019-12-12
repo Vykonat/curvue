@@ -25,19 +25,14 @@ const devPlugins = [
   new SWPrecacheWebpackPlugin({
     cacheId: 'lavuql',
     filename: 'sw.js',
-    staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html}'],
+    staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html,json}'],
     minify: true,
     stripPrefix: 'public/',
     handleFetch: true,
     dynamicUrlToDependencies: {
       '/': ['resources/views/app.pug']
     },
-    staticFileGlobsIgnorePatterns: [
-      /\.map$/,
-      /mix-manifest\.json$/,
-      /manifest\.json$/,
-      /sw\.js$/
-    ],
+    staticFileGlobsIgnorePatterns: [/\.map$/, /mix-manifest\.json$/, /sw\.js$/],
     runtimeCaching: [
       {
         urlPattern: /^https:\/\/fonts\.googleapis\.com\//,

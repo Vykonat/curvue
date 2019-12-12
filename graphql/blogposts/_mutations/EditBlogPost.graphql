@@ -1,5 +1,6 @@
 extend type Mutation @middleware(checks: ["jwt.auth"]) {
-  editBlogPost(id: ID!, data: EditBlogPostInput! @spread): BlogPost!
+  editBlogPost(id: ID!, data: BlogPostInput! @spread): BlogPost!
     @update
     @can(ability: "update")
+    @inject(context: "user.id", name: "user_id")
 }

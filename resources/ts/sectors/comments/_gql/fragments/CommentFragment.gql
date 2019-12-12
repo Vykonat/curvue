@@ -1,4 +1,5 @@
 #import "../../../users/_gql/fragments/UserRelationshipFragment.gql"
+#import "../../../blogposts/_gql/fragments/BlogPostFragment.gql"
 #import "./CommentRelationshipFragment.gql"
 
 fragment Comment on Comment {
@@ -11,6 +12,14 @@ fragment Comment on Comment {
   has_commented
   is_updated
   content
+  commentable {
+    ... on BlogPost {
+      ...BlogPost
+    }
+    ... on Comment {
+      ...CommentRelationship
+    }
+  }
   user {
     ...UserRelationship
   }

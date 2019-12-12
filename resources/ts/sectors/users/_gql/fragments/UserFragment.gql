@@ -1,3 +1,5 @@
+#import '../../../blogposts/_gql/fragments/BlogPostFragment.gql'
+
 fragment User on User {
   __typename
   id
@@ -5,8 +7,8 @@ fragment User on User {
   name
   email
   role
-  blog_posts {
-    id
+  blogPosts {
+    ...BlogPost
   }
   comments {
     id

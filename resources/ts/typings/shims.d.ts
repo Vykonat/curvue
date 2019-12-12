@@ -5,6 +5,5 @@ declare module '*.vue' {
 }
 
 declare module '*.gql' {
-  const _default: any;
-  export default _default;
+  let _default: any;
 }

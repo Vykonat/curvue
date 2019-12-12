@@ -15,29 +15,36 @@
       grid-row
         grid-item
           lvql-text-area( 
-            :name="$t('blogPost.content')",
-            :placeholder="$t('blogPost.content_placeholder')",
+            :name="$t('blogPosts.content')",
+            :placeholder="$t('blogPosts.content_placeholder')",
             v-model="blogPost.content",
             validation="min: 30",
             required
           )
+
+      grid-row
+        grid-item
+          mark-down
+            | {{ blogPost.content }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { apolloClient } from '../../../../common/config/apollo.config';
 import { cacheAddBlogPost } from '../../_gql/cache/BlogPostsCache';
+import { BlogPost, QueryBlogPostsArgs } from '../../../../typings/schema';
 import dialog from '../../../../common/utils/dialog.util';
 import CreateBlogPost from '../../_gql/mutations/createBlogPost.gql';
 import EditBlogPost from '../../_gql/mutations/editBlogPost.gql';
+import { TranslateResult } from 'vue-i18n';
 
 @Component
 export default class BlogPostForm extends Vue {
-  @Prop({ required: true }) blogPost!: IBlogPostInput;
-  @Prop({ default: {} }) variables!: any;
+  @Prop({ required: true }) blogPost!: BlogPost;
+  @Prop({ default: {} }) variables!: QueryBlogPostsArgs;
   @Prop({ default: true }) isAdd!: boolean;
 
-  private sendCreateBlogPostInfo() {
+  private sendCreateBlogPostInfo(): void {
     const vm = this;
     apolloClient.mutate({
       mutation: CreateBlogPost,
@@ -49,16 +56,15 @@ export default class BlogPostForm extends Vue {
         __typename: 'Mutation',
         createBlogPost: {
           __typename: 'BlogPost',
-          id: this.blogPost.id,
-          title: this.blogPost.title,
-          slug: this.blogPost.title,
-          is_updated: true,
-          comments_count: 0,
+          ...this.blogPost,
+          slug: 'slug',
+          passage: '',
           created_at: 'Just now',
           updated_at: 'Just now',
-          passage: this.blogPost.content,
-          content: this.blogPost.content,
           user: { __typename: 'User', ...this.$auth.user() },
+          comments_count: 0,
+          has_commented: false,
+          is_updated: true,
           comments: []
         }
       }
@@ -66,7 +72,7 @@ export default class BlogPostForm extends Vue {
     dialog(this.$t('resource.created', { resource: 'Blog Post' }), false);
   }
 
-  private sendEditBlogPostInfo() {
+  private sendEditBlogPostInfo(): void {
     const vm = this;
     apolloClient.mutate({
       mutation: EditBlogPost,
@@ -79,16 +85,15 @@ export default class BlogPostForm extends Vue {
         id: this.blogPost.id,
         editBlogPost: {
           __typename: 'BlogPost',
-          id: this.blogPost.id,
-          title: this.blogPost.title,
-          slug: this.blogPost.title,
-          is_updated: true,
-          comments_count: 0,
+          ...this.blogPost,
+          slug: 'slug',
+          passage: '',
           created_at: 'Just now',
           updated_at: 'Just now',
-          passage: this.blogPost.content,
-          content: this.blogPost.content,
           user: { __typename: 'User', ...this.$auth.user() },
+          comments_count: 0,
+          has_commented: false,
+          is_updated: true,
           comments: []
         }
       }
@@ -104,7 +109,7 @@ export default class BlogPostForm extends Vue {
     return this.sendEditBlogPostInfo();
   }
 
-  get blogPostFormTitle() {
+  get blogPostFormTitle(): TranslateResult {
     return this.isAdd
       ? this.$t('resource.add', { resource: 'Blog Post' })
       : this.$t('resource.edit', { resource: 'Blog Post' });

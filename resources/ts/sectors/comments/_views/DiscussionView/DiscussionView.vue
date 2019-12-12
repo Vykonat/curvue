@@ -17,9 +17,12 @@
               grid-item( fill )
                 pre {{ error }}
 
-        .result.apollo(v-else-if='data')
+        .result.apollo(v-else-if='data.comment')
           comment-list-element( :comment="data.comment" )
           comments-wrapper( :comments="data.comment.comments" type="App\\Models\\Comment" :type-id="data.comment.id" :count="data.comment.comments_count" )
+
+        .no-results.apollo(v-else)
+          no-results-component
 </template>
 
 <script lang="ts">

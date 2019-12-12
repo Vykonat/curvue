@@ -1,3 +1,6 @@
 extend type Query {
-  allComments(orderBy: [OrderByClause!] @orderBy): [Comment!]! @paginate
+  allComments(
+    orderBy: [OrderByClause!] @orderBy
+    id: String @where(operator: "like")
+  ): [Comment!]! @paginate
 }
