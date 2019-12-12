@@ -21,6 +21,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import BlogPostHeader from '../BlogPostHeader/BlogPostHeader.vue';
+import { BlogPost } from '../../../../typings/schema';
 
 @Component({
   components: {
@@ -28,7 +29,7 @@ import BlogPostHeader from '../BlogPostHeader/BlogPostHeader.vue';
   }
 })
 export default class BlogPostListElement extends Vue {
-  @Prop({ required: true }) blogPost!: IBlogPost;
+  @Prop({ required: true }) blogPost!: BlogPost;
 
   private get blogPostSubtitle(): string {
     return `Written on ${this.blogPost.created_at} by ${this.blogPost.user.name}`;

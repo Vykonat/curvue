@@ -1,7 +1,0 @@
-input EditCommentInput {
-  id: Int
-  user_id: Int
-  content: String! @rules(apply: ["required", "min: 30"])
-  commentable_id: Int! @rules(apply: ["required"])
-  commentable_type: String! @rules(apply: ["required"])
-}

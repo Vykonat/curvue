@@ -23,12 +23,13 @@
 </template>
 
 <script lang="ts">
+import { Comment } from '../../../../typings/schema';
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import userRoles from '../../../../common/config/userRoles.config';
 
 @Component
 export default class CommentListElement extends Vue {
-  @Prop({ required: true }) comment!: IComment;
+  @Prop({ required: true }) comment!: Comment;
 
   get author(): string {
     if (typeof this.comment.user.name !== 'undefined') {

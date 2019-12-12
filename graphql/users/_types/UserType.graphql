@@ -5,8 +5,8 @@ type User {
   role: String!
     @field(resolver: "App\\GraphQL\\Mutations\\UserRoleStringResolver@resolve")
   email: String!
-  blog_posts: [BlogPost]! @hasMany(relation: "blogPosts")
-  comments: [Comment]! @hasMany(relation: "comments")
+  blogPosts: [BlogPost] @hasMany @lazyLoad(relation: "blogPosts")
+  comments: [Comment] @hasMany @lazyLoad(relation: "comments")
   created_at: String!
   updated_at: String!
 }

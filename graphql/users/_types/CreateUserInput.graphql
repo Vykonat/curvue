@@ -1,8 +1,0 @@
-input CreateUserInput {
-  id: Int
-  name: String! @rules(apply: ["required", "between:3, 191"])
-  email: String! @rules(apply: ["required", "email", "max:191"])
-  role_id: Int @rules(apply: ["between:1,2"])
-  password: String! @rules(apply: ["required", "min: 8", "confirmed"]) @bcrypt
-  password_confirmation: String! @rules(apply: ["required"]) @bcrypt
-}

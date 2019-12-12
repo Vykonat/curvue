@@ -90,6 +90,16 @@ import DeleteBlogPost from '../../_gql/mutations/deleteBlogPost.gql';
 import dialog from '../../../../common/utils/dialog.util';
 import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 import { cacheRemoveBlogPost } from '../../_gql/cache/BlogPostsCache';
+import {
+  BlogPost,
+  BlogPostInput,
+  QueryBlogPostsArgs
+} from '../../../../typings/schema';
+
+enum SortOrder {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
 
 @Component({
   components: {
@@ -122,122 +132,73 @@ export default class AdminBlogPostsView extends Vue {
   isLoading: boolean = false;
 
   perPageOptions = [
-    {
-      label: '5',
-      value: 5
-    },
-    {
-      label: '10',
-      value: 10
-    },
-    {
-      label: '25',
-      value: 25
-    },
-    {
-      label: '50',
-      value: 50
-    }
+    { label: '5', value: 5 },
+    { label: '10', value: 10 },
+    { label: '25', value: 25 },
+    { label: '50', value: 50 }
   ];
 
-  blogPostForm: IBlogPostInput = {
-    id: 0,
+  blogPostForm: BlogPostInput = {
+    id: '',
     title: '',
     content: ''
   };
 
-  queryVariables = {
+  queryVariables: QueryBlogPostsArgs = {
     first: this.perPage,
-    orderBy: [{ field: 'id', order: 'DESC' }],
+    orderBy: [{ field: 'id', order: SortOrder.Desc }],
     page: this.currentPage,
     title: this.searchTerm === '' ? undefined : this.searchTerm
   };
 
-  @Provide() blogPostsDataTableHeader = {
-    id: {
-      title: 'ID'
-    },
-
-    title: {
-      title: 'Title'
-    },
-
-    slug: {
-      visible: false
-    },
-
-    passage: {
-      visible: false
-    },
-
-    content: {
-      visible: false
-    },
-
-    user: {
-      title: 'Author',
-      slot: 'author'
-    },
-
-    comments_count: {
-      title: 'Comments'
-    },
-
-    is_updated: {
-      visible: false
-    },
-
-    comments: {
-      visible: false
-    },
-
-    created_at: {
-      title: 'Created'
-    },
-
-    updated_at: {
-      title: 'Updated'
-    },
-
-    actions: {
-      sortable: false,
-      title: 'Actions',
-      slot: 'actions'
-    }
+  blogPostsDataTableHeader = {
+    id: { title: 'ID' },
+    title: { title: 'Title' },
+    slug: { visible: false },
+    passage: { visible: false },
+    content: { visible: false },
+    has_commented: { visible: false },
+    user: { title: 'Author', slot: 'author' },
+    comments_count: { title: 'Comments' },
+    is_updated: { visible: false },
+    comments: { visible: false },
+    created_at: { title: 'Created' },
+    updated_at: { title: 'Updated' },
+    actions: { sortable: false, title: 'Actions', slot: 'actions' }
   };
 
   closeBlogPostModal(): void {
     this.isBlogPostModalShown = false;
     this.blogPostForm = {
-      id: 0,
+      id: '',
       title: '',
       content: ''
     };
   }
 
-  handleBlogPostAdd() {
+  handleBlogPostAdd(): void {
     this.isBlogPostFormAdd = true;
     this.isBlogPostModalShown = true;
   }
 
-  handleBlogPostEdit(blogPost: IBlogPost): void {
+  handleBlogPostEdit(blogPost: BlogPost): void {
     this.isBlogPostFormAdd = false;
     this.isBlogPostModalShown = true;
 
-    delete blogPost.__typename;
     delete blogPost.slug;
     delete blogPost.passage;
-    delete blogPost.comments;
-    delete blogPost.user;
-    delete blogPost.comments_count;
-    delete blogPost.is_updated;
     delete blogPost.created_at;
     delete blogPost.updated_at;
+    delete blogPost.user;
+    delete blogPost.comments_count;
+    delete blogPost.has_commented;
+    delete blogPost.is_updated;
+    delete blogPost.comments;
 
-    this.blogPostForm = blogPost;
+    this.blogPostForm = { ...blogPost };
   }
 
-  async handleBlogPostDelete(blogPost: IBlogPost): Promise<void> {
+  async handleBlogPostDelete(blogPost: BlogPost): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'Blog Post' }),
@@ -258,17 +219,7 @@ export default class AdminBlogPostsView extends Vue {
         __typename: 'Mutation',
         deleteBlogPost: {
           __typename: 'BlogPost',
-          id: blogPost.id,
-          title: blogPost.title,
-          slug: blogPost.slug,
-          is_updated: blogPost.is_updated,
-          comments_count: blogPost.comments_count,
-          created_at: blogPost.created_at,
-          updated_at: blogPost.updated_at,
-          passage: blogPost.passage,
-          content: blogPost.content,
-          user: blogPost.user,
-          comments: blogPost.comments
+          ...blogPost
         }
       }
     });
@@ -295,7 +246,7 @@ export default class AdminBlogPostsView extends Vue {
     await query.fetchMore({
       variables: {
         first: this.perPage,
-        orderBy: [{ field: 'id', order: 'DESC' }],
+        orderBy: [{ field: 'id', order: SortOrder.Desc }],
         page: this.searchTerm === '' ? this.currentPage : 1,
         title: this.searchTerm === '' ? undefined : this.searchTerm
       },
