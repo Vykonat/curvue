@@ -1,15 +1,16 @@
-<template lang='pug'>
+<template lang="pug">
   .blogPostHeaderContainer
     h2 {{ title }}
     | {{ date }}
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import { BlogPost } from '../../../../typings/schema';
 
 @Component
 export default class PostHeader extends Vue {
-  @Prop({ required: true }) blogPost!: IBlogPost;
+  @Prop({ required: true }) blogPost!: BlogPost;
 
   private get title(): string {
     return this.blogPost.title;
@@ -23,7 +24,7 @@ export default class PostHeader extends Vue {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~styles/app';
 
 .blogPostHeaderContainer {

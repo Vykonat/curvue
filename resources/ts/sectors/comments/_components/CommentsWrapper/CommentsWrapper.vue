@@ -1,41 +1,42 @@
 <template lang="pug">
 apollo-query(
-      :query="require('../../_gql/queries/CommentsQuery.gql')",
-      :variables="{ type: type, id: typeId }"
-    )
-      template( slot-scope="{ result: { data, loading, error}, query }" )
-        .loading.apollo(v-if='loading')
-          grid
-            grid-row
-              grid-item( fill )
-                lvql-loader( size="large" )
-                
-        .error.apollo(v-else-if='error') 
-          grid
-            grid-row
-              grid-item( fill )
-                pre {{ error }}
+  :query="require('../../_gql/queries/CommentsQuery.gql')",
+  :variables="{ type: type, id: typeId }"
+)
+  template( slot-scope="{ result: { data, loading, error}, query }" )
+    .loading.apollo(v-if='loading')
+      grid
+        grid-row
+          grid-item( fill )
+            lvql-loader( size="large" )
+            
+    .error.apollo(v-else-if='error') 
+      grid
+        grid-row
+          grid-item( fill )
+            pre {{ error }}
 
-        .result.apollo(v-else-if='data')
-          lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal")
-            comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
+    .result.apollo(v-else-if='data')
+      lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal")
+        comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
 
-          h2 {{ responseCount }}
-          
-          template( v-if="$auth.check()" )
-            lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
-          template( v-else )
-            comment-sign-up-notification
-          
-          grid-row( v-if="data.comments" v-for="comment in data.comments", :key="comment.id" )
-            grid-item( fill )
-              comment-list-element( :comment="comment", @editComment="handleCommentEdit(comment)", @deleteComment="handleCommentDelete(comment)" )
+      h6(align="center") {{ responseCount }}
+      
+      template( v-if="$auth.check()" )
+        lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
+      template( v-else )
+        comment-sign-up-notification
+      
+      grid-row( v-if="data.comments" v-for="comment in data.comments", :key="comment.id" )
+        grid-item.commentWrapper
+          comment-list-element( :comment="comment", @editComment="handleCommentEdit(comment)", @deleteComment="handleCommentDelete(comment)" )
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import DeleteComment from '../../_gql/mutations/DeleteComment.gql';
 import dialog from '../../../../common/utils/dialog.util';
+import { Comment, CommentInput } from '../../../../typings/schema';
 import { cacheRemoveComment } from '../../_gql/cache/CommentsCache';
 import CommentListElement from '../../_components/CommentListElement/CommentListElement.vue';
 import CommentSignUpNotification from '../../_components/CommentSignUpNotification/CommentSignUpNotification.vue';
@@ -54,13 +55,13 @@ import { TranslateResult } from 'vue-i18n';
 })
 export default class CommentsWrapper extends Vue {
   @Prop({ required: true }) type!: string;
-  @Prop({ required: true }) typeId!: number;
+  @Prop({ required: true }) typeId!: string;
   @Prop({ default: 0 }) count!: number;
 
   isCommentModalShown: boolean = false;
   isCommentFormAdd: boolean = true;
-  commentForm: ICommentInput = {
-    id: 0,
+  commentForm: CommentInput = {
+    id: '0',
     commentable_id: this.typeId,
     commentable_type: this.type,
     content: ''
@@ -69,7 +70,7 @@ export default class CommentsWrapper extends Vue {
   closeCommentModal(): void {
     this.isCommentModalShown = false;
     this.commentForm = {
-      id: 0,
+      id: '0',
       commentable_id: this.typeId,
       commentable_type: this.type,
       content: ''
@@ -81,20 +82,22 @@ export default class CommentsWrapper extends Vue {
     this.isCommentModalShown = true;
   }
 
-  handleCommentEdit(comment: IComment): void {
+  handleCommentEdit(comment: Comment): void {
     this.isCommentFormAdd = false;
     this.isCommentModalShown = true;
 
-    delete comment.__typename;
-    delete comment.user;
+    delete (<any>comment).__typename;
+    delete comment.user_id;
+    delete comment.comments_count;
     delete comment.comments;
+    delete comment.user;
+    delete comment.commentable;
+    delete comment.updated_at;
+    delete comment.created_at;
     delete comment.is_updated;
     delete comment.has_commented;
-    delete comment.comments_count;
-    delete comment.created_at;
-    delete comment.updated_at;
 
-    this.commentForm = { ...comment };
+    this.commentForm = comment;
   }
 
   private get responseCount(): TranslateResult {
@@ -109,20 +112,7 @@ export default class CommentsWrapper extends Vue {
     return `${this.count} ${this.$t('comments.count_plural')}`;
   }
 
-  async handleCommentDelete({
-    id,
-    commentable_id,
-    commentable_type,
-    content,
-    user_id,
-    is_updated,
-    has_commented,
-    comments_count,
-    user,
-    comments,
-    created_at,
-    updated_at
-  }): Promise<void> {
+  async handleCommentDelete(comment: Comment): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'Comment' }),
@@ -134,7 +124,7 @@ export default class CommentsWrapper extends Vue {
     const result = await this.$apollo.mutate({
       mutation: DeleteComment,
       variables: {
-        id
+        id: comment.id
       },
       update: (store, { data: { deleteComment } }) => {
         cacheRemoveComment(
@@ -145,21 +135,10 @@ export default class CommentsWrapper extends Vue {
       },
       optimisticResponse: {
         __typename: 'Mutation',
-        id,
+        id: comment.id,
         deleteComment: {
           __typename: 'Comment',
-          id,
-          commentable_id,
-          commentable_type,
-          user_id,
-          is_updated,
-          has_commented,
-          comments_count,
-          content,
-          user,
-          comments,
-          created_at,
-          updated_at
+          ...comment
         }
       }
     });
@@ -168,3 +147,11 @@ export default class CommentsWrapper extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~styles/app';
+
+h6 {
+  margin-top: space(24);
+}
+</style>

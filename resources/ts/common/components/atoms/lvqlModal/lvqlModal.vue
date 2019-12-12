@@ -1,6 +1,8 @@
 <template lang="pug">
   collapse-animation
     article( v-show="isShown", :class="modalCssClasses", ref="modal" )
+      lvql-button.modalCloseBtn( variant="danger", :is-ghost="true" @click="$emit('close')") 
+        i.fas.fa-times 
       slot
 </template>
 
@@ -86,6 +88,12 @@ export default class lvqlModal extends Vue {
     bottom: unset;
     transform: translate(0, -50%);
   }
+}
+
+.modalCloseBtn {
+  position: absolute;
+  right: 0;
+  top: space(20);
 }
 
 .fitContent {

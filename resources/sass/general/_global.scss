@@ -10,12 +10,10 @@ html {
   }
 }
 
-code,
 pre {
-  background: color('background', 'inverse') !important;
-  padding: space(16) space(12);
-  width: 600px;
-  color: color('background', 'light') !important;
+  background: color('background', 'inverse');
+  padding: space();
+  color: color('background', 'light');
 }
 
 blockquote {
@@ -25,6 +23,7 @@ blockquote {
   padding-bottom: space(2);
   margin-bottom: space(4);
   border-left: space(4) solid color('accent');
+  font-style: italic;
 }
 
 .contentBelowNav {

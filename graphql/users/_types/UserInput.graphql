@@ -1,5 +1,5 @@
-input CreateUserInput {
-  id: Int
+input UserInput {
+  id: ID
   name: String! @rules(apply: ["required", "between:3, 191"])
   email: String! @rules(apply: ["required", "email", "max:191"])
   role_id: Int @rules(apply: ["between:1,2"])

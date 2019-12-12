@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 apollo-query(
   :query="require('../../_gql/queries/RecentBlogPosts.gql')"
 )
@@ -15,22 +15,29 @@ apollo-query(
           grid-item( fill )
             pre {{ error }}
 
-    .result.apollo(v-else-if='data')
-      panel
-        panel-body 
-          h3 Recent Posts
-          router-link( v-for="blogPost in data.recentBlogPosts" :key="blogPost.id", :to="{ name: 'blog.show', params: { slug: blogPost.slug } }")
-            p {{ blogPost.title }}
+    .result.apollo(v-else-if='data.recentBlogPosts')
+      grid-row
+        grid-item( fill )
+          h3 More reading
+      grid-row
+        grid-item( v-for="blogPost in data.recentBlogPosts" :key="blogPost.id" )
+          panel
+            panel-body
+              router-link( :to="{ name: 'blog.show', params: { slug: blogPost.slug } }")
+                | {{ blogPost.title }}
+
+    .no-results.apollo(v-else)
+      no-results-component
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class RecentBlogPosts extends Vue {}
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~styles/app';
 
 h3 {

@@ -1,13 +1,16 @@
-<template lang='pug'>
+<template lang="pug">
   article( :class="panelHeaderCssClasses")
     lvql-avatar( :src="image", v-if="image", :alt="title" )
 
     section
-      h4( v-if="title" ) {{ title }}
+      h5( v-if="title" ) {{ title }}
       small( v-if="subtitle" ) {{ subtitle }}
+
+    section
+      slot
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
@@ -25,9 +28,9 @@ export default class PanelHeader extends Vue {
     return classes;
   }
 }
-</script> 
- 
-<style lang='scss' scoped>
+</script>
+
+<style lang="scss" scoped>
 @import '~styles/app';
 @import '~styles/components/panel';
 
@@ -36,7 +39,8 @@ small {
 }
 
 .PanelHeader {
-  display: block;
+  display: flex;
+  justify-content: space-between;
   padding: $panel-padding;
 
   &.withImage {
