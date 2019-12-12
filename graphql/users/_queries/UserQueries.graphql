@@ -1,6 +1,9 @@
 extend type Query @middleware(checks: ["jwt.auth"]) {
-  users: [User!]! @all
   auth: User! @auth
+  users(
+    orderBy: [OrderByClause!] @orderBy
+    name: String @where(operator: "LIKE")
+  ): [User!]! @paginate
 }
 
 extend type Query {

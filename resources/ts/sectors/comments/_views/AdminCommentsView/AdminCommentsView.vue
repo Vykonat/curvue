@@ -17,7 +17,7 @@
               grid-item( fill )
                 pre {{ error }}
 
-        .result.apollo(v-else-if='data.length')
+        .result.apollo(v-else-if='data')
           lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal" )
             comment-form( :is-add="isCommentFormAdd", :comment="commentForm", :type="commentForm.commentable_type", :type-id="commentForm.commentable_id" )
           grid-row
@@ -27,6 +27,16 @@
                 :data="data.allComments.data",
                 :placeholder="searchInputPlaceHolder",
               )
+                template( v-slot:search )
+                  lvql-input(
+                    id="CommentSearch",
+                    name="CommentSearch",
+                    v-model="searchTerm"
+                    :placeholder="searchInputPlaceHolder",
+                    @input="$emit('input', $event)"
+                    @keydown.enter="queryMore(query)"
+                  )
+
                 template( v-slot:perPageSelector )
                   lvql-select( 
                     placeholder="Items per page: ", 
@@ -69,15 +79,13 @@
                     @click="handleCommentDelete(row)"
                   )
                     i.fas.fa-trash
-
-        .no-results.apollo(v-else)
-          no-results-component
 </template>
 
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import DeleteComment from '../../_gql/mutations/DeleteComment.gql';
 import dialog from '../../../../common/utils/dialog.util';
+import { Comment, CommentInput } from '../../../../typings/schema';
 import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 import { cacheRemoveComment } from '../../_gql/cache/CommentsCache';
 
@@ -106,107 +114,60 @@ import { cacheRemoveComment } from '../../_gql/cache/CommentsCache';
 export default class AdminCommentsView extends Vue {
   isCommentModalShown: boolean = false;
   isCommentFormAdd: boolean = true;
-  commentForm: Partial<IComment> = {};
   perPage: number = 5;
   currentPage: number = 1;
+  searchTerm: string | undefined = '';
   isLoading: boolean = false;
 
+  commentForm: CommentInput = {
+    commentable_id: '',
+    commentable_type: '',
+    content: ''
+  };
+
   perPageOptions = [
-    {
-      label: '5',
-      value: 5
-    },
-    {
-      label: '10',
-      value: 10
-    },
-    {
-      label: '25',
-      value: 25
-    },
-    {
-      label: '50',
-      value: 50
-    }
+    { label: '5', value: 5 },
+    { label: '10', value: 10 },
+    { label: '25', value: 25 },
+    { label: '50', value: 50 }
   ];
 
   queryVariables = {
     first: this.perPage,
     orderBy: [{ field: 'id', order: 'DESC' }],
-    page: this.currentPage
+    page: this.currentPage,
+    id: this.searchTerm === '' ? undefined : this.searchTerm
   };
 
-  @Provide() commentsDataTableHeader = {
-    id: {
-      title: 'id'
-    },
-
-    commentable_type: {
-      visible: false
-    },
-
-    commentable_id: {
-      visible: false
-    },
-
-    content: {
-      visible: false
-    },
-
-    user: {
-      slot: 'author',
-      title: 'Author'
-    },
-
-    comments: {
-      visible: false
-    },
-
-    created_at: {
-      title: 'Created'
-    },
-
-    updated_at: {
-      title: 'Updated'
-    },
-
-    actions: {
-      sortable: false,
-      title: 'Actions',
-      slot: 'actions'
-    }
+  commentsDataTableHeader = {
+    id: { title: 'id' },
+    commentable_type: { visible: false },
+    commentable_id: { visible: false },
+    content: { visible: false },
+    user: { slot: 'author', title: 'Author' },
+    comments: { visible: false },
+    created_at: { title: 'Created' },
+    updated_at: { title: 'Updated' },
+    commentable: { visible: false },
+    actions: { sortable: false, title: 'Actions', slot: 'actions' }
   };
 
   closeCommentModal(): void {
     this.isCommentModalShown = false;
-    this.commentForm = {};
+    this.commentForm = {
+      commentable_id: '',
+      commentable_type: '',
+      content: ''
+    };
   }
 
-  handleCommentEdit(comment: IComment): void {
+  handleCommentEdit(comment: CommentInput): void {
     this.isCommentFormAdd = false;
     this.isCommentModalShown = true;
-
-    const form = { ...comment };
-    this.commentForm.commentable_id = comment.commentable_id;
-    this.commentForm.commentable_type = comment.commentable_type;
-    delete form.__typename;
-    delete form.user;
-    delete form.comments;
-    delete form.created_at;
-    delete form.updated_at;
-    this.commentForm = form;
+    this.commentForm = { ...comment };
   }
 
-  async handleCommentDelete({
-    id,
-    commentable_id,
-    commentable_type,
-    content,
-    user,
-    comments,
-    created_at,
-    updated_at
-  }): Promise<void> {
+  async handleCommentDelete(comment: Comment): Promise<void> {
     if (
       !(await dialog(
         this.$t('resource.delete_confirmation', { resource: 'Comment' }),
@@ -217,29 +178,20 @@ export default class AdminCommentsView extends Vue {
 
     const result = await this.$apollo.mutate({
       mutation: DeleteComment,
-      variables: {
-        id
-      },
+      variables: { id: comment.id },
       update: (store, { data: { deleteComment } }) => {
         cacheRemoveComment(
           store,
-          { type: commentable_type, id: commentable_id },
+          { type: comment.commentable_type, id: comment.commentable_id },
           deleteComment
         );
       },
       optimisticResponse: {
         __typename: 'Mutation',
-        id,
-        deleteUser: {
+        id: comment.id,
+        deleteComment: {
           __typename: 'Comment',
-          id,
-          commentable_id,
-          commentable_type,
-          content,
-          user,
-          comments,
-          created_at,
-          updated_at
+          ...comment
         }
       }
     });
@@ -267,7 +219,8 @@ export default class AdminCommentsView extends Vue {
       variables: {
         first: this.perPage,
         orderBy: [{ field: 'id', order: 'DESC' }],
-        page: this.currentPage
+        page: this.searchTerm === '' ? this.currentPage : 1,
+        id: this.searchTerm === '' ? undefined : this.searchTerm
       },
       updateQuery: (previousResult, { fetchMoreResult }) => {
         const newComments = fetchMoreResult.allComments.data;

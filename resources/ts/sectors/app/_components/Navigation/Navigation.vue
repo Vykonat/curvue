@@ -60,7 +60,6 @@ export default class Navigation extends Vue {
 }
 </script>
 
-
 <style lang="scss" scoped>
 @import '~styles/app';
 

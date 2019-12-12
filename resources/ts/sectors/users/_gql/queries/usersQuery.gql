@@ -1,7 +1,18 @@
 #import "../fragments/UserFragment.gql"
 
-query UsersQuery {
-  users {
-    ...User
+query UsersQuery(
+  $orderBy: [OrderByClause!]
+  $first: Int!
+  $page: Int!
+  $name: String
+) {
+  users(orderBy: $orderBy, first: $first, page: $page, name: $name) {
+    data {
+      ...User
+    }
+    paginatorInfo {
+      currentPage
+      lastPage
+    }
   }
 }

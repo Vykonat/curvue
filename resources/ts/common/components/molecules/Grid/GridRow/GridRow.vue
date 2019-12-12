@@ -1,21 +1,22 @@
-<template lang='pug'>
+<template lang="pug">
   .GridRow
     slot
 </template>
 
-<script lang='ts'>
-import { Component, Vue, Prop } from "vue-property-decorator";
+<script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
 export default class GridRow extends Vue {}
 </script>
 
-<style lang='scss' scoped>
-@import "~styles/app";
+<style lang="scss" scoped>
+@import '~styles/app';
 
 .GridRow {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin: 0 (-$screen-phone-gutter);
 
   @include media(tabletPortrait) {

@@ -1,15 +1,16 @@
 <template lang="pug">
 textarea.TextArea(
-    :v-validate = "validation",
-    :readonly   = "readonly",
-    :disabled   = "disabled",
-    :required   = "required",
-    :value      = "value",
-    v-bind      = "$attrs",
-    v-on        = "handlers"
-    :cols       = "cols"
+    :v-validate="validation",
+    :readonly="readonly",
+    :disabled="disabled",
+    :required="required",
+    :value="value",
+    v-bind="$attrs",
+    v-on="handlers"
+    :cols="cols"
+    :placeholder="placeholder",
+    :name="name"
 )
-    span {{ placeholder }}
 </template>
 
 <script lang="ts">
@@ -26,6 +27,7 @@ export default class TextArea extends Vue {
   @Prop({ default: '' }) validation!: string;
   @Prop({ default: false }) required!: Boolean;
   @Prop({ default: '' }) placeholder!: string;
+  @Prop({ default: '' }) name!: string;
   @Prop({ default: false }) readonly!: Boolean;
   @Prop({ default: false }) disabled!: Boolean;
 

@@ -91,7 +91,9 @@ export default class lvqlModal extends Vue {
 }
 
 .modalCloseBtn {
-  float: right;
+  position: absolute;
+  right: 0;
+  top: space(20);
 }
 
 .fitContent {

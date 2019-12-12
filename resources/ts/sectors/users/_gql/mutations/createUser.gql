@@ -1,6 +1,6 @@
 #import "../fragments/UserFragment.gql"
 
-mutation CreateUser($data: CreateUserInput!) {
+mutation CreateUser($data: UserInput!) {
   createUser(data: $data) {
     ...User
   }

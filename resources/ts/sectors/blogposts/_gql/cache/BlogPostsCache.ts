@@ -3,8 +3,13 @@ import {
   cacheAddItemToList,
   cacheRemoveItemFromList
 } from '../../../../common/utils/cache.util';
+import { BlogPost, QueryBlogPostsArgs } from '../../../../typings/schema';
 
-export function cacheAddBlogPost(store: any, item: IBlogPost, variables: any) {
+export function cacheAddBlogPost(
+  store: any,
+  item: BlogPost,
+  variables: QueryBlogPostsArgs
+) {
   const query = { query: BlogPostsQuery, variables };
 
   const data = store.readQuery(query);
@@ -14,8 +19,8 @@ export function cacheAddBlogPost(store: any, item: IBlogPost, variables: any) {
 
 export function cacheRemoveBlogPost(
   store: any,
-  item: IBlogPost,
-  variables: any
+  item: BlogPost,
+  variables: QueryBlogPostsArgs
 ) {
   const query = { query: BlogPostsQuery, variables };
 

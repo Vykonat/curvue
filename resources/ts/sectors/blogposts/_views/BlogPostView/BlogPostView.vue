@@ -17,16 +17,18 @@ lvql-layout( name="Default" )
             grid-item( fill )
               pre {{ error }}
 
-      .result.apollo(v-else-if='data.length')
+      .result.apollo(v-else-if='data.blogPost')
         blog-post-header( :blog-post="data.blogPost" )
-        grid.blogPostContentContainer
-          grid-row
-            section.left
-              mark-down {{ data.blogPost.content }}
-            section.right
-              recent-blog-posts
-              blog-post-sidebar( :url="data.blogPost.slug" )
+        grid-row
+          grid-item.blogPostContentContainer( fill )
+            mark-down {{ data.blogPost.content }}
         comments-wrapper( type="App\\Models\\BlogPost", :type-id="data.blogPost.id", :count="data.blogPost.comments_count" )
+        grid-row
+          grid-item( fill )
+            recent-blog-posts
+        grid-row
+          grid-item( fill )
+            blog-post-sidebar( :url="data.blogPost.slug" )
 
       .no-results.apollo(v-else)
         no-results-component
@@ -69,24 +71,8 @@ export default class BlogPostView extends Vue {}
 
 .blogPostContentContainer {
   @include media(tabletPortrait) {
-    padding: space(48) 0 0 0;
+    max-width: $screen-tablet-portrait;
     font-size: space(20);
-  }
-}
-
-.right {
-  flex: 0 0 100%;
-
-  @include media(tabletPortrait) {
-    flex: 0 0 33.3333333333333%;
-    padding-left: space(4);
-  }
-}
-
-.left {
-  @include media(tabletPortrait) {
-    flex: 0 0 66.6666666666666%;
-    padding-right: space(4);
   }
 }
 </style>

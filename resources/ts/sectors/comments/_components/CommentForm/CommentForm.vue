@@ -10,19 +10,23 @@
             validation="min: 30",
             required
           )
+          mark-down
+            | {{ comment.content }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { apolloClient } from '../../../../common/config/apollo.config';
 import { cacheAddComment } from '../../_gql/cache/CommentsCache';
+import { Comment } from '../../../../typings/schema';
 import dialog from '../../../../common/utils/dialog.util';
 import CreateComment from '../../_gql/mutations/CreateComment.gql';
 import EditComment from '../../_gql/mutations/EditComment.gql';
+import { TranslateResult } from 'vue-i18n';
 
 @Component
 export default class CommentForm extends Vue {
-  @Prop({ required: true }) comment!: ICommentInput;
+  @Prop({ required: true }) comment!: Comment;
   @Prop({ default: true }) isAdd!: boolean;
 
   private sendCreateCommentInfo(): void {
@@ -43,16 +47,14 @@ export default class CommentForm extends Vue {
         __typename: 'Mutation',
         createComment: {
           __typename: 'Comment',
-          id: this.comment.id,
-          commentable_type: this.comment.commentable_type,
-          commentable_id: this.comment.commentable_id,
-          content: this.comment.content,
-          user_id: this.$auth.user().id,
-          is_updated: false,
+          ...this.comment,
+          user_id: 1,
           comments_count: 0,
-          has_commented: false,
           comments: [],
           user: { __typename: 'User', ...this.$auth.user() },
+          commentable: { __typename: 'Commentable' },
+          is_updated: false,
+          has_commented: false,
           created_at: 'Just now',
           updated_at: 'Just now'
         }
@@ -76,20 +78,18 @@ export default class CommentForm extends Vue {
         );
       },
       optimisticResponse: {
-        __typename: 'Mutation',
         id: this.comment.id,
+        __typename: 'Mutation',
         editComment: {
           __typename: 'Comment',
-          id: this.comment.id,
-          commentable_type: this.comment.commentable_type,
-          commentable_id: this.comment.commentable_id,
-          content: this.comment.content,
-          user_id: this.$auth.user().id,
-          is_updated: false,
+          ...this.comment,
+          user_id: 1,
           comments_count: 0,
-          has_commented: false,
           comments: [],
           user: { __typename: 'User', ...this.$auth.user() },
+          commentable: { __typename: 'Commentable' },
+          is_updated: true,
+          has_commented: false,
           created_at: 'Just now',
           updated_at: 'Just now'
         }
@@ -106,7 +106,7 @@ export default class CommentForm extends Vue {
     return this.sendEditCommentInfo();
   }
 
-  get commentFormTitle() {
+  get commentFormTitle(): TranslateResult {
     return this.isAdd
       ? this.$t('resource.add', { resource: 'Comment' })
       : this.$t('resource.edit', { resource: 'Comment' });

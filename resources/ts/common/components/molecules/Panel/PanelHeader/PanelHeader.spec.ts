@@ -10,7 +10,7 @@ describe('Panel Header Molecule Component', () => {
       }
     });
     expect(wrapper.findAll(`.PanelHeader`)).toHaveLength(1);
-    expect(wrapper.find('h4').text()).toBe('Title Test');
+    expect(wrapper.find('h5').text()).toBe('Title Test');
     expect(wrapper.find('small').text()).toBe('Subtitle Test');
   });
 });
