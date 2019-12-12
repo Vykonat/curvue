@@ -1,14 +1,13 @@
 <template lang="pug">
   panel.CommentListElement
-    panel-header( :title="author", :subtitle="date")
+    panel-header( :title="author", :subtitle="date" )
+      lvql-button( tag="router-link", :target="{ name: 'comments.discussion', params: {id: this.comment.id} }", variant="primary", :is-ghost="true" )
+        i.fas.fa-reply 
+        | &nbsp;
+        | {{ comment.comments_count }}
     panel-body
-      grid-row
-        grid-item( fill )
-          truncate 
-            mark-down {{ content }}
-          router-link( :to="{ name: 'comments.discussion', params: {id: this.comment.id} }")
-            i.fas.fa-comments {{ comment.comments_count }}
-            | {{ $t('comments.show_discussion') }}
+      truncate 
+        mark-down {{ content }}
     panel-footer( v-if="isAuthorized" )
       lvql-button(
         :is-ghost="true",

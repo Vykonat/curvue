@@ -28,7 +28,7 @@
       )
         template( v-slot:text ) Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.
         template( v-slot:button ) Click for more
-</template> 
+</template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
@@ -38,7 +38,12 @@ import { setMetaInfo } from '../../../../common/config/vue-meta.config';
 
 @Component({
   metaInfo: {
-    ...setMetaInfo('Home', 'Lavuql home page', '', '')
+    ...setMetaInfo(
+      'A complete PWA boilerplate built on Laravel, Vue, and GraphQL',
+      'Lavuql is the most complete open-source Progressive Web App boilerplate built on Laravel, Vue, and GraphQL. With features such as i18n, SEO meta tags, tests, and automatic zero-downtime deployments right out of the box you can skip the boilerplate hassles and focus on building your product.',
+      '',
+      '/assets/images/lavuql-logo.png'
+    )
   }
 })
 export default class HomeView extends Vue {

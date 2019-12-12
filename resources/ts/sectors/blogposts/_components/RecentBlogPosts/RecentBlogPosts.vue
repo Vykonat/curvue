@@ -16,11 +16,15 @@ apollo-query(
             pre {{ error }}
 
     .result.apollo(v-else-if='data.recentBlogPosts')
-      panel
-        panel-body 
-          h3 Recent Posts
-          router-link( v-for="blogPost in data.recentBlogPosts" :key="blogPost.id", :to="{ name: 'blog.show', params: { slug: blogPost.slug } }")
-            p {{ blogPost.title }}
+      grid-row
+        grid-item( fill )
+          h3 More reading
+      grid-row
+        grid-item( v-for="blogPost in data.recentBlogPosts" :key="blogPost.id" )
+          panel
+            panel-body
+              router-link( :to="{ name: 'blog.show', params: { slug: blogPost.slug } }")
+                | {{ blogPost.title }}
 
     .no-results.apollo(v-else)
       no-results-component

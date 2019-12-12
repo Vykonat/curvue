@@ -1,9 +1,9 @@
-<template lang='pug'>
+<template lang="pug">
   .PanelFooter
     slot
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
@@ -15,6 +15,6 @@ export default class PanelFooter extends Vue {}
 @import '~styles/components/panel';
 
 .PanelFooter {
-  padding: $panel-padding;
+  padding: $panel-footer-padding;
 }
 </style>

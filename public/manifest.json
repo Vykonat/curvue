@@ -1,8 +1,8 @@
 {
   "short_name": "Lavuql",
   "name": "Lavuql",
-  "background_color": "#3a464b",
-  "theme_color": "#3a464b",
+  "background_color": "#3b3a4b",
+  "theme_color": "#3b3a4b",
   "orientation": "portrait",
   "icons": [
     {

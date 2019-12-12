@@ -20,7 +20,7 @@ apollo-query(
       lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal")
         comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
 
-      h6 {{ responseCount }}
+      h6(align="center") {{ responseCount }}
       
       template( v-if="$auth.check()" )
         lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
@@ -28,7 +28,7 @@ apollo-query(
         comment-sign-up-notification
       
       grid-row( v-if="data.comments" v-for="comment in data.comments", :key="comment.id" )
-        grid-item( fill )
+        grid-item.commentWrapper
           comment-list-element( :comment="comment", @editComment="handleCommentEdit(comment)", @deleteComment="handleCommentDelete(comment)" )
 </template>
 
@@ -147,3 +147,11 @@ export default class CommentsWrapper extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~styles/app';
+
+h6 {
+  margin-top: space(24);
+}
+</style>

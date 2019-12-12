@@ -69,7 +69,7 @@ class BlogPost extends Model
      */
     public function scopeRecent(Builder $query): Builder
     {
-        return $query->orderBy('id', 'desc')->limit(5);
+        return $query->orderBy('id', 'desc')->limit(3);
     }
 
     /**
