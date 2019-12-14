@@ -15,20 +15,6 @@ class User extends Authenticatable implements JWTSubject
     use DateAttributeTransformations;
 
     /**
-     * The "booting" method of the model.
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saving(function ($user) {
-            if(! isset($user->role_id)) {
-                $user->role_id = 2;
-            }
-        });
-    }
-
-    /**
      * The attributes that are mass assignable.
      */
     protected $fillable = [

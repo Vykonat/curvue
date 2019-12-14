@@ -28,6 +28,7 @@ export default class lvqlButton extends Vue {
   };
 
   @Prop({ default: 'default', validator: variationValidator }) variant!: string;
+  @Prop({ default: '' }) size!: string;
   @Prop({ default: false }) disabled!: boolean;
   @Prop({ default: false }) loading!: boolean;
   @Prop({ default: 'button' }) tag!: string;
@@ -47,6 +48,7 @@ export default class lvqlButton extends Vue {
       classes.push('disabledButton');
     }
     classes.push(`${this.variant}`);
+    classes.push(`${this.size}`);
     return classes;
   }
 
@@ -127,6 +129,10 @@ export default class lvqlButton extends Vue {
     &:hover {
       box-shadow: none;
     }
+  }
+
+  &.large {
+    width: 100%;
   }
 }
 

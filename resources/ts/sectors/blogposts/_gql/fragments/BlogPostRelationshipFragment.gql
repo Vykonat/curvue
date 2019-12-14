@@ -1,0 +1,13 @@
+#import "../../../users/_gql/fragments/UserRelationshipFragment.gql"
+
+fragment BlogPostRelationship on BlogPost {
+  __typename
+  id
+  title
+  slug
+  created_at
+  updated_at
+  user {
+    ...UserRelationship
+  }
+}

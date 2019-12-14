@@ -1,5 +1,5 @@
 #import "../../../users/_gql/fragments/UserRelationshipFragment.gql"
-#import "../../../blogposts/_gql/fragments/BlogPostFragment.gql"
+#import "../../../blogposts/_gql/fragments/BlogPostRelationshipFragment.gql"
 #import "./CommentRelationshipFragment.gql"
 
 fragment Comment on Comment {
@@ -11,21 +11,21 @@ fragment Comment on Comment {
   comments_count
   has_commented
   is_updated
+  created_at
+  updated_at
   content
+  user {
+    ...UserRelationship
+  }
   commentable {
     ... on BlogPost {
-      ...BlogPost
+      ...BlogPostRelationship
     }
     ... on Comment {
       ...CommentRelationship
     }
   }
-  user {
-    ...UserRelationship
-  }
   comments {
     ...CommentRelationship
   }
-  created_at
-  updated_at
 }

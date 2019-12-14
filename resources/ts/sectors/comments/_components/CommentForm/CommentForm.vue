@@ -18,7 +18,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { apolloClient } from '../../../../common/config/apollo.config';
 import { cacheAddComment } from '../../_gql/cache/CommentsCache';
-import { Comment } from '../../../../typings/schema';
+import { Comment, QueryCommentsArgs } from '../../../../typings/schema';
 import dialog from '../../../../common/utils/dialog.util';
 import CreateComment from '../../_gql/mutations/CreateComment.gql';
 import EditComment from '../../_gql/mutations/EditComment.gql';
@@ -27,6 +27,7 @@ import { TranslateResult } from 'vue-i18n';
 @Component
 export default class CommentForm extends Vue {
   @Prop({ required: true }) comment!: Comment;
+  @Prop({ required: true }) variables!: QueryCommentsArgs;
   @Prop({ default: true }) isAdd!: boolean;
 
   private sendCreateCommentInfo(): void {
@@ -34,14 +35,7 @@ export default class CommentForm extends Vue {
       mutation: CreateComment,
       variables: { data: this.comment },
       update: (store, { data: { createComment } }) => {
-        cacheAddComment(
-          store,
-          {
-            type: this.comment.commentable_type,
-            id: this.comment.commentable_id
-          },
-          createComment
-        );
+        cacheAddComment(store, this.variables, createComment);
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -68,14 +62,7 @@ export default class CommentForm extends Vue {
       mutation: EditComment,
       variables: { id: this.comment.id, data: this.comment },
       update: (store, { data: { editComment } }) => {
-        cacheAddComment(
-          store,
-          {
-            type: this.comment.commentable_type,
-            id: this.comment.commentable_id
-          },
-          editComment
-        );
+        cacheAddComment(store, this.variables, editComment);
       },
       optimisticResponse: {
         id: this.comment.id,

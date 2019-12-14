@@ -1,6 +1,6 @@
 #import "../fragments/CommentFragment.gql"
 
-query Comments($type: String!, $id: ID!) {
+query Comments($type: String!, $id: String!) {
   comments(type: $type, id: $id) {
     ...Comment
   }

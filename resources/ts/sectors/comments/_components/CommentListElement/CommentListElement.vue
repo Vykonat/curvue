@@ -2,8 +2,7 @@
   panel.CommentListElement
     panel-header( :title="author", :subtitle="date" )
       lvql-button( tag="router-link", :target="{ name: 'comments.discussion', params: {id: this.comment.id} }", variant="primary", :is-ghost="true" )
-        i.fas.fa-reply 
-        | &nbsp;
+        i.fas.fa-reply.fa-fw
         | {{ comment.comments_count }}
     panel-body
       truncate 
@@ -53,7 +52,7 @@ export default class CommentListElement extends Vue {
       return true;
     }
 
-    return this.$auth.user().id == this.comment.user.id;
+    return this.$auth.user().id === this.comment.user.id;
   }
 }
 </script>

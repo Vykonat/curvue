@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'showMore' => 'Show Less',
-    'showLess' => 'Show More'
+    'showMore' => 'Show More',
+    'showLess' => 'Show Less'
 ];

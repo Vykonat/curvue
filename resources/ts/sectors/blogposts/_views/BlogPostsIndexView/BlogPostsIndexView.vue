@@ -22,7 +22,7 @@ lvql-layout( name="Default" )
             grid-item.blogPostWrapper( v-for="blogPost, i in data.blogPosts.data", :key="i" )
               blog-post-list-element( :blog-post="blogPost" )
 
-          grid-row
+          grid-row( v-if="data.blogPosts.paginatorInfo.hasMorePages" )
             grid-item(fill)
               lvql-button.loadMoreButton( variant="primary", :is-outline="true", @click="loadMore(query)" ) {{ $t('core.load_more') }}
         
