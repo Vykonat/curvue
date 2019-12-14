@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Auth;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,27 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use App\Http\Traits\DateAttributeTransformations;
 use App\Http\Traits\Commentable;
+use App\Http\Traits\BelongsToUser;
 
 class BlogPost extends Model
 {
     use DateAttributeTransformations;
     use Commentable;
-    
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        // auto-sets values on creation
-        static::saving(function ($post) {
-            $post->user_id = Auth::user() ? Auth::user()->id : 1;
-            $post->slug = Str::slug($post->title . ' ' . time(), '-');
-        });
-    }
+    use BelongsToUser;
 
     /**
      * The attributes that are mass assignable.
@@ -57,15 +42,7 @@ class BlogPost extends Model
     }
 
     /**
-     * Return the blog posts user
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Order blog posts by most recent
+     * Get the 3 most recent blog posts
      */
     public function scopeRecent(Builder $query): Builder
     {
@@ -75,7 +52,7 @@ class BlogPost extends Model
     /**
      * Get last weeks blog posts
      */
-    public function scopeLastWeek()
+    public function scopeLastWeek(): Builder
     {
         return BlogPost::whereBetween('created_at', [carbon('1 week ago'), now()])->orderBy('id', 'desc');
     }

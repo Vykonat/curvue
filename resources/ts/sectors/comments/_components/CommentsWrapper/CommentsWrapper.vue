@@ -1,7 +1,7 @@
 <template lang="pug">
 apollo-query(
   :query="require('../../_gql/queries/CommentsQuery.gql')",
-  :variables="{ type: type, id: typeId }"
+  :variables="queryVariables"
 )
   template( slot-scope="{ result: { data, loading, error}, query }" )
     .loading.apollo(v-if='loading')
@@ -18,25 +18,34 @@ apollo-query(
 
     .result.apollo(v-else-if='data')
       lvql-modal( :is-shown="isCommentModalShown", @close="closeCommentModal")
-        comment-form( :is-add="isCommentFormAdd", :comment="commentForm")
+        comment-form( :is-add="isCommentFormAdd", :comment="commentForm", :variables="queryVariables" )
 
       h6(align="center") {{ responseCount }}
       
-      template( v-if="$auth.check()" )
-        lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
-      template( v-else )
-        comment-sign-up-notification
-      
+      grid-row
+        grid-item.commentWrapper( fill )
+          template( v-if="$auth.check()" )
+            lvql-button( variant="primary", @click="handleCommentAdd" ) {{ $t('resource.add', {resource:"Comment"})}}
+          template( v-else )
+            comment-sign-up-notification
+
       grid-row( v-if="data.comments" v-for="comment in data.comments", :key="comment.id" )
-        grid-item.commentWrapper
+        grid-item.commentWrapper( fill )
           comment-list-element( :comment="comment", @editComment="handleCommentEdit(comment)", @deleteComment="handleCommentDelete(comment)" )
+    
+    .no-results.apollo( v-else )
+        | no data
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import DeleteComment from '../../_gql/mutations/DeleteComment.gql';
 import dialog from '../../../../common/utils/dialog.util';
-import { Comment, CommentInput } from '../../../../typings/schema';
+import {
+  Comment,
+  CommentInput,
+  QueryCommentsArgs
+} from '../../../../typings/schema';
 import { cacheRemoveComment } from '../../_gql/cache/CommentsCache';
 import CommentListElement from '../../_components/CommentListElement/CommentListElement.vue';
 import CommentSignUpNotification from '../../_components/CommentSignUpNotification/CommentSignUpNotification.vue';
@@ -60,6 +69,12 @@ export default class CommentsWrapper extends Vue {
 
   isCommentModalShown: boolean = false;
   isCommentFormAdd: boolean = true;
+
+  queryVariables: QueryCommentsArgs = {
+    type: this.type,
+    id: this.typeId
+  };
+
   commentForm: CommentInput = {
     id: '0',
     commentable_id: this.typeId,
@@ -127,11 +142,7 @@ export default class CommentsWrapper extends Vue {
         id: comment.id
       },
       update: (store, { data: { deleteComment } }) => {
-        cacheRemoveComment(
-          store,
-          { type: this.type, id: this.typeId },
-          deleteComment
-        );
+        cacheRemoveComment(store, this.queryVariables, deleteComment);
       },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -153,5 +164,9 @@ export default class CommentsWrapper extends Vue {
 
 h6 {
   margin-top: space(24);
+}
+
+.commentWrapper {
+  max-width: $screen-tablet-portrait;
 }
 </style>

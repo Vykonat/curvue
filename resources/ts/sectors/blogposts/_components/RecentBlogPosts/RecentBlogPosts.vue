@@ -39,12 +39,4 @@ export default class RecentBlogPosts extends Vue {}
 
 <style lang="scss" scoped>
 @import '~styles/app';
-
-h3 {
-  text-align: center;
-}
-
-p {
-  padding-bottom: space(12);
-}
 </style>

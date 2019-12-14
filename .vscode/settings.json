@@ -10,7 +10,7 @@
     "phpunit-log-junit-fix.php": true,
     "phpunit.xml": true,
     "yarn.lock": true,
-    "node_modules/": false,
+    "node_modules/": true,
     "server.php": true,
     "vendor/": true,
     ".eslintrc.json": true,
