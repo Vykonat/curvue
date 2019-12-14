@@ -83,7 +83,8 @@ lvql-layout( name="Default" )
             br
             | However if you are still looking for more information then you can contact us through one of our preferred contact methods:
             ul
-              li Email: {{ appStrings.APP_EMAIL }}
+              li 
+                a( :href="mailToLink") Email: {{ appStrings.APP_EMAIL }}
 </template>
 
 <script lang="ts">
@@ -111,5 +112,9 @@ export default class CookieConsentView extends Vue {
     APP_EMAIL,
     APP_URL
   };
+
+  get mailToLink() {
+    return `mailto: ${APP_EMAIL}`;
+  }
 }
 </script>
