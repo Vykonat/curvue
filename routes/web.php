@@ -20,4 +20,4 @@ Route::group([
 
 Route::get('password/reset/{token}', 'AppController@index')->name('password.reset');
 
-Route::get('{any}', 'AppController@index')->where('any', '^(?!api\/)[\/\w\.-]*');
+Route::fallback('AppController@index');

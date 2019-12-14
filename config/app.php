@@ -69,7 +69,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
     'graphql_url' => env('GQL_URL', 'http://localhost'),
-
+    'application_email' => env('APP_EMAIL', 'Email not set'),
     'asset_url' => env('ASSET_URL', null),
 
     /*
@@ -187,6 +187,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+        App\Providers\ObserverServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,

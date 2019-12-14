@@ -40,7 +40,7 @@ export type Comment = {
   content: Scalars['String'],
   commentable_id: Scalars['String'],
   commentable_type: Scalars['String'],
-  commentable: Commentable,
+  commentable?: Maybe<Commentable>,
   user_id: Scalars['Int'],
   has_commented?: Maybe<Scalars['Boolean']>,
   comments_count?: Maybe<Scalars['Int']>,
@@ -197,6 +197,7 @@ export type QueryBlogPostArgs = {
 
 export type QueryAllCommentsArgs = {
   orderBy?: Maybe<Array<OrderByClause>>,
+  id?: Maybe<Scalars['String']>,
   first: Scalars['Int'],
   page?: Maybe<Scalars['Int']>
 };
@@ -209,7 +210,7 @@ export type QueryCommentArgs = {
 
 export type QueryCommentsArgs = {
   type: Scalars['String'],
-  id: Scalars['ID']
+  id: Scalars['String']
 };
 
 
@@ -349,7 +350,7 @@ export type CommentResolvers<Context = any, ParentType = Comment> = {
   content?: Resolver<Scalars['String'], ParentType, Context>,
   commentable_id?: Resolver<Scalars['String'], ParentType, Context>,
   commentable_type?: Resolver<Scalars['String'], ParentType, Context>,
-  commentable?: Resolver<Commentable, ParentType, Context>,
+  commentable?: Resolver<Maybe<Commentable>, ParentType, Context>,
   user_id?: Resolver<Scalars['Int'], ParentType, Context>,
   has_commented?: Resolver<Maybe<Scalars['Boolean']>, ParentType, Context>,
   comments_count?: Resolver<Maybe<Scalars['Int']>, ParentType, Context>,

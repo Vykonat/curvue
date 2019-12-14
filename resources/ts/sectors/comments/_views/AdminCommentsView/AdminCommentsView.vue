@@ -182,7 +182,10 @@ export default class AdminCommentsView extends Vue {
       update: (store, { data: { deleteComment } }) => {
         cacheRemoveComment(
           store,
-          { type: comment.commentable_type, id: comment.commentable_id },
+          {
+            type: comment.commentable_type,
+            id: comment.commentable_id
+          },
           deleteComment
         );
       },

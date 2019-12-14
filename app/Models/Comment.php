@@ -3,33 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Auth;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 use App\Http\Traits\DateAttributeTransformations;
 use App\Http\Traits\Commentable;
+use App\Http\Traits\BelongsToUser;
 
 class Comment extends Model
 {
     use DateAttributeTransformations;
     use Commentable;
+    use BelongsToUser;
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saving(function($comment) {
-            $comment->user_id = Auth::user() ? Auth::user()->id : 1;
-        });
-    }
-
+    /**
+     * The attributes that are mass assignable
+     */
     protected $fillable = ['content', 'commentable_id', 'commentable_type'];
 
-    public function user() 
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function commentable() 
+    /**
+     * Return the resource this comment belongs to
+     */
+    public function commentable(): MorphTo
     {
         return $this->morphTo();
     }
