@@ -16,7 +16,9 @@
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "yarn production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "gql-gen": "graphql-codegen --config codegen.yml"
+    "gql-gen": "graphql-codegen --config codegen.yml",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -60,7 +62,6 @@
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
-    "snyk": "^1.197.0",
     "sw-precache-webpack-plugin": "^0.11.5",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
@@ -87,7 +88,8 @@
     "vue-modal-dialogs": "^3.0.0",
     "vue-property-decorator": "^8.2.1",
     "vue-router": "^3.0.6",
-    "vue-social-sharing": "^2.4.5"
+    "vue-social-sharing": "^2.4.5",
+    "@snyk/protect": "latest"
   },
   "jest": {
     "collectCoverage": false,
@@ -117,5 +119,6 @@
       ".*\\.(vue)$": "vue-jest",
       "^.+\\.ts$": "ts-jest"
     }
-  }
+  },
+  "snyk": true
 }
