@@ -60,7 +60,7 @@
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
-    "snyk": "^1.197.0",
+    "snyk": "^1.996.0",
     "sw-precache-webpack-plugin": "^0.11.5",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
